@@ -453,6 +453,22 @@ footer{margin:44px 0 18px;color:var(--faint);font-family:var(--mono);font-size:1
   <div class="livestrip" id="livestrip"></div>
 </section>
 
+<!-- ================= FIJAS DEL DIA ================= -->
+<section class="mod" id="fijas">
+  <div class="mod-head">
+    <h2 data-i="fj.title">Las 10 fijas del día</h2>
+    <div class="rule"></div>
+    <span class="updated"><span class="pulse-new"></span><span id="fj-day">—</span></span>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px" data-i="fj.sub">Lo más probable del día en las tres ligas, contando solo lo que además paga por encima de su probabilidad. Ordenado por probabilidad del modelo, no por edge.</p>
+  <div class="card" style="padding:var(--pad);margin-bottom:var(--gap)">
+    <div class="filters" id="fj-filter" style="margin:0 0 10px"></div>
+    <div id="fj-empty"></div>
+    <div class="tablewrap"><table id="fjtable"></table></div>
+    <div id="fj-note"></div>
+  </div>
+</section>
+
 <!-- ================= MODULE 2: BETS ================= -->
 <section class="mod" id="bets">
   <div class="mod-head"><h2 data-i="m2.title">Apuestas de valor</h2><div class="rule"></div><span class="updated" id="m2-upd">Odds: hace 3h</span></div>
@@ -694,6 +710,10 @@ const I18N = {
     'bar.refs':'Datos de árbitros: 8 de 32 con fuente publicada 2025-26; el resto aparece como «sin datos».',
     'bar.sim':'Fixtures y resultados sí son reales.',
     'lv.title':'En vivo y resultados','lv.auto':'cada 60 s','nav.live':'En vivo',
+    'fj.title':'Las 10 fijas del día',
+    'fj.sub':'Lo más probable del día en las tres ligas, contando solo lo que además paga por encima de su probabilidad. Ordenado por probabilidad del modelo, no por edge.',
+    'fj.note':'No son certezas. El catálogo corta en 95% de probabilidad, así que ninguna fila es un seguro, y cada una muestra su propio número. Tampoco son independientes: varias pueden caer con el mismo marcador, o sea que combinarlas no multiplica como parece — usa la combinada de abajo, que resimula la conjunta. Máximo 1 mercado por categoría y por partido para que un solo encuentro no copie la tabla.',
+    'fj.empty':'No hay partidos abiertos ahora mismo. Vuelve cuando abra el mercado de la próxima jornada.',
     'st.title':'Rendimiento','st.net':'Neto','st.roi':'ROI','st.hit':'Tasa de acierto','st.clv':'Edge medio',
     'st.roitip':'ROI = neto / total apostado. Es la única métrica que dice si estás ganando dinero, no solo apuestas.',
     'st.clvtip':'Ventaja media que el modelo declaró sobre la cuota, promediada por leg. Si el acierto real no la respalda, el edge es imaginario.',
@@ -744,6 +764,10 @@ const I18N = {
     'bar.refs':'Referee data: 8 of 32 carry a published 2025-26 source; the rest show as "no data".',
     'bar.sim':'Fixtures and results are real.',
     'lv.title':'Live & results','lv.auto':'every 60 s','nav.live':'Live',
+    'fj.title':'The 10 bankers of the day',
+    'fj.sub':'The most likely calls of the day across the three leagues, kept to the ones that also pay above their own probability. Ranked by model probability, not by edge.',
+    'fj.note':'These are not certainties. The catalogue cuts off at 95% probability, so no row here is a lock, and each one shows its own number. They are not independent either: several can fail on the same scoreline, so parlaying them does not multiply the way it looks — use the accumulator below, which re-simulates the joint. Capped at one market per category per match so a single fixture cannot flood the table.',
+    'fj.empty':'No open fixtures right now. Come back when the next gameweek opens.',
     'st.title':'Performance','st.net':'Net','st.roi':'ROI','st.hit':'Hit rate','st.clv':'Avg edge',
     'st.roitip':'ROI = net / total staked. The only metric that tells you whether you are making money, not just bets.',
     'st.clvtip':'Average edge the model claimed over the price, per leg. If the realised hit rate does not back it up, the edge is imaginary.',
@@ -1455,7 +1479,11 @@ const S = {
 };
 const $ = s=>document.querySelector(s), $$ = s=>[...document.querySelectorAll(s)];
 const t = k => { const v = I18N[S.lang][k]; return v===undefined?k:v; };
-const bi = s => { if(!s) return s; const p = String(s).split('|'); return S.lang==='en' && p[1]!==undefined ? p[1] : p[0]; };
+/* bi('es|en')  or  bi('es','en') -- the two-arg form is used in ~20 places;
+   without this branch every one of them silently stayed in Spanish. */
+const bi = (s,en) => { if(!s) return s;
+  if(en!==undefined) return S.lang==='en' ? en : s;
+  const p = String(s).split('|'); return S.lang==='en' && p[1]!==undefined ? p[1] : p[0]; };
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 function applyChrome(){
@@ -1621,6 +1649,132 @@ function runSims(){
   if(curMatch) ensureSim(curMatch, N);
   const ms = Math.round(performance.now()-t0);
   $('#sim-status').textContent = `${N.toLocaleString()} ${bi('sims · partido en pantalla|sims · on-screen match')} · ${ms} ms`;
+}
+
+/* ==========================================================================
+   FIJAS DEL DIA -- the ten most likely selections of the day
+   --------------------------------------------------------------------------
+   The value table answers "what pays". This one answers "what is most likely
+   that the book still misprices": ranked by model probability, but a row only
+   qualifies if it also carries positive edge, so it is not a wall of 1.04s.
+
+   A list called "fijas" invites the wrong read, so the limits are deliberate:
+     - marketTable() already drops anything over 95% model probability, so no
+       row is ever shown as a sure thing and every row prints its own p.
+     - one market per category per match, and a per-match cap that scales with
+       how many fixtures the day has, otherwise one high-scoring game floods
+       the table with ten correlated variants of the same bet.
+     - the rows are NOT independent. Several can fail on the same scoreline.
+       The note under the table says so; the parlay builder re-simulates the
+       true joint instead of multiplying these numbers together.
+   ========================================================================== */
+const FIJAS_N = 8000;        /* cheap pass: a whole day at 100k would block */
+let FIJAS = null, fjLeague = 'all';
+
+const dayKey = ts => { const d = new Date(ts);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+
+/* bettable only: open gameweek, deadline still ahead, kickoff still ahead */
+function fijasPool(){
+  const now = Date.now(), open = [];
+  for(const lg in LEAGUES){
+    const d = DATA[lg], gw = d.open;
+    if(d.dl[gw] < now) continue;
+    (d.fx[gw]||[]).forEach(m=>{ if(m.ko > now) open.push({m,lg,gw}); });
+  }
+  if(!open.length) return {day:null, ko:null, matches:[]};
+  const ko = Math.min(...open.map(x=>x.m.ko)), day = dayKey(ko);
+  return {day, ko, matches: open.filter(x=>dayKey(x.m.ko)===day)};
+}
+
+function buildFijas(){
+  const pool = fijasPool(), rows = [];
+  pool.matches.forEach(({m,lg,gw})=>{
+    const sim = simulate(m,lg,FIJAS_N); if(!sim) return;
+    marketTable(m,lg,sim.probs).forEach(r=>{
+      if(r.edge <= 0) return;                       /* likely AND mispriced */
+      rows.push(Object.assign({},r,{mid:m.id,lg,gw,ko:m.ko,h:m.h,a:m.a}));
+    });
+  });
+  rows.sort((x,y)=> y.p - x.p || y.edge - x.edge);
+  return {day:pool.day, ko:pool.ko, matches:pool.matches.length, rows};
+}
+
+/* greedy pick so the table is not ten shades of the same fixture */
+function fijasTop(rows, n, nMatches){
+  const cap = Math.max(2, Math.ceil(n/Math.max(1,nMatches)));
+  const perMatch = {}, seenCat = new Set(), out = [];
+  for(const r of rows){
+    if(out.length >= n) break;
+    if((perMatch[r.mid]||0) >= cap) continue;
+    const ck = r.mid+'|'+r.cat; if(seenCat.has(ck)) continue;
+    perMatch[r.mid] = (perMatch[r.mid]||0)+1; seenCat.add(ck); out.push(r);
+  }
+  return out;
+}
+
+function renderFijas(){
+  if(!FIJAS) FIJAS = buildFijas();
+  const F = FIJAS, loc = S.lang==='es'?'es-PE':'en-GB';
+
+  $('#fj-day').textContent = F.ko
+    ? (F.day===dayKey(Date.now()) ? bi('hoy|today')
+       : new Date(F.ko).toLocaleDateString(loc,{weekday:'long',day:'numeric',month:'short'}))
+    : bi('sin jornada abierta|no open gameweek');
+
+  if(!F.rows.length){
+    $('#fj-filter').innerHTML = '';
+    $('#fj-empty').innerHTML = '<p style="color:var(--faint);font-size:13px">'+t('fj.empty')+'</p>';
+    $('#fjtable').innerHTML = ''; $('#fj-note').innerHTML = '';
+    return;
+  }
+  $('#fj-empty').innerHTML = '';
+
+  const lgs = [...new Set(F.rows.map(r=>r.lg))];
+  if(!lgs.includes(fjLeague)) fjLeague = 'all';
+  $('#fj-filter').innerHTML = ['all',...lgs].map(k=>
+    '<button class="fchip '+(fjLeague===k?'on':'')+'" data-fjl="'+k+'">'+
+    (k==='all'?bi('Todas|All'):LEAGUES[k].name)+'</button>').join('');
+  $$('[data-fjl]').forEach(b=>b.addEventListener('click',()=>{fjLeague=b.dataset.fjl;renderFijas();}));
+
+  const pool = fjLeague==='all' ? F.rows : F.rows.filter(r=>r.lg===fjLeague);
+  const nM = new Set(pool.map(r=>r.mid)).size;
+  const top = fijasTop(pool, 10, nM);
+
+  $('#fjtable').innerHTML =
+    '<tr><th style="width:26px"></th><th>'+bi('Liga|Lg')+'</th><th>'+bi('Partido|Match')+'</th>'+
+    '<th class="num">'+bi('Hora|Time')+'</th><th>'+bi('Mercado|Market')+'</th>'+
+    '<th class="num">'+bi('Prob. modelo|Model prob')+'</th><th class="num">'+bi('Cuota|Odds')+'</th>'+
+    '<th class="num">Edge</th><th></th></tr>' +
+    top.map((r,i)=>
+      '<tr>'+
+      '<td class="mono" style="color:var(--faint)">'+(i+1)+'</td>'+
+      '<td><span class="chip mut"><i style="display:inline-block;width:7px;height:7px;border-radius:50%;background:'+LEAGUES[r.lg].dot+';margin-right:5px;vertical-align:middle"></i>'+r.lg.toUpperCase()+'</span></td>'+
+      '<td title="'+esc(r.h[0]+' v '+r.a[0])+'"><b>'+r.h[2]+'</b> <span style="color:var(--faint)">v</span> <b>'+r.a[2]+'</b></td>'+
+      '<td class="num mono" style="color:var(--muted);font-size:11.5px">'+new Date(r.ko).toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit',hour12:false})+'</td>'+
+      '<td>'+bi(MARKET_BY_KEY[r.key].es+'|'+MARKET_BY_KEY[r.key].en)+'</td>'+
+      '<td class="num"><span class="pbar"><i style="width:'+(r.p*100).toFixed(0)+'%"></i></span>'+(r.p*100).toFixed(1)+'%</td>'+
+      '<td class="num" style="color:var(--accent);font-weight:700">'+r.o.toFixed(2)+'</td>'+
+      '<td class="num" style="color:var(--ok);font-weight:700">&#9650; '+(r.edge>=0.1?r.edge.toFixed(1):r.edge.toFixed(2))+'%</td>'+
+      '<td class="num"><button class="btn tiny ghost" data-fjgo="'+r.lg+'|'+r.gw+'|'+r.mid+'" title="'+bi('Ver el partido en Apuestas de valor','Open this match in Value bets')+'">&rarr;</button></td>'+
+      '</tr>').join('');
+
+  $$('[data-fjgo]').forEach(b=>b.addEventListener('click',()=>{
+    const [lg,gw,mid] = b.dataset.fjgo.split('|');
+    if(S.league!==lg || S.gw!==+gw){
+      S.league = lg; localStorage.setItem('lg-league',lg);
+      S.gw = +gw;    localStorage.setItem('lg-gw',S.gw);
+      SIM={}; SCOUT={}; parlayLegs=[]; XL_RESULT=null; applyChrome();
+    }
+    curMatch = mid; renderAll();
+    document.getElementById('bets').scrollIntoView({behavior:'smooth'});
+  }));
+
+  const eMax = Math.max(...top.map(r=>r.edge)), eMin = Math.min(...top.map(r=>r.edge));
+  $('#fj-note').innerHTML = '<div class="corrwarn">&#9888; '+t('fj.note')+'</div>' +
+    '<div class="corrok" style="margin-top:7px">&#128202; '+bi(
+      top.length+' selecciones sobre '+nM+' '+(nM===1?'partido':'partidos')+' del día, elegidas entre '+pool.length+' mercados con edge positivo. Probabilidad de '+(top[0].p*100).toFixed(1)+'% a '+(top[top.length-1].p*100).toFixed(1)+'%, edge de '+eMax.toFixed(2)+'% a '+eMin.toFixed(2)+'%. Cuando el edge cae a centésimas, la cuota ya es casi justa: la fila sigue siendo probable, pero deja de ser valor.',
+      top.length+' picks across '+nM+' '+(nM===1?'match':'matches')+' today, drawn from '+pool.length+' markets with positive edge. Probability runs '+(top[0].p*100).toFixed(1)+'% to '+(top[top.length-1].p*100).toFixed(1)+'%, edge '+eMax.toFixed(2)+'% to '+eMin.toFixed(2)+'%. Once the edge is down to hundredths the price is essentially fair: the row is still likely, it just is not value any more.')+'</div>';
 }
 
 function renderBets(){
@@ -2155,7 +2309,7 @@ function renderDash(){
 
 function renderAll(){
   if(!DATA[S.league].gws.includes(S.gw)) S.gw = DATA[S.league].open;
-  renderLeagueBar(); renderGwHeader(); renderDash(); renderLive(); renderBets(); renderTickets(); renderInsights(); renderStats(); renderFantasy();
+  renderLeagueBar(); renderGwHeader(); renderDash(); renderLive(); renderFijas(); renderBets(); renderTickets(); renderInsights(); renderStats(); renderFantasy();
 }
 
 /* init */
