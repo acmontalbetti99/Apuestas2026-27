@@ -1755,7 +1755,7 @@ function renderFijas(){
       '<td>'+bi(MARKET_BY_KEY[r.key].es+'|'+MARKET_BY_KEY[r.key].en)+'</td>'+
       '<td class="num"><span class="pbar"><i style="width:'+(r.p*100).toFixed(0)+'%"></i></span>'+(r.p*100).toFixed(1)+'%</td>'+
       '<td class="num" style="color:var(--accent);font-weight:700">'+r.o.toFixed(2)+'</td>'+
-      '<td class="num" style="color:var(--ok);font-weight:700">&#9650; '+(r.edge>=0.1?r.edge.toFixed(1):r.edge.toFixed(2))+'%</td>'+
+      '<td class="num" style="color:var(--ok);font-weight:700">&#9650; '+(r.edge>=0.1?r.edge.toFixed(1)+'%':r.edge>=0.005?r.edge.toFixed(2)+'%':'&lt;0.01%')+'</td>'+
       '<td class="num"><button class="btn tiny ghost" data-fjgo="'+r.lg+'|'+r.gw+'|'+r.mid+'" title="'+bi('Ver el partido en Apuestas de valor','Open this match in Value bets')+'">&rarr;</button></td>'+
       '</tr>').join('');
 
