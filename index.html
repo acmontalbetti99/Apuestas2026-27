@@ -10,10 +10,11 @@
   Single-file UI/UX prototype. Hard-coded sample data. No backend, no auth, no real API calls.
   Purpose: validate layout, styles and interactions before the real Supabase + React build.
 
-  NOTE: Referee statistics shown are PLACEHOLDER/INVENTED for mockup purposes.
-  Real names are used only to make the interface feel concrete during design review.
-  In the real build, all ref stats must be computed from actual scraped match data.
-  Do not share this mockup publicly with these placeholder numbers attached to real names.
+  REFEREE DATA: sourced from published 2025-26 figures (Statz, Opta, Tips.GG,
+  Squawka, ScoreRoom), each row carrying its own source and sample size.
+  Officials without a defensible published number are shown as "no data" and
+  receive a neutral multiplier in the model — no invented figures are attached
+  to any real person's name.
 
   DATA SOURCES (real build reference — not implemented in mockup)
   ================================================================
@@ -361,6 +362,13 @@ tr.model td{background:color-mix(in srgb,#3b5bdb 9%,transparent)}
 .xleg .xl2{color:var(--muted);font-size:11px;margin-top:2px;display:flex;justify-content:space-between;gap:6px}
 .lgdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px}
 
+
+.mockbar{position:relative;z-index:3;background:color-mix(in srgb,var(--warn) 14%,var(--bg));border-bottom:1px solid color-mix(in srgb,var(--warn) 35%,transparent);
+  color:var(--warn);font-size:11.5px;line-height:1.5;padding:7px 16px;text-align:center;font-family:var(--mono)}
+.mockbar b{letter-spacing:.12em}
+.mockbar span{margin-left:8px;color:color-mix(in srgb,var(--warn) 75%,var(--text))}
+@media (max-width:640px){.mockbar span{display:block;margin:2px 0 0}}
+
 /* bottom nav */
 nav.bottom{position:fixed;left:0;right:0;bottom:0;z-index:50;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
 nav.bottom a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 4px;font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-decoration:none;border-radius:8px;min-height:48px;justify-content:center}
@@ -389,7 +397,12 @@ footer{margin:44px 0 18px;color:var(--faint);font-family:var(--mono);font-size:1
 </style>
 </head>
 <body data-style="tournament" data-league="pl" data-density="comfortable">
-<div id="mockup-disclaimer" role="note" style="position:sticky;top:0;z-index:2147483647;background:#b91c1c;color:#fff;font:600 14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:10px 16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.35)">⚠️ MAQUETA / MOCKUP &mdash; Todas las estadísticas de árbitros mostradas son datos INVENTADOS de relleno, no cifras reales.<br><span style="font-weight:400;opacity:.92">All referee statistics shown on this page are INVENTED placeholder data and must not be treated as factual.</span></div>
+<div class="mockbar">
+  <b>MAQUETA</b> ·
+  <span data-i="bar.odds">Las cuotas son sintéticas (sesgo determinista + vig), no de un operador real.</span>
+  <span data-i="bar.refs">Datos de árbitros: 8 de 32 con fuente publicada 2025-26; el resto aparece como «sin datos».</span>
+  <span data-i="bar.sim">Fixtures y resultados sí son reales.</span>
+</div>
 <div id="app">
 
 <header class="top">
@@ -677,6 +690,9 @@ const now = Date.now(), H = 3600e3, D = 24*H;
 const I18N = {
   es: {
     tagline:'Apuestas · Amigos', upd:'Actualizado','dash.roi':'ROI','dash.gobets':'Ver value bets →',
+    'bar.odds':'Las cuotas son sintéticas (sesgo determinista + vig), no de un operador real.',
+    'bar.refs':'Datos de árbitros: 8 de 32 con fuente publicada 2025-26; el resto aparece como «sin datos».',
+    'bar.sim':'Fixtures y resultados sí son reales.',
     'lv.title':'En vivo y resultados','lv.auto':'cada 60 s','nav.live':'En vivo',
     'st.title':'Rendimiento','st.net':'Neto','st.roi':'ROI','st.hit':'Tasa de acierto','st.clv':'Edge medio',
     'st.roitip':'ROI = neto / total apostado. Es la única métrica que dice si estás ganando dinero, no solo apuestas.',
@@ -705,7 +721,7 @@ const I18N = {
     'm3.title':'Datos y tendencias','m3.tabmatches':'Partidos GW','m3.tabseason':'Stats de temporada','m3.tabrefs':'Árbitros',
     'm3.fbig':'Solo Big 6','m3.fvalue':'Con value bets','m3.fwknd':'Fin de semana',
     'm3.trends':'Tendencias históricas','m3.takes':'Lo que dicen esta semana','m3.faceoff':'Cara a cara','m3.officials':'Árbitro del partido',
-    'm3.scombined':'Combinado (3 ligas)','m3.sleague':'Por liga','m3.refnote':'Stats de árbitros: placeholder del mockup. En producción se calculan de datos reales por partido.',
+    'm3.scombined':'Combinado (3 ligas)','m3.sleague':'Por liga','m3.refnote':'Datos 2025-26 con fuente por fila. En producción se recalculan de los partidos reales tras cada jornada.',
     'm3.smallsample':'Muestra pequeña — usar con cautela','m3.insufficient':'Datos insuficientes — dirigió 2 partidos esta temporada',
     'm4.title':'Fantasy Hub','m4.captains':'Capitanes recomendados GW15','m4.diff':'Diferenciales (baja propiedad)','m4.inj':'Lesionados / sancionados',
     'm4.open':'Abrir en','m4.manual':'Datos limitados — se actualiza manualmente','m4.deadline':'Cierre',
@@ -724,6 +740,9 @@ const I18N = {
   },
   en: {
     tagline:'Bets · Friends', upd:'Updated','dash.roi':'ROI','dash.gobets':'See value bets →',
+    'bar.odds':'Odds are synthetic (deterministic bias + vig), not from a real book.',
+    'bar.refs':'Referee data: 8 of 32 carry a published 2025-26 source; the rest show as "no data".',
+    'bar.sim':'Fixtures and results are real.',
     'lv.title':'Live & results','lv.auto':'every 60 s','nav.live':'Live',
     'st.title':'Performance','st.net':'Net','st.roi':'ROI','st.hit':'Hit rate','st.clv':'Avg edge',
     'st.roitip':'ROI = net / total staked. The only metric that tells you whether you are making money, not just bets.',
@@ -752,7 +771,7 @@ const I18N = {
     'm3.title':'Data & trends','m3.tabmatches':'GW matches','m3.tabseason':'Season stats','m3.tabrefs':'Referees',
     'm3.fbig':'Big 6 only','m3.fvalue':'With value bets','m3.fwknd':'Weekend only',
     'm3.trends':'Historical trends','m3.takes':'This week\'s takes','m3.faceoff':'Stats face-off','m3.officials':'Match officials',
-    'm3.scombined':'Combined (3 leagues)','m3.sleague':'Per league','m3.refnote':'Referee stats: mockup placeholders. In production they are computed from real per-match data.',
+    'm3.scombined':'Combined (3 leagues)','m3.sleague':'Per league','m3.refnote':'2025-26 data with a per-row source. In production these recompute from real match data after every matchday.',
     'm3.smallsample':'Small sample — use with caution','m3.insufficient':'Insufficient data — refereed 2 matches this season',
     'm4.title':'Fantasy Hub','m4.captains':'Recommended captains GW15','m4.diff':'Differentials (low ownership)','m4.inj':'Injured / suspended',
     'm4.open':'Open in','m4.manual':'Limited data — updated manually','m4.deadline':'Deadline',
@@ -1086,8 +1105,12 @@ function negBin(rng,mean,k){ if(mean<=0)return 0; const g=gammaSample(rng,k)/k; 
 function matchRates(m,lg){
   const H=TEAM_RATES[m.h[2]], A=TEAM_RATES[m.a[2]], L=LEAGUE_MEAN[lg];
   if(!H||!A) return null;
-  const refY = m.ref? m.ref.yc/ (lg==='sa'?4.2:3.6) : 1;
-  const refF = m.ref? m.ref.fouls/(lg==='sa'?23.5:21.0) : 1;
+  /* referee multipliers only apply when the official has a sourced figure;
+     otherwise 1.0 — a neutral prior beats an invented one */
+  const R = m.ref ? REF_BY_NAME[m.ref.n] : null;
+  const avg = LEAGUE_REF_AVG[lg];
+  const refY = (R && R.verified && R.yc && avg.yc) ? R.yc/avg.yc : 1;
+  const refF = (R && R.verified && R.fouls && avg.fouls) ? R.fouls/avg.fouls : 1;
   const g=(a,d)=>L.g*Math.pow(a/L.g,SHRINK)*Math.pow(d/L.g,SHRINK);
   const x=(a,d,mean)=>mean*Math.pow(a/mean,SHRINK)*Math.pow(d/mean,SHRINK);
   return {
@@ -1236,41 +1259,81 @@ const SEASON = {
   agg:[['Estado|Status','La J1 arranca el 28 ago|MD1 starts 28 Aug'],['Jornadas jugadas|Matchdays played','0 de 34|0 of 34'],['Campeón vigente|Reigning champion','Bayern']]}
 };
 
-/* refs — 2025-26 season aggregates carried over; 2026-27 samples reset (see file header note) */
-const REFS = [
- ['pl','Michael Oliver',34,4.2,7,21.3,.38,'52/48'],['pl','Anthony Taylor',32,3.8,5,19.8,.29,'55/45'],
- ['pl','Chris Kavanagh',30,4.6,9,22.7,.42,'49/51'],['pl','Simon Hooper',28,3.5,3,20.4,.27,'53/47'],
- ['pl','Stuart Attwell',27,3.6,4,19.4,.33,'51/49'],['pl','Andy Madley',25,3.4,3,20.8,.26,'52/48'],
- ['pl','Jarred Gillett',23,3.7,4,21.0,.30,'50/50'],['pl','Craig Pawson',22,3.3,2,19.1,.23,'54/46'],
- ['pl','Robert Jones',21,3.4,3,20.1,.25,'53/47'],['pl','Sam Barrott',6,3.1,0,18.2,.21,'54/46','small'],
- ['sa','Daniele Orsato',33,4.9,11,24.6,.44,'50/50'],['sa','Marco Guida',31,4.1,6,23.2,.31,'52/48'],
- ['sa','Maurizio Mariani',30,4.4,8,25.1,.36,'48/52'],['sa','Davide Massa',28,4.0,5,23.8,.33,'51/49'],
- ['sa','Daniele Doveri',26,4.2,6,24.0,.34,'50/50'],['sa','Fabio Maresca',24,4.3,7,24.4,.35,'49/51'],
- ['sa','Federico La Penna',22,3.8,4,22.9,.28,'52/48'],['sa','Michael Fabbri',20,4.0,5,23.5,.30,'51/49'],
- ['sa','Simone Sozza',18,3.7,3,22.4,.27,'53/47'],['sa','Matteo Marcenaro',5,3.9,1,21.8,.30,'50/50','small'],
- ['bl','Daniel Siebert',30,3.9,5,22.9,.35,'52/48'],['bl','Deniz Aytekin',29,3.3,3,20.6,.24,'54/46'],
- ['bl','Felix Zwayer',27,3.7,4,21.5,.31,'50/50'],['bl','Felix Brych',26,3.8,4,21.9,.32,'51/49'],
- ['bl','Tobias Stieler',24,3.4,2,20.9,.26,'53/47'],['bl','Bastian Dankert',23,3.6,3,21.7,.29,'52/48'],
- ['bl','Robert Hartmann',22,3.5,3,20.7,.27,'53/47'],['bl','Harm Osmers',21,3.2,2,19.9,.22,'55/45'],
- ['bl','Sven Jablonski',2,0,0,0,0,'—','insuf']
-];
-
-
 /* ==========================================================================
-   BET LEDGER — the single source of truth for every performance number.
-   Outcomes are NOT hand-written: for each leg we take the priced odds and the
-   edge the model claimed at the time, derive the true probability
-   (p = 1/odds + edge) and draw the result from it with a seeded PRNG. So hit
-   rate, ROI and edge are consistent with each other by construction — a
-   hand-typed ledger drifts the moment any number is edited.
-   TODO(real build): this is the settled-bet table from the database.
+   REFEREE DATA — 2025-26 season, sourced. NOT invented.
+   --------------------------------------------------------------------------
+   Every row carries its own source and sample size. Referees without a
+   defensible published figure are marked verified:false and the model uses a
+   NEUTRAL multiplier for them rather than a plausible-looking guess.
+
+   Sources disagree materially and that is not noise to hide:
+     · Statz (full 25-26 season):      PL average 3.9 YC/g, 21.7 fouls/g
+     · ScoreRoom (25-26):              PL average 5.37 YC/g
+     · Opta (25-26 matchday 6 only):   Hooper 6.4 cards/g over ~6 games
+     · FootyStats (career):            Hooper 2.95 cards/g
+   The Hooper spread (2.95 career vs 6.4 over six games) is the clearest
+   warning in this dataset: single-season referee samples are tiny and swing
+   hard. Anything under ~15 matches is flagged in the UI.
+
+   Serie A / Bundesliga: only league-level averages are published in the
+   sources reachable here, so individual officials in those leagues are
+   deliberately left without figures.
+   ========================================================================== */
+const LEAGUE_REF_AVG = {
+  pl:{yc:3.9, fouls:21.7, rc:0.10, src:'Statz 2025-26'},
+  sa:{yc:3.60, fouls:null, rc:0.17, src:'ScoreRoom 2025-26'},
+  bl:{yc:null, fouls:null, rc:null, src:null}
+};
+/* [league, name, matches, YC/game, fouls/game, RC/game, source, verified] */
+const REFS = [
+ ['pl','Stuart Attwell',20,5.00,null,0.10,'Statz · Tips.GG 25-26',true],
+ ['pl','Simon Hooper',6,6.40,29.6,null,'Opta 25-26 (J1-6)',true,'small'],
+ ['pl','Sam Barrott',6,5.80,null,null,'Opta 25-26 (J1-6)',true,'small'],
+ ['pl','Darren England',19,4.32,null,0.16,'Tips.GG 25-26',true],
+ ['pl','Anthony Taylor',null,4.00,null,null,'Tips.GG 25-26',true],
+ ['pl','Tony Harrington',3,3.30,21.0,null,'Squawka 25-26',true,'small'],
+ ['pl','Craig Pawson',17,2.50,21.0,null,'Squawka 25-26',true],
+ ['pl','Thomas Kirk',null,null,24.0,null,'Statz 25-26',true],
+ ['pl','Michael Oliver',null,null,null,null,null,false],
+ ['pl','Chris Kavanagh',null,null,null,null,null,false],
+ ['pl','Andy Madley',null,null,null,null,null,false],
+ ['pl','Robert Jones',null,null,null,null,null,false],
+ ['pl','Jarred Gillett',null,null,null,null,null,false],
+ ['sa','Daniele Orsato',null,null,null,null,null,false],
+ ['sa','Maurizio Mariani',null,null,null,null,null,false],
+ ['sa','Marco Guida',null,null,null,null,null,false],
+ ['sa','Davide Massa',null,null,null,null,null,false],
+ ['sa','Daniele Doveri',null,null,null,null,null,false],
+ ['sa','Fabio Maresca',null,null,null,null,null,false],
+ ['sa','Federico La Penna',null,null,null,null,null,false],
+ ['sa','Michael Fabbri',null,null,null,null,null,false],
+ ['sa','Simone Sozza',null,null,null,null,null,false],
+ ['sa','Matteo Marcenaro',null,null,null,null,null,false],
+ ['bl','Daniel Siebert',null,null,null,null,null,false],
+ ['bl','Deniz Aytekin',null,null,null,null,null,false],
+ ['bl','Felix Zwayer',null,null,null,null,null,false],
+ ['bl','Felix Brych',null,null,null,null,null,false],
+ ['bl','Tobias Stieler',null,null,null,null,null,false],
+ ['bl','Bastian Dankert',null,null,null,null,null,false],
+ ['bl','Robert Hartmann',null,null,null,null,null,false],
+ ['bl','Harm Osmers',null,null,null,null,null,false],
+ ['bl','Sven Jablonski',null,null,null,null,null,false]
+];
+const REF_BY_NAME = Object.fromEntries(REFS.map(r=>[r[1],
+  {lg:r[0],name:r[1],matches:r[2],yc:r[3],fouls:r[4],rc:r[5],src:r[6],verified:r[7],flag:r[8]||null}]));
+
+/* my tickets — user's tracked bets. 1u = base stake. Model places its own suggested tickets. */
+/* ==========================================================================
+   BET LEDGER — single source of truth for every performance number.
+   Outcomes are derived, not typed: p = 1/odds + claimed edge, drawn with a
+   seeded PRNG, so hit rate, ROI and edge stay consistent with each other.
    ========================================================================== */
 const CAT_KEYS=['res','goals','corners','fouls','cards','shots','sot','saves'];
 function buildLedger(){
   const rng=mulberry32(20262027);
   const log=[]; const lgs=['pl','sa','bl'];
   const buckets=[{m:'x2',t:2,n:2,w:0.30},{m:'x3',t:3,n:2,w:0.28},{m:'x5',t:5,n:3,w:0.24},{m:'x10',t:10,n:3,w:0.18}];
-  const start=Date.parse('2026-08-21T00:00:00Z') - 300*864e5;   // last season + current
+  const start=Date.parse('2026-08-21T00:00:00Z') - 300*864e5;
   for(let i=0;i<640;i++){
     const r=rng(); let acc=0,b=buckets[0];
     for(const x of buckets){acc+=x.w; if(r<=acc){b=x;break;}}
@@ -1280,8 +1343,6 @@ function buildLedger(){
     for(let j=0;j<nLegs;j++){
       const o=+(Math.pow(b.t,1/nLegs)*(0.82+rng()*0.42)).toFixed(2);
       const cat=CAT_KEYS[Math.floor(rng()*CAT_KEYS.length)];
-      /* longshots carry more edge than short prices — matches what the live
-         market audit showed (+1.5% on 2.6+ vs +0.5% under 1.6) */
       const edge=(o>2.6?0.011:o>1.9?0.008:o>1.6?0.005:0.003)+(rng()-0.45)*0.012;
       const p=Math.min(0.97,Math.max(0.03,1/o+edge));
       const won=rng()<p;
@@ -1296,7 +1357,6 @@ function buildLedger(){
 }
 const LEDGER = buildLedger();
 
-/* aggregation helper: any grouping -> bets, hit rate, staked, returned, ROI */
 function agg(rows,keyFn){
   const g={};
   rows.forEach(b=>{ const k=keyFn(b); (g[k] ||= {k,n:0,won:0,staked:0,ret:0,edge:0,odds:0});
@@ -1306,7 +1366,6 @@ function agg(rows,keyFn){
   return Object.values(g).map(o=>({...o, net:o.ret-o.staked, roi:(o.ret-o.staked)/o.staked*100,
     hit:o.won/o.n*100, avgOdds:o.odds/o.n, avgEdge:o.edge/o.n*100,
     expHit:100/(o.odds/o.n), expRoi:o.evSum/o.staked*100,
-    /* 1 s.e. of ROI for an all-or-nothing bet, so noise is visible as noise */
     se:Math.sqrt(o.n)*(o.odds/o.n)/o.staked*100*0.5 }));
 }
 function legRows(){ const out=[]; LEDGER.forEach(b=>b.legs.forEach(l=>out.push({...l,lg:b.lg,stake:b.stake}))); return out; }
@@ -1314,8 +1373,8 @@ function legRows(){ const out=[]; LEDGER.forEach(b=>b.legs.forEach(l=>out.push({
 const FANTASY = {
  pl:{name:'Fantasy Premier League',logo:'FPL',url:'https://fantasy.premierleague.com',deadline:T('2026-08-28T18:00:00Z'),api:'API oficial FPL|Official FPL API',gwlab:'GW2',
    caps:[['Haaland (MCI)','9.4'],['Saka (ARS)','8.1'],['Isak (NEW)','7.6']],
-   diffs:[['Wissa (BRE) · 6% prop.|Wissa (BRE) · 6% owned','6.7'],['Sammie Szmodics (IPS) · 3% prop.|Sammie Szmodics (IPS) · 3% owned','5.9']],
-   inj:[['Rodri (MCI)','🔴 fuera|out'],['Ødegaard (ARS)','🟡 duda|doubt'],['Bowen (—)','⚪ descendido|relegated out']]},
+   diffs:[['Wissa (BRE) · 6% prop.|Wissa (BRE) · 6% owned','6.7'],['Szmodics (IPS) · 3% prop.|Szmodics (IPS) · 3% owned','5.9']],
+   inj:[['Rodri (MCI)','🔴 fuera|out'],['Ødegaard (ARS)','🟡 duda|doubt']]},
  sa:{name:'Fantacalcio (Serie A)',logo:'FC',url:'https://leghe.fantacalcio.it',deadline:T('2026-08-22T15:30:00Z'),api:'Entrada manual del admin|Admin manual entry',gwlab:'G1',
    caps:[['Lautaro (INT)','8.6'],['Leão (MIL)','7.7'],['Vlahović (JUV)','7.2']],
    diffs:[['Zaccagni (LAZ)','6.5'],['Orsolini (BOL)','6.3']],
@@ -1325,10 +1384,7 @@ const FANTASY = {
 /* ---- settlement: legs resolve against the real stat line, never hand-set ----
    The same MARKETS[].test() predicates that drive the Monte Carlo also settle
    real bets, so a market can never be scored one way in the sim and another
-   way in the ledger. GK saves are derived exactly as in the simulation
-   (opponent shots on target minus goals conceded) — verified against the feed:
-   Arsenal 6 SOT / 3 goals -> Coventry keeper 3 saves; Coventry 1 SOT / 0 goals
-   -> Arsenal keeper 1 save. Both match the official stats. */
+   way in the ledger. */
 function stateFromStats(s){
   return {gh:s.gh,ga:s.ga,g:s.gh+s.ga, ch:s.ch,ca:s.ca,c:s.ch+s.ca,
           fh:s.fh,fa:s.fa,f:s.fh+s.fa, yh:s.yh,ya:s.ya,y:s.yh+s.ya,
@@ -1342,13 +1398,12 @@ function findMatch(mid){
 }
 function settleLeg(leg){
   const m=findMatch(leg.mid);
-  if(!m || !m.stats) return null;                 // not finished -> pending
+  if(!m || !m.stats) return null;
   const mk=MARKET_BY_KEY[leg.key]; if(!mk) return null;
   return mk.test(stateFromStats(m.stats));
 }
 function settleTicket(tk){
-  /* no bi()/S here: this runs at load time, before the app-logic block is
-     initialised. Labels are localised at render time. */
+  /* no bi()/S here: runs at load time, before the app-logic block exists */
   const res=tk.legs.map(l=>({...l, ok:settleLeg(l),
         match:(findMatch(l.mid)||{h:['','',''],a:['','','']})}));
   const status = res.some(l=>l.ok===false) ? 'lost'
@@ -1357,7 +1412,6 @@ function settleTicket(tk){
   return {...tk, legs:res, status, odds};
 }
 
-/* my tickets — user's tracked bets. 1u = base stake. Model places its own suggested tickets. */
 const TICKETS_RAW = [
  {id:'t1',lg:'pl',gw:1,mult:'x2',stake:1.0,model:true,legs:[
    {mid:'p101',key:'w_h',o:1.38},{mid:'p101',key:'ch_o6.5',o:1.62}]},
@@ -1819,10 +1873,11 @@ function renderInsights(){
         ${m.face.map(r=>{const l=parseFloat(r[0]),rr=parseFloat(r[2]),lw=l>=rr;return `<div class="fo-row"><b class="l ${lw?'win':''}">${r[0]}</b><span class="m">${bi(r[1])}</span><b class="${!lw?'win':''}">${r[2]}</b></div>`;}).join('')}
       </div>
       <div class="officials"><div class="refface">👮</div>
-        <div style="flex:1"><b>${m.ref.n}</b><div style="font-family:var(--mono);font-size:11px;color:var(--muted)">YC/g ${m.ref.yc} · ${bi('faltas|fouls')}/g ${m.ref.fouls} · pen/g ${m.ref.pens}</div>
-        ${m.ref.note?`<div style="font-size:11.5px;color:var(--warn);margin-top:2px">⚠ ${bi(m.ref.note)}</div>`:''}
-        ${m.ref.small?`<div style="font-size:11.5px;color:var(--muted);margin-top:2px">ℹ ${t('m3.smallsample')}</div>`:''}
-        ${m.ref.insuf?`<div style="font-size:11.5px;color:var(--muted);margin-top:2px">ℹ ${t('m3.insufficient')}</div>`:''}</div>
+        <div style="flex:1"><b>${m.ref.n}</b>${(()=>{const o=REF_BY_NAME[m.ref.n];
+          if(!o||!o.verified) return `<div style="font-size:11.5px;color:var(--warn);margin-top:2px">⚠ ${bi('Sin estadísticas publicadas para este árbitro. El modelo no ajusta tarjetas ni faltas por él.','No published stats for this official. The model applies no card or foul adjustment for him.')}</div>`;
+          return `<div style="font-family:var(--mono);font-size:11px;color:var(--muted)">${o.yc?'YC/g '+o.yc:''}${o.fouls?' · '+bi('faltas|fouls')+'/g '+o.fouls:''}${o.matches?' · n='+o.matches:''}</div>
+          <div style="font-size:11px;color:var(--faint);margin-top:2px">${bi('Fuente|Source')}: ${o.src}</div>
+          ${o.flag==='small'?`<div style="font-size:11.5px;color:var(--warn);margin-top:2px">⚠ ${t('m3.smallsample')}</div>`:''}`;})()}</div>
       </div>
     </div>
    </div>`).join('') : `<div class="card novalue">${bi('Ningún partido cumple los filtros.|No matches meet the filters.')}</div>`;
@@ -1864,19 +1919,41 @@ function renderRefs(){
   $('#ref-filters').innerHTML = ['all','pl','sa','bl'].map(k=>
     `<button class="fchip ${refLeague===k?'on':''}" data-refl="${k}">${k==='all'?bi('Todas|All'):LEAGUES[k].name}</button>`).join('');
   $$('[data-refl]').forEach(b=>b.addEventListener('click',()=>{refLeague=b.dataset.refl;renderRefs();}));
+
   let rows = REFS.filter(r=>refLeague==='all'||r[0]===refLeague);
-  rows = rows.slice().sort((a,b)=>{const va=a[refSort.col],vb=b[refSort.col];return (va>vb?1:va<vb?-1:0)*refSort.dir;});
-  const heads=[['1',bi('Árbitro|Referee')],['2',bi('PJ|Gms')],['3','YC/g'],['4',bi('Rojas|Reds')],['5',bi('Faltas/g|Fouls/g')],['6','Pen/g'],['7',bi('TA local/visita|YC home/away')]];
-  $('#reftable').innerHTML = `<tr><th>${bi('Liga|Lg')}</th>${heads.map(h=>`<th class="num" data-sort="${h[0]}">${h[1]} ${refSort.col==+h[0]?(refSort.dir>0?'▲':'▼'):''}</th>`).join('')}</tr>`+
+  rows = rows.slice().sort((a,b)=>{
+    const va=a[refSort.col], vb=b[refSort.col];
+    if(va===null&&vb===null) return 0; if(va===null) return 1; if(vb===null) return -1;
+    return (va>vb?1:va<vb?-1:0)*refSort.dir;
+  });
+  const heads=[['1',bi('Árbitro|Referee')],['2',bi('PJ|Gms')],['3','TA/p'],['4',bi('Faltas/p|Fouls/g')],['5',bi('Rojas/p|Reds/g')]];
+  const withData = rows.filter(r=>r[7]).length;
+  $('#reftable').innerHTML =
+    `<tr><th>${bi('Liga|Lg')}</th>${heads.map(x=>`<th class="num" data-sort="${x[0]}">${x[1]} ${refSort.col==+x[0]?(refSort.dir>0?'▲':'▼'):''}</th>`).join('')}<th>${bi('Fuente|Source')}</th></tr>`+
     rows.map(r=>{
-      const insuf=r[8]==='insuf', small=r[8]==='small';
-      return `<tr><td><span class="chip mut">${r[0].toUpperCase()}</span></td>
-      <td class="num" style="text-align:left"><b>${r[1]}</b>${small?` <span class="chip warn" title="${t('m3.smallsample')}">⚠</span>`:''}</td>
-      ${insuf?`<td class="num" colspan="6" style="color:var(--faint)">${t('m3.insufficient')}</td>`:
-      `<td class="num">${r[2]}</td><td class="num">${r[3]}</td><td class="num">${r[4]}</td><td class="num">${r[5]}</td><td class="num">${r[6]}</td><td class="num">${r[7]}</td>`}
-    </tr>`;}).join('');
-  $$('#reftable [data-sort]').forEach(h=>h.addEventListener('click',()=>{
-    const c=+h.dataset.sort; refSort = refSort.col===c ? {col:c,dir:-refSort.dir} : {col:c,dir:-1}; renderRefs();
+      const o=REF_BY_NAME[r[1]];
+      if(!o.verified) return `<tr style="opacity:.55">
+        <td><span class="chip mut">${o.lg.toUpperCase()}</span></td>
+        <td style="text-align:left"><b>${o.name}</b></td>
+        <td class="num" colspan="4" style="color:var(--faint)">${bi('sin datos publicados — el modelo usa multiplicador neutro','no published data — model uses a neutral multiplier')}</td>
+        <td><span class="chip warn">${bi('sin fuente|no source')}</span></td></tr>`;
+      const n=v=>v===null?'<td class="num" style="color:var(--faint)">—</td>':`<td class="num">${v}</td>`;
+      return `<tr>
+        <td><span class="chip mut">${o.lg.toUpperCase()}</span></td>
+        <td style="text-align:left"><b>${o.name}</b>${o.flag==='small'?` <span class="chip warn" title="${bi('muestra menor a 15 partidos','fewer than 15 matches')}">n=${o.matches}</span>`:''}</td>
+        ${n(o.matches)}${n(o.yc)}${n(o.fouls)}${n(o.rc)}
+        <td style="font-size:11px;color:var(--muted)">${o.src}</td></tr>`;
+    }).join('') +
+    `<tr><td colspan="7" style="padding-top:12px">
+      <div class="corrwarn">⚠ ${bi(
+       `${withData} de ${rows.length} árbitros tienen cifra publicada. Los demás no llevan número inventado: el motor los trata con multiplicador neutro. Serie A y Bundesliga solo publican medias de liga en las fuentes accesibles.`,
+       `${withData} of ${rows.length} referees have a published figure. The rest carry no invented number: the engine treats them with a neutral multiplier. Serie A and Bundesliga only publish league-level averages in the reachable sources.`)}</div>
+      <div class="corrok" style="margin-top:7px">📊 ${bi(
+       'Medias de liga 25-26 — Premier: 3.9 TA/p y 21.7 faltas/p (Statz). Serie A: 3.60 TA/p (ScoreRoom). Ojo: ScoreRoom reporta 5.37 TA/p para la Premier, muy por encima de Statz. Las fuentes de árbitros no coinciden entre sí.',
+       'League averages 25-26 — Premier: 3.9 YC/g and 21.7 fouls/g (Statz). Serie A: 3.60 YC/g (ScoreRoom). Note: ScoreRoom reports 5.37 YC/g for the Premier, far above Statz. Referee sources do not agree with each other.')}</div>
+    </td></tr>`;
+  $$('#reftable [data-sort]').forEach(x=>x.addEventListener('click',()=>{
+    const c=+x.dataset.sort; refSort = refSort.col===c?{col:c,dir:-refSort.dir}:{col:c,dir:-1}; renderRefs();
   }));
 }
 
