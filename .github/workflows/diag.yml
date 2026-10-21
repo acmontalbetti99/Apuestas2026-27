@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12', cache: pip }
       - run: pip install -r requirements.txt
-      - name: Medir si el arbitro predice tarjetas
+      - name: Recalibrar la base de tarjetas
         run: |
           exec > data/_diagnostico.log 2>&1
           python -u - <<'PY2'
@@ -18,87 +18,37 @@ jobs:
           import refresh as R; R.prefer_ipv4()
           import numpy as np, pandas as pd
           import stats_engine as SE
-
           DIVS={"E0":"premier","SP1":"laliga","I1":"seriea","D1":"bundesliga"}
           fr=[]
           for season in ("2627","2526","2425","2324"):
               for div,lg in DIVS.items():
                   d=R.fetch_csv(f"https://www.football-data.co.uk/mmz4281/{season}/{div}.csv")
                   if d is None or "HY" not in d: continue
-                  if "Referee" not in d.columns:
-                      print(f"   {div} {season}: sin columna Referee, se saltea"); continue
-                  d=d.dropna(subset=["HY","AY","HomeTeam","AwayTeam","Referee"]).copy()
-                  d["lg"]=lg; d["temp"]=season; fr.append(d)
-                  print(f"   {div} {season}: {len(d)} partidos con arbitro")
-          if not fr:
-              print("ninguna division trae arbitro"); raise SystemExit
+                  d=d.dropna(subset=["HY","AY"]).copy(); d["lg"]=lg; d["temp"]=season; fr.append(d)
           D=pd.concat(fr,ignore_index=True)
-          D["fecha"]=pd.to_datetime(D["Date"],dayfirst=True,errors="coerce")
-          D=D.dropna(subset=["fecha"]).sort_values("fecha").reset_index(drop=True)
-          for c in ("HY","AY","HC","AC"): D[c]=pd.to_numeric(D.get(c),errors="coerce") if c in D else np.nan
-          D["amarillas"]=D.HY+D.AY; D["corners"]=D.HC+D.AC
-          D=D.dropna(subset=["amarillas"]).reset_index(drop=True)
-          print(f"{len(D)} partidos con arbitro y tarjetas")
-          print(f"{D.Referee.nunique()} arbitros distintos")
-          n=D.groupby("Referee").size()
-          print(f"partidos por arbitro: mediana {n.median():.0f}, max {n.max()}, "
-                f"con >=20: {(n>=20).sum()} arbitros ({100*n[n>=20].sum()/len(D):.0f}% de los partidos)")
-
-          # cuotas para la supremacia (el modelo la usa)
-          def sup(r):
-              try:
-                  h,dr,a=float(r["AvgCH"]),float(r["AvgCD"]),float(r["AvgCA"])
-                  if min(h,dr,a)<=1: return None
-                  i=np.array([1/h,1/dr,1/a]); i=i/i.sum(); return float(i[0]-i[2])
-              except Exception: return None
-          D["sup"]=[sup(r) for _,r in D.iterrows()]
-          D=D.dropna(subset=["sup"]).reset_index(drop=True)
-          print(f"{len(D)} con cuotas de cierre\n")
-
-          # walk-forward: para cada partido, el ratio del arbitro con SOLO lo anterior
-          hist={}; lgacc={}
-          base_pred=[]; ref_pred=[]; reales=[]; usados=0
-          for _,r in D.iterrows():
-              lg=r.lg
-              mh=SE.side_mean(lg,"yel","H",r.sup); ma=SE.side_mean(lg,"yel","A",r.sup)
-              esperado=mh+ma
-              prev=hist.get(r.Referee,[])
-              if len(prev)>=20:
-                  # cuanto se desvia el arbitro de lo que el modelo esperaba en SUS partidos
-                  ratio=float(np.mean([a/e for a,e in prev[-40:]]))
-                  ratio=1+0.6*(ratio-1)          # contraccion, como el resto del modelo
-                  usados+=1
-              else:
-                  ratio=1.0
-              base_pred.append(esperado); ref_pred.append(esperado*ratio)
-              reales.append(r.amarillas)
-              hist.setdefault(r.Referee,[]).append((r.amarillas,esperado))
-          b=np.array(base_pred); rp=np.array(ref_pred); y=np.array(reales,float)
-          print(f"partidos con arbitro conocido (>=20 previos): {usados} de {len(D)}\n")
-          m=np.array([len(hist.get(x,[]))>=0 for x in D.Referee])
-          sel=np.array([True]*len(D))
-          # comparar SOLO donde el ajuste hizo algo
-          act=rp!=b
-          print(f"=== amarillas del partido · {act.sum()} partidos con ajuste activo ===")
-          for nom,pred in (("modelo actual (sin arbitro)",b),("modelo + arbitro",rp)):
-              e=pred[act]-y[act]
-              print(f"  {nom:32s} MAE {np.abs(e).mean():.4f}  RMSE {np.sqrt((e**2).mean()):.4f}  sesgo {e.mean():+.4f}")
-          # correlacion del efecto arbitro con el error que dejaba el modelo
-          resid=y[act]-b[act]; efecto=rp[act]-b[act]
-          print(f"\n  correlacion entre el ajuste por arbitro y el error del modelo: "
-                f"{np.corrcoef(efecto,resid)[0,1]:+.4f}")
-          print("  (si fuera ~0, el arbitro no explica nada de lo que el modelo erraba)")
-          # dispersion entre arbitros
-          rr={k:np.mean([a/e for a,e in v]) for k,v in hist.items() if len(v)>=20}
-          if rr:
-              vals=np.array(list(rr.values()))
-              print(f"\n  ratio real/esperado por arbitro (n>=20): "
-                    f"min {vals.min():.2f} p25 {np.percentile(vals,25):.2f} "
-                    f"mediana {np.median(vals):.2f} p75 {np.percentile(vals,75):.2f} max {vals.max():.2f}")
-              top=sorted(rr.items(),key=lambda x:-x[1])[:4]
-              bot=sorted(rr.items(),key=lambda x:x[1])[:4]
-              print("  mas tarjeteros:", ", ".join(f"{k} {v:.2f}" for k,v in top))
-              print("  menos tarjeteros:", ", ".join(f"{k} {v:.2f}" for k,v in bot))
+          for c in ("HY","AY","HC","AC","HS","AS","HST","AST"):
+              D[c]=pd.to_numeric(D[c],errors="coerce") if c in D else np.nan
+          D["savH"]=(D.AST-pd.to_numeric(D.FTAG,errors="coerce")).clip(lower=0)
+          D["savA"]=(D.HST-pd.to_numeric(D.FTHG,errors="coerce")).clip(lower=0)
+          COLS={"yel":("HY","AY"),"cor":("HC","AC"),"sho":("HS","AS"),"sav":("savH","savA")}
+          print("Medias por lado medidas en 2023-2027, contra las que usa el modelo (2018-2025)\n")
+          print(f"{'liga':11s} {'stat':5s} {'n':>5s}  {'modelo L/V':>14s}  {'medido L/V':>14s}  {'desvio total':>13s}")
+          nuevo={}
+          for lg in DIVS.values():
+              g=D[D.lg==lg]
+              for s,(ch,ca) in COLS.items():
+                  sub=g.dropna(subset=[ch,ca])
+                  if len(sub)<200: continue
+                  mh,ma=sub[ch].mean(),sub[ca].mean()
+                  bh,ba=SE.BASE[lg][s]
+                  d=(mh+ma)-(bh+ba)
+                  flag=" <-- revisar" if abs(d)>0.25 else ""
+                  print(f"{lg:11s} {s:5s} {len(sub):5d}  {bh:6.2f}/{ba:5.2f}  {mh:6.2f}/{ma:5.2f}  "
+                        f"{d:+8.2f} ({100*d/(bh+ba):+5.1f}%){flag}")
+                  nuevo.setdefault(lg,{})[s]=(round(float(mh),2),round(float(ma),2))
+          print("\nBASE recalculado:")
+          for lg,v in nuevo.items():
+              print(f" '{lg}': {{" + ", ".join(f"'{s}':({a},{b})" for s,(a,b) in v.items()) + "},")
           PY2
       - name: Publicar
         if: always()
