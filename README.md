@@ -64,3 +64,20 @@ Nada de lo medido produce ganancia esperada positiva apostando a ciegas. El filt
 cuotas cortas, que es la banda donde el margen de la casa es más chico, pero el margen sigue estando.
 La cuota justa que muestra cada pick es el precio a partir del cual la apuesta deja de perder valor:
 si la casa paga menos que eso, la apuesta pierde aunque entre seguido.
+
+## Los motores
+
+En `scripts/` queda el codigo con el que se midio y se genera todo:
+
+| Archivo | Que hace |
+| --- | --- |
+| `engine.py` | Superficie Dixon-Coles anclada al mercado. `fit_lambdas` resuelve la supremacia con `brentq` para que el reparto local/visitante coincida con las cuotas. |
+| `stats_engine.py` | Corners, tarjetas, remates y atajadas. Binomial negativa por lado con el ajuste por desequilibrio y la contraccion de calibracion. |
+| `picks2.py` | Genera los picks sobre el umbral y arma las combinadas (una pata por partido, sin equipos repetidos). |
+| `fit_stats.py` / `val_stats.py` | Ajuste y verificacion fuera de muestra de la contraccion de calibracion. |
+| `backtest.py` / `validate_picks.py` / `followup.py` | Backtest walk-forward: log loss, Brier, acierto por banda. |
+| `factors.py` | La exploracion inicial de factores (arbitros, clima, rachas) y por que la mayoria no sobrevivio. |
+
+`scripts/refresh.py` todavia no existe: el refresco diario lo hace hoy la tarea programada de
+Claude contra la base del artifact. El workflow de GitHub Actions ya esta puesto y lo detecta
+cuando aparezca.
