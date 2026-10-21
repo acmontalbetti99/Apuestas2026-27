@@ -25,6 +25,7 @@ import io
 import json
 import os
 import re
+import socket
 import sys
 import unicodedata
 from datetime import datetime, timedelta, timezone
@@ -90,6 +91,44 @@ def log(msg: str) -> None:
     print(msg, flush=True)
 
 
+def prefer_ipv4() -> None:
+    """Resolver IPv4 primero.
+
+    football-data.co.uk publica A (217.160.0.118) y AAAA (2001:8d8:100f:f000::200),
+    y el resolver de los runners de Actions devuelve el AAAA primero. El runner no
+    tiene ruta IPv6, asi que la conexion muere con 'Network is unreachable' antes de
+    salir. curl no se entera porque prueba las dos familias y se queda con la que
+    responde; requests toma la primera direccion y se rinde. De ahi que el CSV baje
+    desde un navegador y falle en Actions.
+    """
+    original = socket.getaddrinfo
+
+    def patched(host, port, family=0, type=0, proto=0, flags=0):
+        if family == 0:
+            try:
+                if (v4 := original(host, port, socket.AF_INET, type, proto, flags)):
+                    return v4
+            except socket.gaierror:
+                pass          # sin registro A: que lo intente como pueda
+        return original(host, port, family, type, proto, flags)
+
+    socket.getaddrinfo = patched
+
+
+def session() -> requests.Session:
+    """Sesion con reintentos: football-data corta de a ratos y un 503 no debe voltear el dia."""
+    s = requests.Session()
+    retry = requests.adapters.Retry(total=3, backoff_factor=1.5,
+                                    status_forcelist=(429, 500, 502, 503, 504),
+                                    allowed_methods=("GET",))
+    s.mount("https://", requests.adapters.HTTPAdapter(max_retries=retry))
+    s.headers["User-Agent"] = "montoglory-refresh"
+    return s
+
+
+SESSION: requests.Session | None = None
+
+
 def slug(s: str) -> str:
     s = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode()
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", s.lower())).strip("-")
@@ -111,8 +150,11 @@ def seasons(today: datetime, n: int = 2) -> list[str]:
 
 
 def fetch_csv(url: str, timeout: int = 60) -> pd.DataFrame | None:
+    global SESSION
+    if SESSION is None:
+        SESSION = session()
     try:
-        r = requests.get(url, timeout=timeout, headers={"User-Agent": "montoglory-refresh"})
+        r = SESSION.get(url, timeout=timeout, allow_redirects=True)
     except requests.RequestException as e:
         log(f"  ! {url}: {e}")
         return None
@@ -476,6 +518,7 @@ def write_json(path: Path, obj) -> None:
 def main() -> int:
     today = datetime.now(timezone.utc)
     log(f"Refresco {today:%Y-%m-%d %H:%M} UTC")
+    prefer_ipv4()
 
     log("Bajando resultados...")
     D = load_results(today)
