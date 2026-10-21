@@ -78,6 +78,19 @@ En `scripts/` queda el codigo con el que se midio y se genera todo:
 | `backtest.py` / `validate_picks.py` / `followup.py` | Backtest walk-forward: log loss, Brier, acierto por banda. |
 | `factors.py` | La exploracion inicial de factores (arbitros, clima, rachas) y por que la mayoria no sobrevivio. |
 
-`scripts/refresh.py` todavia no existe: el refresco diario lo hace hoy la tarea programada de
-Claude contra la base del artifact. El workflow de GitHub Actions ya esta puesto y lo detecta
-cuando aparezca.
+`scripts/refresh.py` es el refresco diario y corre en GitHub Actions, no en la sesion de
+Claude: el contenedor de Claude sale a internet por un proxy con lista blanca que rechaza
+football-data.co.uk, y Actions no tiene esa restriccion. Hace cuatro cosas en orden: baja los
+partidos jugados de las cuatro ligas, liquida los picks cuyo partido ya termino, mide el acierto
+y mueve el umbral si el desvio lo justifica, y baja los proximos partidos con cuotas para generar
+los picks y las combinadas. Si una descarga falla no escribe nada y sale en rojo, asi que un dia
+caido deja los datos del dia anterior en lugar de datos a medias.
+
+Champions League queda afuera del refresco: football-data.co.uk no publica cuotas ni resultados
+de Champions, y los picks de Champions salen justamente del mercado. Un pick de Champions
+pendiente sobrevive 3 dias despues del kickoff y despues se descarta, para que no entre como
+acierto ni como fallo y no ensucie la medicion.
+
+El umbral solo se mueve con 60 o mas picks liquidados, y solo hacia arriba: si el modelo viene
+inflado 3 puntos, el filtro pasa de 65% a 68%. Con menos de 60 el error de muestra es mayor que
+el ajuste, asi que no se toca.
