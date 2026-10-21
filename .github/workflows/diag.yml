@@ -1,0 +1,77 @@
+name: Diagnostico EL y ECL
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Buscar Europa y Conference, y ver si hay cuotas
+        run: |
+          exec > data/_diagnostico.log 2>&1
+          python -u - <<'PY2'
+          import sys; sys.path.insert(0,'scripts')
+          import refresh as R; R.prefer_ipv4()
+          import requests, json
+          from datetime import datetime, timedelta, timezone
+          UA=("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+              "Chrome/131.0.0.0 Safari/537.36")
+          s=requests.Session(); s.headers.update({"User-Agent":UA,"Referer":"https://www.livescore.com/"})
+          B="https://prod-public-api.livescore.com/v1/api/app/date/soccer"
+          hoy=datetime.now(timezone.utc)
+          vistos={}
+          ejemplo=None
+          for n in range(0,15):
+              dia=hoy-timedelta(days=n)
+              try: d=s.get(f"{B}/{dia:%Y%m%d}/0",timeout=25).json()
+              except Exception as e: print(f"  {dia:%Y-%m-%d}: {e}"); continue
+              for stg in d.get("Stages",[]):
+                  cn=str(stg.get("Cnm","")); sn=str(stg.get("Snm",""))
+                  blob=f"{cn} {sn}".lower()
+                  if any(w in blob for w in ("europa","conference")):
+                      ev=stg.get("Events",[])
+                      vistos.setdefault((cn,sn),0); vistos[(cn,sn)]+=len(ev)
+                      for e in ev:
+                          if e.get("Eps")=="FT" and ejemplo is None:
+                              ejemplo=(cn,sn,e)
+          print("COMPETENCIAS ENCONTRADAS (ultimos 15 dias):")
+          for (cn,sn),n in sorted(vistos.items(), key=lambda x:-x[1]):
+              print(f"   Cnm={cn!r:34s} Snm={sn!r:34s} {n} partidos")
+          if ejemplo:
+              cn,sn,e=ejemplo
+              t1=(e.get("T1") or [{}])[0].get("Nm"); t2=(e.get("T2") or [{}])[0].get("Nm")
+              print(f"\nEJEMPLO: [{cn}] {sn}: {t1} {e.get('Tr1')}-{e.get('Tr2')} {t2} Esd={e.get('Esd')}")
+          print("\n=== CAMPOS EO / EOX (posibles cuotas) ===")
+          # buscar en partidos NO empezados, que es donde habria cuotas
+          for n in range(0,4):
+              dia=hoy+timedelta(days=n)
+              try: d=s.get(f"{B}/{dia:%Y%m%d}/0",timeout=25).json()
+              except Exception: continue
+              for stg in d.get("Stages",[]):
+                  cn=str(stg.get("Cnm","")).lower(); sn=str(stg.get("Snm","")).lower()
+                  if not any(w in f"{cn} {sn}" for w in ("champions","europa","conference","premier","laliga","serie a","bundesliga")):
+                      continue
+                  for e in stg.get("Events",[]):
+                      if e.get("Eps")!="NS": continue
+                      t1=(e.get("T1") or [{}])[0].get("Nm"); t2=(e.get("T2") or [{}])[0].get("Nm")
+                      print(f"\n  [{stg.get('Cnm')}] {t1} v {t2}  ({dia:%Y-%m-%d})")
+                      for k in ("EO","EOX","Eodds","Odds"):
+                          if k in e: print(f"     {k} = {json.dumps(e[k])[:400]}")
+                      if "EO" not in e and "EOX" not in e: print("     sin campos de cuotas")
+                      break
+                  else: continue
+                  break
+              else: continue
+              break
+          PY2
+      - name: Publicar
+        if: always()
+        run: |
+          git config user.name montoglory-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A data/_diagnostico.log
+          git diff --staged --quiet || { git commit -m "diagnostico EL/ECL"; git push; }
