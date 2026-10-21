@@ -10,102 +10,90 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12', cache: pip }
       - run: pip install -r requirements.txt
-      - name: Medir si xG aporta sobre el mercado
+      - name: Medir si el arbitro predice tarjetas
         run: |
           exec > data/_diagnostico.log 2>&1
           python -u - <<'PY2'
           import sys; sys.path.insert(0,'scripts')
           import refresh as R; R.prefer_ipv4()
           import numpy as np, pandas as pd
-          from engine import markets
+          import stats_engine as SE
 
           DIVS={"E0":"premier","SP1":"laliga","I1":"seriea","D1":"bundesliga"}
           fr=[]
-          for season in ("2627","2526","2425"):
+          for season in ("2627","2526","2425","2324"):
               for div,lg in DIVS.items():
                   d=R.fetch_csv(f"https://www.football-data.co.uk/mmz4281/{season}/{div}.csv")
-                  if d is None or "FTHG" not in d: continue
-                  d=d.dropna(subset=["FTHG","FTAG","HomeTeam","AwayTeam"]).copy()
-                  d["lg"]=lg; d["temp"]=season; fr.append(d)
+                  if d is None or "HY" not in d: continue
+                  d=d.dropna(subset=["HY","AY","HomeTeam","AwayTeam","Referee"]).copy()
+                  d["lg"]=lg; fr.append(d)
           D=pd.concat(fr,ignore_index=True)
           D["fecha"]=pd.to_datetime(D["Date"],dayfirst=True,errors="coerce")
           D=D.dropna(subset=["fecha"]).sort_values("fecha").reset_index(drop=True)
-          print(f"{len(D)} partidos bajados")
+          for c in ("HY","AY","HC","AC"): D[c]=pd.to_numeric(D[c],errors="coerce")
+          D["amarillas"]=D.HY+D.AY; D["corners"]=D.HC+D.AC
+          D=D.dropna(subset=["amarillas"]).reset_index(drop=True)
+          print(f"{len(D)} partidos con arbitro y tarjetas")
+          print(f"{D.Referee.nunique()} arbitros distintos")
+          n=D.groupby("Referee").size()
+          print(f"partidos por arbitro: mediana {n.median():.0f}, max {n.max()}, "
+                f"con >=20: {(n>=20).sum()} arbitros ({100*n[n>=20].sum()/len(D):.0f}% de los partidos)")
 
-          tiene_xg = D[["HxG","AxG"]].notna().all(axis=1) if "HxG" in D else pd.Series(False,index=D.index)
-          print(f"con xG: {int(tiene_xg.sum())} ({100*tiene_xg.mean():.1f}%)")
-          if "HxG" in D:
-              for t,g in D[tiene_xg].groupby("temp"):
-                  print(f"   temporada {t}: {len(g)} partidos con xG")
-          if tiene_xg.sum()<400:
-              print("\nxG insuficiente para medir nada serio."); raise SystemExit
-
-          # cuotas: 1X2 de cierre y linea de 2.5
-          def dv(a,b,c):
-              i=np.array([1/a,1/b,1/c]); return i/i.sum()
-          ok=[]
-          for _,r in D[tiene_xg].iterrows():
+          # cuotas para la supremacia (el modelo la usa)
+          def sup(r):
               try:
                   h,dr,a=float(r["AvgCH"]),float(r["AvgCD"]),float(r["AvgCA"])
-                  o,u=float(r["AvgC>2.5"]),float(r["AvgC<2.5"])
-                  if min(h,dr,a,o,u)<=1: continue
-              except Exception: continue
-              pH,pD,pA=dv(h,dr,a)
-              io=np.array([1/o,1/u]); pOver=float((io/io.sum())[0])
-              ok.append({"lg":r["lg"],"fecha":r["fecha"],"home":r["HomeTeam"],"away":r["AwayTeam"],
-                         "pH":pH,"pD":pD,"pA":pA,"mkOver":pOver,
-                         "tot":int(r["FTHG"])+int(r["FTAG"]),
-                         "hxg":float(r["HxG"]),"axg":float(r["AxG"])})
-          M=pd.DataFrame(ok).sort_values("fecha").reset_index(drop=True)
-          print(f"\n{len(M)} partidos con xG Y cuotas de cierre completas")
-          if len(M)<300: print("muy pocos."); raise SystemExit
+                  if min(h,dr,a)<=1: return None
+                  i=np.array([1/h,1/dr,1/a]); i=i/i.sum(); return float(i[0]-i[2])
+              except Exception: return None
+          D["sup"]=[sup(r) for _,r in D.iterrows()]
+          D=D.dropna(subset=["sup"]).reset_index(drop=True)
+          print(f"{len(D)} con cuotas de cierre\n")
 
-          # xG movil por equipo, SOLO con partidos anteriores (walk-forward)
-          hist={}
-          feat=[]
-          for _,r in M.iterrows():
-              def media(t,k):
-                  v=hist.get((t,k),[])
-                  return float(np.mean(v[-10:])) if len(v)>=5 else None
-              xf_h,xa_h = media(r.home,"f"), media(r.home,"a")
-              xf_a,xa_a = media(r.away,"f"), media(r.away,"a")
-              feat.append(None if None in (xf_h,xa_h,xf_a,xa_a)
-                          else (xf_h+xa_a)/2 + (xf_a+xa_h)/2)
-              hist.setdefault((r.home,"f"),[]).append(r.hxg)
-              hist.setdefault((r.home,"a"),[]).append(r.axg)
-              hist.setdefault((r.away,"f"),[]).append(r.axg)
-              hist.setdefault((r.away,"a"),[]).append(r.hxg)
-          M["xg_esp"]=feat
-          M=M.dropna(subset=["xg_esp"]).reset_index(drop=True)
-          print(f"{len(M)} con historial xG suficiente (>=5 partidos previos por equipo)")
-
-          from scipy.stats import poisson
-          y=(M.tot>2.5).astype(int).values
-          def ll(p):
-              p=np.clip(np.asarray(p,float),1e-6,1-1e-6)
-              return float(-np.mean(y*np.log(p)+(1-y)*np.log(1-p)))
-
-          # 1) mercado
-          p_mkt=M.mkOver.values
-          # 2) nuestro modelo actual
-          p_mod=np.array([markets(r.lg,r.pH,r.pD,r.pA)[0]["O2.5"][1] for _,r in M.iterrows()])
-          # 3) xG puro: Poisson con el total esperado por xG
-          p_xg=1-poisson.cdf(2,M.xg_esp.values)
-          # 4) mezcla del modelo con xG (reescala el total del modelo hacia el de xG)
-          mezclas={}
-          for w in (0.15,0.3,0.5):
-              tot_mod=np.array([sum(markets(r.lg,r.pH,r.pD,r.pA)[1:]) for _,r in M.iterrows()])
-              tot_mix=(1-w)*tot_mod + w*M.xg_esp.values
-              mezclas[w]=1-poisson.cdf(2,tot_mix)
-
-          print(f"\n=== mas de 2.5 goles · {len(M)} partidos · base real {y.mean():.3f} ===")
-          print(f"  {'mercado (cierre)':34s} log loss {ll(p_mkt):.5f}")
-          print(f"  {'nuestro modelo':34s} log loss {ll(p_mod):.5f}")
-          print(f"  {'xG puro':34s} log loss {ll(p_xg):.5f}")
-          for w,p in mezclas.items():
-              print(f"  {'modelo + xG (peso '+str(w)+')':34s} log loss {ll(p):.5f}")
-          print(f"\n  menor es mejor. Si nada baja de {ll(p_mkt):.5f}, el mercado gana y")
-          print("  conviene anclar goles al mercado en vez de modelarlos.")
+          # walk-forward: para cada partido, el ratio del arbitro con SOLO lo anterior
+          hist={}; lgacc={}
+          base_pred=[]; ref_pred=[]; reales=[]; usados=0
+          for _,r in D.iterrows():
+              lg=r.lg
+              mh=SE.side_mean(lg,"yel","H",r.sup); ma=SE.side_mean(lg,"yel","A",r.sup)
+              esperado=mh+ma
+              prev=hist.get(r.Referee,[])
+              if len(prev)>=20:
+                  # cuanto se desvia el arbitro de lo que el modelo esperaba en SUS partidos
+                  ratio=float(np.mean([a/e for a,e in prev[-40:]]))
+                  ratio=1+0.6*(ratio-1)          # contraccion, como el resto del modelo
+                  usados+=1
+              else:
+                  ratio=1.0
+              base_pred.append(esperado); ref_pred.append(esperado*ratio)
+              reales.append(r.amarillas)
+              hist.setdefault(r.Referee,[]).append((r.amarillas,esperado))
+          b=np.array(base_pred); rp=np.array(ref_pred); y=np.array(reales,float)
+          print(f"partidos con arbitro conocido (>=20 previos): {usados} de {len(D)}\n")
+          m=np.array([len(hist.get(x,[]))>=0 for x in D.Referee])
+          sel=np.array([True]*len(D))
+          # comparar SOLO donde el ajuste hizo algo
+          act=rp!=b
+          print(f"=== amarillas del partido · {act.sum()} partidos con ajuste activo ===")
+          for nom,pred in (("modelo actual (sin arbitro)",b),("modelo + arbitro",rp)):
+              e=pred[act]-y[act]
+              print(f"  {nom:32s} MAE {np.abs(e).mean():.4f}  RMSE {np.sqrt((e**2).mean()):.4f}  sesgo {e.mean():+.4f}")
+          # correlacion del efecto arbitro con el error que dejaba el modelo
+          resid=y[act]-b[act]; efecto=rp[act]-b[act]
+          print(f"\n  correlacion entre el ajuste por arbitro y el error del modelo: "
+                f"{np.corrcoef(efecto,resid)[0,1]:+.4f}")
+          print("  (si fuera ~0, el arbitro no explica nada de lo que el modelo erraba)")
+          # dispersion entre arbitros
+          rr={k:np.mean([a/e for a,e in v]) for k,v in hist.items() if len(v)>=20}
+          if rr:
+              vals=np.array(list(rr.values()))
+              print(f"\n  ratio real/esperado por arbitro (n>=20): "
+                    f"min {vals.min():.2f} p25 {np.percentile(vals,25):.2f} "
+                    f"mediana {np.median(vals):.2f} p75 {np.percentile(vals,75):.2f} max {vals.max():.2f}")
+              top=sorted(rr.items(),key=lambda x:-x[1])[:4]
+              bot=sorted(rr.items(),key=lambda x:x[1])[:4]
+              print("  mas tarjeteros:", ", ".join(f"{k} {v:.2f}" for k,v in top))
+              print("  menos tarjeteros:", ", ".join(f"{k} {v:.2f}" for k,v in bot))
           PY2
       - name: Publicar
         if: always()
