@@ -1,11 +1,41 @@
-COMPETENCIAS ENCONTRADAS (ultimos 15 dias):
-   Cnm='Europa League'                    Snm='League Stage'                     18 partidos
-   Cnm='Conference League'                Snm='League Stage'                     18 partidos
+======================================================================
+SQUAWKA
+  https://www.squawka.com/
+    http=403 final=https://www.squawka.com/ cloudflare=True ct=text/html; charset=UTF-8 bytes=5595
+  https://www.squawka.com/en/
+    http=403 final=https://www.squawka.com/en/ cloudflare=True ct=text/html; charset=UTF-8 bytes=5604
+  https://api.squawka.com/
+    EXC ConnectionError: HTTPSConnectionPool(host='api.squawka.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("HTTPSConnection(host='api.squawka.com', port=443): Failed to resolve 'api.squawka.com' ([Errno -5] No address associated with hostname)"))
+  https://www.squawka.com/football-news/
+    http=403 final=https://www.squawka.com/football-news/ cloudflare=True ct=text/html; charset=UTF-8 bytes=5658
 
-EJEMPLO: [Europa League] League Stage: AZ Alkmaar 2-1 Hapoel Beer Sheva Esd=20261015164500
-
-=== CAMPOS EO / EOX (posibles cuotas) ===
-
-  [Botswana] Extension Gunners v Galaxy  (2026-10-21)
-     EO = 270274566
-     EOX = 270274566
+======================================================================
+COMPETENCIAS INTERNACIONALES EN LIVESCORE (-10 a +90 dias)
+  Cnm='Europa League'                Snm='League Stage'                      54 part.  2026-10-15 .. 2026-12-10
+  Cnm='England'                      Snm='FA Cup: Qualification'             43 part.  2026-10-17 .. 2026-10-20
+  Cnm='Turkiye'                      Snm='Turkiye Cup: Qualification'        36 part.  2026-10-27 .. 2026-10-27
+  Cnm='Africa'                       Snm='CAF Champions League: Qualification'  27 part.  2026-10-16 .. 2026-10-25
+  Cnm='International Friendlies'     Snm="Women's Friendlies"                23 part.  2026-10-11 .. 2026-12-02
+  Cnm="Women's World Cup Qualification" Snm='UEFA Qualification: Playoff'       20 part.  2026-10-13 .. 2026-11-26
+  Cnm='Euro U17'                     Snm='Qualification: Group 3'             6 part.  2026-10-12 .. 2026-10-18
+  Cnm='International'                Snm='AFC Challenger League: Group A'     6 part.  2026-10-17 .. 2026-10-23
+  Cnm='International'                Snm='AFC Challenger League: Group B'     6 part.  2026-10-17 .. 2026-10-23
+  Cnm='International'                Snm='AFC Challenger League: Group C'     6 part.  2026-10-17 .. 2026-10-23
+  Cnm='CONCACAF Nations League'      Snm='Play-In'                            5 part.  2026-11-12 .. 2026-11-18
+  Cnm="Women's Euro U17"             Snm='Qualification Round 1: Group A3'    4 part.  2026-10-12 .. 2026-10-15
+  Cnm='International'                Snm='CONCACAF Caribbean Cup Playoff'     4 part.  2026-10-14 .. 2026-10-23
+  Cnm='Euro U17'                     Snm='Qualification: Group 8'             4 part.  2026-10-16 .. 2026-10-19
+  Cnm='International'                Snm='AFC Challenger League: Group D'     4 part.  2026-10-18 .. 2026-10-21
+  Cnm='International'                Snm='AFC Challenger League: Group E'     4 part.  2026-10-18 .. 2026-10-21
+  Cnm="Women's Euro U17"             Snm='Qualification Round 1: Group A5'    4 part.  2026-10-21 .. 2026-10-27
+  Cnm="Women's Euro U17"             Snm='Qualification Round 1: Group B4'    4 part.  2026-10-25 .. 2026-10-31
+  Cnm="Women's Euro U17"             Snm='Qualification Round 1: Group A2'    4 part.  2026-11-02 .. 2026-11-08
+  Cnm='CONCACAF Nations League'      Snm='League A: Quarter Finals'           4 part.  2026-11-14 .. 2026-11-18
+  Cnm='World Cup U17'                Snm='Group E'                            4 part.  2026-11-20 .. 2026-11-26
+  Cnm='World Cup U17'                Snm='Group F'                            4 part.  2026-11-20 .. 2026-11-26
+  Cnm='World Cup U17'                Snm='Group G'                            4 part.  2026-11-20 .. 2026-11-26
+  Cnm='World Cup U17'                Snm='Group H'                            4 part.  2026-11-20 .. 2026-11-26
+  Cnm="Women's Euro U19"             Snm='Qualification Round 1: Group B4'    4 part.  2026-11-24 .. 2026-11-30
+  Cnm="Women's Euro U19"             Snm='Qualification Round 1: Group B3'    4 part.  2026-11-26 .. 2026-12-02
+  Cnm="Women's Euro U17"             Snm='Qualification Round 1: Group A7'    4 part.  2026-11-28 .. 2026-12-04
+  Cnm="Women's Euro U19"             Snm='Qualification Round 1: Group A1'    4 part.  2026-11-28 .. 2026-12-04
