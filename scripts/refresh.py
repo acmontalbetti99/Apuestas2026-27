@@ -47,11 +47,22 @@ BASE_URL = "https://www.football-data.co.uk"
 DIVS = {"E0": "premier", "SP1": "laliga", "I1": "seriea", "D1": "bundesliga"}
 LGN = {"premier": "Premier League", "laliga": "La Liga", "seriea": "Serie A",
        "bundesliga": "Bundesliga", "ucl": "Champions League",
-       "uel": "Europa League", "uecl": "Conference League"}
+       "uel": "Europa League", "uecl": "Conference League",
+       "afcon": "Copa Africana", "unl": "Nations League",
+       "wcq_eu": "Clasificatorias UEFA", "wcq_sa": "Clasificatorias CONMEBOL",
+       "copa": "Copa America"}
 
-# Competencias UEFA: la base historica no las tiene, asi que solo se ofrecen los
-# mercados que salen directo del mercado y no dependen de ninguna calibracion.
-SOLO_MERCADO = {"ucl", "uel", "uecl"}
+# La base historica son ligas domesticas de clubes 2018-2025. Nada de esto aplica a
+# copas europeas ni a seleccciones: distinta dispersion de nivel, localia que a veces
+# no existe, y muchos menos enfrentamientos repetidos. Para estas competencias solo se
+# ofrece lo que ES el mercado (1X2 y doble oportunidad), sin pasar por ningun modelo.
+SOLO_MERCADO = {"ucl", "uel", "uecl", "afcon", "unl", "wcq_eu", "wcq_sa", "copa"}
+
+# Torneos de selecciones: el pick aparece recien cuando faltan pocos dias, porque la
+# cuota se acerca al cierre y es ahi donde mejor predice. Sobre 7.149 partidos medimos
+# que la cuota de cierre le gana a cualquier modelo propio; la de apertura es peor.
+TORNEOS = {"afcon", "unl", "wcq_eu", "wcq_sa", "copa"}
+DIAS_ANTES_TORNEO = 3
 
 UMBRAL_BASE = 0.65
 UMBRAL_MAX = 0.80
@@ -566,10 +577,18 @@ def pick_id(home: str, away: str, key: str) -> str:
     return f"{slug(home)}__{slug(away)}__{slug(key)}"
 
 
-def build_picks(fx: list[dict], ratios: dict, umbral: float) -> list[dict]:
-    todas = []
+def build_picks(fx: list[dict], ratios: dict, umbral: float,
+                ahora: datetime | None = None) -> list[dict]:
+    ahora = ahora or datetime.now(timezone.utc)
+    todas, diferidos = [], 0
     for f in fx:
         lg, pH, pD, pA = f["lg"], f["pH"], f["pD"], f["pA"]
+
+        if lg in TORNEOS:
+            ko = pd.to_datetime(f["ko"], utc=True, errors="coerce")
+            if pd.isna(ko) or (ko - ahora) > timedelta(days=DIAS_ANTES_TORNEO):
+                diferidos += 1
+                continue
         base = {"lg": lg, "liga": LGN[lg], "ko": f["ko"], "home": f["home"], "away": f["away"],
                 "b365": f.get("b365") or {}}
 
@@ -609,6 +628,10 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float) -> list[dict]:
     for s in todas:
         k = ((s["home"], s["away"]), s["grupo"])
         mejor.setdefault(k, s)
+
+    if diferidos:
+        log(f"  {diferidos} partidos de torneo todavia lejos "
+            f"(entran a {DIAS_ANTES_TORNEO} dias del arranque)")
 
     picks = []
     for s in sorted(mejor.values(), key=lambda s: (s["ko"], -s["p"])):

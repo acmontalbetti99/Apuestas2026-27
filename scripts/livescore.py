@@ -49,8 +49,22 @@ UEFA = {
     "conference league": "uecl", "uefa conference league": "uecl",
     "uefa europa conference league": "uecl", "europa conference league": "uecl",
 }
-# ni juveniles ni femeninas, que comparten nombre de competencia
-EXCLUIR = ("youth", "u19", "u21", "u23", "women", "femenin", "qualification", "qualifying")
+
+# Selecciones. Se compara Cnm completo igual que arriba: "nations league" a secas es
+# la de UEFA; la de CONCACAF llega como "concacaf nations league" y no se toma.
+SELECCIONES = {
+    "africa cup of nations": "afcon", "afcon": "afcon",
+    "nations league": "unl", "uefa nations league": "unl",
+    "copa america": "copa", "conmebol copa america": "copa",
+}
+# Las clasificatorias traen el continente en Snm, no en Cnm.
+CLASIFICATORIAS = {"world cup qualification": {"uefa": "wcq_eu", "conmebol": "wcq_sa",
+                                               "south america": "wcq_sa"}}
+# Juveniles y femeninas, que comparten el nombre de la competencia mayor.
+# OJO: no filtrar por "qualification". Las fases previas de copas de clubes ya quedan
+# afuera porque la comparacion de Cnm es exacta (llegan como Cnm="Africa" o "England"),
+# mientras que las clasificatorias del Mundial SI se llaman asi y hay que dejarlas pasar.
+EXCLUIR = ("youth", "u17", "u19", "u20", "u21", "u23", "women", "femenin", "feminin")
 
 # LiveScore nombra algunos equipos distinto que nuestros picks. canon() resuelve
 # los acentos y la puntuacion; esto resuelve el resto.
@@ -106,6 +120,7 @@ def cosechar(dias: int = 3) -> list[dict]:
                       "Referer": "https://www.livescore.com/"})
     hoy = datetime.now(timezone.utc)
     out: list[dict] = []
+    no_mapeadas: set[str] = set()
     for n in range(dias):
         dia = hoy - timedelta(days=n)
         d = fetch(dia, s)
@@ -117,8 +132,18 @@ def cosechar(dias: int = 3) -> list[dict]:
             snm = str(stg.get("Snm", "")).lower().strip()
             if any(w in f"{cnm} {snm}" for w in EXCLUIR):
                 continue
-            lg = UEFA.get(cnm) or DOMESTICAS.get((cnm, snm))
+            lg = UEFA.get(cnm) or SELECCIONES.get(cnm) or DOMESTICAS.get((cnm, snm))
+            if not lg and cnm in CLASIFICATORIAS:
+                for marca, codigo in CLASIFICATORIAS[cnm].items():
+                    if marca in snm:
+                        lg = codigo
+                        break
             if not lg:
+                # deja rastro de lo internacional que no supimos mapear, para poder
+                # agregarlo despues: los nombres cambian de una edicion a otra
+                if any(w in f"{cnm} {snm}" for w in
+                       ("nations league", "world cup", "copa america", "africa cup", "afcon")):
+                    no_mapeadas.add(f"Cnm={stg.get('Cnm')!r} Snm={stg.get('Snm')!r}")
                 continue
             for e in stg.get("Events", []):
                 if e.get("Eps") not in TERMINADO:
@@ -138,6 +163,11 @@ def cosechar(dias: int = 3) -> list[dict]:
                             "hg": int(hg), "ag": int(ag)})
                 hallados += 1
         log(f"  {dia:%Y-%m-%d}: {hallados} partidos terminados de nuestras ligas")
+    if no_mapeadas:
+        log(f"  {len(no_mapeadas)} competencias internacionales sin mapear "
+            f"(agregarlas a SELECCIONES/CLASIFICATORIAS si interesan):")
+        for x in sorted(no_mapeadas)[:8]:
+            log(f"     {x}")
     return out
 
 

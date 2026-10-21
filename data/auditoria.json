@@ -1,11 +1,17 @@
 [
  {
-  "fecha": "2026-10-21T22:27:48Z",
+  "fecha": "2026-10-21T22:55:21Z",
   "hallazgos": [
    {
     "severidad": "baja",
     "area": "valor",
     "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "sitio",
+    "mensaje": "no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
     "detalle": null
    }
   ],
@@ -22,18 +28,14 @@
     "conPrecioCasa": 0
    },
    "edadHoras": {
-    "_ultimo_refresco.log": 0.0,
-    "_ultimo_livescore.log": 0.0
-   },
-   "sitio": {
-    "/data/picks.json": 129,
-    "/data/parlays.json": 4
+    "_ultimo_refresco.log": 0.5,
+    "_ultimo_livescore.log": 0.5
    }
   },
   "resumen": {
    "alta": 0,
    "media": 0,
-   "baja": 1
+   "baja": 2
   }
  }
 ]

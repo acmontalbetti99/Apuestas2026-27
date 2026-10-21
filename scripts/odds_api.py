@@ -36,7 +36,13 @@ COMPETENCIAS = {
     "soccer_uefa_champs_league": "ucl",
     "soccer_uefa_europa_league": "uel",
     "soccer_uefa_europa_conference_league": "uecl",
+    "soccer_uefa_nations_league": "unl",
+    "soccer_fifa_world_cup_qualifiers_europe": "wcq_eu",
+    "soccer_conmebol_world_cup_qualifiers": "wcq_sa",
+    "soccer_africa_cup_of_nations": "afcon",
+    "soccer_conmebol_copa_america": "copa",
 }
+# Una competencia fuera de temporada devuelve 404 y no es un error: se saltea sola.
 
 # Como nombra cada equipo The Odds API frente a como lo nombran nuestros picks.
 # Se completa a medida que aparezcan diferencias; el log avisa cual falta.
@@ -120,6 +126,8 @@ def main() -> int:
             log(f"  ! {sport}: {e}")
             continue
         restantes = r.headers.get("x-requests-remaining", restantes)
+        if r.status_code == 404:
+            continue                      # fuera de temporada, normal
         if r.status_code != 200:
             log(f"  ! {sport}: HTTP {r.status_code} {r.text[:160]}")
             continue
@@ -140,7 +148,8 @@ def main() -> int:
                         "pH": round(c["pH"], 4), "pD": round(c["pD"], 4),
                         "pA": round(c["pA"], 4), "b365": c["b365"]})
             n += 1
-        log(f"  {LGN_corto(lg)}: {n} partidos con cuotas")
+        if n:
+            log(f"  {LGN_corto(lg)}: {n} partidos con cuotas")
 
     if restantes is not None:
         log(f"  consultas restantes este mes: {restantes}")
@@ -158,7 +167,8 @@ def main() -> int:
 
 
 def LGN_corto(lg: str) -> str:
-    return {"ucl": "Champions", "uel": "Europa League", "uecl": "Conference"}.get(lg, lg)
+    from refresh import LGN
+    return LGN.get(lg, lg)
 
 
 if __name__ == "__main__":
