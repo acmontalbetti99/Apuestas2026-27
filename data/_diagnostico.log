@@ -1,0 +1,30 @@
+== DNS ==
+2001:8d8:100f:f000::200 www.football-data.co.uk
+217.160.0.118   STREAM www.football-data.co.uk
+217.160.0.118   DGRAM  
+217.160.0.118   RAW    
+2001:8d8:100f:f000::200 STREAM www.football-data.co.uk
+2001:8d8:100f:f000::200 DGRAM  
+2001:8d8:100f:f000::200 RAW    
+
+== curl IPv4 forzado ==
+http=302 ip=217.160.0.118 t=0.421326
+
+== curl IPv6 forzado ==
+curl: (7) Failed to connect to www.football-data.co.uk port 443 after 0 ms: Couldn't connect to server
+http=000 ip=
+curl -6 fallo: 7
+
+== curl sin forzar ==
+http=302 ip=217.160.0.118
+
+== control: raw.githubusercontent.com ==
+http=301 ip=185.199.110.133
+
+== control: example.com ==
+http=200 ip=172.66.147.243
+
+== variables de proxy ==
+ninguna
+
+== primeras lineas del CSV si entro ==
