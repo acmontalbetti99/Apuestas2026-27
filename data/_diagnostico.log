@@ -1,21 +1,36 @@
-========================================================================
 
---- football-data.org v4 sin token (CL)
-    https://api.football-data.org/v4/competitions/CL/matches?season=2026
-    http=403 bytes=152 cloudflare=False
-    cuerpo: '{"message":"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.","errorCode":403}'
+--- CL temporada 2026-2027
+    https://www.thesportsdb.com/api/v1/json/123/eventsseason.php?id=4480&s=2026-2027
+    http=200 bytes=17760
+    eventos: 15
+    ultimo jugado: The New Saints vs Sabah Baku 1-2 2026-07-14 id=2491745
 
---- API-Football sin key
-    https://v3.football.api-sports.io/status
-    http=403 bytes=219 cloudflare=False
-    cuerpo: '{"get": "","parameters": [],"errors": {"token": "Missing application key, Check our documentation on how to add your API key in headers.","error": "4xHe"},"results": 0,"paging": {"current": 1,"total": 1},"response": []}'
+--- estadisticas de ese partido
+    https://www.thesportsdb.com/api/v1/json/123/lookupeventstats.php?id=2491745
+    http=200 bytes=851
+    filas de stats: 5
+      Shots on Goal                local=4 visitante=6
+      Ball Possession              local=46 visitante=54
+      Shots off Goal               local=6 visitante=6
+      Red Cards                    local=0 visitante=0
+      Corner Kicks                 local=3 visitante=3
 
---- TheSportsDB free: liga CL por temporada
-    https://www.thesportsdb.com/api/v1/json/3/eventsseason.php?id=4480&s=2026-2027
-    http=403 bytes=153 cloudflare=False
-    cuerpo: 'The old \'3\' Free Sports API key is permanently disabled, Please use the new test key "123" or sign up to premium here https://www.thesportsdb.com/pricing'
+--- Premier League 2026-2027
+    https://www.thesportsdb.com/api/v1/json/123/eventsseason.php?id=4328&s=2026-2027
+    http=200 bytes=18440
+    -> Premier League: 15 eventos
 
---- TheSportsDB free: estadisticas de un evento
-    https://www.thesportsdb.com/api/v1/json/3/lookupeventstats.php?id=2052601
-    http=403 bytes=153 cloudflare=False
-    cuerpo: 'The old \'3\' Free Sports API key is permanently disabled, Please use the new test key "123" or sign up to premium here https://www.thesportsdb.com/pricing'
+--- La Liga 2026-2027
+    https://www.thesportsdb.com/api/v1/json/123/eventsseason.php?id=4335&s=2026-2027
+    http=200 bytes=17742
+    -> La Liga: 15 eventos
+
+--- Serie A 2026-2027
+    https://www.thesportsdb.com/api/v1/json/123/eventsseason.php?id=4332&s=2026-2027
+    http=200 bytes=17611
+    -> Serie A: 15 eventos
+
+--- Bundesliga 2026-2027
+    https://www.thesportsdb.com/api/v1/json/123/eventsseason.php?id=4331&s=2026-2027
+    http=200 bytes=18219
+    -> Bundesliga: 15 eventos
