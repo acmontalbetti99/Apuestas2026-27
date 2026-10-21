@@ -1,0 +1,43 @@
+name: Diagnostico de red
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probar la red
+        run: |
+          exec > data/_diagnostico.log 2>&1
+          set +e
+          echo "== DNS =="
+          getent hosts www.football-data.co.uk || echo "getent fallo"
+          getent ahostsv4 www.football-data.co.uk || echo "sin A"
+          getent ahostsv6 www.football-data.co.uk || echo "sin AAAA"
+          echo; echo "== curl IPv4 forzado =="
+          curl -4 -sS -m 30 -o /dev/null -w 'http=%{http_code} ip=%{remote_ip} t=%{time_total}\n' \
+            https://www.football-data.co.uk/mmz4281/2627/E0.csv || echo "curl -4 fallo: $?"
+          echo; echo "== curl IPv6 forzado =="
+          curl -6 -sS -m 30 -o /dev/null -w 'http=%{http_code} ip=%{remote_ip}\n' \
+            https://www.football-data.co.uk/mmz4281/2627/E0.csv || echo "curl -6 fallo: $?"
+          echo; echo "== curl sin forzar =="
+          curl -sS -m 30 -o /dev/null -w 'http=%{http_code} ip=%{remote_ip}\n' \
+            https://www.football-data.co.uk/ || echo "curl fallo: $?"
+          echo; echo "== control: raw.githubusercontent.com =="
+          curl -sS -m 30 -o /dev/null -w 'http=%{http_code} ip=%{remote_ip}\n' \
+            https://raw.githubusercontent.com/ || echo "control fallo: $?"
+          echo; echo "== control: example.com =="
+          curl -sS -m 30 -o /dev/null -w 'http=%{http_code} ip=%{remote_ip}\n' \
+            https://example.com/ || echo "control2 fallo: $?"
+          echo; echo "== variables de proxy =="
+          env | grep -iE 'proxy|no_proxy' || echo "ninguna"
+          echo; echo "== primeras lineas del CSV si entro =="
+          curl -4 -sS -m 30 https://www.football-data.co.uk/mmz4281/2627/E0.csv | head -2
+      - name: Publicar
+        if: always()
+        run: |
+          git config user.name montoglory-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A data/_diagnostico.log
+          git diff --staged --quiet || { git commit -m "diagnostico de red"; git push; }
