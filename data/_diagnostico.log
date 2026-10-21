@@ -1,20 +1,21 @@
 ========================================================================
-SOFASCORE
 
---- eventos del 2026-10-21
-    https://api.sofascore.com/api/v1/sport/football/scheduled-events/2026-10-21
-    http=403 bytes=48 ct=application/json
-    cuerpo: '{"error": {"code": 403, "reason": "Forbidden" }}'
+--- football-data.org v4 sin token (CL)
+    https://api.football-data.org/v4/competitions/CL/matches?season=2026
+    http=403 bytes=152 cloudflare=False
+    cuerpo: '{"message":"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.","errorCode":403}'
 
-========================================================================
-FOREBET
+--- API-Football sin key
+    https://v3.football.api-sports.io/status
+    http=403 bytes=219 cloudflare=False
+    cuerpo: '{"get": "","parameters": [],"errors": {"token": "Missing application key, Check our documentation on how to add your API key in headers.","error": "4xHe"},"results": 0,"paging": {"current": 1,"total": 1},"response": []}'
 
---- resultados de ayer
-    https://www.forebet.com/en/football-predictions
-    http=403 bytes=5698 ct=text/html; charset=UTF-8
-    cuerpo: '<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta nam'
+--- TheSportsDB free: liga CL por temporada
+    https://www.thesportsdb.com/api/v1/json/3/eventsseason.php?id=4480&s=2026-2027
+    http=403 bytes=153 cloudflare=False
+    cuerpo: 'The old \'3\' Free Sports API key is permanently disabled, Please use the new test key "123" or sign up to premium here https://www.thesportsdb.com/pricing'
 
---- API no oficial
-    https://www.forebet.com/scripts/getrs.php?ln=en&tp=1h&in=0
-    http=403 bytes=5798 ct=text/html; charset=UTF-8
-    cuerpo: '<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta nam'
+--- TheSportsDB free: estadisticas de un evento
+    https://www.thesportsdb.com/api/v1/json/3/lookupeventstats.php?id=2052601
+    http=403 bytes=153 cloudflare=False
+    cuerpo: 'The old \'3\' Free Sports API key is permanently disabled, Please use the new test key "123" or sign up to premium here https://www.thesportsdb.com/pricing'
