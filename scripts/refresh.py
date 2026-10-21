@@ -563,16 +563,25 @@ def main() -> int:
     for p in picks:
         if p["estado"] != "pendiente":
             final[p["id"]] = p
+
+    # Un partido que se vuelve a cotizar se reemplaza completo: las cuotas frescas
+    # mandan, y asi se respeta la regla de un solo pick por partido y por grupo, que
+    # se rompia si se mezclaban los viejos con los nuevos del mismo partido.
+    recotizados = {(p["home"], p["away"]) for p in nuevos}
     for p in nuevos:
-        if p["id"] not in final:
-            final[p["id"]] = p
+        final.setdefault(p["id"], p)
+
+    # El resto de los pendientes se arrastra tal cual. Que un pick siga vivo ya lo
+    # decidio settle(), que es quien conoce la regla de caducidad; volver a filtrar
+    # por fecha aca borraba los que estaban pasado el kickoff esperando resultado.
     conservados = 0
     for p in picks:
-        if p["estado"] == "pendiente" and p["id"] not in final:
-            ko = pd.to_datetime(p["ko"], utc=True, errors="coerce")
-            if pd.notna(ko) and ko > today:
-                final[p["id"]] = p
-                conservados += 1
+        if p["estado"] != "pendiente" or p["id"] in final:
+            continue
+        if (p["home"], p["away"]) in recotizados:
+            continue
+        final[p["id"]] = p
+        conservados += 1
     if conservados:
         log(f"  {conservados} picks pendientes de dias anteriores se mantienen")
     final = sorted(final.values(), key=lambda p: (p["ko"], -p["p"]))
