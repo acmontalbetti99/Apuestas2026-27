@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Montoglory</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -72,8 +77,8 @@ main{padding-block:20px 56px}
 .chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;color:var(--fg-dim);
   font-family:var(--font-body);font-size:12px;font-weight:500;padding:5px 12px;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-:root[data-theme="dark"] .chip[aria-pressed="true"],
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:#13130f}}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{color:#13130f}
 .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* day group */
@@ -154,13 +159,15 @@ td.n{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+</head>
+<body>
 
 <header>
   <div class="wrap">
     <div class="hrow">
       <div class="brand">
         <h1>Montoglory</h1>
-        <span id="sub">Premier · La Liga · Serie A · Bundesliga</span>
+        <span id="sub">Premier · La Liga · Serie A · Bundesliga · Champions</span>
       </div>
       <div class="scoreboard" id="scoreboard"></div>
     </div>
@@ -404,3 +411,5 @@ async function fromFiles(){
   setTimeout(()=>{if(!ready){ready=true;render()}},6000);
 })();
 </script>
+</body>
+</html>
