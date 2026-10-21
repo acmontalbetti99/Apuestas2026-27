@@ -1,0 +1,20 @@
+========================================================================
+SOFASCORE
+
+--- eventos del 2026-10-21
+    https://api.sofascore.com/api/v1/sport/football/scheduled-events/2026-10-21
+    http=403 bytes=48 ct=application/json
+    cuerpo: '{"error": {"code": 403, "reason": "Forbidden" }}'
+
+========================================================================
+FOREBET
+
+--- resultados de ayer
+    https://www.forebet.com/en/football-predictions
+    http=403 bytes=5698 ct=text/html; charset=UTF-8
+    cuerpo: '<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta nam'
+
+--- API no oficial
+    https://www.forebet.com/scripts/getrs.php?ln=en&tp=1h&in=0
+    http=403 bytes=5798 ct=text/html; charset=UTF-8
+    cuerpo: '<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta nam'
