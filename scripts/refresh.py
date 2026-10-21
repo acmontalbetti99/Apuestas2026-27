@@ -223,12 +223,14 @@ def load_results(today: datetime) -> pd.DataFrame | None:
 
 
 def load_champions() -> pd.DataFrame | None:
-    """Resultados de Champions, que football-data no publica.
+    """Resultados inyectados a mano: Champions, que football-data no publica, y
+    cualquier partido que una fuente en vivo quiera liquidar antes de que
+    football-data lo publique (su CSV tarda horas en aparecer).
 
-    Los alimenta una sesion de Claude (su feed si cubre Champions) o, mas adelante,
-    una API con clave. El formato es el minimo que necesita la liquidacion:
-      [{"home","away","ko","hg","ag", y opcionalmente "hc","ac","hy","ay",
-        "hs","as","hst","ast"}]
+    Los alimenta una sesion de Claude o, mas adelante, una API con clave. El
+    formato es el minimo que necesita la liquidacion:
+      [{"home","away","ko","hg","ag", "lg" opcional (default ucl),
+        y opcionalmente "hc","ac","hy","ay","hs","as","hst","ast"}]
     Los nombres tienen que ser los mismos que usan los picks; canon() aguanta las
     variantes habituales, pero no un nombre inventado.
     """
@@ -247,7 +249,7 @@ def load_champions() -> pd.DataFrame | None:
     for r in rows:
         try:
             out.append({
-                "Div": "UCL", "lg": "ucl",
+                "Div": "UCL", "lg": r.get("lg", "ucl"),
                 "HomeTeam": r["home"], "AwayTeam": r["away"],
                 "fecha": pd.to_datetime(r["ko"], utc=True).tz_localize(None),
                 "FTHG": float(r["hg"]), "FTAG": float(r["ag"]),
@@ -571,7 +573,11 @@ def write_json(path: Path, obj) -> None:
 
 def main() -> int:
     today = datetime.now(timezone.utc)
-    log(f"Refresco {today:%Y-%m-%d %H:%M} UTC")
+    # Las corridas frecuentes solo liquidan: bajar fixtures y regenerar picks cada media
+    # hora no aporta nada (la ventana de fixtures.csv cambia una vez al dia) y haria
+    # bailar las recomendaciones a lo largo del dia.
+    solo_liquidar = "--solo-liquidar" in sys.argv
+    log(f"Refresco {today:%Y-%m-%d %H:%M} UTC{' (solo liquidar)' if solo_liquidar else ''}")
     prefer_ipv4()
 
     log("Bajando resultados...")
@@ -597,9 +603,14 @@ def main() -> int:
     log(f"  acierto {calib['real']} vs predicho {calib['predicho']}"
         f" sobre {calib['nLiquidados']} · umbral {calib['umbralVigente']}")
 
-    log("Bajando proximos partidos...")
-    fx = load_fixtures(today)
-    if fx is None:
+    if solo_liquidar:
+        fx, nuevos = None, []
+    else:
+        log("Bajando proximos partidos...")
+        fx = load_fixtures(today)
+    if solo_liquidar:
+        pass
+    elif fx is None:
         log("  ! sin fixtures: dejo los picks abiertos como estaban")
         nuevos = [p for p in picks if p["estado"] == "pendiente"]
     else:
@@ -639,11 +650,14 @@ def main() -> int:
     final = sorted(final.values(), key=lambda p: (p["ko"], -p["p"]))
 
     hoy = today.date().isoformat()
-    abiertas = build_parlays(final, hoy) if fx is not None else []
-    cerradas = [t for t in parlays if t.get("estado") != "pendiente"]
-    cerradas_ids = {t["id"] for t in cerradas}
-    parlays_final = cerradas + [t for t in abiertas if t["id"] not in cerradas_ids]
-    log(f"  {len(abiertas)} combinadas armadas")
+    if solo_liquidar:
+        parlays_final = parlays          # ya re-liquidadas arriba, no se rearman
+    else:
+        abiertas = build_parlays(final, hoy) if fx is not None else []
+        cerradas = [t for t in parlays if t.get("estado") != "pendiente"]
+        cerradas_ids = {t["id"] for t in cerradas}
+        parlays_final = cerradas + [t for t in abiertas if t["id"] not in cerradas_ids]
+        log(f"  {len(abiertas)} combinadas armadas")
 
     write_json(DATA / "picks.json", final)
     write_json(DATA / "parlays.json", parlays_final)

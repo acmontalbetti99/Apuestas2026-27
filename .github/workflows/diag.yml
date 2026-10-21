@@ -1,0 +1,61 @@
+name: Diagnostico LiveScore
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Probar LiveScore
+        run: |
+          exec > data/_diagnostico.log 2>&1
+          python -u - <<'PY2'
+          import sys; sys.path.insert(0,'scripts')
+          import refresh as R; R.prefer_ipv4()
+          import requests, json
+          UA=("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+              "Chrome/131.0.0.0 Safari/537.36")
+          s=requests.Session(); s.headers.update({"User-Agent":UA,"Accept":"application/json, text/plain, */*",
+                                                  "Referer":"https://www.livescore.com/"})
+          def g(n,u):
+              print(f"\n--- {n}\n    {u}")
+              try: r=s.get(u,timeout=25)
+              except Exception as e: print(f"    EXC {type(e).__name__}: {e}"); return None
+              cf="Just a moment" in r.text[:400]
+              print(f"    http={r.status_code} bytes={len(r.content)} cloudflare={cf} ct={r.headers.get('content-type','?')[:30]}")
+              if cf or r.status_code>=400:
+                  print(f"    {r.text[:200]!r}"); return None
+              try: return r.json()
+              except Exception: print(f"    no JSON: {r.text[:200]!r}"); return None
+
+          for nm,u in [("API publica react 21/10","https://prod-public-api.livescore.com/v1/api/react/date/soccer/20261021/0"),
+                       ("API publica app 21/10","https://prod-public-api.livescore.com/v1/api/app/date/soccer/20261021/0"),
+                       ("sitio web","https://www.livescore.com/en/")]:
+              d=g(nm,u)
+              if isinstance(d,dict):
+                  print(f"    claves: {list(d)[:10]}")
+                  st=d.get("Stages") or d.get("stages") or []
+                  print(f"    stages: {len(st)}")
+                  for stg in st[:40]:
+                      cn=stg.get("Cnm") or stg.get("competitionName") or "?"
+                      sn=stg.get("Snm") or stg.get("stageName") or "?"
+                      ev=stg.get("Events") or stg.get("events") or []
+                      if any(k in f"{cn} {sn}".lower() for k in
+                             ("champions","premier","laliga","liga","serie a","bundesliga")):
+                          print(f"      [{cn}] {sn}: {len(ev)} partidos")
+                          for e in ev[:2]:
+                              t1=(e.get('T1') or [{}])[0].get('Nm'); t2=(e.get('T2') or [{}])[0].get('Nm')
+                              print(f"         {t1} {e.get('Tr1')}-{e.get('Tr2')} {t2}  eid={e.get('Eid')} status={e.get('Eps')}")
+                  break
+          PY2
+      - name: Publicar
+        if: always()
+        run: |
+          git config user.name montoglory-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A data/_diagnostico.log
+          git diff --staged --quiet || { git commit -m "diagnostico livescore"; git push; }
