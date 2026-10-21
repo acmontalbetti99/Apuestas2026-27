@@ -91,6 +91,27 @@ de Champions, y los picks de Champions salen justamente del mercado. Un pick de 
 pendiente sobrevive 3 dias despues del kickoff y despues se descarta, para que no entre como
 acierto ni como fallo y no ensucie la medicion.
 
+La ventana de `fixtures.csv` es corta: publica solo uno o dos dias de partidos, no la
+jornada completa. Por eso el refresco es **aditivo** y nunca reconstruye la lista desde cero:
+cada corrida suma los partidos que entraron en la ventana y arrastra los pendientes que
+siguen vigentes. Un partido que se vuelve a cotizar se reemplaza completo, porque las cuotas
+frescas mandan y asi se respeta la regla de un solo pick por partido y por grupo.
+
 El umbral solo se mueve con 60 o mas picks liquidados, y solo hacia arriba: si el modelo viene
 inflado 3 puntos, el filtro pasa de 65% a 68%. Con menos de 60 el error de muestra es mayor que
 el ajuste, asi que no se toca.
+
+## Las pruebas
+
+`python scripts/test_refresh.py` corre el refresco entero contra descargas simuladas con la
+forma real de football-data, sin tocar la red ni los datos del repo. Cubre tres escenarios:
+
+1. Liquidacion de los 26 mercados, verificada a mano contra el partido, incluidas las
+   atajadas (remates al arco del rival menos sus goles), el ajuste de umbral y que una
+   descarga caida aborte sin escribir nada.
+2. Un dia con `fixtures.csv` flaco no borra los pendientes que siguen vigentes.
+3. Un pick pasado el kickoff que espera resultado no se borra, y un partido recotizado no
+   deja picks viejos y nuevos mezclados en el mismo grupo.
+
+Los escenarios 2 y 3 son regresiones: las dos cosas pasaron de verdad y estan ahi para que
+no vuelvan a pasar.
