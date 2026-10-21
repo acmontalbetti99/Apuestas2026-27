@@ -1,11 +1,51 @@
-Refresco 2026-10-21 17:34 UTC
+Refresco 2026-10-21 17:45 UTC
 Bajando resultados...
-  ! https://www.football-data.co.uk/mmz4281/2627/E0.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2627/E0.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-  ! https://www.football-data.co.uk/mmz4281/2627/SP1.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2627/SP1.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-  ! https://www.football-data.co.uk/mmz4281/2627/I1.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2627/I1.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-  ! https://www.football-data.co.uk/mmz4281/2627/D1.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2627/D1.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-  ! https://www.football-data.co.uk/mmz4281/2526/E0.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2526/E0.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-  ! https://www.football-data.co.uk/mmz4281/2526/SP1.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2526/SP1.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-  ! https://www.football-data.co.uk/mmz4281/2526/I1.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2526/I1.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-  ! https://www.football-data.co.uk/mmz4281/2526/D1.csv: HTTPSConnectionPool(host='www.football-data.co.uk', port=443): Max retries exceeded with url: /mmz4281/2526/D1.csv (Caused by NewConnectionError("HTTPSConnection(host='www.football-data.co.uk', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
-ABORTO: no pude bajar ningun resultado. Los datos quedan como estaban.
+  E0 2627: 70 partidos
+  SP1 2627: 88 partidos
+  I1 2627: 70 partidos
+  D1 2627: 54 partidos
+  E0 2526: 380 partidos
+  SP1 2526: 380 partidos
+  I1 2526: 380 partidos
+  D1 2526: 306 partidos
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:205: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  D["fecha"] = pd.to_datetime(D["Date"], dayfirst=True, errors="coerce")
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:212: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:213: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:214: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
+  1728 partidos en base
+Liquidando...
+  0 acertados · 0 fallados · 129 en espera · 0 sin estadisticas · 0 caducados
+  acierto None vs predicho None sobre 0 · umbral 0.65
+Bajando proximos partidos...
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Div'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py", line 575, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py", line 547, in main
+    fx = load_fixtures(today)
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py", line 403, in load_fixtures
+    df = df[df["Div"].isin(DIVS)].copy()
+            ~~^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pandas/core/frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Div'
