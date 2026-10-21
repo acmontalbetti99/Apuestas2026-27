@@ -25,12 +25,17 @@ jobs:
               for div,lg in DIVS.items():
                   d=R.fetch_csv(f"https://www.football-data.co.uk/mmz4281/{season}/{div}.csv")
                   if d is None or "HY" not in d: continue
+                  if "Referee" not in d.columns:
+                      print(f"   {div} {season}: sin columna Referee, se saltea"); continue
                   d=d.dropna(subset=["HY","AY","HomeTeam","AwayTeam","Referee"]).copy()
-                  d["lg"]=lg; fr.append(d)
+                  d["lg"]=lg; d["temp"]=season; fr.append(d)
+                  print(f"   {div} {season}: {len(d)} partidos con arbitro")
+          if not fr:
+              print("ninguna division trae arbitro"); raise SystemExit
           D=pd.concat(fr,ignore_index=True)
           D["fecha"]=pd.to_datetime(D["Date"],dayfirst=True,errors="coerce")
           D=D.dropna(subset=["fecha"]).sort_values("fecha").reset_index(drop=True)
-          for c in ("HY","AY","HC","AC"): D[c]=pd.to_numeric(D[c],errors="coerce")
+          for c in ("HY","AY","HC","AC"): D[c]=pd.to_numeric(D.get(c),errors="coerce") if c in D else np.nan
           D["amarillas"]=D.HY+D.AY; D["corners"]=D.HC+D.AC
           D=D.dropna(subset=["amarillas"]).reset_index(drop=True)
           print(f"{len(D)} partidos con arbitro y tarjetas")
