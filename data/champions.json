@@ -1,0 +1,65 @@
+[
+ {
+  "home": "Como",
+  "away": "Manchester United",
+  "ko": "2026-10-21T16:45:00Z",
+  "hg": 4,
+  "ag": 1
+ },
+ {
+  "home": "Lille",
+  "away": "Galatasaray",
+  "ko": "2026-10-21T16:45:00Z",
+  "hg": 2,
+  "ag": 4
+ },
+ {
+  "home": "Aston Villa",
+  "away": "Viking FK",
+  "ko": "2026-10-21T19:00:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "home": "Club Brujas",
+  "away": "Lens",
+  "ko": "2026-10-21T19:00:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "home": "Bayern Munich",
+  "away": "Arsenal",
+  "ko": "2026-10-21T19:00:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "home": "Inter",
+  "away": "Shakhtar Donetsk",
+  "ko": "2026-10-21T19:00:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "home": "Real Madrid",
+  "away": "RB Leipzig",
+  "ko": "2026-10-21T19:00:00Z",
+  "hg": 4,
+  "ag": 1
+ },
+ {
+  "home": "Real Betis",
+  "away": "Feyenoord",
+  "ko": "2026-10-21T19:00:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "home": "Sporting CP",
+  "away": "LASK Linz",
+  "ko": "2026-10-21T19:00:00Z",
+  "hg": 2,
+  "ag": 3
+ }
+]

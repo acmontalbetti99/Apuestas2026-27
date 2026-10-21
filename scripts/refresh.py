@@ -214,7 +214,59 @@ def load_results(today: datetime) -> pd.DataFrame | None:
     D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
     D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
     D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
+
+    extra = load_champions()
+    if extra is not None:
+        D = pd.concat([D, extra], ignore_index=True)
+        log(f"  champions.json: {len(extra)} partidos")
     return D.sort_values("fecha")
+
+
+def load_champions() -> pd.DataFrame | None:
+    """Resultados de Champions, que football-data no publica.
+
+    Los alimenta una sesion de Claude (su feed si cubre Champions) o, mas adelante,
+    una API con clave. El formato es el minimo que necesita la liquidacion:
+      [{"home","away","ko","hg","ag", y opcionalmente "hc","ac","hy","ay",
+        "hs","as","hst","ast"}]
+    Los nombres tienen que ser los mismos que usan los picks; canon() aguanta las
+    variantes habituales, pero no un nombre inventado.
+    """
+    path = DATA / "champions.json"
+    if not path.exists():
+        return None
+    try:
+        rows = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        log(f"  ! champions.json: {e} - se ignora")
+        return None
+    if not isinstance(rows, list) or not rows:
+        return None
+
+    out = []
+    for r in rows:
+        try:
+            out.append({
+                "Div": "UCL", "lg": "ucl",
+                "HomeTeam": r["home"], "AwayTeam": r["away"],
+                "fecha": pd.to_datetime(r["ko"], utc=True).tz_localize(None),
+                "FTHG": float(r["hg"]), "FTAG": float(r["ag"]),
+                "HC": r.get("hc"), "AC": r.get("ac"),
+                "HY": r.get("hy"), "AY": r.get("ay"),
+                "HS": r.get("hs"), "AS": r.get("as"),
+                "HST": r.get("hst"), "AST": r.get("ast"),
+                "kH": canon(r["home"]), "kA": canon(r["away"]),
+            })
+        except (KeyError, TypeError, ValueError) as e:
+            log(f"  ! champions.json: fila invalida {r!r}: {e}")
+    if not out:
+        return None
+    D = pd.DataFrame(out)
+    for col in ("HC", "AC", "HY", "AY", "HS", "AS", "HST", "AST"):
+        D[col] = pd.to_numeric(D[col], errors="coerce")
+    D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
+    D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
+    return D
 
 
 # --------------------------------------------------------------------------- liquidacion
