@@ -1,37 +1,27 @@
-   E0 2627: 70 partidos con arbitro
-   SP1 2627: sin columna Referee, se saltea
-   I1 2627: sin columna Referee, se saltea
-   D1 2627: sin columna Referee, se saltea
-   E0 2526: 380 partidos con arbitro
-   SP1 2526: sin columna Referee, se saltea
-   I1 2526: sin columna Referee, se saltea
-   D1 2526: sin columna Referee, se saltea
-   E0 2425: 380 partidos con arbitro
-   SP1 2425: sin columna Referee, se saltea
-   I1 2425: sin columna Referee, se saltea
-   D1 2425: sin columna Referee, se saltea
-   E0 2324: 380 partidos con arbitro
-   SP1 2324: sin columna Referee, se saltea
-   I1 2324: sin columna Referee, se saltea
-   D1 2324: sin columna Referee, se saltea
-<stdin>:20: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
-<stdin>:23: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
-<stdin>:23: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
-1210 partidos con arbitro y tarjetas
-36 arbitros distintos
-partidos por arbitro: mediana 32, max 88, con >=20: 19 arbitros (93% de los partidos)
-<stdin>:38: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
-1210 con cuotas de cierre
+<stdin>:15: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+<stdin>:16: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+Medias por lado medidas en 2023-2027, contra las que usa el modelo (2018-2025)
 
-partidos con arbitro conocido (>=20 previos): 747 de 1210
+liga        stat      n      modelo L/V      medido L/V   desvio total
+premier     yel    1210    1.67/ 1.88    1.83/ 2.16     +0.44 (+12.4%) <-- revisar
+premier     cor    1210    5.65/ 4.70    5.60/ 4.72     -0.03 ( -0.3%)
+premier     sho    1210   13.88/11.56   14.35/11.90     +0.80 ( +3.2%) <-- revisar
+premier     sav    1210    2.77/ 3.23    2.81/ 3.30     +0.11 ( +1.9%)
+laliga      yel    1229    2.33/ 2.49    2.17/ 2.37     -0.28 ( -5.9%) <-- revisar
+laliga      cor    1229    5.24/ 4.14    5.37/ 4.17     +0.16 ( +1.7%)
+laliga      sho    1229   13.20/10.49   13.70/10.86     +0.87 ( +3.7%) <-- revisar
+laliga      sav    1229    2.47/ 3.15    2.55/ 3.33     +0.26 ( +4.6%) <-- revisar
+seriea      yel    1210    2.05/ 2.35    1.80/ 2.11     -0.49 (-11.1%) <-- revisar
+seriea      cor    1210    5.32/ 4.40    5.20/ 4.07     -0.45 ( -4.7%) <-- revisar
+seriea      sho    1210   12.87/10.76   13.71/11.29     +1.38 ( +5.8%) <-- revisar
+seriea      sav    1210    2.99/ 3.54    2.57/ 3.12     -0.84 (-12.9%) <-- revisar
+bundesliga  yel     971    1.79/ 2.03    1.85/ 2.06     +0.09 ( +2.3%)
+bundesliga  cor     971    5.33/ 4.43    5.56/ 4.25     +0.06 ( +0.6%)
+bundesliga  sho     971   14.26/11.81   14.82/11.94     +0.69 ( +2.6%) <-- revisar
+bundesliga  sav     971    2.89/ 3.49    2.81/ 3.61     +0.04 ( +0.6%)
 
-=== amarillas del partido · 747 partidos con ajuste activo ===
-  modelo actual (sin arbitro)      MAE 1.7053  RMSE 2.1355  sesgo -0.3641
-  modelo + arbitro                 MAE 1.6766  RMSE 2.1148  sesgo -0.0655
-
-  correlacion entre el ajuste por arbitro y el error del modelo: +0.0171
-  (si fuera ~0, el arbitro no explica nada de lo que el modelo erraba)
-
-  ratio real/esperado por arbitro (n>=20): min 0.98 p25 1.08 mediana 1.12 p75 1.20 max 1.44
-  mas tarjeteros: D Coote 1.44, S Hooper 1.26, J Brooks 1.25, S Attwell 1.24
-  menos tarjeteros: P Tierney 0.98, M Salisbury 1.02, T Harrington 1.02, M Oliver 1.05
+BASE recalculado:
+ 'premier': {'yel':(1.83,2.16), 'cor':(5.6,4.72), 'sho':(14.35,11.9), 'sav':(2.81,3.3)},
+ 'laliga': {'yel':(2.17,2.37), 'cor':(5.37,4.17), 'sho':(13.7,10.86), 'sav':(2.55,3.33)},
+ 'seriea': {'yel':(1.8,2.11), 'cor':(5.2,4.07), 'sho':(13.71,11.29), 'sav':(2.57,3.12)},
+ 'bundesliga': {'yel':(1.85,2.06), 'cor':(5.56,4.25), 'sho':(14.82,11.94), 'sav':(2.81,3.61)},
