@@ -10,73 +10,41 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12', cache: pip }
       - run: pip install -r requirements.txt
-      - name: Probar SofaScore y Forebet
+      - name: Probar APIs abiertas
         run: |
           exec > data/_diagnostico.log 2>&1
-          python -u - <<'PY'
-          import sys, json; sys.path.insert(0,'scripts')
-          import refresh as R
-          R.prefer_ipv4()
-          import requests
-          UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
-          s = requests.Session(); s.headers.update({"User-Agent": UA, "Accept": "*/*"})
+          python -u - <<'PY2'
+          import sys; sys.path.insert(0,'scripts')
+          import refresh as R; R.prefer_ipv4()
+          import requests, json
+          s = requests.Session(); s.headers["User-Agent"]="montoglory-probe"
 
-          def probe(name, url, js=True):
+          def probe(name, url, headers=None):
               print(f"\n--- {name}\n    {url}")
-              try:
-                  r = s.get(url, timeout=25)
-              except Exception as e:
-                  print(f"    EXCEPCION: {type(e).__name__}: {e}"); return None
-              print(f"    http={r.status_code} bytes={len(r.content)} ct={r.headers.get('content-type','?')[:40]}")
-              if r.status_code != 200: print(f"    cuerpo: {r.text[:200]!r}"); return None
-              if not js: print(f"    inicio: {r.text[:300]!r}"); return r.text
-              try:
-                  d = r.json()
-              except Exception as e:
-                  print(f"    no es JSON: {e}; inicio={r.text[:200]!r}"); return None
-              print(f"    claves: {list(d)[:8]}")
-              return d
+              try: r = s.get(url, timeout=25, headers=headers or {})
+              except Exception as e: print(f"    EXCEPCION {type(e).__name__}: {e}"); return None
+              cf = "Just a moment" in r.text[:400]
+              print(f"    http={r.status_code} bytes={len(r.content)} cloudflare={cf}")
+              print(f"    cuerpo: {r.text[:260]!r}")
+              return None if cf or r.status_code>=400 else r
 
-          print("="*72); print("SOFASCORE")
-          d = probe("eventos del 2026-10-21",
-                    "https://api.sofascore.com/api/v1/sport/football/scheduled-events/2026-10-21")
-          evid = None
-          if d and "events" in d:
-              ev = d["events"]
-              print(f"    {len(ev)} eventos")
-              torneos = {}
-              for e in ev:
-                  ut = e.get("tournament",{}).get("uniqueTournament",{})
-                  torneos.setdefault((ut.get("id"), ut.get("name")), 0)
-                  torneos[(ut.get("id"), ut.get("name"))] += 1
-              for k in [(7,"UEFA Champions League"),(17,"Premier League"),(8,"LaLiga"),
-                        (23,"Serie A"),(35,"Bundesliga")]:
-                  hit = [t for t in torneos if t[0]==k[0]]
-                  print(f"    torneo {k[0]:>3} {k[1]:24s}: {'SI '+str(torneos[hit[0]])+' partidos' if hit else 'no aparece'}")
-              for e in ev:
-                  ut = e.get("tournament",{}).get("uniqueTournament",{})
-                  if ut.get("id")==7 and e.get("status",{}).get("type")=="finished":
-                      evid = e["id"]
-                      print(f"    partido CL terminado: {e['homeTeam']['name']} {e['homeScore'].get('current')}-"
-                            f"{e['awayScore'].get('current')} {e['awayTeam']['name']} (id={evid})")
-                      break
-          if evid:
-              st = probe(f"estadisticas del evento {evid}",
-                         f"https://api.sofascore.com/api/v1/event/{evid}/statistics")
-              if st and "statistics" in st:
-                  for p in st["statistics"]:
-                      if p.get("period")!="ALL": continue
-                      for grp in p.get("groups",[]):
-                          for it in grp.get("statisticsItems",[]):
-                              if any(w in it.get("name","").lower() for w in
-                                     ("corner","yellow","shots","save")):
-                                  print(f"      {it['name']:28s} local={it.get('home')} visitante={it.get('away')}")
-
-          print(); print("="*72); print("FOREBET")
-          t = probe("resultados de ayer", "https://www.forebet.com/en/football-predictions", js=False)
-          probe("API no oficial", "https://www.forebet.com/scripts/getrs.php?ln=en&tp=1h&in=0", js=False)
-          PY
+          print("="*72)
+          probe("football-data.org v4 sin token (CL)",
+                "https://api.football-data.org/v4/competitions/CL/matches?season=2026")
+          probe("API-Football sin key",
+                "https://v3.football.api-sports.io/status")
+          r = probe("TheSportsDB free: liga CL por temporada",
+                "https://www.thesportsdb.com/api/v1/json/3/eventsseason.php?id=4480&s=2026-2027")
+          if r:
+              d=r.json(); ev=d.get("events") or []
+              print(f"    eventos: {len(ev)}")
+              if ev:
+                  e=ev[0]
+                  print(f"    ejemplo: {e.get('strEvent')} {e.get('intHomeScore')}-{e.get('intAwayScore')} {e.get('dateEvent')}")
+                  print(f"    campos de stats presentes: {[k for k in e if any(w in k.lower() for w in ('corner','card','shot','save'))] or 'NINGUNO'}")
+          r2 = probe("TheSportsDB free: estadisticas de un evento",
+                "https://www.thesportsdb.com/api/v1/json/3/lookupeventstats.php?id=2052601")
+          PY2
       - name: Publicar
         if: always()
         run: |
