@@ -46,7 +46,12 @@ DATA = ROOT / "data"
 BASE_URL = "https://www.football-data.co.uk"
 DIVS = {"E0": "premier", "SP1": "laliga", "I1": "seriea", "D1": "bundesliga"}
 LGN = {"premier": "Premier League", "laliga": "La Liga", "seriea": "Serie A",
-       "bundesliga": "Bundesliga", "ucl": "Champions League"}
+       "bundesliga": "Bundesliga", "ucl": "Champions League",
+       "uel": "Europa League", "uecl": "Conference League"}
+
+# Competencias UEFA: la base historica no las tiene, asi que solo se ofrecen los
+# mercados que salen directo del mercado y no dependen de ninguna calibracion.
+SOLO_MERCADO = {"ucl", "uel", "uecl"}
 
 UMBRAL_BASE = 0.65
 UMBRAL_MAX = 0.80
@@ -476,8 +481,85 @@ def load_fixtures(today: datetime) -> list[dict] | None:
         fx.append({"lg": DIVS[r["Div"]], "ko": ko.strftime("%Y-%m-%dT%H:%M:%SZ"),
                    "home": show(r["HomeTeam"]), "away": show(r["AwayTeam"]),
                    "kH": canon(r["HomeTeam"]), "kA": canon(r["AwayTeam"]),
-                   "pH": probs[0], "pD": probs[1], "pA": probs[2]})
+                   "pH": probs[0], "pD": probs[1], "pA": probs[2],
+                   "b365": cuotas_b365(r)})
+
+    fx += load_cuotas_extra(today)
     return fx
+
+
+def load_cuotas_extra(today: datetime) -> list[dict]:
+    """Partidos con cuotas que football-data no publica (competencias UEFA).
+
+    Lo escribe scripts/odds_api.py cuando hay ODDS_API_KEY. Mismo formato que
+    load_fixtures, asi que build_picks no distingue de donde vino cada partido.
+    """
+    path = DATA / "cuotas_extra.json"
+    if not path.exists():
+        return []
+    try:
+        rows = json.loads(path.read_text(encoding="utf-8")) or []
+    except (OSError, json.JSONDecodeError) as e:
+        log(f"  ! cuotas_extra.json: {e} - se ignora")
+        return []
+    out = []
+    for r in rows:
+        try:
+            if r["lg"] not in LGN:
+                continue
+            ko = pd.to_datetime(r["ko"], utc=True)
+            if ko < today - timedelta(hours=2):
+                continue
+            s = float(r["pH"]) + float(r["pD"]) + float(r["pA"])
+            if not (0.95 < s < 1.05):
+                log(f"  ! cuotas_extra: probabilidades que no suman 1 en {r.get('home')} "
+                    f"v {r.get('away')} ({s:.3f}), se saltea")
+                continue
+            out.append({"lg": r["lg"], "ko": ko.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        "home": r["home"], "away": r["away"],
+                        "kH": canon(r["home"]), "kA": canon(r["away"]),
+                        "pH": float(r["pH"])/s, "pD": float(r["pD"])/s, "pA": float(r["pA"])/s,
+                        "b365": r.get("b365") or {}})
+        except (KeyError, TypeError, ValueError) as e:
+            log(f"  ! cuotas_extra: fila invalida {r!r}: {e}")
+    if out:
+        log(f"  cuotas_extra.json: {len(out)} partidos")
+    return out
+
+
+def cuotas_b365(r: pd.Series) -> dict:
+    """Lo que paga bet365, para comparar contra la cuota justa.
+
+    Ojo con la distincion: la PROBABILIDAD sale del promedio de casas, que esta mejor
+    calibrado; una casa sola te mete su margen dentro de la estimacion. Bet365 entra
+    solo como el precio contra el cual se compara.
+
+    El CSV trae su 1X2 y su linea de 2.5 goles. La doble oportunidad no la publica, asi
+    que se arma con la combinacion sin arbitraje de su propio 1X2 (1/(1/o1 + 1/ox)), que
+    es como la cotizan las casas; queda marcada como estimada.
+    """
+    def num(col):
+        try:
+            v = float(r.get(col))
+            return v if np.isfinite(v) and v > 1.0 else None
+        except (TypeError, ValueError):
+            return None
+
+    o1, ox, o2 = num("B365H"), num("B365D"), num("B365A")
+    out: dict[str, float] = {}
+    if o1: out["1"] = round(o1, 2)
+    if ox: out["X"] = round(ox, 2)
+    if o2: out["2"] = round(o2, 2)
+    comb = lambda a, b: round(1 / (1 / a + 1 / b), 2)
+    if o1 and ox: out["1X"] = comb(o1, ox)
+    if o1 and o2: out["12"] = comb(o1, o2)
+    if ox and o2: out["X2"] = comb(ox, o2)
+    for col, k in (("B365>2.5", "O2.5"), ("B365<2.5", "U2.5")):
+        if (v := num(col)):
+            out[k] = round(v, 2)
+    # las derivadas van marcadas para no hacerlas pasar por precio publicado
+    out["_estimadas"] = [k for k in ("1X", "12", "X2") if k in out]
+    return out
 
 
 def pick_id(home: str, away: str, key: str) -> str:
@@ -488,7 +570,22 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float) -> list[dict]:
     todas = []
     for f in fx:
         lg, pH, pD, pA = f["lg"], f["pH"], f["pD"], f["pA"]
-        base = {"lg": lg, "liga": LGN[lg], "ko": f["ko"], "home": f["home"], "away": f["away"]}
+        base = {"lg": lg, "liga": LGN[lg], "ko": f["ko"], "home": f["home"], "away": f["away"],
+                "b365": f.get("b365") or {}}
+
+        if lg in SOLO_MERCADO:
+            # Sin base historica para goles ni estadisticas: solo 1X2 y doble oportunidad,
+            # que son el mercado mismo y no pasan por ningun modelo.
+            for k, lab, p in (("1", "Gana local", pH), ("2", "Gana visitante", pA),
+                              ("1X", "Local o empate", pH + pD),
+                              ("12", "Local o visitante (no empate)", pH + pA),
+                              ("X2", "Empate o visitante", pD + pA)):
+                if umbral < p <= CEIL_GOAL:
+                    todas.append({**base, "key": k, "fam": "res",
+                                  "cat": "1X2" if k in ("1", "2") else "Doble oportunidad",
+                                  "label": lab, "p": round(float(p), 4),
+                                  "cuota": round(1 / float(p), 2), "grupo": "resultado"})
+            continue
 
         mk, lh, la = markets(lg, pH, pD, pA)
         for k, (lab, p) in mk.items():
@@ -515,11 +612,20 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float) -> list[dict]:
 
     picks = []
     for s in sorted(mejor.values(), key=lambda s: (s["ko"], -s["p"])):
-        picks.append({"id": pick_id(s["home"], s["away"], s["key"]),
-                      "lg": s["lg"], "home": s["home"], "away": s["away"], "ko": s["ko"],
-                      "key": s["key"], "label": s["label"], "cat": s["cat"], "grupo": s["grupo"],
-                      "p": s["p"], "cuota": s["cuota"],
-                      "estado": "pendiente", "resultado": None})
+        b = s.get("b365") or {}
+        casa = b.get(s["key"])
+        pick = {"id": pick_id(s["home"], s["away"], s["key"]),
+                "lg": s["lg"], "home": s["home"], "away": s["away"], "ko": s["ko"],
+                "key": s["key"], "label": s["label"], "cat": s["cat"], "grupo": s["grupo"],
+                "p": s["p"], "cuota": s["cuota"],
+                "estado": "pendiente", "resultado": None}
+        if casa:
+            pick["casa"] = casa
+            # valor esperado por unidad apostada: positivo = la casa paga de mas
+            pick["valor"] = round(s["p"] * casa - 1, 4)
+            if s["key"] in (b.get("_estimadas") or []):
+                pick["casaEst"] = True
+        picks.append(pick)
     return picks
 
 

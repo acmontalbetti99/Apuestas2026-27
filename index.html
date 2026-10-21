@@ -110,6 +110,11 @@ main{padding-block:20px 56px}
 .tag.won{background:var(--good-soft);color:var(--good)}
 .tag.lost{background:var(--bad-soft);color:var(--bad)}
 .tag.pend{background:var(--wait-soft);color:var(--wait)}
+.casa{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;margin-top:1px}
+.casa b{font-family:var(--font-mono);font-size:13px;font-weight:600}
+.casa small{font-size:9px;color:var(--fg-faint);text-transform:uppercase;letter-spacing:.05em}
+.casa.vale b{color:var(--good)} .casa.vale small{color:var(--good)}
+.casa.no b{color:var(--fg-dim)}
 
 /* ticket */
 .ticket{background:var(--surface);border:1px solid var(--line-strong);border-radius:11px;overflow:hidden;margin-bottom:16px}
@@ -167,7 +172,7 @@ td.n{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
     <div class="hrow">
       <div class="brand">
         <h1>Montoglory</h1>
-        <span id="sub">Premier · La Liga · Serie A · Bundesliga · Champions</span>
+        <span id="sub">Premier · La Liga · Serie A · Bundesliga · Champions · Europa · Conference</span>
       </div>
       <div class="scoreboard" id="scoreboard"></div>
     </div>
@@ -188,7 +193,7 @@ td.n{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
 </main>
 
 <script>
-const LG={premier:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ucl:'Champions League'};
+const LG={premier:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:'Bundesliga',ucl:'Champions League',uel:'Europa League',uecl:'Conference League'};
 const GRP={resultado:'Resultado',goles:'Goles',estadisticas:'Córners, tarjetas, remates y atajadas'};
 const DAYS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
@@ -234,6 +239,17 @@ function filters(withGroup){
 }
 const inView=p=>(league==='todas'||p.lg===league)&&(grupo==='todos'||p.grupo===grupo);
 
+// Lo que paga bet365 contra la cuota justa. Si paga mas, la apuesta tiene valor;
+// si paga menos, pierde aunque entre seguido. La doble oportunidad va marcada
+// porque bet365 no la publica: se arma con su propio 1X2.
+function casa(p){
+  if(!p.casa) return '';
+  const vale = p.casa > p.cuota;
+  const pct = p.valor!=null ? (p.valor>=0?'+':'')+(100*p.valor).toFixed(1)+'%' : '';
+  return `<span class="casa ${vale?'vale':'no'}" title="${vale?'bet365 paga por encima de la justa':'bet365 paga por debajo de la justa'}">
+    <b class="num">${p.casa.toFixed(2)}</b><small>bet365${p.casaEst?'*':''} ${pct}</small></span>`;
+}
+
 function pickRow(p,showRes){
   const res=showRes&&p.resultado?`<span class="num">${esc(p.resultado)}</span>`:'';
   return `<article class="pick ${st(p)==='pend'?'':st(p)}">
@@ -246,6 +262,7 @@ function pickRow(p,showRes){
     </div>
     <div class="right">
       <span class="odds num">${p.cuota.toFixed(2)}<small>cuota justa</small></span>
+      ${casa(p)}
       <span class="tag ${st(p)}">${stw(p)}</span>
     </div></article>`;
 }
@@ -255,7 +272,7 @@ function renderPicks(){
   const open=PICKS.filter(p=>p.estado==='pendiente'&&inView(p))
                   .sort((a,b)=>new Date(a.ko)-new Date(b.ko)||b.p-a.p);
   if(!ready){el.innerHTML=skeleton('Cargando los picks de la jornada…');return}
-  let h=`<p class="lead">Solo se recomienda lo que el modelo da por encima del <b>65%</b>. Hasta tres picks por partido, uno por familia de mercado, para que no se solapen. La <b>cuota justa</b> es el precio a partir del cual la apuesta deja de perder valor: si la casa paga menos que eso, no la tomes.</p>`+filters(true);
+  let h=`<p class="lead">Solo se recomienda lo que el modelo da por encima del <b>65%</b>. Hasta tres picks por partido, uno por familia de mercado, para que no se solapen. La <b>cuota justa</b> es el precio a partir del cual la apuesta deja de perder valor. Al lado va lo que paga <b>bet365</b>: en verde cuando paga por encima de la justa, que es la unica situacion en la que la apuesta tiene valor. El asterisco marca la doble oportunidad, que bet365 no publica y se arma con su propio 1X2.</p>`+filters(true);
   if(!open.length){
     h+=`<div class="empty"><h3>No hay picks abiertos</h3><p>Cuando se carguen los partidos de la próxima jornada, acá aparecen las recomendaciones que superan el 65%.</p></div>`;
   }else{

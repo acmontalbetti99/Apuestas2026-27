@@ -47,8 +47,17 @@ jobs:
             echo "args=" >> "$GITHUB_OUTPUT"
           fi
 
-      # Primero los resultados en vivo: si falla, la liquidacion sigue con
-      # football-data y lo que ya estuviera en resultados_extra.json.
+      # Cuotas de las competencias UEFA. Sin el secret ODDS_API_KEY no hace nada
+      # y el resto sigue igual, solo que Champions/Europa/Conference no generan picks.
+      - name: Cuotas UEFA
+        continue-on-error: true
+        if: steps.modo.outputs.args == ''
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python -u scripts/odds_api.py 2>&1 | tee data/_ultimo_odds.log
+
+      # Si LiveScore falla, la liquidacion sigue con football-data y con lo que
+      # ya estuviera en resultados_extra.json.
       - name: Resultados en vivo
         continue-on-error: true
         run: python -u scripts/livescore.py 2>&1 | tee data/_ultimo_livescore.log

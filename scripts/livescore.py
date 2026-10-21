@@ -31,16 +31,26 @@ API = "https://prod-public-api.livescore.com/v1/api/app/date/soccer"
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/131.0.0.0 Safari/537.36")
 
-# (Cnm, Snm) tal como los nombra LiveScore -> nuestro codigo de liga
-COMPETICIONES = {
-    ("champions league", "league stage"): "ucl",
-    ("champions league", "knockout stage"): "ucl",
-    ("champions league", "final stage"): "ucl",
+# Ligas domesticas: LiveScore pone el pais en Cnm y la liga en Snm.
+DOMESTICAS = {
     ("england", "premier league"): "premier",
     ("spain", "laliga"): "laliga",
     ("italy", "serie a"): "seriea",
     ("germany", "bundesliga"): "bundesliga",
 }
+
+# Competencias UEFA: ahi Cnm ES la competencia. Se compara Cnm COMPLETO, no por
+# substring, porque hay homonimas de otras confederaciones que llegan como
+# Cnm="Africa" / Snm="CAF Champions League", y juveniles como Cnm="UEFA Youth
+# League". Cualquier etapa sirve (fase liga, eliminatorias, final).
+UEFA = {
+    "champions league": "ucl", "uefa champions league": "ucl",
+    "europa league": "uel", "uefa europa league": "uel",
+    "conference league": "uecl", "uefa conference league": "uecl",
+    "uefa europa conference league": "uecl", "europa conference league": "uecl",
+}
+# ni juveniles ni femeninas, que comparten nombre de competencia
+EXCLUIR = ("youth", "u19", "u21", "u23", "women", "femenin", "qualification", "qualifying")
 
 # LiveScore nombra algunos equipos distinto que nuestros picks. canon() resuelve
 # los acentos y la puntuacion; esto resuelve el resto.
@@ -103,9 +113,11 @@ def cosechar(dias: int = 3) -> list[dict]:
             continue
         hallados = 0
         for stg in d.get("Stages", []):
-            clave = (str(stg.get("Cnm", "")).lower().strip(),
-                     str(stg.get("Snm", "")).lower().strip())
-            lg = COMPETICIONES.get(clave)
+            cnm = str(stg.get("Cnm", "")).lower().strip()
+            snm = str(stg.get("Snm", "")).lower().strip()
+            if any(w in f"{cnm} {snm}" for w in EXCLUIR):
+                continue
+            lg = UEFA.get(cnm) or DOMESTICAS.get((cnm, snm))
             if not lg:
                 continue
             for e in stg.get("Events", []):
