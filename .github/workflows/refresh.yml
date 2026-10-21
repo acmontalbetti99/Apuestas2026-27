@@ -22,8 +22,11 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - name: Liquidar y regenerar
-        run: python scripts/refresh.py
+        run: |
+          set -o pipefail
+          python -u scripts/refresh.py 2>&1 | tee data/_ultimo_refresco.log
       - name: Commitear si cambio algo
+        if: always()
         run: |
           git config user.name  "montoglory-bot"
           git config user.email "actions@users.noreply.github.com"

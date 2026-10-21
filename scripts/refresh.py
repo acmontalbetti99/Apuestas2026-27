@@ -162,8 +162,10 @@ def load_results(today: datetime) -> pd.DataFrame | None:
     D = pd.concat(frames, ignore_index=True)
     D["fecha"] = pd.to_datetime(D["Date"], dayfirst=True, errors="coerce")
     D = D.dropna(subset=["fecha"])
-    for col in ("HC", "AC", "HY", "AY", "HS", "AS", "HST", "AST"):
-        D[col] = pd.to_numeric(D.get(col), errors="coerce")
+    # una division o temporada puede no traer la columna de estadisticas: se crea vacia
+    # para que el resto siga funcionando y esos mercados queden sin liquidar, no mal liquidados
+    for col in ("FTHG", "FTAG", "HC", "AC", "HY", "AY", "HS", "AS", "HST", "AST"):
+        D[col] = pd.to_numeric(D[col], errors="coerce") if col in D.columns else np.nan
     # atajadas del arquero local = remates al arco del visitante menos sus goles
     D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
     D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
