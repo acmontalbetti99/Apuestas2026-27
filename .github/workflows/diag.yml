@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12', cache: pip }
       - run: pip install -r requirements.txt
-      - name: Probar LiveScore
+      - name: Probar estadisticas de LiveScore
         run: |
           exec > data/_diagnostico.log 2>&1
           python -u - <<'PY2'
@@ -25,32 +25,34 @@ jobs:
               print(f"\n--- {n}\n    {u}")
               try: r=s.get(u,timeout=25)
               except Exception as e: print(f"    EXC {type(e).__name__}: {e}"); return None
-              cf="Just a moment" in r.text[:400]
-              print(f"    http={r.status_code} bytes={len(r.content)} cloudflare={cf} ct={r.headers.get('content-type','?')[:30]}")
-              if cf or r.status_code>=400:
-                  print(f"    {r.text[:200]!r}"); return None
+              print(f"    http={r.status_code} bytes={len(r.content)} ct={r.headers.get('content-type','?')[:30]}")
+              if r.status_code>=400: print(f"    {r.text[:160]!r}"); return None
               try: return r.json()
-              except Exception: print(f"    no JSON: {r.text[:200]!r}"); return None
+              except Exception: print(f"    no JSON: {r.text[:160]!r}"); return None
 
-          for nm,u in [("API publica react 21/10","https://prod-public-api.livescore.com/v1/api/react/date/soccer/20261021/0"),
-                       ("API publica app 21/10","https://prod-public-api.livescore.com/v1/api/app/date/soccer/20261021/0"),
-                       ("sitio web","https://www.livescore.com/en/")]:
+          EID="1882866"  # Como 4-1 Manchester United
+          for nm,u in [("match-details app", f"https://prod-public-api.livescore.com/v1/api/app/match/soccer/{EID}/0"),
+                       ("match-details react", f"https://prod-public-api.livescore.com/v1/api/react/match/{EID}/0"),
+                       ("stats app", f"https://prod-public-api.livescore.com/v1/api/app/match-stats/soccer/{EID}"),
+                       ("stats react", f"https://prod-public-api.livescore.com/v1/api/react/match-stats/{EID}")]:
               d=g(nm,u)
-              if isinstance(d,dict):
-                  print(f"    claves: {list(d)[:10]}")
-                  st=d.get("Stages") or d.get("stages") or []
-                  print(f"    stages: {len(st)}")
-                  for stg in st[:40]:
-                      cn=stg.get("Cnm") or stg.get("competitionName") or "?"
-                      sn=stg.get("Snm") or stg.get("stageName") or "?"
-                      ev=stg.get("Events") or stg.get("events") or []
-                      if any(k in f"{cn} {sn}".lower() for k in
-                             ("champions","premier","laliga","liga","serie a","bundesliga")):
-                          print(f"      [{cn}] {sn}: {len(ev)} partidos")
-                          for e in ev[:2]:
-                              t1=(e.get('T1') or [{}])[0].get('Nm'); t2=(e.get('T2') or [{}])[0].get('Nm')
-                              print(f"         {t1} {e.get('Tr1')}-{e.get('Tr2')} {t2}  eid={e.get('Eid')} status={e.get('Eps')}")
-                  break
+              if not isinstance(d,dict): continue
+              print(f"    claves de primer nivel: {list(d)[:20]}")
+              txt=json.dumps(d).lower()
+              for w in ("corner","yellow","shot","save","possession"):
+                  print(f"      contiene '{w}': {w in txt}")
+              # volcar cualquier bloque que parezca estadisticas
+              def walk(o, path="", depth=0):
+                  if depth>4: return
+                  if isinstance(o,dict):
+                      for k,v in o.items():
+                          if any(w in str(k).lower() for w in ("stat","corner","yellow","shot","save")):
+                              print(f"      {path}.{k} = {json.dumps(v)[:300]}")
+                          walk(v, f"{path}.{k}", depth+1)
+                  elif isinstance(o,list):
+                      for n_,v in enumerate(o[:3]): walk(v, f"{path}[{n_}]", depth+1)
+              walk(d)
+              break
           PY2
       - name: Publicar
         if: always()
