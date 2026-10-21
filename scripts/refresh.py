@@ -167,6 +167,8 @@ def fetch_csv(url: str, timeout: int = 60) -> pd.DataFrame | None:
     except Exception as e:  # noqa: BLE001 - un CSV corrupto no debe tumbar el refresco
         log(f"  ! {url}: no se pudo parsear ({e})")
         return None
+    # los CSV vienen con BOM y leidos como latin-1 la primera columna queda 'i»¿Div'
+    df.columns = [str(c).replace("﻿", "").replace("ï»¿", "").strip() for c in df.columns]
     return df.dropna(how="all")
 
 
