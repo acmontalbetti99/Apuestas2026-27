@@ -1,0 +1,5 @@
+# Dependencias del refresco diario (scripts/refresh.py)
+numpy>=1.26
+scipy>=1.11
+pandas>=2.1
+requests>=2.31
