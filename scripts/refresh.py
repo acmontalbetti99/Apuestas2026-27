@@ -555,9 +555,27 @@ def main() -> int:
         nuevos = build_picks(fx, team_ratios(D), calib["umbralVigente"])
         log(f"  {len(nuevos)} picks sobre el {100 * calib['umbralVigente']:.0f}%")
 
-    liquidados = [p for p in picks if p["estado"] != "pendiente"]
-    vistos = {p["id"] for p in liquidados}
-    final = liquidados + [p for p in nuevos if p["id"] not in vistos]
+    # El refresco es aditivo, nunca destructivo. fixtures.csv solo publica una ventana
+    # de uno o dos dias, asi que si se reconstruyera la lista desde cero un dia flaco
+    # se llevaria puestos los picks del fin de semana que ya estaban bien calculados.
+    # Precedencia: liquidado > recien generado (prob fresca) > pendiente aun por jugar.
+    final: dict[str, dict] = {}
+    for p in picks:
+        if p["estado"] != "pendiente":
+            final[p["id"]] = p
+    for p in nuevos:
+        if p["id"] not in final:
+            final[p["id"]] = p
+    conservados = 0
+    for p in picks:
+        if p["estado"] == "pendiente" and p["id"] not in final:
+            ko = pd.to_datetime(p["ko"], utc=True, errors="coerce")
+            if pd.notna(ko) and ko > today:
+                final[p["id"]] = p
+                conservados += 1
+    if conservados:
+        log(f"  {conservados} picks pendientes de dias anteriores se mantienen")
+    final = sorted(final.values(), key=lambda p: (p["ko"], -p["p"]))
 
     hoy = today.date().isoformat()
     abiertas = build_parlays(final, hoy) if fx is not None else []
@@ -569,7 +587,8 @@ def main() -> int:
     write_json(DATA / "picks.json", final)
     write_json(DATA / "parlays.json", parlays_final)
     write_json(DATA / "calibracion.json", calib)
-    log(f"Listo: {len(final)} picks ({len(liquidados)} liquidados), {len(parlays_final)} combinadas")
+    n_liq = sum(p["estado"] != "pendiente" for p in final)
+    log(f"Listo: {len(final)} picks ({n_liq} liquidados), {len(parlays_final)} combinadas")
     return 0
 
 
