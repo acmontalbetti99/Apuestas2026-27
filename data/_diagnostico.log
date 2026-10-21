@@ -1,45 +1,20 @@
 
---- API publica react 21/10
-    https://prod-public-api.livescore.com/v1/api/react/date/soccer/20261021/0
-    http=503 bytes=592 cloudflare=False ct=text/html
-    '<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503 Service Temporarily Unavailable</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a pad'
+--- match-details app
+    https://prod-public-api.livescore.com/v1/api/app/match/soccer/1882866/0
+    http=404 bytes=53 ct=text/html; charset=utf-8
+    '<html><body><h1>Resource not found</h1></body></html>'
 
---- API publica app 21/10
-    https://prod-public-api.livescore.com/v1/api/app/date/soccer/20261021/0
-    http=200 bytes=100807 cloudflare=False ct=application/json
-    claves: ['Ts', 'Stages']
-    stages: 63
-      [Champions League] League Stage: 9 partidos
-         Como 1907 4-1 Manchester United  eid=1882866 status=FT
-         Lille 2-4 Galatasaray  eid=1882812 status=FT
-      [Spain] LaLiga: 1 partidos
-         Levante 3-1 Athletic Club  eid=1810663 status=FT
-      [Africa] CAF Champions League: Qualification: 2 partidos
-         15 de Agosto 1-6 Simba SC  eid=1902693 status=FT
-         Young Africans 4-1 Cffa  eid=1892545 status=FT
-      [Mexico] Liga MX: Apertura: 4 partidos
-         CD Guadalajara 1-0 Necaxa  eid=1799031 status=FT
-         Atletico de San Luis 2-1 Queretaro FC  eid=1799035 status=FT
-      [Egypt] Premier League: 3 partidos
-         Ghazl Al Mehalla 2-1 Al-Ittihad Alexandria  eid=1857544 status=FT
-         Al Ahly 3-3 Olympic El Qanah FC  eid=1857525 status=FT
-      [UEFA Youth League] Champions League Path: 9 partidos
-         Como U19 2-1 Manchester United U19  eid=1886586 status=FT
-         Lille U19 3-1 Galatasaray U19  eid=1886591 status=FT
-      [Botswana] Premier League: 1 partidos
-         Extension Gunners None-None Galaxy  eid=1878478 status=NS
-      [Canada] Canadian Championship: 1 partidos
-         CF Montreal None-None Forge FC  eid=1894214 status=NS
-      [Denmark] Ligaen U19: 1 partidos
-         AaB U19 3-0 Silkeborg U19  eid=1897281 status=FT
-      [England] Northern Premier League: 1 partidos
-         Avro 3-2 Ashton United  eid=1837473 status=FT
-      [England] Southern League Premier: South: 1 partidos
-         Frome Town None-None Gloucester City  eid=1839118 status=Postp.
-      [England] Isthmian League Premier Division: 1 partidos
-         Whyteleafe 2-3 Burgess Hill Town  eid=1837029 status=FT
-      [Germany] Oberliga: Niedersachsen: 1 partidos
-         SV Drochtersen/Assel II None-None Luneburger SK Hansa  eid=1829914 status=NS
-      [Guatemala] Liga Nacional: Apertura: 2 partidos
-         Deportivo Malacateco 1-0 Comunicaciones FC  eid=1808948 status=FT
-         Mixco 0-0 CSD Municipal  eid=1808965 status=HT
+--- match-details react
+    https://prod-public-api.livescore.com/v1/api/react/match/1882866/0
+    http=503 bytes=592 ct=text/html
+    '<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503 Service Temporarily Unavailable</h1></center>\r\n<hr><center>ngin'
+
+--- stats app
+    https://prod-public-api.livescore.com/v1/api/app/match-stats/soccer/1882866
+    http=404 bytes=53 ct=text/html; charset=utf-8
+    '<html><body><h1>Resource not found</h1></body></html>'
+
+--- stats react
+    https://prod-public-api.livescore.com/v1/api/react/match-stats/1882866
+    http=503 bytes=592 ct=text/html
+    '<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503 Service Temporarily Unavailable</h1></center>\r\n<hr><center>ngin'
