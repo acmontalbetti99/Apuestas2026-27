@@ -1,6 +1,6 @@
 [
  {
-  "fecha": "2026-10-21T22:59:04Z",
+  "fecha": "2026-10-21T23:13:45Z",
   "hallazgos": [
    {
     "severidad": "baja",
@@ -28,8 +28,8 @@
     "conPrecioCasa": 0
    },
    "edadHoras": {
-    "_ultimo_refresco.log": 0.5,
-    "_ultimo_livescore.log": 0.5
+    "_ultimo_refresco.log": 0.8,
+    "_ultimo_livescore.log": 0.8
    }
   },
   "resumen": {

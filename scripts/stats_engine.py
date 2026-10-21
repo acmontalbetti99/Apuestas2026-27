@@ -9,12 +9,15 @@ which measured Poisson (var/mean 0.93-0.98).
 import numpy as np
 from scipy.stats import nbinom, poisson
 
-# per-match means, measured on 11,568 matches 2018-2025 (home, away)
+# Medias por partido y por lado (local, visitante), medidas sobre 4.620 partidos de
+# 2023-2027. Reemplazan a las de 2018-2025, que habian quedado desfasadas: las
+# amarillas de Premier subieron 12,4% y las de Serie A bajaron 11,1%, y las atajadas
+# de Serie A cayeron 12,9%. Ver el PR 'recalibrar-estadisticas' para la medicion.
 BASE = {
- 'premier':   {'cor':(5.65,4.70), 'yel':(1.67,1.88), 'sho':(13.88,11.56), 'sav':(2.77,3.23)},
- 'laliga':    {'cor':(5.24,4.14), 'yel':(2.33,2.49), 'sho':(13.20,10.49), 'sav':(2.47,3.15)},
- 'seriea':    {'cor':(5.32,4.40), 'yel':(2.05,2.35), 'sho':(12.87,10.76), 'sav':(2.99,3.54)},
- 'bundesliga':{'cor':(5.33,4.43), 'yel':(1.79,2.03), 'sho':(14.26,11.81), 'sav':(2.89,3.49)},
+ 'premier':   {'cor':(5.60,4.72), 'yel':(1.83,2.16), 'sho':(14.35,11.90), 'sav':(2.81,3.30)},
+ 'laliga':    {'cor':(5.37,4.17), 'yel':(2.17,2.37), 'sho':(13.70,10.86), 'sav':(2.55,3.33)},
+ 'seriea':    {'cor':(5.20,4.07), 'yel':(1.80,2.11), 'sho':(13.71,11.29), 'sav':(2.57,3.12)},
+ 'bundesliga':{'cor':(5.56,4.25), 'yel':(1.85,2.06), 'sho':(14.82,11.94), 'sav':(2.81,3.61)},
 }
 # variance/mean, measured per side
 DISP = {'cor':1.607, 'yel':0.956, 'sho':2.077, 'sav':1.376}
