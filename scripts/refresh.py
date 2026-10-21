@@ -94,6 +94,32 @@ DISPLAY = {
     "Inter": "Inter", "Milan": "Milan", "Verona": "Hellas Verona",
 }
 
+# Futbol femenino: fuera del alcance de la app, por decision de producto. La regla vive
+# aca y la usan livescore.py y odds_api.py, para que no haya dos listas que se
+# desincronicen. Se chequea tanto el nombre de la competencia como el de los equipos:
+# algunos feeds no marcan la competencia pero si el equipo, con sufijos como "(W)".
+MARCAS_FEMENINO = (
+    "women", "woman", "womens", "ladies", "girls",
+    # raices cortas, que cubren femeni/femeni­l/femenina/femenino, feminine/feminina
+    # y femminile sin depender de la terminacion de cada idioma
+    "femen", "femin", "femmin",
+    "frauen", "dames", "damen", "kvinner", "kvinnor", "naisten",
+    "wsl", "nwsl",
+)
+_SUFIJOS_FEM = (" (w)", " w", "-w", " fem", " femenino", " femenil")
+
+
+def es_femenino(*textos: str) -> bool:
+    """True si alguno de los textos corresponde a futbol femenino."""
+    for x in textos:
+        s = f" {str(x or '').lower().strip()} "
+        if any(m in s for m in MARCAS_FEMENINO):
+            return True
+        if any(s.rstrip().endswith(suf) for suf in _SUFIJOS_FEM):
+            return True
+    return False
+
+
 STAT_COLS = {"cor": ("HC", "AC"), "yel": ("HY", "AY"),
              "sho": ("HS", "AS"), "sav": ("savH", "savA")}
 STAT_WORD = {"cor": "corners", "yel": "amarillas", "sho": "remates", "sav": "atajadas"}

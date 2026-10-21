@@ -27,7 +27,7 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
-from refresh import DATA, log, prefer_ipv4  # noqa: E402
+from refresh import DATA, es_femenino, log, prefer_ipv4  # noqa: E402
 
 BASE = "https://api.the-odds-api.com/v4"
 
@@ -117,6 +117,8 @@ def main() -> int:
 
     out, restantes = [], None
     for sport, lg in COMPETENCIAS.items():
+        if es_femenino(sport):       # red de seguridad si alguien agrega una clave
+            continue
         url = f"{BASE}/sports/{sport}/odds"
         try:
             r = s.get(url, timeout=30, params={
@@ -140,6 +142,8 @@ def main() -> int:
         n = 0
         for j in juegos:
             home, away = j.get("home_team"), j.get("away_team")
+            if es_femenino(home, away):
+                continue
             c = consenso(j.get("bookmakers", []), home, away)
             if not c:
                 continue

@@ -256,3 +256,37 @@ print(f"  picks del partido recotizado {par[0]} v {par[1]}: {len(delpar)} "
       f"(grupos: {sorted({p['grupo'] for p in delpar})})")
 assert len(delpar) == len({p["grupo"] for p in delpar}), "quedaron viejos y nuevos mezclados"
 print("\nESCENARIO 3 OK")
+
+# ===================== futbol femenino: nunca, por decision de producto ==============
+print("\n" + "=" * 70)
+print("ESCENARIO 4: exclusion de futbol femenino")
+from refresh import es_femenino
+FEM = [("Women's World Cup Qualification","UEFA"), ("England","FA WSL"), ("USA","NWSL"),
+       ("Germany","Frauen-Bundesliga"), ("Spain","Liga F Femenino"),
+       ("International Friendlies","Women's Friendlies"), ("Arsenal (W)",),
+       ("Chelsea W",), ("Barcelona Femeni",), ("Barcelona Femenino",),
+       ("Olympique Lyonnais Feminin",), ("Juventus Femminile",), ("Lyon Dames",),
+       ("Norway Kvinner",), ("Ladies FC",)]
+MASC = [("England","Premier League"), ("World Cup Qualification","UEFA: Group C"),
+        ("Champions League","League Stage"), ("Africa Cup of Nations","Group A"),
+        ("Nations League","League A"), ("Copa America","Group B"),
+        ("Wolves",), ("Werder Bremen",), ("West Ham",), ("Newcastle",), ("Swansea",),
+        ("Como","Manchester United"), ("Athletic Bilbao",), ("Feyenoord",),
+        ("Bayern Munich",), ("Real Madrid",), ("Wolfsburg",), ("Dortmund",)]
+mal = []
+for a in FEM:
+    if not es_femenino(*a): mal.append(("no detectado", a))
+for a in MASC:
+    if es_femenino(*a): mal.append(("falso positivo", a))
+for m in mal: print(f"   MAL {m[0]}: {m[1]}")
+print(f"  {len(FEM)} casos femeninos detectados, {len(MASC)} masculinos intactos")
+assert not mal, f"{len(mal)} errores en la exclusion de femenino"
+
+# y que efectivamente no entre por ninguna de las tres puertas
+import livescore as _LS, odds_api as _OA
+assert _LS.es_femenino is es_femenino and _OA.es_femenino is es_femenino, \
+    "las fuentes deben usar la MISMA regla, no copias"
+assert not any(es_femenino(k) is False and "women" in k for k in _OA.COMPETENCIAS), \
+    "hay una clave femenina en COMPETENCIAS"
+print("  las tres fuentes comparten la misma regla: ok")
+print("\nESCENARIO 4 OK")

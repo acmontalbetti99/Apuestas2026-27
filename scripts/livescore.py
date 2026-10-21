@@ -25,7 +25,7 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
-from refresh import DATA, canon, log, prefer_ipv4  # noqa: E402
+from refresh import DATA, canon, es_femenino, log, prefer_ipv4  # noqa: E402
 
 API = "https://prod-public-api.livescore.com/v1/api/app/date/soccer"
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -60,11 +60,12 @@ SELECCIONES = {
 # Las clasificatorias traen el continente en Snm, no en Cnm.
 CLASIFICATORIAS = {"world cup qualification": {"uefa": "wcq_eu", "conmebol": "wcq_sa",
                                                "south america": "wcq_sa"}}
-# Juveniles y femeninas, que comparten el nombre de la competencia mayor.
+# Juveniles, que comparten el nombre de la competencia mayor. El femenino se filtra
+# aparte con es_femenino(), que es la regla compartida.
 # OJO: no filtrar por "qualification". Las fases previas de copas de clubes ya quedan
 # afuera porque la comparacion de Cnm es exacta (llegan como Cnm="Africa" o "England"),
 # mientras que las clasificatorias del Mundial SI se llaman asi y hay que dejarlas pasar.
-EXCLUIR = ("youth", "u17", "u19", "u20", "u21", "u23", "women", "femenin", "feminin")
+EXCLUIR = ("youth", "u17", "u19", "u20", "u21", "u23")
 
 # LiveScore nombra algunos equipos distinto que nuestros picks. canon() resuelve
 # los acentos y la puntuacion; esto resuelve el resto.
@@ -130,7 +131,7 @@ def cosechar(dias: int = 3) -> list[dict]:
         for stg in d.get("Stages", []):
             cnm = str(stg.get("Cnm", "")).lower().strip()
             snm = str(stg.get("Snm", "")).lower().strip()
-            if any(w in f"{cnm} {snm}" for w in EXCLUIR):
+            if any(w in f"{cnm} {snm}" for w in EXCLUIR) or es_femenino(cnm, snm):
                 continue
             lg = UEFA.get(cnm) or SELECCIONES.get(cnm) or DOMESTICAS.get((cnm, snm))
             if not lg and cnm in CLASIFICATORIAS:
@@ -142,7 +143,8 @@ def cosechar(dias: int = 3) -> list[dict]:
                 # deja rastro de lo internacional que no supimos mapear, para poder
                 # agregarlo despues: los nombres cambian de una edicion a otra
                 if any(w in f"{cnm} {snm}" for w in
-                       ("nations league", "world cup", "copa america", "africa cup", "afcon")):
+                       ("nations league", "world cup", "copa america", "africa cup", "afcon")) \
+                        and not es_femenino(cnm, snm):
                     no_mapeadas.add(f"Cnm={stg.get('Cnm')!r} Snm={stg.get('Snm')!r}")
                 continue
             for e in stg.get("Events", []):
@@ -152,6 +154,8 @@ def cosechar(dias: int = 3) -> list[dict]:
                 t2 = (e.get("T2") or [{}])[0].get("Nm")
                 hg, ag = e.get("Tr1"), e.get("Tr2")
                 if not t1 or not t2 or hg is None or ag is None:
+                    continue
+                if es_femenino(t1, t2):      # el feed no siempre marca la competencia
                     continue
                 ko = e.get("Esd")      # formato YYYYMMDDHHMMSS
                 try:
