@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12', cache: pip }
       - run: pip install -r requirements.txt
-      - name: Probar estadisticas de LiveScore
+      - name: Buscar la ruta de estadisticas
         run: |
           exec > data/_diagnostico.log 2>&1
           python -u - <<'PY2'
@@ -21,38 +21,35 @@ jobs:
               "Chrome/131.0.0.0 Safari/537.36")
           s=requests.Session(); s.headers.update({"User-Agent":UA,"Accept":"application/json, text/plain, */*",
                                                   "Referer":"https://www.livescore.com/"})
-          def g(n,u):
-              print(f"\n--- {n}\n    {u}")
-              try: r=s.get(u,timeout=25)
-              except Exception as e: print(f"    EXC {type(e).__name__}: {e}"); return None
-              print(f"    http={r.status_code} bytes={len(r.content)} ct={r.headers.get('content-type','?')[:30]}")
-              if r.status_code>=400: print(f"    {r.text[:160]!r}"); return None
-              try: return r.json()
-              except Exception: print(f"    no JSON: {r.text[:160]!r}"); return None
+          B="https://prod-public-api.livescore.com/v1/api/app"
+          d=s.get(f"{B}/date/soccer/20261021/0",timeout=25).json()
+          ev=None
+          for stg in d.get("Stages",[]):
+              if "champions league"==str(stg.get("Cnm","")).lower():
+                  for e in stg.get("Events",[]):
+                      if e.get("Eps")=="FT": ev=e; break
+              if ev: break
+          print("CAMPOS DE UN EVENTO TERMINADO:")
+          print(json.dumps({k:v for k,v in ev.items() if k not in ("T1","T2")}, indent=1)[:1800])
+          eid=ev["Eid"]; print(f"\nEid={eid}")
 
-          EID="1882866"  # Como 4-1 Manchester United
-          for nm,u in [("match-details app", f"https://prod-public-api.livescore.com/v1/api/app/match/soccer/{EID}/0"),
-                       ("match-details react", f"https://prod-public-api.livescore.com/v1/api/react/match/{EID}/0"),
-                       ("stats app", f"https://prod-public-api.livescore.com/v1/api/app/match-stats/soccer/{EID}"),
-                       ("stats react", f"https://prod-public-api.livescore.com/v1/api/react/match-stats/{EID}")]:
-              d=g(nm,u)
-              if not isinstance(d,dict): continue
-              print(f"    claves de primer nivel: {list(d)[:20]}")
-              txt=json.dumps(d).lower()
-              for w in ("corner","yellow","shot","save","possession"):
-                  print(f"      contiene '{w}': {w in txt}")
-              # volcar cualquier bloque que parezca estadisticas
-              def walk(o, path="", depth=0):
-                  if depth>4: return
-                  if isinstance(o,dict):
-                      for k,v in o.items():
-                          if any(w in str(k).lower() for w in ("stat","corner","yellow","shot","save")):
-                              print(f"      {path}.{k} = {json.dumps(v)[:300]}")
-                          walk(v, f"{path}.{k}", depth+1)
-                  elif isinstance(o,list):
-                      for n_,v in enumerate(o[:3]): walk(v, f"{path}[{n_}]", depth+1)
-              walk(d)
-              break
+          rutas=[f"{B}/match/soccer/{eid}", f"{B}/match/{eid}/soccer/0", f"{B}/match/{eid}",
+                 f"{B}/matchdetails/soccer/{eid}/0", f"{B}/match-details/soccer/{eid}/0",
+                 f"{B}/stats/soccer/{eid}", f"{B}/match/soccer/{eid}/0/stats",
+                 f"{B}/detail/soccer/{eid}/0", f"{B}/incidents/soccer/{eid}/0",
+                 "https://prod-public-api.livescore.com/v1/api/app/live/soccer/0"]
+          for u in rutas:
+              try: r=s.get(u,timeout=20)
+              except Exception as ex: print(f"  EXC {u}: {ex}"); continue
+              ok = r.status_code==200 and "json" in r.headers.get("content-type","")
+              print(f"  http={r.status_code:3d} {'JSON' if ok else '    '} {u}")
+              if ok:
+                  txt=r.text.lower()
+                  print(f"      bytes={len(r.content)} corner={'corner' in txt} "
+                        f"yellow={'yellow' in txt} shot={'shot' in txt} save={'save' in txt}")
+                  if "corner" in txt:
+                      print("      *** TIENE CORNERS ***")
+                      print("      "+json.dumps(r.json())[:700])
           PY2
       - name: Publicar
         if: always()
