@@ -68,12 +68,20 @@ jobs:
           python -u scripts/refresh.py ${{ steps.modo.outputs.args }} 2>&1 \
             | tee data/_ultimo_refresco.log
 
+      # Mide integridad, liquidacion, calibracion, valor, frescura y el sitio.
+      # No bloquea el commit: primero se guarda el informe, despues se pone en rojo.
+      - name: Auditoria
+        id: audit
+        if: steps.modo.outputs.args == ''
+        continue-on-error: true
+        run: python -u scripts/auditoria.py 2>&1 | tee data/_ultima_auditoria.log
+
       - name: Commitear si cambio algo
         if: always()
         run: |
           git config user.name  "montoglory-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -A data/
+          git add -A data/ AUDITORIA.md
           if git diff --staged --quiet; then
             echo "sin cambios"
           else
@@ -81,3 +89,11 @@ jobs:
             git pull --rebase --autostash origin main || true
             git push
           fi
+
+      # Va en rojo si la auditoria encontro algo de severidad alta, pero recien
+      # ahora, con el informe ya commiteado y visible en AUDITORIA.md.
+      - name: Fallar si la auditoria encontro algo grave
+        if: steps.audit.outcome == 'failure'
+        run: |
+          echo "La auditoria encontro hallazgos de severidad alta. Ver AUDITORIA.md"
+          exit 1
