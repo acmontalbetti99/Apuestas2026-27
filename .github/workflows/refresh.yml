@@ -1,0 +1,30 @@
+# Refresco diario de los datos. Hoy la tarea programada de Claude escribe en la base del
+# artifact; este workflow queda listo para cuando se le dé permiso de escritura sobre el repo:
+# commitea data/*.json y Vercel redespliega solo.
+name: Refresco diario
+on:
+  schedule:
+    - cron: '50 10 * * *'   # 05:50 Lima
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy
+      - name: Liquidar y regenerar
+        run: |
+          if [ -f scripts/refresh.py ]; then python scripts/refresh.py; else
+            echo "scripts/refresh.py todavia no existe: el refresco lo hace la tarea de Claude"; fi
+      - name: Commitear si cambio algo
+        run: |
+          git config user.name  "montoglory-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A data/
+          git diff --staged --quiet || git commit -m "datos: refresco $(date -u +%Y-%m-%d)"
+          git push || true
