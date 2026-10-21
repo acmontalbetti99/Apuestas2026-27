@@ -4,62 +4,71 @@
   "away": "Manchester United",
   "ko": "2026-10-21T16:45:00Z",
   "hg": 4,
-  "ag": 1
+  "ag": 1,
+  "lg": "ucl"
  },
  {
   "home": "Lille",
   "away": "Galatasaray",
   "ko": "2026-10-21T16:45:00Z",
   "hg": 2,
-  "ag": 4
+  "ag": 4,
+  "lg": "ucl"
  },
  {
   "home": "Aston Villa",
   "away": "Viking FK",
   "ko": "2026-10-21T19:00:00Z",
   "hg": 3,
-  "ag": 1
+  "ag": 1,
+  "lg": "ucl"
  },
  {
   "home": "Club Brujas",
   "away": "Lens",
   "ko": "2026-10-21T19:00:00Z",
   "hg": 3,
-  "ag": 0
+  "ag": 0,
+  "lg": "ucl"
  },
  {
   "home": "Bayern Munich",
   "away": "Arsenal",
   "ko": "2026-10-21T19:00:00Z",
   "hg": 2,
-  "ag": 2
+  "ag": 2,
+  "lg": "ucl"
  },
  {
   "home": "Inter",
   "away": "Shakhtar Donetsk",
   "ko": "2026-10-21T19:00:00Z",
   "hg": 1,
-  "ag": 0
+  "ag": 0,
+  "lg": "ucl"
  },
  {
   "home": "Real Madrid",
   "away": "RB Leipzig",
   "ko": "2026-10-21T19:00:00Z",
   "hg": 4,
-  "ag": 1
+  "ag": 1,
+  "lg": "ucl"
  },
  {
   "home": "Real Betis",
   "away": "Feyenoord",
   "ko": "2026-10-21T19:00:00Z",
   "hg": 1,
-  "ag": 0
+  "ag": 0,
+  "lg": "ucl"
  },
  {
   "home": "Sporting CP",
   "away": "LASK Linz",
   "ko": "2026-10-21T19:00:00Z",
   "hg": 2,
-  "ag": 3
+  "ag": 3,
+  "lg": "ucl"
  }
 ]

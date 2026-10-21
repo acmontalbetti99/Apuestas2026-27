@@ -215,14 +215,14 @@ def load_results(today: datetime) -> pd.DataFrame | None:
     D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
     D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
 
-    extra = load_champions()
+    extra = load_resultados_extra()
     if extra is not None:
         D = pd.concat([D, extra], ignore_index=True)
-        log(f"  champions.json: {len(extra)} partidos")
+        log(f"  resultados_extra.json: {len(extra)} partidos")
     return D.sort_values("fecha")
 
 
-def load_champions() -> pd.DataFrame | None:
+def load_resultados_extra() -> pd.DataFrame | None:
     """Resultados inyectados a mano: Champions, que football-data no publica, y
     cualquier partido que una fuente en vivo quiera liquidar antes de que
     football-data lo publique (su CSV tarda horas en aparecer).
@@ -234,13 +234,13 @@ def load_champions() -> pd.DataFrame | None:
     Los nombres tienen que ser los mismos que usan los picks; canon() aguanta las
     variantes habituales, pero no un nombre inventado.
     """
-    path = DATA / "champions.json"
+    path = DATA / "resultados_extra.json"
     if not path.exists():
         return None
     try:
         rows = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as e:
-        log(f"  ! champions.json: {e} - se ignora")
+        log(f"  ! resultados_extra.json: {e} - se ignora")
         return None
     if not isinstance(rows, list) or not rows:
         return None
@@ -260,7 +260,7 @@ def load_champions() -> pd.DataFrame | None:
                 "kH": canon(r["home"]), "kA": canon(r["away"]),
             })
         except (KeyError, TypeError, ValueError) as e:
-            log(f"  ! champions.json: fila invalida {r!r}: {e}")
+            log(f"  ! resultados_extra.json: fila invalida {r!r}: {e}")
     if not out:
         return None
     D = pd.DataFrame(out)

@@ -1,8 +1,0 @@
-PARTIDO: [Spain] LaLiga :: Levante 3-1 Athletic Club
-
-campo Inc-f:
-  {"2": [{"IT": 45, "Nm": 2, "NoP": false}]}
-  equipo 2: tipos de incidencia {45: 1}
-     {"IT": 45, "Nm": 2, "NoP": false}
-
-campos del evento: ['Eid', 'Inc-f', 'Tr1', 'Tr2', 'Trh1', 'Trh2', 'Tr1OR', 'Tr2OR', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Ewt', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']

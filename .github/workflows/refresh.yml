@@ -1,11 +1,26 @@
-# Refresco diario: liquida los partidos terminados, mide el acierto, mueve el umbral
-# si hace falta y genera los picks de lo que viene. Commitea data/*.json; cuando el
-# proyecto de Vercel este conectado a este repo, el commit dispara el redeploy solo.
-name: Refresco diario
+# Dos cadencias, porque las fuentes tienen tiempos distintos.
+#
+# Cada 30 minutos (13:00-23:30 UTC, que cubre el final de todo el futbol europeo):
+#   LiveScore trae el marcador apenas termina el partido, asi que los picks de
+#   resultado y goles se liquidan el mismo dia. Solo liquida: no regenera picks,
+#   porque la ventana de fixtures.csv cambia una vez al dia y rearmarlos cada
+#   media hora haria bailar las recomendaciones.
+#
+# Una vez al dia (10:50 UTC = 05:50 Lima):
+#   La corrida completa. football-data publica con horas de retraso pero es la
+#   unica que trae cornners, tarjetas, remates y atajadas, y es de donde salen
+#   las cuotas de cierre con las que se generan los picks nuevos.
+name: Refresco
 on:
   schedule:
-    - cron: '50 10 * * *'   # 05:50 Lima
+    - cron: '50 10 * * *'        # completa
+    - cron: '*/30 13-23 * * *'   # solo liquidar
   workflow_dispatch:
+    inputs:
+      completa:
+        description: 'Correr la completa (regenera picks), no solo liquidar'
+        type: boolean
+        default: true
 permissions:
   contents: write
 concurrency:
@@ -21,10 +36,29 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
+
+      - name: Decidir el modo
+        id: modo
+        run: |
+          if [ "${{ github.event.schedule }}" = "*/30 13-23 * * *" ] \
+             || [ "${{ github.event.inputs.completa }}" = "false" ]; then
+            echo "args=--solo-liquidar" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Primero los resultados en vivo: si falla, la liquidacion sigue con
+      # football-data y lo que ya estuviera en resultados_extra.json.
+      - name: Resultados en vivo
+        continue-on-error: true
+        run: python -u scripts/livescore.py 2>&1 | tee data/_ultimo_livescore.log
+
       - name: Liquidar y regenerar
         run: |
           set -o pipefail
-          python -u scripts/refresh.py 2>&1 | tee data/_ultimo_refresco.log
+          python -u scripts/refresh.py ${{ steps.modo.outputs.args }} 2>&1 \
+            | tee data/_ultimo_refresco.log
+
       - name: Commitear si cambio algo
         if: always()
         run: |
@@ -34,6 +68,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "sin cambios"
           else
-            git commit -m "datos: refresco $(date -u +%Y-%m-%d)"
+            git commit -m "datos: ${{ steps.modo.outputs.args && 'liquidacion' || 'refresco' }} $(date -u +'%Y-%m-%d %H:%M')"
+            git pull --rebase --autostash origin main || true
             git push
           fi
