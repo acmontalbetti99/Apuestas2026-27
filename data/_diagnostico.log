@@ -1,0 +1,115 @@
+fecha 2026-10-22  stages=33
+
+=== Europa League / League Stage: 18 partidos
+  Ararat Armenia v AZ Alkmaar  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Dinamo Zagreb v NEC Nijmegen  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337494183
+     EOX = 337494183
+  Ferencvaros v Torreense  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Juventus v Rennes  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Lech Poznan v Sunderland  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  OFI Crete v Bayer Leverkusen  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337231911
+     EOX = 337231911
+  Sturm Graz v Marseille  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337494183
+     EOX = 337494183
+  Union St.Gilloise v Hapoel Beer Sheva  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  AFC Bournemouth v AC Milan  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337494183
+     EOX = 337494183
+  Beşiktaş v Crystal Palace  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Celtic v Celta Vigo  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337494183
+     EOX = 337494183
+  Hoffenheim v Lyon  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337494183
+     EOX = 337494183
+  Jagiellonia Bialystok v Anderlecht  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Lillestroem v Real Sociedad  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  NK Celje v FC Salzburg  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Olympiacos v Sparta Prague  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Omonia Nicosia v Benfica  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337232039
+     EOX = 337232039
+  Viktoria Plzen v Levski Sofia  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337494183
+     EOX = 337494183
+
+=== Conference League / League Stage: 18 partidos
+  Kairat Almaty v Panathinaikos  estado=29'  campos=['Eid', 'Tr1', 'Tr2', 'Trh1', 'Trh2', 'Tr1OR', 'Tr2OR', 'Eps', 'Esid', 'Etm', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270189423
+     EOX = 270189423
+  FC Iberia 1999 v Mjaellby  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270024743
+     EOX = 270024743
+  FC Nordsjaelland v PFC CSKA Sofia  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270024743
+     EOX = 270024743
+  FK Crvena Zvezda v FC Copenhagen  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337428519
+     EOX = 337428519
+  FK Kauno Zalgiris v Brann  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270057511
+     EOX = 270057511
+  Getafe v Lugano  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337166375
+     EOX = 337166375
+  Inter Club d'Escaldes v CS Universitatea Craiova  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270024743
+     EOX = 270024743
+  Jablonec v Brighton  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337166375
+     EOX = 337166375
+  Pafos FC v Riga FC  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337166375
+     EOX = 337166375
+  Trabzonspor v Hearts  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337166375
+     EOX = 337166375
+  AGF v KF Egnatia  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270026791
+     EOX = 270026791
+  AS Monaco v Freiburg  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337166375
+     EOX = 337166375
+  Ajax v Atalanta  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337428519
+     EOX = 337428519
+  Borac Banja Luka v KuPS  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270024743
+     EOX = 270024743
+  FC Midtjylland v St.Truiden  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337166375
+     EOX = 337166375
+  Lincoln Red Imps FC v FC Twente  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337166375
+     EOX = 337166375
+  SC Braga v Gent  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 337428519
+     EOX = 337428519
+  Thun v Hajduk Split  estado=NS  campos=['Eid', 'Eps', 'Esid', 'Epr', 'Ecov', 'ErnInf', 'Et', 'Esd', 'EO', 'EOX', 'Spid', 'Pid']
+     EO = 270024743
+     EOX = 270024743
+
+--- resumen: 36 de 36 partidos traen EO/EOX
