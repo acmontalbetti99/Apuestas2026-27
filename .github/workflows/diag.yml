@@ -1,0 +1,59 @@
+name: Diagnostico en vivo
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Ver campos de un partido en curso
+        run: |
+          exec > data/_diagnostico.log 2>&1
+          python -u - <<'PY2'
+          import sys; sys.path.insert(0,'scripts')
+          import refresh as R; R.prefer_ipv4()
+          import requests, json
+          from datetime import datetime, timezone
+          UA=("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+              "Chrome/131.0.0.0 Safari/537.36")
+          s=requests.Session(); s.headers.update({"User-Agent":UA,"Referer":"https://www.livescore.com/"})
+          hoy=datetime.now(timezone.utc)
+          print(f"ahora: {hoy:%H:%M} UTC\n")
+          d=s.get(f"https://prod-public-api.livescore.com/v1/api/app/date/soccer/{hoy:%Y%m%d}/0",timeout=30).json()
+          vivos=[]
+          for stg in d.get("Stages",[]):
+              cn=str(stg.get("Cnm",""))
+              if cn.lower() not in ("europa league","conference league","champions league"): continue
+              for e in stg.get("Events",[]):
+                  t1=(e.get("T1") or [{}])[0].get("Nm"); t2=(e.get("T2") or [{}])[0].get("Nm")
+                  vivos.append((cn,t1,t2,e))
+          print(f"{len(vivos)} partidos UEFA hoy\n")
+          print("=== estados que aparecen ===")
+          from collections import Counter
+          print(dict(Counter(e.get("Eps") for _,_,_,e in vivos)))
+          print("\n=== volcado completo de los 3 primeros ===")
+          for cn,t1,t2,e in vivos[:3]:
+              print(f"\n--- [{cn}] {t1} {e.get('Tr1')}-{e.get('Tr2')} {t2}")
+              print("   " + json.dumps({k:v for k,v in e.items() if k not in ("T1","T2","Media","Pids")})[:900])
+          print("\n=== tambien el endpoint de partidos en vivo ===")
+          try:
+              lv=s.get("https://prod-public-api.livescore.com/v1/api/app/live/soccer/0",timeout=25).json()
+              print(f"   claves: {list(lv)[:6]}  stages={len(lv.get('Stages',[]))}")
+              for stg in lv.get("Stages",[])[:3]:
+                  for e in stg.get("Events",[])[:2]:
+                      t1=(e.get("T1") or [{}])[0].get("Nm"); t2=(e.get("T2") or [{}])[0].get("Nm")
+                      print(f"   [{stg.get('Cnm')}] {t1} {e.get('Tr1')}-{e.get('Tr2')} {t2} "
+                            f"Eps={e.get('Eps')!r} Et={e.get('Et')!r} Epr={e.get('Epr')!r} Ecd={e.get('Ecd')!r}")
+          except Exception as ex: print(f"   EXC {ex}")
+          PY2
+      - name: Publicar
+        if: always()
+        run: |
+          git config user.name montoglory-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A data/_diagnostico.log
+          git diff --staged --quiet || { git commit -m "diag en vivo"; git push; }
