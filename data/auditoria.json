@@ -39,7 +39,7 @@
   }
  },
  {
-  "fecha": "2026-10-22T14:46:22Z",
+  "fecha": "2026-10-22T14:52:28Z",
   "hallazgos": [
    {
     "severidad": "baja",
@@ -57,12 +57,6 @@
     "severidad": "media",
     "area": "cobertura",
     "mensaje": "sin ODDS_API_KEY no se generan picks de Champions League, Europa League, Conference League: football-data solo publica ligas domesticas",
-    "detalle": null
-   },
-   {
-    "severidad": "baja",
-    "area": "sitio",
-    "mensaje": "no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
     "detalle": null
    }
   ],
@@ -89,12 +83,16 @@
    "edadHoras": {
     "_ultimo_refresco.log": 0.0,
     "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 129,
+    "/data/parlays.json": 4
    }
   },
   "resumen": {
    "alta": 0,
    "media": 1,
-   "baja": 3
+   "baja": 2
   }
  }
 ]

@@ -1,6 +1,6 @@
-# Auditoria · 2026-10-22 14:46 UTC
+# Auditoria · 2026-10-22 14:52 UTC
 
-**0 de severidad alta · 1 media · 3 baja**
+**0 de severidad alta · 1 media · 2 baja**
 
 ## 🟡 Media
 
@@ -10,7 +10,6 @@
 
 - **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
 - **[cobertura]** ningun pick para hoy (2026-10-22)
-- **[sitio]** no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
 
 ## Calibracion
 
