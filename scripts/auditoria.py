@@ -239,9 +239,32 @@ def valor(inf: Informe, picks: list[dict]) -> None:
 
 # ----------------------------------------------------------------------- frescura
 
+def cobertura(inf: Informe, picks: list[dict], ahora: datetime) -> None:
+    """Avisa si una competencia activa no esta produciendo picks.
+
+    El 22/10 no habia ni un pick de Europa League con Milan jugando, y nada lo
+    marcaba: sin ODDS_API_KEY las competencias UEFA simplemente no generan nada y
+    el silencio se confunde con "no habia valor".
+    """
+    pend = [p for p in picks if p.get("estado") == "pendiente"]
+    hoy = ahora.strftime("%Y-%m-%d")
+    if not any(p.get("ko", "")[:10] == hoy for p in pend):
+        inf.add("baja", "cobertura", f"ningun pick para hoy ({hoy})")
+    ligas = {p.get("lg") for p in pend}
+    sin_fuente = [lg for lg in ("ucl", "uel", "uecl") if lg not in ligas]
+    if sin_fuente and not os.environ.get("ODDS_API_KEY"):
+        inf.add("media", "cobertura",
+                f"sin ODDS_API_KEY no se generan picks de {', '.join(LGN[l] for l in sin_fuente)}: "
+                f"football-data solo publica ligas domesticas")
+    inf.metricas["cobertura"] = {"ligasConPicks": sorted(ligas)}
+
+
 def frescura(inf: Informe, ahora: datetime) -> None:
-    for nombre, horas, sev in (("_ultimo_refresco.log", 36, "alta"),
-                               ("_ultimo_livescore.log", 36, "media")):
+    # 14 h cubre el hueco mas largo previsto (la diaria 10:50 UTC mas margen). GitHub
+    # dropea corridas programadas cuando la plataforma esta cargada, y el 22/10 se
+    # saltearon todas las del dia sin avisar: el umbral viejo de 36 h no lo habria visto.
+    for nombre, horas, sev in (("_ultimo_refresco.log", 14, "alta"),
+                               ("_ultimo_livescore.log", 14, "media")):
         f = DATA / nombre
         if not f.exists():
             inf.add(sev, "frescura", f"falta {nombre}: el refresco no dejo rastro")
@@ -372,6 +395,7 @@ def main() -> int:
         liquidacion(inf, picks, ahora)
         calibracion(inf, picks, calib if isinstance(calib, dict) else {})
         valor(inf, picks)
+        cobertura(inf, picks, ahora)
     frescura(inf, ahora)
     sitio(inf)
     escribir(inf, ahora)

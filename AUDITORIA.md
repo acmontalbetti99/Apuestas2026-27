@@ -1,10 +1,16 @@
-# Auditoria · 2026-10-22 14:41 UTC
+# Auditoria · 2026-10-22 14:46 UTC
 
-**0 de severidad alta · 0 media · 1 baja**
+**0 de severidad alta · 1 media · 3 baja**
+
+## 🟡 Media
+
+- **[cobertura]** sin ODDS_API_KEY no se generan picks de Champions League, Europa League, Conference League: football-data solo publica ligas domesticas
 
 ## ⚪ Baja
 
 - **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
+- **[cobertura]** ningun pick para hoy (2026-10-22)
+- **[sitio]** no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
 
 ## Calibracion
 
