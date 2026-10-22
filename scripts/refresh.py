@@ -729,6 +729,14 @@ def write_json(path: Path, obj) -> None:
     os.replace(tmp, path)
 
 
+def _alias_vivo() -> dict:
+    try:
+        from livescore import ALIAS
+    except Exception:
+        return {}
+    return {slug(k): slug(v) for k, v in ALIAS.items()}
+
+
 def main() -> int:
     today = datetime.now(timezone.utc)
     # Las corridas frecuentes solo liquidan: bajar fixtures y regenerar picks cada media
@@ -831,6 +839,9 @@ def main() -> int:
                    "domesticas, y las competencias UEFA y de seleccion dependen de "
                    "The Odds API.") if sin_fuente else None,
         "proximoPorLiga": {},
+        # Para que la pagina pueda emparejar los nombres que llegan del feed en vivo
+        # con los de los picks, sin duplicar el diccionario en JavaScript.
+        "aliasVivo": _alias_vivo(),
     }
     for p in final:
         if p["estado"] == "pendiente":

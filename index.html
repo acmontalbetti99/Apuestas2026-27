@@ -111,6 +111,15 @@ main{padding-block:20px 56px}
 .tag.lost{background:var(--bad-soft);color:var(--bad)}
 .tag.pend{background:var(--wait-soft);color:var(--wait)}
 .tag.live{background:var(--accent-soft);color:var(--accent)}
+.vivo{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
+.vivo b{font-family:var(--font-mono);font-size:16px;font-weight:600}
+.vivo b em{font-style:normal;color:var(--fg-faint);padding:0 2px}
+.vivo small{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-faint)}
+.vivo.jugando b{color:var(--accent)}
+.vivo.jugando small{color:var(--accent)}
+.vivo.jugando small::before{content:"\25CF";font-size:7px;vertical-align:middle;margin-right:3px;
+  animation:lat 1.6s ease-in-out infinite}
+@keyframes lat{0%,100%{opacity:1}50%{opacity:.25}}
 .pick.live{opacity:.72}
 .casa{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;margin-top:1px}
 .casa b{font-family:var(--font-mono);font-size:13px;font-weight:600}
@@ -199,7 +208,7 @@ const LG={premier:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:
 const GRP={resultado:'Resultado',goles:'Goles',estadisticas:'Córners, tarjetas, remates y atajadas'};
 const DAYS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-let PICKS=[],TICKETS=[],ESTADO=null,league='todas',grupo='todos',tab='picks',ready=false;
+let PICKS=[],TICKETS=[],ESTADO=null,VIVO=new Map(),vivoTimer=null,league='todas',grupo='todos',tab='picks',ready=false;
 
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pc=p=>(100*p).toFixed(1)+'%';
@@ -253,6 +262,55 @@ function casa(p){
     <b class="num">${p.casa.toFixed(2)}</b><small>bet365${p.casaEst?'*':''} ${pct}</small></span>`;
 }
 
+/* ---- marcador y minuto en vivo ----------------------------------------------
+   data/picks.json se regenera cada 30 minutos, asi que el marcador no puede salir
+   de ahi. /api/vivo consulta LiveScore al vuelo y esto lo pide cada 45 s, pero solo
+   mientras haya algun pick cuyo partido ya arranco: si no hay nada en juego no se
+   molesta a nadie. */
+const canonJS=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
+  .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+
+function claveVivo(h,a){
+  const al=ESTADO?.aliasVivo||{};
+  const n=x=>{const c=canonJS(x);return al[c]||c};
+  return n(h)+'|'+n(a);
+}
+
+async function traerVivo(){
+  try{
+    const r=await fetch('/api/vivo',{cache:'no-store'});
+    if(!r.ok)return;
+    const d=await r.json();
+    const m=new Map();
+    for(const p of d.partidos||[]) m.set(claveVivo(p.hn,p.an),p);
+    VIVO=m;
+  }catch(_){ /* sin marcador en vivo la app sigue igual */ }
+}
+
+function hayEnJuego(){
+  return PICKS.some(p=>p.estado==='pendiente'&&new Date(p.ko)<=new Date()
+                       &&new Date(p.ko)>new Date(Date.now()-4*3600e3));
+}
+
+function marcador(p){
+  const v=VIVO.get(claveVivo(p.home,p.away));
+  if(!v)return '';
+  const fin=/^(FT|AET|AP)$/i.test(v.est);
+  const min=v.est&&!fin&&!/^NS$/i.test(v.est)?v.est:(fin?'Final':'');
+  return `<span class="vivo${fin?'':' jugando'}">
+    <b class="num">${v.hg}<em>-</em>${v.ag}</b><small>${esc(min)}</small></span>`;
+}
+
+function cicloVivo(){
+  if(vivoTimer)clearInterval(vivoTimer);
+  if(!hayEnJuego())return;
+  traerVivo().then(render);
+  vivoTimer=setInterval(async()=>{
+    if(!hayEnJuego()){clearInterval(vivoTimer);vivoTimer=null;return}
+    await traerVivo(); render();
+  },45000);
+}
+
 function pickRow(p,showRes){
   const res=showRes&&p.resultado?`<span class="num">${esc(p.resultado)}</span>`:'';
   return `<article class="pick ${st(p)==='pend'?'':st(p)}">
@@ -264,6 +322,7 @@ function pickRow(p,showRes){
       <span class="bet">${esc(p.label)}</span>
     </div>
     <div class="right">
+      ${marcador(p)}
       <span class="odds num">${p.cuota.toFixed(2)}<small>cuota justa</small></span>
       ${casa(p)}
       <span class="tag ${st(p)}">${stw(p)}</span>
