@@ -37,5 +37,42 @@
    "media": 0,
    "baja": 2
   }
+ },
+ {
+  "fecha": "2026-10-22T14:41:47Z",
+  "hallazgos": [
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {},
+   "calibracion": {
+    "n": 12,
+    "predicho": 0.8006,
+    "real": 0.75,
+    "z": -0.44
+   },
+   "valor": {
+    "pendientes": 117,
+    "conPrecioCasa": 0
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 129,
+    "/data/parlays.json": 4
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 0,
+   "baja": 1
+  }
  }
 ]
