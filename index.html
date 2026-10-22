@@ -197,7 +197,7 @@ const LG={premier:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:
 const GRP={resultado:'Resultado',goles:'Goles',estadisticas:'Córners, tarjetas, remates y atajadas'};
 const DAYS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-let PICKS=[],TICKETS=[],league='todas',grupo='todos',tab='picks',ready=false;
+let PICKS=[],TICKETS=[],ESTADO=null,league='todas',grupo='todos',tab='picks',ready=false;
 
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pc=p=>(100*p).toFixed(1)+'%';
@@ -267,6 +267,28 @@ function pickRow(p,showRes){
     </div></article>`;
 }
 
+// Un vacio puede significar tres cosas muy distintas, y decir siempre lo mismo
+// enganaba: la competencia no tiene fuente de cuotas, todavia no juega, o
+// simplemente nada supero el umbral. Cada caso tiene su mensaje.
+function vacioPicks(){
+  const sinFuente = (ESTADO?.sinFuenteDeCuotas)||[];
+  if(league!=='todas' && sinFuente.includes(league)){
+    return `<div class="empty"><h3>${esc(LG[league])} todavía no tiene fuente de cuotas</h3>
+      <p>${esc(ESTADO?.motivo||'Falta configurar la fuente de cuotas de esta competencia.')}
+      Hasta entonces no se generan picks acá, por mucho que haya partidos.</p></div>`;
+  }
+  const prox = ESTADO?.proximoPorLiga?.[league];
+  if(league!=='todas' && prox){
+    return `<div class="empty"><h3>Nada abierto en ${esc(LG[league])} con este filtro</h3>
+      <p>El próximo partido con pick es el ${esc(dlabel(prox))}. Probá quitando el filtro de mercado.</p></div>`;
+  }
+  const n = PICKS.filter(p=>p.estado==='pendiente').length;
+  if(n) return `<div class="empty"><h3>Nada abierto con este filtro</h3>
+      <p>Hay ${n} picks abiertos en otras competencias o mercados.</p></div>`;
+  return `<div class="empty"><h3>No hay picks abiertos</h3>
+      <p>Cuando se carguen los partidos de la próxima jornada, acá aparecen las recomendaciones que superan el 65%.</p></div>`;
+}
+
 function renderPicks(){
   const el=document.getElementById('p-picks');
   const open=PICKS.filter(p=>p.estado==='pendiente'&&inView(p))
@@ -274,7 +296,7 @@ function renderPicks(){
   if(!ready){el.innerHTML=skeleton('Cargando los picks de la jornada…');return}
   let h=`<p class="lead">Solo se recomienda lo que el modelo da por encima del <b>65%</b>. Hasta tres picks por partido, uno por familia de mercado, para que no se solapen. La <b>cuota justa</b> es el precio a partir del cual la apuesta deja de perder valor. Al lado va lo que paga <b>bet365</b>: en verde cuando paga por encima de la justa, que es la unica situacion en la que la apuesta tiene valor. El asterisco marca la doble oportunidad, que bet365 no publica y se arma con su propio 1X2.</p>`+filters(true);
   if(!open.length){
-    h+=`<div class="empty"><h3>No hay picks abiertos</h3><p>Cuando se carguen los partidos de la próxima jornada, acá aparecen las recomendaciones que superan el 65%.</p></div>`;
+    h+=vacioPicks();
   }else{
     let last='';
     for(const p of open){
@@ -404,10 +426,12 @@ render();
    daily refresh commits; inside the Claude artifact it is the artifact's own database,
    which the same refresh writes to. Whichever answers first wins. */
 async function fromFiles(){
-  const [p,t]=await Promise.all([
+  const [p,t,e]=await Promise.all([
     fetch('data/picks.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
-    fetch('data/parlays.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
+    fetch('data/parlays.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch('data/estado.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
   ]);
+  if(e&&typeof e==='object')ESTADO=e;
   if(!Array.isArray(p))return false;
   PICKS=p.filter(x=>x&&x.ko); TICKETS=Array.isArray(t)?t.filter(x=>x&&x.legs):[];
   return true;

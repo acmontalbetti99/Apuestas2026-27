@@ -814,6 +814,28 @@ def main() -> int:
         parlays_final = cerradas + [t for t in abiertas if t["id"] not in cerradas_ids]
         log(f"  {len(abiertas)} combinadas armadas")
 
+    # Estado por competencia, para que la pagina pueda explicar un vacio en vez de
+    # decir "esperá a que carguen", que es mentira cuando no hay fuente de cuotas.
+    con_cuotas = sorted({f["lg"] for f in (fx or [])})
+    hay_clave = bool(os.environ.get("ODDS_API_KEY"))
+    sin_fuente = [lg for lg in LGN
+                  if lg in SOLO_MERCADO and lg not in con_cuotas and not hay_clave]
+    estado = {
+        "fecha": today.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "conCuotas": con_cuotas,
+        "sinFuenteDeCuotas": sin_fuente,
+        "motivo": ("Falta configurar ODDS_API_KEY: football-data solo publica ligas "
+                   "domesticas, y las competencias UEFA y de seleccion dependen de "
+                   "The Odds API.") if sin_fuente else None,
+        "proximoPorLiga": {},
+    }
+    for p in final:
+        if p["estado"] == "pendiente":
+            lg = p["lg"]
+            if lg not in estado["proximoPorLiga"] or p["ko"] < estado["proximoPorLiga"][lg]:
+                estado["proximoPorLiga"][lg] = p["ko"]
+    write_json(DATA / "estado.json", estado)
+
     write_json(DATA / "picks.json", final)
     write_json(DATA / "parlays.json", parlays_final)
     write_json(DATA / "calibracion.json", calib)
