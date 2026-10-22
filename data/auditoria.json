@@ -39,18 +39,12 @@
   }
  },
  {
-  "fecha": "2026-10-22T19:13:27Z",
+  "fecha": "2026-10-22T19:15:43Z",
   "hallazgos": [
    {
     "severidad": "baja",
     "area": "valor",
     "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
-    "detalle": null
-   },
-   {
-    "severidad": "media",
-    "area": "sitio",
-    "mensaje": "el sitio publica 129 picks y el repo tiene 165: el despliegue quedo atras",
     "detalle": null
    }
   ],
@@ -82,13 +76,13 @@
     "_ultimo_livescore.log": 0.0
    },
    "sitio": {
-    "/data/picks.json": 129,
+    "/data/picks.json": 165,
     "/data/parlays.json": 4
    }
   },
   "resumen": {
    "alta": 0,
-   "media": 1,
+   "media": 0,
    "baja": 1
   }
  }
