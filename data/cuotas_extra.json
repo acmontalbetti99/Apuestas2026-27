@@ -1,0 +1,442 @@
+[
+ {
+  "lg": "ucl",
+  "home": "Galatasaray",
+  "away": "VfB Stuttgart",
+  "ko": "2026-11-03T17:45:00Z",
+  "pH": 0.4178,
+  "pD": 0.2422,
+  "pA": 0.34,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Shakhtar Donetsk",
+  "away": "Sporting CP",
+  "ko": "2026-11-03T17:45:00Z",
+  "pH": 0.2601,
+  "pD": 0.2467,
+  "pA": 0.4932,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Manchester United",
+  "away": "AS Roma",
+  "ko": "2026-11-03T20:00:00Z",
+  "pH": 0.4548,
+  "pD": 0.2502,
+  "pA": 0.295,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Barcelona",
+  "away": "Aston Villa",
+  "ko": "2026-11-03T20:00:00Z",
+  "pH": 0.7553,
+  "pD": 0.1445,
+  "pA": 0.1002,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Atlético Madrid",
+  "away": "Bayern Munich",
+  "ko": "2026-11-03T20:00:00Z",
+  "pH": 0.2941,
+  "pD": 0.2362,
+  "pA": 0.4697,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Bodø/Glimt",
+  "away": "Lille",
+  "ko": "2026-11-03T20:00:00Z",
+  "pH": 0.4749,
+  "pD": 0.2439,
+  "pA": 0.2812,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Feyenoord",
+  "away": "Inter",
+  "ko": "2026-11-03T20:00:00Z",
+  "pH": 0.2143,
+  "pD": 0.2221,
+  "pA": 0.5635,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "LASK Linz",
+  "away": "ŠK Slovan Bratislava",
+  "ko": "2026-11-03T20:00:00Z",
+  "pH": 0.6498,
+  "pD": 0.197,
+  "pA": 0.1532,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Villarreal",
+  "away": "Paris Saint Germain",
+  "ko": "2026-11-03T20:00:00Z",
+  "pH": 0.1996,
+  "pD": 0.2088,
+  "pA": 0.5916,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "AEK Athens",
+  "away": "Real Madrid",
+  "ko": "2026-11-04T17:45:00Z",
+  "pH": 0.1222,
+  "pD": 0.1642,
+  "pA": 0.7136,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Fenerbahce",
+  "away": "Liverpool",
+  "ko": "2026-11-04T17:45:00Z",
+  "pH": 0.2072,
+  "pD": 0.222,
+  "pA": 0.5708,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Slavia Praha",
+  "away": "Arsenal",
+  "ko": "2026-11-04T20:00:00Z",
+  "pH": 0.1002,
+  "pD": 0.1573,
+  "pA": 0.7425,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Dortmund",
+  "away": "Real Betis",
+  "ko": "2026-11-04T20:00:00Z",
+  "pH": 0.5331,
+  "pD": 0.2348,
+  "pA": 0.2321,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "PSV Eindhoven",
+  "away": "Club Brujas",
+  "ko": "2026-11-04T20:00:00Z",
+  "pH": 0.4227,
+  "pD": 0.2366,
+  "pA": 0.3407,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Lens",
+  "away": "Como",
+  "ko": "2026-11-04T20:00:00Z",
+  "pH": 0.3283,
+  "pD": 0.2511,
+  "pA": 0.4206,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "RB Leipzig",
+  "away": "Manchester City",
+  "ko": "2026-11-04T20:00:00Z",
+  "pH": 0.1894,
+  "pD": 0.2062,
+  "pA": 0.6045,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Porto",
+  "away": "Napoli",
+  "ko": "2026-11-04T20:00:00Z",
+  "pH": 0.4461,
+  "pD": 0.2651,
+  "pA": 0.2887,
+  "b365": {}
+ },
+ {
+  "lg": "ucl",
+  "home": "Viking FK",
+  "away": "Sabah FK",
+  "ko": "2026-11-04T20:00:00Z",
+  "pH": 0.6033,
+  "pD": 0.2147,
+  "pA": 0.182,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Bournemouth",
+  "away": "Milan",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.6652,
+  "pD": 0.1976,
+  "pA": 0.1371,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Jagiellonia Białystok",
+  "away": "Anderlecht",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.2847,
+  "pD": 0.2817,
+  "pA": 0.4336,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Omonoia FC",
+  "away": "Benfica",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.1168,
+  "pD": 0.1812,
+  "pA": 0.7019,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Besiktas JK",
+  "away": "Crystal Palace",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.3215,
+  "pD": 0.2661,
+  "pA": 0.4124,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Celtic",
+  "away": "Celta Vigo",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.3642,
+  "pD": 0.2786,
+  "pA": 0.3571,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Lillestrom",
+  "away": "Real Sociedad",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.1405,
+  "pD": 0.1956,
+  "pA": 0.6638,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "TSG Hoffenheim",
+  "away": "Lyon",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.5449,
+  "pD": 0.2314,
+  "pA": 0.2238,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "NK Celje",
+  "away": "Salzburg",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.1237,
+  "pD": 0.1812,
+  "pA": 0.6951,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Olympiakos Piraeus",
+  "away": "Sparta Prague",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.6255,
+  "pD": 0.2311,
+  "pA": 0.1434,
+  "b365": {}
+ },
+ {
+  "lg": "uel",
+  "home": "Viktoria Plzeň",
+  "away": "PFC Levski Sofia",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.5293,
+  "pD": 0.2706,
+  "pA": 0.2001,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "AGF Aarhus",
+  "away": "KF Egnatia",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.3746,
+  "pD": 0.273,
+  "pA": 0.3523,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "AS Monaco",
+  "away": "SC Freiburg",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.4241,
+  "pD": 0.2714,
+  "pA": 0.3046,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "Ajax",
+  "away": "Atalanta BC",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.462,
+  "pD": 0.2471,
+  "pA": 0.2909,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Midtjylland",
+  "away": "Sint Truiden",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.4808,
+  "pD": 0.254,
+  "pA": 0.2653,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Thun",
+  "away": "Hajduk Split",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.3168,
+  "pD": 0.2649,
+  "pA": 0.4183,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "Lincoln Red Imps FC",
+  "away": "FC Twente Enschede",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.0572,
+  "pD": 0.1205,
+  "pA": 0.8223,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "FK Borac Banja Luka",
+  "away": "KuPS Kuopio",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.632,
+  "pD": 0.2148,
+  "pA": 0.1532,
+  "b365": {}
+ },
+ {
+  "lg": "uecl",
+  "home": "SC Braga",
+  "away": "Gent",
+  "ko": "2026-10-22T19:00:00Z",
+  "pH": 0.6536,
+  "pD": 0.2129,
+  "pA": 0.1335,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "Turkey",
+  "away": "Belgium",
+  "ko": "2026-11-12T17:00:00Z",
+  "pH": 0.2431,
+  "pD": 0.2396,
+  "pA": 0.5173,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "England",
+  "away": "Croatia",
+  "ko": "2026-11-12T19:45:00Z",
+  "pH": 0.7817,
+  "pD": 0.144,
+  "pA": 0.0742,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "Czech Republic",
+  "away": "Spain",
+  "ko": "2026-11-12T19:45:00Z",
+  "pH": 0.0999,
+  "pD": 0.1609,
+  "pA": 0.7392,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "Italy",
+  "away": "France",
+  "ko": "2026-11-12T19:45:00Z",
+  "pH": 0.2532,
+  "pD": 0.2519,
+  "pA": 0.4949,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "Serbia",
+  "away": "Germany",
+  "ko": "2026-11-13T19:45:00Z",
+  "pH": 0.1107,
+  "pD": 0.1616,
+  "pA": 0.7276,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "Netherlands",
+  "away": "Greece",
+  "ko": "2026-11-13T19:45:00Z",
+  "pH": 0.6076,
+  "pD": 0.2203,
+  "pA": 0.1721,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "Norway",
+  "away": "Wales",
+  "ko": "2026-11-14T17:00:00Z",
+  "pH": 0.6901,
+  "pD": 0.1854,
+  "pA": 0.1245,
+  "b365": {}
+ },
+ {
+  "lg": "unl",
+  "home": "Portugal",
+  "away": "Denmark",
+  "ko": "2026-11-14T19:45:00Z",
+  "pH": 0.6328,
+  "pD": 0.2122,
+  "pA": 0.155,
+  "b365": {}
+ }
+]

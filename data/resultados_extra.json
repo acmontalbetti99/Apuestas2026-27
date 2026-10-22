@@ -206,5 +206,141 @@
   "ko": "2026-10-22T14:30:00Z",
   "hg": 1,
   "ag": 5
+ },
+ {
+  "lg": "uel",
+  "home": "Ararat Armenia",
+  "away": "AZ Alkmaar",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 0,
+  "ag": 4
+ },
+ {
+  "lg": "uel",
+  "home": "Dinamo Zagreb",
+  "away": "NEC Nijmegen",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 2,
+  "ag": 4
+ },
+ {
+  "lg": "uel",
+  "home": "Ferencvaros",
+  "away": "Torreense",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 4,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Juventus",
+  "away": "Rennes",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Lech Poznan",
+  "away": "Sunderland",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "OFI Crete",
+  "away": "Leverkusen",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Sturm Graz",
+  "away": "Marseille",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Union St.Gilloise",
+  "away": "Hapoel Beer Sheva",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Iberia 1999",
+  "away": "Mjaellby",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Nordsjaelland",
+  "away": "PFC CSKA Sofia",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "FK Crvena Zvezda",
+  "away": "FC Copenhagen",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "FK Kauno Zalgiris",
+  "away": "Brann",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 1,
+  "ag": 4
+ },
+ {
+  "lg": "uecl",
+  "home": "Getafe",
+  "away": "Lugano",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 2,
+  "ag": 5
+ },
+ {
+  "lg": "uecl",
+  "home": "Inter Club d'Escaldes",
+  "away": "CS Universitatea Craiova",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 1,
+  "ag": 3
+ },
+ {
+  "lg": "uecl",
+  "home": "Jablonec",
+  "away": "Brighton",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Pafos FC",
+  "away": "Riga FC",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "Trabzonspor",
+  "away": "Hearts",
+  "ko": "2026-10-22T16:45:00Z",
+  "hg": 2,
+  "ag": 0
  }
 ]

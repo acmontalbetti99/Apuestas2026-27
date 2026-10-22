@@ -39,7 +39,7 @@
   }
  },
  {
-  "fecha": "2026-10-22T15:41:38Z",
+  "fecha": "2026-10-22T19:13:27Z",
   "hallazgos": [
    {
     "severidad": "baja",
@@ -48,15 +48,9 @@
     "detalle": null
    },
    {
-    "severidad": "baja",
-    "area": "cobertura",
-    "mensaje": "ningun pick para hoy (2026-10-22)",
-    "detalle": null
-   },
-   {
     "severidad": "media",
-    "area": "cobertura",
-    "mensaje": "sin ODDS_API_KEY no se generan picks de Champions League, Europa League, Conference League: football-data solo publica ligas domesticas",
+    "area": "sitio",
+    "mensaje": "el sitio publica 129 picks y el repo tiene 165: el despliegue quedo atras",
     "detalle": null
    }
   ],
@@ -69,7 +63,7 @@
     "z": -0.44
    },
    "valor": {
-    "pendientes": 117,
+    "pendientes": 153,
     "conPrecioCasa": 0
    },
    "cobertura": {
@@ -77,7 +71,10 @@
      "bundesliga",
      "laliga",
      "premier",
-     "seriea"
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
     ]
    },
    "edadHoras": {
@@ -92,7 +89,7 @@
   "resumen": {
    "alta": 0,
    "media": 1,
-   "baja": 2
+   "baja": 1
   }
  }
 ]
