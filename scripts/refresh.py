@@ -545,7 +545,10 @@ def load_cuotas_extra(today: datetime) -> list[dict]:
             if r["lg"] not in LGN:
                 continue
             ko = pd.to_datetime(r["ko"], utc=True)
-            if ko < today - timedelta(hours=2):
+            # Nada de tolerancia hacia atras aca: recomendar un partido ya empezado no
+            # sirve y confunde. La tolerancia de 2 h de fixtures.csv existe porque ese
+            # archivo trae la hora redondeada; The Odds API la da exacta.
+            if ko <= today:
                 continue
             s = float(r["pH"]) + float(r["pD"]) + float(r["pA"])
             if not (0.95 < s < 1.05):

@@ -139,6 +139,12 @@ def main() -> int:
             log(f"  ! {sport}: no es JSON ({e})")
             continue
 
+        casas = set()
+        for j in juegos:
+            for bk in j.get("bookmakers", []):
+                casas.add(bk.get("key"))
+        if casas:
+            log(f"    casas devueltas: {', '.join(sorted(casas))}")
         n = 0
         for j in juegos:
             home, away = j.get("home_team"), j.get("away_team")

@@ -110,6 +110,8 @@ main{padding-block:20px 56px}
 .tag.won{background:var(--good-soft);color:var(--good)}
 .tag.lost{background:var(--bad-soft);color:var(--bad)}
 .tag.pend{background:var(--wait-soft);color:var(--wait)}
+.tag.live{background:var(--accent-soft);color:var(--accent)}
+.pick.live{opacity:.72}
 .casa{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;margin-top:1px}
 .casa b{font-family:var(--font-mono);font-size:13px;font-weight:600}
 .casa small{font-size:9px;color:var(--fg-faint);text-transform:uppercase;letter-spacing:.05em}
@@ -204,8 +206,9 @@ const pc=p=>(100*p).toFixed(1)+'%';
 const dkey=iso=>{const d=new Date(iso);return d.toISOString().slice(0,10)};
 const dlabel=iso=>{const d=new Date(iso);return `${DAYS[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`};
 const tlabel=iso=>{const d=new Date(iso);return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
-const st=p=>p.estado==='ganado'?'won':p.estado==='perdido'?'lost':'pend';
-const stw=p=>p.estado==='ganado'?'Acertó':p.estado==='perdido'?'Falló':'Pendiente';
+const empezado=p=>p.estado==='pendiente'&&new Date(p.ko)<=new Date();
+const st=p=>p.estado==='ganado'?'won':p.estado==='perdido'?'lost':empezado(p)?'live':'pend';
+const stw=p=>p.estado==='ganado'?'Acertó':p.estado==='perdido'?'Falló':empezado(p)?'En juego':'Pendiente';
 
 function scoreboard(){
   const done=PICKS.filter(p=>p.estado==='ganado'||p.estado==='perdido');
