@@ -342,5 +342,149 @@
   "ko": "2026-10-22T16:45:00Z",
   "hg": 2,
   "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "AFC Bournemouth",
+  "away": "Milan",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Beşiktaş",
+  "away": "Crystal Palace",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Celtic",
+  "away": "Celta de Vigo",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Hoffenheim",
+  "away": "Lyon",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Jagiellonia Bialystok",
+  "away": "Anderlecht",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 0,
+  "ag": 3
+ },
+ {
+  "lg": "uel",
+  "home": "Lillestroem",
+  "away": "Real Sociedad",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 0,
+  "ag": 6
+ },
+ {
+  "lg": "uel",
+  "home": "NK Celje",
+  "away": "FC Salzburg",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Olympiacos",
+  "away": "Sparta Prague",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Omonia Nicosia",
+  "away": "Benfica",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 1,
+  "ag": 4
+ },
+ {
+  "lg": "uel",
+  "home": "Viktoria Plzen",
+  "away": "Levski Sofia",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "AGF",
+  "away": "KF Egnatia",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "AS Monaco",
+  "away": "Freiburg",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Ajax",
+  "away": "Atalanta",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Borac Banja Luka",
+  "away": "KuPS",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Midtjylland",
+  "away": "St.Truiden",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "Lincoln Red Imps FC",
+  "away": "FC Twente",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 1,
+  "ag": 4
+ },
+ {
+  "lg": "uecl",
+  "home": "SC Braga",
+  "away": "Gent",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Thun",
+  "away": "Hajduk Split",
+  "ko": "2026-10-22T19:00:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]
