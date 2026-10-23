@@ -786,34 +786,96 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
     return picks
 
 
-def build_parlays(picks: list[dict], hoy: str) -> list[dict]:
-    """Combinadas entre 40% y 52% conjunto, una sola pata por partido y sin equipos repetidos."""
-    abiertos = [p for p in picks if p["estado"] == "pendiente"]
-    salida = []
-    for n in (2, 3, 4, 5):
-        objetivo = PARLAY_LO ** (1 / n)      # probabilidad por pata que lleva al rango
-        pool = sorted(abiertos, key=lambda p: abs(p["p"] - objetivo))[:14]
-        mejor = None
-        for combo in combinations(pool, n):
-            equipos = [t for p in combo for t in (p["home"], p["away"])]
-            if len(set(equipos)) != 2 * n:
-                continue
-            prob = float(np.prod([p["p"] for p in combo]))
-            if not (PARLAY_LO <= prob <= PARLAY_HI):
-                continue
-            if mejor is None or prob > mejor[0]:
-                mejor = (prob, combo)
-        if mejor is None:
+def _mejor_combo(pool: list[dict], n: int, multi_dia: bool = False) -> tuple[float, tuple] | None:
+    """La combinacion de n patas con mayor probabilidad dentro de la banda objetivo.
+
+    Una sola pata por partido y sin repetir equipos: dos patas del mismo partido o
+    del mismo equipo estan correlacionadas, y multiplicar sus probabilidades como si
+    fueran independientes infla la probabilidad conjunta.
+
+    Se permite mezclar ligas y torneos a proposito: partidos de competencias
+    distintas son justamente los mas independientes entre si.
+    """
+    objetivo = PARLAY_LO ** (1 / n)
+    cand = sorted(pool, key=lambda p: abs(p["p"] - objetivo))[:14]
+    vistos, limpio = set(), []
+    for p in cand:                       # una sola pata por partido
+        k = (p["home"], p["away"])
+        if k in vistos:
             continue
-        prob, combo = mejor
-        salida.append({
-            "id": f"{hoy}__{n}patas", "jornada": hoy, "patas": n,
-            "prob": round(prob, 4), "cuota": round(1 / prob, 2),
+        vistos.add(k)
+        limpio.append(p)
+    mejor = None
+    for combo in combinations(limpio, n):
+        equipos = [t for p in combo for t in (p["home"], p["away"])]
+        if len(set(equipos)) != 2 * n:
+            continue
+        if multi_dia and len({p["ko"][:10] for p in combo}) < 2:
+            continue      # si cae toda en un dia ya esta cubierta por la del dia
+        prob = float(np.prod([p["p"] for p in combo]))
+        if not (PARLAY_LO <= prob <= PARLAY_HI):
+            continue
+        if mejor is None or prob > mejor[0]:
+            mejor = (prob, combo)
+    return mejor
+
+
+def _ticket(combo, prob, tid, tipo, alcance, hoy):
+    return {"id": tid, "jornada": hoy, "tipo": tipo, "alcance": alcance,
+            "patas": len(combo), "prob": round(prob, 4), "cuota": round(1 / prob, 2),
             "legs": [{"id": p["id"], "liga": LGN[p["lg"]], "lg": p["lg"],
                       "home": p["home"], "away": p["away"], "label": p["label"],
                       "p": p["p"], "ko": p["ko"], "key": p["key"], "cuota": p["cuota"]}
-                     for p in combo],
-            "estado": "pendiente"})
+                     for p in sorted(combo, key=lambda x: x["ko"])],
+            "estado": "pendiente"}
+
+
+DIAS_JORNADA = 4        # una jornada domestica va de viernes a lunes
+DIAS_CON_COMBINADAS = 3  # cuantos dias proximos reciben sus propias combinadas
+
+
+def build_parlays(picks: list[dict], hoy: str,
+                  ahora: datetime | None = None) -> list[dict]:
+    """Dos familias de combinadas.
+
+    POR DIA: todas las patas se juegan la misma fecha de calendario, asi que el
+    ticket se resuelve esa noche.
+
+    POR FECHA: las patas caen dentro de la jornada, una ventana de 4 dias desde el
+    primer partido, que es lo que dura un fin de semana domestico o una semana
+    europea. Antes no habia ventana y salian combinadas que mezclaban el 25 de
+    octubre con el 4 de noviembre: eso no es una jornada, es un rango arbitrario.
+    """
+    # Solo partidos que todavia no arrancaron: una combinada con una pata en juego
+    # no se puede apostar.
+    corte = (ahora or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    abiertos = [p for p in picks if p["estado"] == "pendiente" and p["ko"] > corte]
+    if not abiertos:
+        return []
+    salida = []
+
+    por_dia: dict[str, list[dict]] = {}
+    for p in abiertos:
+        por_dia.setdefault(p["ko"][:10], []).append(p)
+
+    for dia in sorted(por_dia)[:DIAS_CON_COMBINADAS]:
+        for n in (2, 3, 4, 5):
+            m = _mejor_combo(por_dia[dia], n)
+            if m:
+                salida.append(_ticket(m[1], m[0], f"{hoy}__dia-{dia}__{n}patas",
+                                      "dia", dia, hoy))
+
+    primer = min(por_dia)
+    fin = (datetime.strptime(primer, "%Y-%m-%d") + timedelta(days=DIAS_JORNADA)) \
+        .strftime("%Y-%m-%d")
+    ventana = [p for p in abiertos if primer <= p["ko"][:10] <= fin]
+    dias_ventana = sorted({p["ko"][:10] for p in ventana})
+    if len(dias_ventana) > 1:        # si todo cae un mismo dia ya esta cubierto arriba
+        for n in (2, 3, 4, 5):
+            m = _mejor_combo(ventana, n, multi_dia=True)
+            if m:
+                salida.append(_ticket(m[1], m[0], f"{hoy}__fecha__{n}patas",
+                                      "fecha", f"{primer} a {dias_ventana[-1]}", hoy))
     return salida
 
 

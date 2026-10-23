@@ -131,7 +131,12 @@ main{padding-block:20px 56px}
 .ticket{background:var(--surface);border:1px solid var(--line-strong);border-radius:11px;overflow:hidden;margin-bottom:16px}
 .thead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;background:var(--sunk);
   padding:11px 14px;border-bottom:1px solid var(--line)}
-.thead h3{font-size:14px;font-weight:700;margin-right:auto}
+.thead h3{font-size:14px;font-weight:700}
+.thead .alc{font-size:11px;color:var(--fg-faint);margin-right:auto;padding-left:2px}
+.thead h3+.k{margin-left:auto}
+.gtit{font-family:var(--font-display);font-size:16px;font-weight:700;margin:26px 0 2px}
+.gtit:first-of-type{margin-top:4px}
+.gsub{color:var(--fg-dim);font-size:12.5px;margin:0 0 14px;max-width:64ch}
 .thead .k{font-family:var(--font-mono);font-size:13px;font-weight:600}
 .thead .k small{font-family:var(--font-body);font-size:10px;color:var(--fg-faint);
   text-transform:uppercase;letter-spacing:.06em;margin-right:4px;font-weight:400}
@@ -407,25 +412,44 @@ function renderPicks(){
 
 function renderCombis(){
   const el=document.getElementById('p-combis');
-  if(!ready){el.innerHTML=skeleton('Cargando combinadas…');return}
+  if(!ready){el.innerHTML=skeleton('Cargando combinadas\u2026');return}
   const open=TICKETS.filter(t=>t.estado==='pendiente');
-  let h=`<p class="lead">Combinadas armadas para caer entre el <b>40% y el 52%</b> de probabilidad conjunta: es la zona donde la cuota compensa sin que el riesgo se dispare. Una sola pata por partido, para que las probabilidades se puedan multiplicar sin correlación.</p>`;
+  let h=`<p class="lead">Combinadas armadas para caer entre el <b>40% y el 52%</b> de probabilidad conjunta: es la zona donde la cuota compensa sin que el riesgo se dispare. Una sola pata por partido y sin repetir equipos, porque dos patas correlacionadas no se pueden multiplicar como si fueran independientes. Mezclar ligas y torneos esta permitido a proposito: partidos de competencias distintas son los mas independientes entre si.</p>`;
   if(!open.length){
-    h+=`<div class="empty"><h3>No hay combinadas abiertas</h3><p>Se arman cuando hay suficientes picks sobre 65% en la jornada como para llegar al 40% conjunto.</p></div>`;
+    h+=`<div class="empty"><h3>No hay combinadas abiertas</h3><p>Se arman cuando hay suficientes picks sobre el umbral como para llegar al 40% conjunto.</p></div>`;
+    el.innerHTML=h; return;
   }
-  for(const t of open){
-    h+=`<div class="ticket"><div class="thead"><h3>${t.patas} patas</h3>
+  const grupos=[
+    ['dia','Por d\u00eda','Todas las patas se juegan la misma fecha, as\u00ed que el ticket se resuelve esa noche.'],
+    ['fecha','Por fecha','Las patas caen dentro de la jornada, hasta cuatro d\u00edas: un fin de semana dom\u00e9stico o una semana europea.'],
+    [null,'Combinadas','']
+  ];
+  for(const [tipo,titulo,bajada] of grupos){
+    const del=open.filter(t=>tipo?t.tipo===tipo:!t.tipo);
+    if(!del.length)continue;
+    h+=`<h3 class="gtit">${esc(titulo)}</h3>`;
+    if(bajada)h+=`<p class="gsub">${esc(bajada)}</p>`;
+    let alc='';
+    for(const t of del.sort((a,b)=>(a.alcance||'').localeCompare(b.alcance||'')||a.patas-b.patas)){
+      if(tipo==='dia'&&t.alcance!==alc){alc=t.alcance;h+=`<div class="day">${esc(dlabel(t.alcance+'T12:00:00Z'))}</div>`}
+      h+=ticket(t);
+    }
+  }
+  h+=`<p class="note"><b>Qu\u00e9 esperar.</b> Sobre 2.625 combinadas simuladas con este mismo criterio, el acierto real fue <b>48,0%</b> contra un <b>47,2%</b> predicho. Para ganar plata con ellas la casa tiene que pagarte por encima de la cuota justa que figura arriba; si paga menos, la combinada pierde valor aunque entre.</p>`;
+  el.innerHTML=h;
+}
+
+function ticket(t){
+  const rango=t.tipo==='fecha'&&t.alcance?`<span class="alc">${esc(t.alcance)}</span>`:'';
+  let h=`<div class="ticket"><div class="thead"><h3>${t.patas} patas</h3>${rango}
       <span class="k"><small>Probabilidad</small>${pc(t.prob)}</span>
       <span class="k"><small>Cuota justa</small>${t.cuota.toFixed(2)}</span></div>`;
-    for(const l of t.legs){
-      h+=`<div class="leg"><span class="lp">${(100*l.p).toFixed(0)}%</span>
-        <div class="lm"><b>${esc(l.home)} v ${esc(l.away)}</b><span>${esc(LG[l.lg]||l.liga||'')} · ${esc(l.label)}</span></div>
-        <span class="num" style="font-size:12.5px;color:var(--fg-dim)">${l.cuota?l.cuota.toFixed(2):''}</span></div>`;
-    }
-    h+='</div>';
+  for(const l of t.legs){
+    h+=`<div class="leg"><span class="lp">${(100*l.p).toFixed(0)}%</span>
+      <div class="lm"><b>${esc(l.home)} v ${esc(l.away)}</b><span>${esc(LG[l.lg]||l.liga||'')} \u00b7 ${esc(dlabel(l.ko))} \u00b7 ${esc(l.label)}</span></div>
+      <span class="num" style="font-size:12.5px;color:var(--fg-dim)">${l.cuota?l.cuota.toFixed(2):''}</span></div>`;
   }
-  h+=`<p class="note"><b>Qué esperar.</b> Sobre 2.625 combinadas simuladas con este mismo criterio, el acierto real fue <b>48,0%</b> contra un <b>47,2%</b> predicho. Para ganar plata con ellas la casa tiene que pagarte por encima de la cuota justa que figura arriba; si paga menos, la combinada pierde valor aunque entre.</p>`;
-  el.innerHTML=h;
+  return h+'</div>';
 }
 
 function renderHistorial(){

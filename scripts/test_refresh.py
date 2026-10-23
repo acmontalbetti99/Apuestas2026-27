@@ -7,6 +7,7 @@ import numpy as np, pandas as pd
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
 import refresh as R
+from refresh import PARLAY_LO, PARLAY_HI
 
 random.seed(7); np.random.seed(7)
 TODAY = datetime(2026, 10, 28, 9, 0, tzinfo=timezone.utc)
@@ -329,3 +330,48 @@ for m in mal: print(f"   MAL {m}")
 print(f"  {len(UNO)} comparaciones de equipo y {len(PAR)} de partido")
 assert not mal, f"{len(mal)} errores de emparejamiento"
 print("\nESCENARIO 5 OK")
+
+# ============ combinadas: por dia y por fecha ======================================
+print("\n" + "=" * 70)
+print("ESCENARIO 6: las dos familias de combinadas")
+from refresh import build_parlays
+base = datetime(2026, 11, 20, 9, 0, tzinfo=timezone.utc)
+muestra = []
+for i in range(40):                      # 4 dias, varias competencias
+    dia = base + timedelta(days=1 + i % 4, hours=12)
+    lg = ["premier", "laliga", "seriea", "bundesliga", "ucl"][i % 5]
+    muestra.append({"id": f"p{i}", "lg": lg, "home": f"Local{i}", "away": f"Visita{i}",
+                    "ko": dia.strftime("%Y-%m-%dT%H:%M:%SZ"), "key": "1X",
+                    "label": "Local o empate", "cat": "Doble oportunidad",
+                    "grupo": "resultado", "p": round(0.70 + (i % 9) * 0.02, 4),
+                    "cuota": 1.3, "estado": "pendiente", "resultado": None})
+# una pata ya empezada: no debe entrar en ninguna
+muestra.append({**muestra[0], "id": "viejo", "home": "Empezado", "away": "YaJuega",
+                "ko": (base - timedelta(hours=3)).strftime("%Y-%m-%dT%H:%M:%SZ")})
+ts = build_parlays(muestra, "2026-11-20", ahora=base)
+print(f"  {len(ts)} combinadas: "
+      f"{sum(1 for t in ts if t['tipo']=='dia')} por dia, "
+      f"{sum(1 for t in ts if t['tipo']=='fecha')} por fecha")
+fallas = []
+for t in ts:
+    dias = {l["ko"][:10] for l in t["legs"]}
+    eq = [q for l in t["legs"] for q in (l["home"], l["away"])]
+    part = [(l["home"], l["away"]) for l in t["legs"]]
+    pr = 1.0
+    for l in t["legs"]: pr *= l["p"]
+    if t["tipo"] == "dia" and len(dias) != 1: fallas.append((t["id"], "dia multiples fechas"))
+    if t["tipo"] == "fecha" and len(dias) < 2: fallas.append((t["id"], "fecha de un solo dia"))
+    if len(set(eq)) != len(eq): fallas.append((t["id"], "equipo repetido"))
+    if len(set(part)) != len(part): fallas.append((t["id"], "partido repetido"))
+    if not (PARLAY_LO - 1e-9 <= pr <= PARLAY_HI + 1e-9): fallas.append((t["id"], f"banda {pr:.3f}"))
+    if abs(pr - t["prob"]) > 1e-3: fallas.append((t["id"], "prob != producto"))
+    if any(l["home"] == "Empezado" for l in t["legs"]): fallas.append((t["id"], "pata ya empezada"))
+for f in fallas: print(f"   MAL {f}")
+assert ts, "no se armo ninguna combinada"
+assert not fallas, f"{len(fallas)} problemas"
+assert len({t["id"] for t in ts}) == len(ts), "ids duplicados"
+# mezclar competencias esta permitido y de hecho pasa
+assert any(len({l["lg"] for l in t["legs"]}) > 1 for t in ts), "ninguna mezcla competencias"
+print("  una pata por partido, sin equipos repetidos, en banda, sin partidos empezados: ok")
+print("  mezcla de competencias presente: ok")
+print("\nESCENARIO 6 OK")
