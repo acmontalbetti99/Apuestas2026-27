@@ -87,18 +87,24 @@
   }
  },
  {
-  "fecha": "2026-10-23T01:36:31Z",
+  "fecha": "2026-10-23T15:30:05Z",
   "hallazgos": [
    {
     "severidad": "baja",
     "area": "valor",
-    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "mensaje": "ninguno de los 39 picks con precio supera la cuota justa: valor medio -5.09%. Es lo esperable, pero conviene no apostarlos",
     "detalle": null
    },
    {
     "severidad": "media",
     "area": "cobertura",
-    "mensaje": "sin ODDS_API_KEY no se generan picks de Europa League, Conference League: football-data solo publica ligas domesticas",
+    "mensaje": "sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "sitio",
+    "mensaje": "el sitio publica 165 picks y el repo tiene 185: el despliegue quedo atras",
     "detalle": null
    }
   ],
@@ -119,8 +125,10 @@
     }
    },
    "valor": {
-    "pendientes": 135,
-    "conPrecioCasa": 0
+    "pendientes": 155,
+    "conPrecioCasa": 39,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0509
    },
    "cobertura": {
     "ligasConPicks": [
@@ -128,7 +136,8 @@
      "laliga",
      "premier",
      "seriea",
-     "ucl"
+     "ucl",
+     "uel"
     ]
    },
    "edadHoras": {
@@ -142,7 +151,7 @@
   },
   "resumen": {
    "alta": 0,
-   "media": 1,
+   "media": 2,
    "baja": 1
   }
  }

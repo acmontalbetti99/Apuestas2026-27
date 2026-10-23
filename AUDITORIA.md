@@ -1,14 +1,15 @@
-# Auditoria · 2026-10-23 01:36 UTC
+# Auditoria · 2026-10-23 15:30 UTC
 
-**0 de severidad alta · 1 media · 1 baja**
+**0 de severidad alta · 2 media · 1 baja**
 
 ## 🟡 Media
 
-- **[cobertura]** sin ODDS_API_KEY no se generan picks de Europa League, Conference League: football-data solo publica ligas domesticas
+- **[cobertura]** sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas
+- **[sitio]** el sitio publica 165 picks y el repo tiene 185: el despliegue quedo atras
 
 ## ⚪ Baja
 
-- **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
+- **[valor]** ninguno de los 39 picks con precio supera la cuota justa: valor medio -5.09%. Es lo esperable, pero conviene no apostarlos
 
 ## Calibracion
 
@@ -21,5 +22,6 @@
 
 ## Valor contra bet365
 
-- 0 de 135 picks pendientes traen precio de la casa
+- 39 de 155 picks pendientes traen precio de la casa
+- 0 superan la cuota justa · valor medio -5.09%
 
