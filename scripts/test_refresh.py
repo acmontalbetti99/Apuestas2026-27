@@ -375,3 +375,41 @@ assert any(len({l["lg"] for l in t["legs"]}) > 1 for t in ts), "ninguna mezcla c
 print("  una pata por partido, sin equipos repetidos, en banda, sin partidos empezados: ok")
 print("  mezcla de competencias presente: ok")
 print("\nESCENARIO 6 OK")
+
+# ============ el mismo partido cargado dos veces ===================================
+print("\n" + "=" * 70)
+print("ESCENARIO 7: duplicados del mismo partido")
+from refresh import _quitar_duplicados
+dup = [
+  # mismo partido, dos nombres y dos horarios: paso de verdad el 23/10
+  {"id": "a1", "lg": "premier", "home": "Ipswich Town", "away": "Nottingham Forest",
+   "ko": "2026-10-23T19:00:00Z", "grupo": "resultado", "p": 0.72, "cuota": 1.39,
+   "key": "12", "label": "x", "cat": "c", "estado": "pendiente", "resultado": None},
+  {"id": "a2", "lg": "premier", "home": "Ipswich", "away": "Nottingham Forest",
+   "ko": "2026-10-23T20:00:00Z", "grupo": "resultado", "p": 0.73, "cuota": 1.37,
+   "key": "12", "label": "x", "cat": "c", "estado": "pendiente", "resultado": None},
+  {"id": "a3", "lg": "premier", "home": "Ipswich", "away": "Nottingham Forest",
+   "ko": "2026-10-23T20:00:00Z", "grupo": "goles", "p": 0.80, "cuota": 1.25,
+   "key": "O1.5", "label": "x", "cat": "c", "estado": "pendiente", "resultado": None},
+  # partidos distintos que NO deben fusionarse
+  {"id": "b1", "lg": "premier", "home": "Manchester United", "away": "Roma",
+   "ko": "2026-10-23T19:00:00Z", "grupo": "resultado", "p": 0.70, "cuota": 1.43,
+   "key": "12", "label": "x", "cat": "c", "estado": "pendiente", "resultado": None},
+  {"id": "b2", "lg": "premier", "home": "Manchester City", "away": "Roma",
+   "ko": "2026-10-23T19:00:00Z", "grupo": "resultado", "p": 0.75, "cuota": 1.33,
+   "key": "12", "label": "x", "cat": "c", "estado": "pendiente", "resultado": None},
+  # mismo cruce pero de otra semana: tampoco se fusiona
+  {"id": "c1", "lg": "premier", "home": "Ipswich", "away": "Nottingham Forest",
+   "ko": "2026-11-15T15:00:00Z", "grupo": "resultado", "p": 0.71, "cuota": 1.41,
+   "key": "12", "label": "x", "cat": "c", "estado": "pendiente", "resultado": None},
+]
+out = _quitar_duplicados(dup)
+ids = {p["id"] for p in out}
+ipswich_oct = [p for p in out if "ipswich" in p["home"].lower() and p["ko"][:10] == "2026-10-23"]
+print(f"  {len(dup)} entraron, {len(out)} quedaron")
+for p in out: print(f"     {p['home'][:18]:18s} v {p['away'][:18]:18s} {p['ko'][:16]} {p['grupo']}")
+assert len(ipswich_oct) == 2, f"deberian quedar 2 (un grupo cada uno), quedaron {len(ipswich_oct)}"
+assert all(p["ko"] == "2026-10-23T20:00:00Z" for p in ipswich_oct), "debe quedar el horario corregido"
+assert {"b1", "b2"} <= ids, "Manchester United y City se fusionaron: son equipos distintos"
+assert "c1" in ids, "se fusiono un cruce de otra fecha"
+print("\nESCENARIO 7 OK")

@@ -881,6 +881,69 @@ def build_parlays(picks: list[dict], hoy: str,
 
 # --------------------------------------------------------------------------- io
 
+def _quitar_duplicados(picks: list[dict]) -> list[dict]:
+    """Un mismo partido puede entrar dos veces con nombres u horarios distintos.
+
+    Paso de verdad: el Ipswich v Nottingham Forest del 23/10 quedo cargado como
+    "Ipswich Town" a las 19:00 y como "Ipswich" a las 20:00, con tres picks cada
+    uno. Las fuentes corrigen el horario a medida que se acerca el partido y no
+    siempre nombran igual al equipo, y como el id sale del nombre, el segundo
+    juego entra como si fuera otro partido.
+
+    No alcanza con comparar el id ni el par de nombres literal: hay que usar el
+    mismo emparejamiento por palabras que la liquidacion. Se conserva el pick ya
+    liquidado si lo hay, y si no el de kickoff mas tardio, que es la correccion
+    mas reciente.
+    """
+    grupos: list[dict] = []          # un representante por partido real
+    asignado: list[int] = []
+    for p in picks:
+        ko = p.get("ko", "")
+        idx = None
+        for i, g in enumerate(grupos):
+            if abs((pd.to_datetime(ko, utc=True, errors="coerce")
+                    - pd.to_datetime(g["ko"], utc=True, errors="coerce")).total_seconds()) > 86400:
+                continue
+            if mismo_partido(g["home"], g["away"], p["home"], p["away"]):
+                idx = i
+                break
+        if idx is None:
+            grupos.append(p)
+            asignado.append(len(grupos) - 1)
+        else:
+            asignado.append(idx)
+
+    por_grupo: dict[int, list[dict]] = {}
+    for p, g in zip(picks, asignado):
+        por_grupo.setdefault(g, []).append(p)
+
+    salida, quitados = [], 0
+    for miembros in por_grupo.values():
+        if len(miembros) == 1:
+            salida.extend(miembros)
+            continue
+        # dentro del partido, una version por familia de mercado
+        liquidados = [m for m in miembros if m.get("estado") != "pendiente"]
+        if liquidados:
+            salida.extend(liquidados)
+            quitados += len(miembros) - len(liquidados)
+            continue
+        ko_bueno = max(m.get("ko", "") for m in miembros)
+        nombre = max(miembros, key=lambda m: len(m.get("home", "")))["home"]
+        mejores: dict[str, dict] = {}
+        for m in miembros:
+            k = m.get("grupo", "")
+            if k not in mejores or m.get("ko", "") > mejores[k].get("ko", ""):
+                mejores[k] = m
+        for m in mejores.values():
+            m["ko"], m["home"] = ko_bueno, nombre
+        salida.extend(mejores.values())
+        quitados += len(miembros) - len(mejores)
+    if quitados:
+        log(f"  {quitados} picks duplicados del mismo partido quitados")
+    return sorted(salida, key=lambda p: (p["ko"], -p["p"]))
+
+
 def read_json(path: Path, default):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -981,6 +1044,7 @@ def main() -> int:
     if conservados:
         log(f"  {conservados} picks pendientes de dias anteriores se mantienen")
     final = sorted(final.values(), key=lambda p: (p["ko"], -p["p"]))
+    final = _quitar_duplicados(final)
 
     hoy = today.date().isoformat()
     if solo_liquidar:

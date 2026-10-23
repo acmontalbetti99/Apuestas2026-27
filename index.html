@@ -111,6 +111,8 @@ main{padding-block:20px 56px}
 .tag.lost{background:var(--bad-soft);color:var(--bad)}
 .tag.pend{background:var(--wait-soft);color:var(--wait)}
 .tag.live{background:var(--accent-soft);color:var(--accent)}
+.tag.wait{background:var(--sunk);color:var(--fg-dim)}
+.pick.wait{opacity:.72}
 .vivo{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
 .vivo b{font-family:var(--font-mono);font-size:16px;font-weight:600}
 .vivo b em{font-style:normal;color:var(--fg-faint);padding:0 2px}
@@ -221,8 +223,12 @@ const dkey=iso=>{const d=new Date(iso);return d.toISOString().slice(0,10)};
 const dlabel=iso=>{const d=new Date(iso);return `${DAYS[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`};
 const tlabel=iso=>{const d=new Date(iso);return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
 const empezado=p=>p.estado==='pendiente'&&new Date(p.ko)<=new Date();
-const st=p=>p.estado==='ganado'?'won':p.estado==='perdido'?'lost':empezado(p)?'live':'pend';
-const stw=p=>p.estado==='ganado'?'Acertó':p.estado==='perdido'?'Falló':empezado(p)?'En juego':'Pendiente';
+// Un partido terminado desaparece del feed en vivo, asi que sin esto la fila se
+// quedaba en "En juego" para siempre. Pasadas 3 h del inicio ya termino seguro:
+// lo que falta es la liquidacion, y eso es lo que conviene decir.
+const esperando=p=>empezado(p)&&new Date(p.ko)<=new Date(Date.now()-3*3600e3);
+const st=p=>p.estado==='ganado'?'won':p.estado==='perdido'?'lost':esperando(p)?'wait':empezado(p)?'live':'pend';
+const stw=p=>p.estado==='ganado'?'Acertó':p.estado==='perdido'?'Falló':esperando(p)?'Esperando resultado':empezado(p)?'En juego':'Pendiente';
 
 function scoreboard(){
   const done=PICKS.filter(p=>p.estado==='ganado'||p.estado==='perdido');
