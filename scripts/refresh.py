@@ -181,6 +181,98 @@ def canon(name: str) -> str:
     return slug(DISPLAY.get(str(name).strip(), str(name).strip()))
 
 
+# Las cuotas vienen de The Odds API y los resultados de LiveScore, asi que los nombres
+# casi nunca coinciden literal: "AFC Bournemouth" vs "Bournemouth", "Besiktas JK" vs
+# "Besiktas", "TSG Hoffenheim" vs "Hoffenheim". Una lista de alias siempre deja uno
+# afuera, y cada uno que falta es un pick que no se liquida nunca.
+#
+# Solo siglas y articulos. "United", "City" y "Real" NO son ruido: son justo lo que
+# distingue Manchester United de Manchester City, y Real Madrid de Real Sociedad.
+RUIDO = {"fc", "afc", "ac", "sc", "cf", "sk", "bk", "jk", "ks", "ssc", "cd", "cp",
+         "club", "de", "el", "la", "los", "1", "04", "05", "09", "1899", "1900",
+         "1901", "tsg", "vfb", "vfl", "fsv", "sv", "bsc", "rc", "rcd", "ud", "sd",
+         "us", "nk", "hnk", "fk", "pfc", "if", "bv", "psv", "ogc", "calcio",
+         "sad", "ssd", "asd",
+         # St./Sint/Saint varia entre fuentes (St.Truiden vs Sint Truiden) y lo que
+         # distingue siempre es lo que viene despues: Pauli, Gallen, Etienne, Truiden.
+         "st", "sint", "saint"}
+_TRAD = str.maketrans({"\u0142": "l", "\u00f8": "o", "\u0111": "d"})
+
+
+def fichas(nombre: str) -> list[str]:
+    s = unicodedata.normalize("NFKD", str(nombre or "")).translate(_TRAD)
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = s.replace("\u00df", "ss").replace("\u00e6", "ae")
+    palabras = [w for w in re.split(r"[^a-z0-9]+", s.lower()) if w]
+    return [w for w in palabras if w not in RUIDO] or palabras
+
+
+def _dist1(x: str, y: str) -> bool:
+    """True si x e y difieren en a lo sumo una letra, y no en el arranque.
+
+    Exigir que las dos primeras letras coincidan es lo que separa una
+    transliteracion de dos clubes distintos: lillestroem/lillestrom y
+    olympiacos/olympiakos difieren adentro de la palabra, mientras que
+    Valencia/Palencia difieren en la primera letra y son equipos distintos.
+    """
+    if x[:2] != y[:2]:
+        return False
+    if abs(len(x) - len(y)) > 1:
+        return False
+    if len(x) > len(y):
+        x, y = y, x
+    i = j = 0
+    fallos = 0
+    while i < len(x) and j < len(y):
+        if x[i] == y[j]:
+            i += 1; j += 1
+            continue
+        fallos += 1
+        if fallos > 1:
+            return False
+        if len(x) == len(y):
+            i += 1; j += 1
+        else:
+            j += 1
+    return fallos + (len(y) - j) + (len(x) - i) <= 1
+
+
+def _igual(x: str, y: str) -> bool:
+    if x == y:
+        return True
+    if len(x) >= 5 and len(y) >= 5 and (x.startswith(y) or y.startswith(x)):
+        return True
+    # Transliteraciones que difieren en una letra entre fuentes: lillestroem vs
+    # lillestrom, olympiacos vs olympiakos, omonia vs omonoia. Se exige 6 letras
+    # para que palabras cortas no se crucen, y la regla de subconjunto obliga
+    # ademas a que coincidan los DOS equipos.
+    return len(x) >= 6 and len(y) >= 6 and _dist1(x, y)
+
+
+def mismo_equipo(a: str, b: str) -> bool:
+    """Las palabras con peso de uno estan TODAS en el otro.
+
+    Compartir una sola no alcanza: Manchester United y Manchester City comparten
+    "manchester", y Real Madrid y Real Sociedad comparten "real".
+    """
+    A, B = fichas(a), fichas(b)
+    if not A or not B:
+        return False
+    sub = lambda P, Q: all(any(_igual(x, y) for y in Q) for x in P)  # noqa: E731
+    return sub(A, B) or sub(B, A)
+
+
+def mismo_partido(h1: str, a1: str, h2: str, a2: str) -> bool:
+    """Dos partidos son el mismo si coinciden LOS DOS equipos.
+
+    Un solo equipo es deliberadamente permisivo: "Inter" tiene que coincidir con
+    "Inter Milano", y con eso tambien coincide con "Inter Miami". La proteccion no
+    esta ahi sino aca, mas la ventana de fecha: que ademas coincida el rival el
+    mismo dia hace que un cruce equivocado sea practicamente imposible.
+    """
+    return mismo_equipo(h1, h2) and mismo_equipo(a1, a2)
+
+
 def show(name: str) -> str:
     return DISPLAY.get(str(name).strip(), str(name).strip())
 
@@ -377,8 +469,10 @@ def settle_label(pick: dict, r: pd.Series) -> str:
 def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
     """Liquida en sitio. Devuelve el conteo de lo que paso."""
     idx: dict[tuple[str, str], list[pd.Series]] = {}
+    por_dia: dict[str, list[pd.Series]] = {}
     for _, r in D.iterrows():
         idx.setdefault((r["kH"], r["kA"]), []).append(r)
+        por_dia.setdefault(str(r["fecha"])[:10], []).append(r)
 
     n = {"ganado": 0, "perdido": 0, "sin_datos": 0, "caducado": 0, "espera": 0}
     vivos = []
@@ -393,6 +487,17 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
             continue
 
         cands = idx.get((canon(p["home"]), canon(p["away"])), [])
+        if not cands:
+            # Sin coincidencia literal se busca por palabras, solo entre los partidos
+            # del dia del pick y el anterior: acotar asi mantiene el costo bajo y
+            # hace casi imposible un falso positivo.
+            dia = str(p["ko"])[:10]
+            ayer = (ko - timedelta(days=1)).strftime("%Y-%m-%d")
+            manana = (ko + timedelta(days=1)).strftime("%Y-%m-%d")
+            for d in (dia, ayer, manana):
+                for r in por_dia.get(d, []):
+                    if mismo_partido(r["HomeTeam"], r["AwayTeam"], p["home"], p["away"]):
+                        cands.append(r)
         # el mismo cruce se repite entre temporadas: el partido mas cercano al kickoff
         gap = lambda x: abs((x["fecha"].tz_localize("UTC") - ko).total_seconds())
         r = min(cands, key=gap, default=None)

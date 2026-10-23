@@ -290,3 +290,42 @@ assert not any(es_femenino(k) is False and "women" in k for k in _OA.COMPETENCIA
     "hay una clave femenina en COMPETENCIAS"
 print("  las tres fuentes comparten la misma regla: ok")
 print("\nESCENARIO 4 OK")
+
+
+# ============ regresion: nombres de dos fuentes distintas ===========================
+print("\n" + "=" * 70)
+print("ESCENARIO 5: emparejar nombres entre The Odds API y LiveScore")
+from refresh import mismo_equipo, mismo_partido
+
+# Un solo equipo: permisivo a proposito. "Inter" tiene que coincidir con
+# "Inter Milano", y eso arrastra que tambien coincida con "Inter Miami".
+UNO = [("Lillestroem", "Lillestrom", True), ("Olympiacos", "Olympiakos Piraeus", True),
+       ("Omonia Nicosia", "Omonoia FC", True), ("St.Truiden", "Sint Truiden", True),
+       ("AFC Bournemouth", "Bournemouth", True), ("AC Milan", "Milan", True),
+       ("Be\u015fikta\u015f", "Besiktas JK", True), ("Hoffenheim", "TSG Hoffenheim", True),
+       ("Jagiellonia Bialystok", "Jagiellonia Bia\u0142ystok", True),
+       ("Inter", "Inter Milano", True), ("Atalanta", "Atalanta BC", True),
+       # distintos: no deben cruzarse nunca
+       ("Valencia", "Palencia", False), ("Lorient", "Lorca", False),
+       ("Salzburg", "Hamburg", False), ("Manchester United", "Manchester City", False),
+       ("Real Madrid", "Real Sociedad", False), ("Atletico Madrid", "Real Madrid", False),
+       ("Celtic", "Celta Vigo", False), ("St. Pauli", "St. Gallen", False),
+       ("Borussia Dortmund", "Borussia Monchengladbach", False),
+       ("Union Berlin", "Union St.Gilloise", False)]
+# Partido completo: es lo que se usa de verdad, y lo que cierra los ambiguos.
+PAR = [(("Bournemouth", "Milan"), ("AFC Bournemouth", "AC Milan"), True),
+       (("Omonoia FC", "Benfica"), ("Omonia Nicosia", "Benfica"), True),
+       (("Lillestrom", "Real Sociedad"), ("Lillestroem", "Real Sociedad"), True),
+       (("FC Midtjylland", "Sint Truiden"), ("FC Midtjylland", "St.Truiden"), True),
+       (("Inter", "Shakhtar Donetsk"), ("Inter Miami", "Orlando City"), False),
+       (("Sporting CP", "LASK Linz"), ("Sporting Gijon", "Albacete"), False),
+       (("Manchester United", "Roma"), ("Manchester City", "Roma"), False)]
+mal = []
+for a, b, e in UNO:
+    if mismo_equipo(a, b) != e: mal.append(("equipo", a, b, e))
+for (h1, a1), (h2, a2), e in PAR:
+    if mismo_partido(h1, a1, h2, a2) != e: mal.append(("partido", f"{h1} v {a1}", f"{h2} v {a2}", e))
+for m in mal: print(f"   MAL {m}")
+print(f"  {len(UNO)} comparaciones de equipo y {len(PAR)} de partido")
+assert not mal, f"{len(mal)} errores de emparejamiento"
+print("\nESCENARIO 5 OK")
