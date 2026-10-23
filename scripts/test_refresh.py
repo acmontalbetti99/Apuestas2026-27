@@ -93,8 +93,21 @@ KEYS = ["1", "2", "1X", "12", "X2", "O1.5", "O2.5", "U2.5", "U3.5", "BTTS", "NBT
         "cor_m_o8.5", "cor_h_o2.5", "cor_a_u6.5", "yel_m_o2.5", "yel_h_u3.5", "yel_a_o0.5",
         "sho_m_o21.5", "sho_h_o10.5", "sho_a_u12.5", "sav_m_o4.5", "sav_h_u4.5", "sav_a_o1.5",
         "CS_H", "HO1.5", "AU0.5"]
+# cruces distintos: con pares repetidos el deduplicado quita uno, con razon, y el
+# escenario dejaria de medir lo que quiere medir
+_vistos = set()
+_filas = []
+for _, _r in hist.iterrows():
+    _par = (_r["HomeTeam"], _r["AwayTeam"])
+    if _par in _vistos:
+        continue
+    _vistos.add(_par)
+    _filas.append(_r)
+    if len(_filas) >= len(KEYS):
+        break
+assert len(_filas) >= len(KEYS), "no hay suficientes cruces distintos en la muestra"
 for i, k in enumerate(KEYS):
-    r = hist.iloc[i]
+    r = _filas[i]
     ko = datetime.strptime(r["Date"], "%d/%m/%Y").replace(hour=15, tzinfo=timezone.utc)
     viejos.append({"id": R.pick_id(R.show(r["HomeTeam"]), R.show(r["AwayTeam"]), k),
                    "lg": "premier", "home": R.show(r["HomeTeam"]), "away": R.show(r["AwayTeam"]),
@@ -413,3 +426,22 @@ assert all(p["ko"] == "2026-10-23T20:00:00Z" for p in ipswich_oct), "debe quedar
 assert {"b1", "b2"} <= ids, "Manchester United y City se fusionaron: son equipos distintos"
 assert "c1" in ids, "se fusiono un cruce de otra fecha"
 print("\nESCENARIO 7 OK")
+
+# un duplicado YA LIQUIDADO no debe contarse dos veces
+print("\n--- duplicados ya liquidados")
+liq = [
+  {"id": "d1", "lg": "premier", "home": "Ipswich Town", "away": "Nottingham Forest",
+   "ko": "2026-10-23T19:00:00Z", "grupo": "goles", "p": 0.80, "cuota": 1.25, "key": "O1.5",
+   "label": "Mas de 1.5 goles", "cat": "c", "estado": "ganado", "resultado": "1-1"},
+  {"id": "d2", "lg": "premier", "home": "Ipswich", "away": "Nottingham Forest",
+   "ko": "2026-10-23T20:00:00Z", "grupo": "goles", "p": 0.81, "cuota": 1.23, "key": "O1.5",
+   "label": "Mas de 1.5 goles", "cat": "c", "estado": "ganado", "resultado": "1-1"},
+  {"id": "d3", "lg": "premier", "home": "Ipswich", "away": "Nottingham Forest",
+   "ko": "2026-10-23T20:00:00Z", "grupo": "resultado", "p": 0.72, "cuota": 1.39, "key": "12",
+   "label": "Local o visitante", "cat": "c", "estado": "perdido", "resultado": "1-1"},
+]
+o = _quitar_duplicados(liq)
+print(f"  {len(liq)} entraron, {len(o)} quedaron: {[(x['grupo'], x['estado']) for x in o]}")
+assert len(o) == 2, f"el mismo resultado quedo contado {len(o)} veces"
+assert {x["grupo"] for x in o} == {"goles", "resultado"}
+print("  un solo pick por grupo, sin contar dos veces el mismo resultado: ok")

@@ -922,21 +922,27 @@ def _quitar_duplicados(picks: list[dict]) -> list[dict]:
         if len(miembros) == 1:
             salida.extend(miembros)
             continue
-        # dentro del partido, una version por familia de mercado
-        liquidados = [m for m in miembros if m.get("estado") != "pendiente"]
-        if liquidados:
-            salida.extend(liquidados)
-            quitados += len(miembros) - len(liquidados)
-            continue
+        # Dentro del partido queda UNA version por familia de mercado, liquidada o
+        # no. Conservar todas las liquidadas contaba dos veces el mismo resultado,
+        # que es justo lo que arruina la medicion de acierto.
         ko_bueno = max(m.get("ko", "") for m in miembros)
         nombre = max(miembros, key=lambda m: len(m.get("home", "")))["home"]
+        orden = {"ganado": 2, "perdido": 2, "pendiente": 0}
         mejores: dict[str, dict] = {}
         for m in miembros:
             k = m.get("grupo", "")
-            if k not in mejores or m.get("ko", "") > mejores[k].get("ko", ""):
+            actual = mejores.get(k)
+            if actual is None:
+                mejores[k] = m
+                continue
+            # prioridad: ya liquidado, y a igualdad el de kickoff mas tardio
+            clave = lambda x: (orden.get(x.get("estado"), 0), x.get("ko", ""))  # noqa: E731
+            if clave(m) > clave(actual):
                 mejores[k] = m
         for m in mejores.values():
-            m["ko"], m["home"] = ko_bueno, nombre
+            m["ko"] = ko_bueno
+            if m.get("estado") == "pendiente":
+                m["home"] = nombre
         salida.extend(mejores.values())
         quitados += len(miembros) - len(mejores)
     if quitados:
@@ -990,6 +996,9 @@ def main() -> int:
         return 1
 
     log("Liquidando...")
+    # Deduplicar ANTES de medir: si el mismo partido entro dos veces, su resultado
+    # cuenta dos veces en el acierto y el umbral se ajusta con numeros inflados.
+    picks[:] = _quitar_duplicados(picks)
     n = settle(picks, D, today)
     settle_parlays(parlays, picks)
     log(f"  {n['ganado']} acertados · {n['perdido']} fallados · {n['espera']} en espera"
