@@ -85,5 +85,65 @@
    "media": 0,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-10-23T01:36:31Z",
+  "hallazgos": [
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "cobertura",
+    "mensaje": "sin ODDS_API_KEY no se generan picks de Europa League, Conference League: football-data solo publica ligas domesticas",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {},
+   "calibracion": {
+    "n": 30,
+    "predicho": 0.7993,
+    "real": 0.8,
+    "z": 0.01
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 28,
+     "predicho": 0.799,
+     "real": 0.8214,
+     "z": 0.3
+    }
+   },
+   "valor": {
+    "pendientes": 135,
+    "conPrecioCasa": 0
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 165,
+    "/data/parlays.json": 4
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 1,
+   "baja": 1
+  }
  }
 ]

@@ -1,4 +1,4 @@
-Refresco 2026-10-22 23:53 UTC (solo liquidar)
+Refresco 2026-10-23 01:36 UTC
 Bajando resultados...
   E0 2627: 70 partidos
   SP1 2627: 89 partidos
@@ -8,18 +8,24 @@ Bajando resultados...
   SP1 2526: 380 partidos
   I1 2526: 380 partidos
   D1 2526: 306 partidos
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:249: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:341: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["fecha"] = pd.to_datetime(D["Date"], dayfirst=True, errors="coerce")
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:256: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:348: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:257: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:349: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:258: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:350: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
   resultados_extra.json: 61 partidos
   1790 partidos en base
 Liquidando...
-  0 acertados · 0 fallados · 152 en espera · 0 sin estadisticas · 0 caducados
-  acierto 0.7692 vs predicho 0.8057 sobre 13 · umbral 0.65
-  152 picks pendientes de dias anteriores se mantienen
-Listo: 165 picks (13 liquidados), 4 combinadas
+  14 acertados · 3 fallados · 135 en espera · 0 sin estadisticas · 0 caducados
+  acierto 0.8 vs predicho 0.7993 sobre 30 · umbral 0.65
+Bajando proximos partidos...
+  cuotas_extra.json: 26 partidos
+  26 partidos con cuotas
+  8 partidos de torneo todavia lejos (entran a 3 dias del arranque)
+  18 picks sobre el 65%
+  117 picks pendientes de dias anteriores se mantienen
+  4 combinadas armadas
+Listo: 165 picks (30 liquidados), 4 combinadas
