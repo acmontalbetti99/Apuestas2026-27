@@ -87,7 +87,7 @@
   }
  },
  {
-  "fecha": "2026-10-23T22:40:08Z",
+  "fecha": "2026-10-23T22:43:17Z",
   "hallazgos": [
    {
     "severidad": "baja",
@@ -104,24 +104,24 @@
    {
     "severidad": "media",
     "area": "sitio",
-    "mensaje": "el sitio publica 198 picks y el repo tiene 185: el despliegue quedo atras",
+    "mensaje": "el sitio publica 185 picks y el repo tiene 183: el despliegue quedo atras",
     "detalle": null
    }
   ],
   "metricas": {
    "sinLiquidar": {},
    "calibracion": {
-    "n": 38,
-    "predicho": 0.7902,
-    "real": 0.7632,
-    "z": -0.41
+    "n": 36,
+    "predicho": 0.7928,
+    "real": 0.7778,
+    "z": -0.22
    },
    "porGrupo": {
     "resultado": {
-     "n": 32,
-     "predicho": 0.7933,
-     "real": 0.7812,
-     "z": -0.17
+     "n": 31,
+     "predicho": 0.7954,
+     "real": 0.8065,
+     "z": 0.15
     }
    },
    "valor": {
@@ -145,7 +145,7 @@
     "_ultimo_livescore.log": 0.0
    },
    "sitio": {
-    "/data/picks.json": 198,
+    "/data/picks.json": 185,
     "/data/parlays.json": 12
    }
   },
