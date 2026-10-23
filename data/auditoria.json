@@ -87,12 +87,12 @@
   }
  },
  {
-  "fecha": "2026-10-23T20:57:46Z",
+  "fecha": "2026-10-23T22:40:08Z",
   "hallazgos": [
    {
     "severidad": "baja",
     "area": "valor",
-    "mensaje": "ninguno de los 37 picks con precio supera la cuota justa: valor medio -5.05%. Es lo esperable, pero conviene no apostarlos",
+    "mensaje": "ninguno de los 35 picks con precio supera la cuota justa: valor medio -5.10%. Es lo esperable, pero conviene no apostarlos",
     "detalle": null
    },
    {
@@ -104,31 +104,31 @@
    {
     "severidad": "media",
     "area": "sitio",
-    "mensaje": "el sitio publica 185 picks y el repo tiene 198: el despliegue quedo atras",
+    "mensaje": "el sitio publica 198 picks y el repo tiene 185: el despliegue quedo atras",
     "detalle": null
    }
   ],
   "metricas": {
    "sinLiquidar": {},
    "calibracion": {
-    "n": 34,
-    "predicho": 0.7956,
-    "real": 0.7941,
-    "z": -0.02
+    "n": 38,
+    "predicho": 0.7902,
+    "real": 0.7632,
+    "z": -0.41
    },
    "porGrupo": {
     "resultado": {
-     "n": 30,
-     "predicho": 0.7977,
-     "real": 0.8333,
-     "z": 0.49
+     "n": 32,
+     "predicho": 0.7933,
+     "real": 0.7812,
+     "z": -0.17
     }
    },
    "valor": {
-    "pendientes": 164,
-    "conPrecioCasa": 37,
+    "pendientes": 147,
+    "conPrecioCasa": 35,
     "conValorPositivo": 0,
-    "valorMedio": -0.0505
+    "valorMedio": -0.051
    },
    "cobertura": {
     "ligasConPicks": [
@@ -145,8 +145,8 @@
     "_ultimo_livescore.log": 0.0
    },
    "sitio": {
-    "/data/picks.json": 185,
-    "/data/parlays.json": 4
+    "/data/picks.json": 198,
+    "/data/parlays.json": 12
    }
   },
   "resumen": {

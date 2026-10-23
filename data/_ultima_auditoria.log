@@ -1,5 +1,5 @@
-Auditoria 2026-10-23 20:57 UTC
+Auditoria 2026-10-23 22:40 UTC
   [media] cobertura: sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas
-  [media] sitio: el sitio publica 185 picks y el repo tiene 198: el despliegue quedo atras
-  [baja] valor: ninguno de los 37 picks con precio supera la cuota justa: valor medio -5.05%. Es lo esperable, pero conviene no apostarlos
+  [media] sitio: el sitio publica 198 picks y el repo tiene 185: el despliegue quedo atras
+  [baja] valor: ninguno de los 35 picks con precio supera la cuota justa: valor medio -5.10%. Es lo esperable, pero conviene no apostarlos
   0 alta · 2 media · 1 baja
