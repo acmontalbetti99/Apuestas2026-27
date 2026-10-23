@@ -486,5 +486,21 @@
   "ko": "2026-10-22T19:00:00Z",
   "hg": 0,
   "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "VfB Stuttgart",
+  "away": "Borussia M'gladbach",
+  "ko": "2026-10-23T18:30:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "seriea",
+  "home": "Torino",
+  "away": "Monza",
+  "ko": "2026-10-23T18:45:00Z",
+  "hg": 3,
+  "ag": 2
  }
 ]
