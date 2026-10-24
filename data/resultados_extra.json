@@ -534,5 +534,77 @@
   "ko": "2026-10-24T12:00:00Z",
   "hg": 0,
   "ag": 3
+ },
+ {
+  "lg": "seriea",
+  "home": "Cagliari",
+  "away": "Bologna",
+  "ko": "2026-10-24T13:00:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "seriea",
+  "home": "Como",
+  "away": "Sassuolo",
+  "ko": "2026-10-24T13:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Augsburg",
+  "away": "Union Berlin",
+  "ko": "2026-10-24T13:30:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "FC Cologne",
+  "away": "Schalke 04",
+  "ko": "2026-10-24T13:30:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Mainz 05",
+  "away": "Werder Bremen",
+  "ko": "2026-10-24T13:30:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Paderborn",
+  "away": "Hamburgo",
+  "ko": "2026-10-24T13:30:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "RB Leipzig",
+  "away": "Elversberg",
+  "ko": "2026-10-24T13:30:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Arsenal",
+  "away": "Everton",
+  "ko": "2026-10-24T14:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Coventry City",
+  "away": "Fulham",
+  "ko": "2026-10-24T14:00:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]

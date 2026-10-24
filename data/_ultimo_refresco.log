@@ -1,4 +1,4 @@
-Refresco 2026-10-24 14:08 UTC
+Refresco 2026-10-24 16:10 UTC
 Bajando resultados...
   E0 2627: 70 partidos
   SP1 2627: 89 partidos
@@ -8,25 +8,25 @@ Bajando resultados...
   SP1 2526: 380 partidos
   I1 2526: 380 partidos
   D1 2526: 306 partidos
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:341: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:342: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["fecha"] = pd.to_datetime(D["Date"], dayfirst=True, errors="coerce")
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:348: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
-  D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
 /home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:349: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
-  D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
+  D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
 /home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:350: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:351: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
-  resultados_extra.json: 67 partidos
-  1796 partidos en base
+  resultados_extra.json: 76 partidos
+  1805 partidos en base
 Liquidando...
-  2 acertados · 2 fallados · 141 en espera · 2 sin estadisticas · 0 caducados
-  acierto 0.75 vs predicho 0.7918 sobre 40 · umbral 0.65
+  11 acertados · 3 fallados · 120 en espera · 9 sin estadisticas · 0 caducados
+  acierto 0.7593 vs predicho 0.7921 sobre 54 · umbral 0.65
 Bajando proximos partidos...
   cuotas_extra.json: 44 partidos
-  79 partidos con cuotas
+  75 partidos con cuotas
   8 partidos de torneo todavia lejos (entran a 3 dias del arranque)
-  141 picks sobre el 65%
-  8 picks pendientes de dias anteriores se mantienen
+  129 picks sobre el 65%
+  12 picks pendientes de dias anteriores se mantienen
   2 picks duplicados del mismo partido quitados
-  11 combinadas armadas
-Listo: 183 picks (40 liquidados), 13 combinadas
+  11 combinadas armadas (11 nuevas), 20 abiertas
+Listo: 183 picks (54 liquidados), 24 combinadas

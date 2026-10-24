@@ -156,12 +156,12 @@
   }
  },
  {
-  "fecha": "2026-10-24T14:08:33Z",
+  "fecha": "2026-10-24T16:11:14Z",
   "hallazgos": [
    {
     "severidad": "media",
     "area": "liquidacion",
-    "mensaje": "3 picks de Bundesliga sin liquidar tras 19 h (suele ser un nombre de equipo que no coincide)",
+    "mensaje": "3 picks de Bundesliga sin liquidar tras 21 h (suele ser un nombre de equipo que no coincide)",
     "detalle": [
      "Stuttgart v Monchengladbach (2026-10-23T19:30)",
      "Stuttgart v Monchengladbach (2026-10-23T19:30)",
@@ -171,7 +171,7 @@
    {
     "severidad": "baja",
     "area": "valor",
-    "mensaje": "ninguno de los 33 picks con precio supera la cuota justa: valor medio -5.11%. Es lo esperable, pero conviene no apostarlos",
+    "mensaje": "ninguno de los 26 picks con precio supera la cuota justa: valor medio -5.17%. Es lo esperable, pero conviene no apostarlos",
     "detalle": null
    },
    {
@@ -186,24 +186,38 @@
     "bundesliga": 3
    },
    "calibracion": {
-    "n": 40,
-    "predicho": 0.7918,
-    "real": 0.75,
-    "z": -0.66
+    "n": 54,
+    "predicho": 0.7921,
+    "real": 0.7593,
+    "z": -0.6
    },
    "porGrupo": {
     "resultado": {
-     "n": 33,
-     "predicho": 0.7952,
-     "real": 0.7576,
-     "z": -0.54
+     "n": 40,
+     "predicho": 0.793,
+     "real": 0.775,
+     "z": -0.28
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 15,
+     "predicho": 0.7325,
+     "real": 0.6667,
+     "z": -0.58
+    },
+    "0.75-0.80": {
+     "n": 15,
+     "predicho": 0.7685,
+     "real": 0.6,
+     "z": -1.55
     }
    },
    "valor": {
-    "pendientes": 143,
-    "conPrecioCasa": 33,
+    "pendientes": 129,
+    "conPrecioCasa": 26,
     "conValorPositivo": 0,
-    "valorMedio": -0.0511
+    "valorMedio": -0.0517
    },
    "cobertura": {
     "ligasConPicks": [
@@ -221,7 +235,7 @@
    },
    "sitio": {
     "/data/picks.json": 183,
-    "/data/parlays.json": 12
+    "/data/parlays.json": 13
    }
   },
   "resumen": {
