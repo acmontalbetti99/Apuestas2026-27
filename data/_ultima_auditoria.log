@@ -1,5 +1,5 @@
-Auditoria 2026-10-23 22:43 UTC
+Auditoria 2026-10-24 14:08 UTC
+  [media] liquidacion: 3 picks de Bundesliga sin liquidar tras 19 h (suele ser un nombre de equipo que no coincide)
   [media] cobertura: sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas
-  [media] sitio: el sitio publica 185 picks y el repo tiene 183: el despliegue quedo atras
-  [baja] valor: ninguno de los 35 picks con precio supera la cuota justa: valor medio -5.10%. Es lo esperable, pero conviene no apostarlos
+  [baja] valor: ninguno de los 33 picks con precio supera la cuota justa: valor medio -5.11%. Es lo esperable, pero conviene no apostarlos
   0 alta · 2 media · 1 baja

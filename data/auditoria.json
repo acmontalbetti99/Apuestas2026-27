@@ -154,5 +154,80 @@
    "media": 2,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-10-24T14:08:33Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "3 picks de Bundesliga sin liquidar tras 19 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 33 picks con precio supera la cuota justa: valor medio -5.11%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "cobertura",
+    "mensaje": "sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "bundesliga": 3
+   },
+   "calibracion": {
+    "n": 40,
+    "predicho": 0.7918,
+    "real": 0.75,
+    "z": -0.66
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 33,
+     "predicho": 0.7952,
+     "real": 0.7576,
+     "z": -0.54
+    }
+   },
+   "valor": {
+    "pendientes": 143,
+    "conPrecioCasa": 33,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0511
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 183,
+    "/data/parlays.json": 12
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 2,
+   "baja": 1
+  }
  }
 ]
