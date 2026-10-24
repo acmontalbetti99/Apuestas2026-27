@@ -139,6 +139,12 @@ main{padding-block:20px 56px}
 .gtit{font-family:var(--font-display);font-size:16px;font-weight:700;margin:26px 0 2px}
 .gtit:first-of-type{margin-top:4px}
 .gsub{color:var(--fg-dim);font-size:12.5px;margin:0 0 14px;max-width:64ch}
+.ticket.won{border-left:3px solid var(--good)}
+.ticket.lost{border-left:3px solid var(--bad)}
+.lr{font-family:var(--font-mono);font-size:11.5px;padding:1px 6px;border-radius:4px;margin-right:8px}
+.lr.won{background:var(--good-soft);color:var(--good)}
+.lr.lost{background:var(--bad-soft);color:var(--bad)}
+.pos{color:var(--good)} .neg{color:var(--bad)}
 .thead .k{font-family:var(--font-mono);font-size:13px;font-weight:600}
 .thead .k small{font-family:var(--font-body);font-size:10px;color:var(--fg-faint);
   text-transform:uppercase;letter-spacing:.06em;margin-right:4px;font-weight:400}
@@ -441,19 +447,70 @@ function renderCombis(){
       h+=ticket(t);
     }
   }
+  h+=precisionCombis();
   h+=`<p class="note"><b>Qu\u00e9 esperar.</b> Sobre 2.625 combinadas simuladas con este mismo criterio, el acierto real fue <b>48,0%</b> contra un <b>47,2%</b> predicho. Para ganar plata con ellas la casa tiene que pagarte por encima de la cuota justa que figura arriba; si paga menos, la combinada pierde valor aunque entre.</p>`;
   el.innerHTML=h;
 }
 
+/* Registro de las combinadas ya liquidadas. Va aca y no solo en Precision porque
+   una combinada se evalua distinto que un pick: lo que importa es cuantas
+   entraron enteras, no el acierto pata por pata. */
+function precisionCombis(){
+  const done=TICKETS.filter(t=>t.estado==='ganado'||t.estado==='perdido');
+  if(!done.length){
+    return `<h3 class="gtit">Precisi\u00f3n</h3>
+      <p class="gsub">Todav\u00eda no se liquid\u00f3 ninguna combinada. Ac\u00e1 va a ir el registro de
+      cu\u00e1ntas entraron enteras contra cu\u00e1ntas se esperaba, y el saldo a cuota justa.</p>`;
+  }
+  const g=done.filter(t=>t.estado==='ganado');
+  const real=g.length/done.length;
+  const pred=done.reduce((s,t)=>s+t.prob,0)/done.length;
+  // saldo apostando 1 a cuota justa: mide si el modelo esta bien calibrado,
+  // no si se gana plata (para eso la casa tiene que pagar por encima)
+  const saldo=done.reduce((s,t)=>s+(t.estado==='ganado'?t.cuota-1:-1),0);
+  let h=`<h3 class="gtit">Precisi\u00f3n</h3>
+    <div class="scroll" style="margin:6px 0 14px"><table><thead><tr>
+      <th>Corte</th><th>Combinadas</th><th>Entraron</th><th>Predicho</th><th>Real</th><th>Desv\u00edo</th>
+    </tr></thead><tbody>`;
+  const fila=(nom,s)=>{
+    if(!s.length)return '';
+    const w=s.filter(t=>t.estado==='ganado').length;
+    const pp=s.reduce((a,t)=>a+t.prob,0)/s.length, rr=w/s.length, d=100*(rr-pp);
+    return `<tr><td>${esc(nom)}</td><td class="n">${s.length}</td><td class="n">${w}</td>
+      <td class="n">${pc(pp)}</td><td class="n">${pc(rr)}</td>
+      <td class="n delta ${d>=0?'up':'down'}">${d>=0?'+':''}${d.toFixed(1)} pp</td></tr>`;
+  };
+  h+=fila('Todas',done);
+  for(const [k,n] of [['dia','Por d\u00eda'],['fecha','Por fecha']])
+    h+=fila(n,done.filter(t=>t.tipo===k));
+  for(const n of [2,3,4,5]) h+=fila(`${n} patas`,done.filter(t=>t.patas===n));
+  h+=`</tbody></table></div>`;
+  h+=`<p class="gsub">Apostando 1 a la cuota justa de cada una, el saldo ser\u00eda
+    <b class="num ${saldo>=0?'pos':'neg'}">${saldo>=0?'+':''}${saldo.toFixed(2)}</b>.
+    Cerca de cero significa que el modelo esta bien calibrado; no que se gane plata,
+    porque para eso la casa tiene que pagar por encima de esa cuota.</p>`;
+
+  h+=`<h3 class="gtit">Liquidadas</h3>`;
+  for(const t of done.sort((a,b)=>(b.legs[0]?.ko||'').localeCompare(a.legs[0]?.ko||''))){
+    h+=ticket(t);
+  }
+  return h;
+}
+
 function ticket(t){
   const rango=t.tipo==='fecha'&&t.alcance?`<span class="alc">${esc(t.alcance)}</span>`:'';
-  let h=`<div class="ticket"><div class="thead"><h3>${t.patas} patas</h3>${rango}
+  const cerr=t.estado==='ganado'||t.estado==='perdido';
+  const sello=cerr?`<span class="tag ${t.estado==='ganado'?'won':'lost'}">${t.estado==='ganado'?'Entr\u00f3':'No entr\u00f3'}</span>`:'';
+  let h=`<div class="ticket${cerr?' '+(t.estado==='ganado'?'won':'lost'):''}"><div class="thead"><h3>${t.patas} patas</h3>${rango}${sello}
       <span class="k"><small>Probabilidad</small>${pc(t.prob)}</span>
       <span class="k"><small>Cuota justa</small>${t.cuota.toFixed(2)}</span></div>`;
   for(const l of t.legs){
+    const pk=PICKS.find(x=>x.id===l.id);
+    const mk=pk&&(pk.estado==='ganado'||pk.estado==='perdido')
+      ?`<span class="lr ${pk.estado==='ganado'?'won':'lost'}">${esc(pk.resultado||'')}</span>`:'';
     h+=`<div class="leg"><span class="lp">${(100*l.p).toFixed(0)}%</span>
       <div class="lm"><b>${esc(l.home)} v ${esc(l.away)}</b><span>${esc(LG[l.lg]||l.liga||'')} \u00b7 ${esc(dlabel(l.ko))} \u00b7 ${esc(l.label)}</span></div>
-      <span class="num" style="font-size:12.5px;color:var(--fg-dim)">${l.cuota?l.cuota.toFixed(2):''}</span></div>`;
+      ${mk}<span class="num" style="font-size:12.5px;color:var(--fg-dim)">${l.cuota?l.cuota.toFixed(2):''}</span></div>`;
   }
   return h+'</div>';
 }

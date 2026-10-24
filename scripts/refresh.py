@@ -21,6 +21,7 @@ Los que ya estan cargados se liquidan a mano o caducan; ver EXPIRA_UCL.
 """
 from __future__ import annotations
 
+import hashlib
 import io
 import json
 import os
@@ -820,14 +821,27 @@ def _mejor_combo(pool: list[dict], n: int, multi_dia: bool = False) -> tuple[flo
     return mejor
 
 
-def _ticket(combo, prob, tid, tipo, alcance, hoy):
-    return {"id": tid, "jornada": hoy, "tipo": tipo, "alcance": alcance,
+def _ticket_id(tipo: str, alcance: str, legs: list[dict]) -> str:
+    """Identidad por PATAS, no por fecha de armado.
+
+    Antes el id llevaba el dia en que se armo, asi que la misma combinada generada
+    hoy y manana eran dos tickets distintos y la de ayer se perdia al regenerar:
+    de 12 combinadas de un dia sobrevivieron 2, las unicas que alcanzaron a
+    liquidarse antes del siguiente refresco. Asi nunca habia historial.
+    """
+    firma = "|".join(sorted(l["id"] for l in legs))
+    return f"{tipo}-{slug(alcance)}-{len(legs)}patas-{hashlib.sha1(firma.encode()).hexdigest()[:8]}"
+
+
+def _ticket(combo, prob, tipo, alcance, hoy):
+    legs = [{"id": p["id"], "liga": LGN[p["lg"]], "lg": p["lg"],
+             "home": p["home"], "away": p["away"], "label": p["label"],
+             "p": p["p"], "ko": p["ko"], "key": p["key"], "cuota": p["cuota"]}
+            for p in sorted(combo, key=lambda x: x["ko"])]
+    return {"id": _ticket_id(tipo, alcance, legs), "jornada": hoy,
+            "tipo": tipo, "alcance": alcance,
             "patas": len(combo), "prob": round(prob, 4), "cuota": round(1 / prob, 2),
-            "legs": [{"id": p["id"], "liga": LGN[p["lg"]], "lg": p["lg"],
-                      "home": p["home"], "away": p["away"], "label": p["label"],
-                      "p": p["p"], "ko": p["ko"], "key": p["key"], "cuota": p["cuota"]}
-                     for p in sorted(combo, key=lambda x: x["ko"])],
-            "estado": "pendiente"}
+            "legs": legs, "estado": "pendiente"}
 
 
 DIAS_JORNADA = 4        # una jornada domestica va de viernes a lunes
@@ -862,8 +876,7 @@ def build_parlays(picks: list[dict], hoy: str,
         for n in (2, 3, 4, 5):
             m = _mejor_combo(por_dia[dia], n)
             if m:
-                salida.append(_ticket(m[1], m[0], f"{hoy}__dia-{dia}__{n}patas",
-                                      "dia", dia, hoy))
+                salida.append(_ticket(m[1], m[0], "dia", dia, hoy))
 
     primer = min(por_dia)
     fin = (datetime.strptime(primer, "%Y-%m-%d") + timedelta(days=DIAS_JORNADA)) \
@@ -874,8 +887,8 @@ def build_parlays(picks: list[dict], hoy: str,
         for n in (2, 3, 4, 5):
             m = _mejor_combo(ventana, n, multi_dia=True)
             if m:
-                salida.append(_ticket(m[1], m[0], f"{hoy}__fecha__{n}patas",
-                                      "fecha", f"{primer} a {dias_ventana[-1]}", hoy))
+                salida.append(_ticket(m[1], m[0], "fecha",
+                                      f"{primer} a {dias_ventana[-1]}", hoy))
     return salida
 
 
@@ -1059,11 +1072,32 @@ def main() -> int:
     if solo_liquidar:
         parlays_final = parlays          # ya re-liquidadas arriba, no se rearman
     else:
-        abiertas = build_parlays(final, hoy) if fx is not None else []
-        cerradas = [t for t in parlays if t.get("estado") != "pendiente"]
-        cerradas_ids = {t["id"] for t in cerradas}
-        parlays_final = cerradas + [t for t in abiertas if t["id"] not in cerradas_ids]
-        log(f"  {len(abiertas)} combinadas armadas")
+        abiertas = build_parlays(final, hoy, ahora=today)
+        # Una combinada pendiente se conserva hasta que liquide. Solo se descarta
+        # cuando ya no puede liquidar nunca: todas sus patas quedaron viejas y
+        # ninguna se resolvio, lo que pasa si el pick que la sostenia desaparecio.
+        limite = (today - timedelta(days=10)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        por_id: dict[str, dict] = {}
+        caducadas = 0
+        for t in parlays:
+            if t.get("estado") != "pendiente":
+                por_id[t["id"]] = t
+                continue
+            ultimo = max((l.get("ko", "") for l in t.get("legs", [])), default="")
+            if ultimo < limite:
+                caducadas += 1
+                continue
+            por_id[t["id"]] = t
+        nuevas = 0
+        for t in abiertas:
+            if t["id"] not in por_id:
+                por_id[t["id"]] = t
+                nuevas += 1
+        parlays_final = sorted(por_id.values(),
+                               key=lambda t: (t.get("alcance", ""), t.get("patas", 0)))
+        log(f"  {len(abiertas)} combinadas armadas ({nuevas} nuevas), "
+            f"{sum(1 for t in parlays_final if t['estado'] == 'pendiente')} abiertas"
+            + (f", {caducadas} caducadas" if caducadas else ""))
 
     # Estado por competencia, para que la pagina pueda explicar un vacio en vez de
     # decir "esperá a que carguen", que es mentira cuando no hay fuente de cuotas.
