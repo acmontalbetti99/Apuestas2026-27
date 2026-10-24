@@ -646,5 +646,21 @@
   "ko": "2026-10-24T16:30:00Z",
   "hg": 1,
   "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Lazio",
+  "away": "Parma",
+  "ko": "2026-10-24T18:45:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Atletico Madrid",
+  "away": "Deportivo A Coruna",
+  "ko": "2026-10-24T19:00:00Z",
+  "hg": 1,
+  "ag": 0
  }
 ]
