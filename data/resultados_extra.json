@@ -734,5 +734,45 @@
   "ko": "2026-10-25T14:30:00Z",
   "hg": 3,
   "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Celta de Vigo",
+  "away": "Real Betis",
+  "ko": "2026-10-25T15:15:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Sunderland",
+  "away": "Leeds United",
+  "ko": "2026-10-25T16:30:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Freiburg",
+  "away": "Bayern Munich",
+  "ko": "2026-10-25T16:30:00Z",
+  "hg": 1,
+  "ag": 3
+ },
+ {
+  "lg": "seriea",
+  "home": "Lecce",
+  "away": "Juventus",
+  "ko": "2026-10-25T17:05:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "laliga",
+  "home": "Real Sociedad",
+  "away": "Levante",
+  "ko": "2026-10-25T17:30:00Z",
+  "hg": 2,
+  "ag": 1
  }
 ]
