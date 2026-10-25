@@ -670,5 +670,69 @@
   "ko": "2026-10-25T11:30:00Z",
   "hg": 2,
   "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Athletic Bilbao",
+  "away": "Getafe",
+  "ko": "2026-10-25T13:00:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Crystal Palace",
+  "away": "Newcastle",
+  "ko": "2026-10-25T14:00:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Hull City",
+  "away": "Brentford",
+  "ko": "2026-10-25T14:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "premier",
+  "home": "Liverpool",
+  "away": "Brighton",
+  "ko": "2026-10-25T14:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Manchester United",
+  "away": "AFC Bournemouth",
+  "ko": "2026-10-25T14:00:00Z",
+  "hg": 0,
+  "ag": 3
+ },
+ {
+  "lg": "seriea",
+  "home": "Atalanta",
+  "away": "Frosinone",
+  "ko": "2026-10-25T14:00:00Z",
+  "hg": 4,
+  "ag": 4
+ },
+ {
+  "lg": "seriea",
+  "home": "Genoa",
+  "away": "Venezia",
+  "ko": "2026-10-25T14:00:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Hoffenheim",
+  "away": "Leverkusen",
+  "ko": "2026-10-25T14:30:00Z",
+  "hg": 3,
+  "ag": 0
  }
 ]
