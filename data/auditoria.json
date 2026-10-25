@@ -243,5 +243,139 @@
    "media": 2,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-10-25T14:36:18Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "13 picks de Bundesliga sin liquidar tras 43 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "RB Leipzig v Elversberg (2026-10-24T14:30)",
+     "Colonia v Schalke 04 (2026-10-24T14:30)",
+     "Mainz v Werder Bremen (2026-10-24T14:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "4 picks de Premier League sin liquidar tras 26 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Aston Villa v Manchester City (2026-10-24T12:30)",
+     "Arsenal v Everton (2026-10-24T15:00)",
+     "Coventry v Fulham (2026-10-24T15:00)",
+     "Chelsea v Tottenham (2026-10-24T17:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "4 picks de La Liga sin liquidar tras 26 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Rayo Vallecano v Elche (2026-10-24T13:00)",
+     "Racing Santander v Espanyol (2026-10-24T15:15)",
+     "Valencia v Villarreal (2026-10-24T17:30)",
+     "Atletico Madrid v Deportivo (2026-10-24T20:00)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "4 picks de Serie A sin liquidar tras 25 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Como v Sassuolo (2026-10-24T14:00)",
+     "Cagliari v Bologna (2026-10-24T14:00)",
+     "Napoli v Roma (2026-10-24T17:00)",
+     "Lazio v Parma (2026-10-24T19:45)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 18 picks con precio supera la cuota justa: valor medio -5.34%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "cobertura",
+    "mensaje": "sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "bundesliga": 13,
+    "premier": 4,
+    "laliga": 4,
+    "seriea": 4
+   },
+   "calibracion": {
+    "n": 70,
+    "predicho": 0.7931,
+    "real": 0.7429,
+    "z": -1.05
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 48,
+     "predicho": 0.7944,
+     "real": 0.7708,
+     "z": -0.41
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 18,
+     "predicho": 0.7321,
+     "real": 0.6667,
+     "z": -0.63
+    },
+    "0.75-0.80": {
+     "n": 23,
+     "predicho": 0.7734,
+     "real": 0.6087,
+     "z": -1.89
+    },
+    "0.85-0.90": {
+     "n": 16,
+     "predicho": 0.8694,
+     "real": 0.9375,
+     "z": 0.81
+    }
+   },
+   "valor": {
+    "pendientes": 113,
+    "conPrecioCasa": 18,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0534
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 183,
+    "/data/parlays.json": 24
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 5,
+   "baja": 1
+  }
  }
 ]
