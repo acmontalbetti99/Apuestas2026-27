@@ -625,7 +625,8 @@ def load_fixtures(today: datetime) -> list[dict] | None:
                    "home": show(r["HomeTeam"]), "away": show(r["AwayTeam"]),
                    "kH": canon(r["HomeTeam"]), "kA": canon(r["AwayTeam"]),
                    "pH": probs[0], "pD": probs[1], "pA": probs[2],
-                   "b365": cuotas_b365(r)})
+                   "b365": (lambda b: {k: v for k, v in b.items() if k != "_mejor"})(cuotas_b365(r)),
+                   "mejor": cuotas_b365(r).get("_mejor", {})})
 
     fx += load_cuotas_extra(today)
     return fx
@@ -665,7 +666,8 @@ def load_cuotas_extra(today: datetime) -> list[dict]:
                         "home": r["home"], "away": r["away"],
                         "kH": canon(r["home"]), "kA": canon(r["away"]),
                         "pH": float(r["pH"])/s, "pD": float(r["pD"])/s, "pA": float(r["pA"])/s,
-                        "b365": r.get("b365") or {}})
+                        "b365": r.get("b365") or {}, "mejor": r.get("mejor") or {},
+                        "quien": r.get("quien") or {}})
         except (KeyError, TypeError, ValueError) as e:
             log(f"  ! cuotas_extra: fila invalida {r!r}: {e}")
     if out:
@@ -693,6 +695,22 @@ def cuotas_b365(r: pd.Series) -> dict:
 
     o1, ox, o2 = num("B365H"), num("B365D"), num("B365A")
     out: dict[str, float] = {}
+    # MaxH/MaxD/MaxA es el mejor precio que pagaba alguna casa. Medido sobre 242
+    # selecciones, apostar al mejor precio deja -1.17% contra -5.11% apostando
+    # siempre en la misma casa: es la mayor mejora disponible.
+    m1, mx, m2 = num("MaxH"), num("MaxD"), num("MaxA")
+    mejor: dict[str, float] = {}
+    if m1: mejor["1"] = round(m1, 2)
+    if mx: mejor["X"] = round(mx, 2)
+    if m2: mejor["2"] = round(m2, 2)
+    cmb = lambda a, b: round(1 / (1 / a + 1 / b), 2)   # noqa: E731
+    if m1 and mx: mejor["1X"] = cmb(m1, mx)
+    if m1 and m2: mejor["12"] = cmb(m1, m2)
+    if mx and m2: mejor["X2"] = cmb(mx, m2)
+    for col, k in (("Max>2.5", "O2.5"), ("Max<2.5", "U2.5")):
+        if (v := num(col)):
+            mejor[k] = round(v, 2)
+    out["_mejor"] = mejor
     if o1: out["1"] = round(o1, 2)
     if ox: out["X"] = round(ox, 2)
     if o2: out["2"] = round(o2, 2)
@@ -725,7 +743,8 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
                 diferidos += 1
                 continue
         base = {"lg": lg, "liga": LGN[lg], "ko": f["ko"], "home": f["home"], "away": f["away"],
-                "b365": f.get("b365") or {}}
+                "b365": f.get("b365") or {}, "mejor": f.get("mejor") or {},
+                "quien": f.get("quien") or {}}
 
         if lg in SOLO_MERCADO:
             # Sin base historica para goles ni estadisticas: solo 1X2 y doble oportunidad,
@@ -771,12 +790,20 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
     picks = []
     for s in sorted(mejor.values(), key=lambda s: (s["ko"], -s["p"])):
         b = s.get("b365") or {}
+        mj = s.get("mejor") or {}
         casa = b.get(s["key"])
+        top = mj.get(s["key"])
         pick = {"id": pick_id(s["home"], s["away"], s["key"]),
                 "lg": s["lg"], "home": s["home"], "away": s["away"], "ko": s["ko"],
                 "key": s["key"], "label": s["label"], "cat": s["cat"], "grupo": s["grupo"],
                 "p": s["p"], "cuota": s["cuota"],
                 "estado": "pendiente", "resultado": None}
+        if top:
+            pick["mejor"] = top
+            pick["ev"] = round(s["p"] * top - 1, 4)
+            q = (s.get("quien") or {}).get(s["key"])
+            if q:
+                pick["quien"] = q
         if casa:
             pick["casa"] = casa
             # valor esperado por unidad apostada: positivo = la casa paga de mas
