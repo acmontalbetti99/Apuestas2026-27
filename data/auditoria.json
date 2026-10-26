@@ -377,5 +377,157 @@
    "media": 5,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-10-26T13:48:40Z",
+  "hallazgos": [
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "15 picks de Bundesliga sin liquidar tras 66 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "Stuttgart v Monchengladbach (2026-10-23T19:30)",
+     "RB Leipzig v Elversberg (2026-10-24T14:30)",
+     "Colonia v Schalke 04 (2026-10-24T14:30)",
+     "Mainz v Werder Bremen (2026-10-24T14:30)"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "12 picks de Premier League sin liquidar tras 49 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Aston Villa v Manchester City (2026-10-24T12:30)",
+     "Arsenal v Everton (2026-10-24T15:00)",
+     "Coventry v Fulham (2026-10-24T15:00)",
+     "Chelsea v Tottenham (2026-10-24T17:30)",
+     "Manchester United v Bournemouth (2026-10-25T14:00)",
+     "Crystal Palace v Newcastle (2026-10-25T14:00)"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "8 picks de La Liga sin liquidar tras 49 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Rayo Vallecano v Elche (2026-10-24T13:00)",
+     "Racing Santander v Espanyol (2026-10-24T15:15)",
+     "Valencia v Villarreal (2026-10-24T17:30)",
+     "Atletico Madrid v Deportivo (2026-10-24T20:00)",
+     "Athletic Bilbao v Getafe (2026-10-25T13:00)",
+     "Celta de Vigo v Real Betis (2026-10-25T15:15)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "9 picks de Serie A sin liquidar tras 48 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Como v Sassuolo (2026-10-24T14:00)",
+     "Cagliari v Bologna (2026-10-24T14:00)",
+     "Napoli v Roma (2026-10-24T17:00)",
+     "Lazio v Parma (2026-10-24T19:45)",
+     "Inter v Fiorentina (2026-10-25T11:30)",
+     "Atalanta v Frosinone (2026-10-25T14:00)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 5 picks con precio supera la cuota justa: valor medio -5.28%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "cobertura",
+    "mensaje": "sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "bundesliga": 15,
+    "premier": 12,
+    "laliga": 8,
+    "seriea": 9
+   },
+   "calibracion": {
+    "n": 97,
+    "predicho": 0.7892,
+    "real": 0.7732,
+    "z": -0.39
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 62,
+     "predicho": 0.7922,
+     "real": 0.7742,
+     "z": -0.35
+    },
+    "goles": {
+     "n": 34,
+     "predicho": 0.782,
+     "real": 0.7647,
+     "z": -0.25
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 24,
+     "predicho": 0.7319,
+     "real": 0.625,
+     "z": -1.18
+    },
+    "0.75-0.80": {
+     "n": 36,
+     "predicho": 0.7711,
+     "real": 0.7222,
+     "z": -0.7
+    },
+    "0.80-0.85": {
+     "n": 17,
+     "predicho": 0.8254,
+     "real": 0.8824,
+     "z": 0.62
+    },
+    "0.85-0.90": {
+     "n": 19,
+     "predicho": 0.8684,
+     "real": 0.9474,
+     "z": 1.02
+    }
+   },
+   "valor": {
+    "pendientes": 86,
+    "conPrecioCasa": 5,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0528
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 183,
+    "/data/parlays.json": 31
+   }
+  },
+  "resumen": {
+   "alta": 3,
+   "media": 2,
+   "baja": 1
+  }
  }
 ]

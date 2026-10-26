@@ -1,8 +1,8 @@
-Auditoria 2026-10-25 14:36 UTC
-  [media] liquidacion: 13 picks de Bundesliga sin liquidar tras 43 h (suele ser un nombre de equipo que no coincide)
-  [media] liquidacion: 4 picks de Premier League sin liquidar tras 26 h (suele ser un nombre de equipo que no coincide)
-  [media] liquidacion: 4 picks de La Liga sin liquidar tras 26 h (suele ser un nombre de equipo que no coincide)
-  [media] liquidacion: 4 picks de Serie A sin liquidar tras 25 h (suele ser un nombre de equipo que no coincide)
+Auditoria 2026-10-26 13:48 UTC
+  [alta] liquidacion: 15 picks de Bundesliga sin liquidar tras 66 h (suele ser un nombre de equipo que no coincide)
+  [alta] liquidacion: 12 picks de Premier League sin liquidar tras 49 h (suele ser un nombre de equipo que no coincide)
+  [alta] liquidacion: 8 picks de La Liga sin liquidar tras 49 h (suele ser un nombre de equipo que no coincide)
+  [media] liquidacion: 9 picks de Serie A sin liquidar tras 48 h (suele ser un nombre de equipo que no coincide)
   [media] cobertura: sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas
-  [baja] valor: ninguno de los 18 picks con precio supera la cuota justa: valor medio -5.34%. Es lo esperable, pero conviene no apostarlos
-  0 alta · 5 media · 1 baja
+  [baja] valor: ninguno de los 5 picks con precio supera la cuota justa: valor medio -5.28%. Es lo esperable, pero conviene no apostarlos
+  3 alta · 2 media · 1 baja
