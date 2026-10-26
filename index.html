@@ -289,6 +289,89 @@ function casa(p){
 }
 const conValor=p=>(p.ev!=null?p.ev:(p.valor!=null?p.valor:-1))>0;
 
+/* ---- marcador y minuto en vivo ----------------------------------------------
+   data/picks.json se regenera cada 30 minutos, asi que el marcador no puede salir
+   de ahi. /api/vivo consulta LiveScore al vuelo y esto lo pide cada 45 s, pero solo
+   mientras haya algun pick cuyo partido ya arranco: si no hay nada en juego no se
+   molesta a nadie. */
+const canonJS=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
+  .replace(/\u0142/g,'l').replace(/\u00f8/g,'o').replace(/\u00df/g,'ss')
+  .replace(/\u0111/g,'d').replace(/\u00e6/g,'ae')
+  .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+
+/* Emparejar nombres de dos fuentes distintas (las cuotas vienen de The Odds API,
+   el marcador de LiveScore) no se resuelve con una lista de alias: siempre falta
+   uno. "AFC Bournemouth" vs "Bournemouth", "TSG Hoffenheim" vs "Hoffenheim",
+   "Besiktas JK" vs "Besiktas". Lo que si distingue es la palabra con peso: se
+   descartan las siglas y se exige que coincidan LOS DOS equipos, con lo que un
+   falso positivo es practicamente imposible. */
+/* Solo siglas y articulos. "United", "City" o "Real" NO son ruido: son justo lo que
+   distingue a Manchester United de Manchester City, y a Real Madrid de Real Sociedad. */
+const RUIDO=new Set(['fc','afc','ac','sc','cf','sk','bk','jk','ks','ssc','cd','cp',
+  'club','de','el','la','los','1','04','05','09','1899','1900','1901','tsg','vfb','vfl',
+  'fsv','sv','bsc','rc','rcd','ud','sd','us','nk','hnk','fk','pfc','if','bv','psv','ogc',
+  'calcio','sad','ssd','ac','asd']);
+
+function fichas(n){
+  const t=canonJS(n).split(' ').filter(x=>x&&!RUIDO.has(x));
+  return t.length?t:canonJS(n).split(' ').filter(Boolean);
+}
+/* Un equipo coincide con otro cuando las palabras de uno estan TODAS en el otro.
+   Compartir una sola no alcanza: Manchester United y Manchester City comparten
+   "manchester", y Real Madrid y Real Sociedad comparten "real". */
+const igualFicha=(x,y)=>x===y||(x.length>=5&&y.length>=5&&(x.startsWith(y)||y.startsWith(x)));
+const subconjunto=(A,B)=>A.every(x=>B.some(y=>igualFicha(x,y)));
+const compartenFicha=(a,b)=>{
+  const A=fichas(a), B=fichas(b);
+  return A.length&&B.length&&(subconjunto(A,B)||subconjunto(B,A));
+};
+
+function buscarVivo(p){
+  const al=ESTADO?.aliasVivo||{};
+  const norm=x=>{const c=canonJS(x).replace(/ /g,'-');return al[c]||c};
+  const clave=norm(p.home)+'|'+norm(p.away);
+  if(VIVO.has(clave))return VIVO.get(clave);          // coincidencia exacta primero
+  for(const v of VIVO.values()){                       // si no, por palabra con peso
+    if(compartenFicha(v.hn,p.home)&&compartenFicha(v.an,p.away))return v;
+  }
+  return null;
+}
+
+async function traerVivo(){
+  try{
+    const r=await fetch('/api/vivo',{cache:'no-store'});
+    if(!r.ok)return;
+    const d=await r.json();
+    const m=new Map();
+    for(const q of d.partidos||[]) m.set(q.h+'|'+q.a,q);
+    VIVO=m;
+  }catch(_){ /* sin marcador en vivo la app sigue igual */ }
+}
+
+function hayEnJuego(){
+  return PICKS.some(p=>p.estado==='pendiente'&&new Date(p.ko)<=new Date()
+                       &&new Date(p.ko)>new Date(Date.now()-4*3600e3));
+}
+
+function marcador(p){
+  const v=buscarVivo(p);
+  if(!v)return '';
+  const fin=/^(FT|AET|AP)$/i.test(v.est);
+  const min=v.est&&!fin&&!/^NS$/i.test(v.est)?v.est:(fin?'Final':'');
+  return `<span class="vivo${fin?'':' jugando'}">
+    <b class="num">${v.hg}<em>-</em>${v.ag}</b><small>${esc(min)}</small></span>`;
+}
+
+function cicloVivo(){
+  if(vivoTimer)clearInterval(vivoTimer);
+  if(!hayEnJuego())return;
+  traerVivo().then(render);
+  vivoTimer=setInterval(async()=>{
+    if(!hayEnJuego()){clearInterval(vivoTimer);vivoTimer=null;return}
+    await traerVivo(); render();
+  },45000);
+}
+
 function pickRow(p,showRes){
   const res=showRes&&p.resultado?`<span class="num">${esc(p.resultado)}</span>`:'';
   return `<article class="pick ${st(p)==='pend'?'':st(p)}">
