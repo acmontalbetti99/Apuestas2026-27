@@ -379,7 +379,7 @@
   }
  },
  {
-  "fecha": "2026-10-26T13:48:40Z",
+  "fecha": "2026-10-26T13:54:30Z",
   "hallazgos": [
    {
     "severidad": "alta",
@@ -521,7 +521,7 @@
    },
    "sitio": {
     "/data/picks.json": 183,
-    "/data/parlays.json": 31
+    "/data/parlays.json": 33
    }
   },
   "resumen": {
