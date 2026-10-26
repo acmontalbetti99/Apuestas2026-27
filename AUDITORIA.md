@@ -1,17 +1,17 @@
-# Auditoria · 2026-10-26 13:54 UTC
+# Auditoria · 2026-10-26 14:16 UTC
 
-**3 de severidad alta · 2 media · 1 baja**
+**4 de severidad alta · 1 media · 1 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 15 picks de Bundesliga sin liquidar tras 66 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 15 picks de Bundesliga sin liquidar tras 67 h (suele ser un nombre de equipo que no coincide)
   - `Stuttgart v Monchengladbach (2026-10-23T19:30)`
   - `Stuttgart v Monchengladbach (2026-10-23T19:30)`
   - `Stuttgart v Monchengladbach (2026-10-23T19:30)`
   - `RB Leipzig v Elversberg (2026-10-24T14:30)`
   - `Colonia v Schalke 04 (2026-10-24T14:30)`
   - `Mainz v Werder Bremen (2026-10-24T14:30)`
-- **[liquidacion]** 12 picks de Premier League sin liquidar tras 49 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 12 picks de Premier League sin liquidar tras 50 h (suele ser un nombre de equipo que no coincide)
   - `Aston Villa v Manchester City (2026-10-24T12:30)`
   - `Arsenal v Everton (2026-10-24T15:00)`
   - `Coventry v Fulham (2026-10-24T15:00)`
@@ -25,9 +25,6 @@
   - `Atletico Madrid v Deportivo (2026-10-24T20:00)`
   - `Athletic Bilbao v Getafe (2026-10-25T13:00)`
   - `Celta de Vigo v Real Betis (2026-10-25T15:15)`
-
-## 🟡 Media
-
 - **[liquidacion]** 9 picks de Serie A sin liquidar tras 48 h (suele ser un nombre de equipo que no coincide)
   - `Como v Sassuolo (2026-10-24T14:00)`
   - `Cagliari v Bologna (2026-10-24T14:00)`
@@ -35,6 +32,9 @@
   - `Lazio v Parma (2026-10-24T19:45)`
   - `Inter v Fiorentina (2026-10-25T11:30)`
   - `Atalanta v Frosinone (2026-10-25T14:00)`
+
+## 🟡 Media
+
 - **[cobertura]** sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas
 
 ## ⚪ Baja

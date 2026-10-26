@@ -379,12 +379,12 @@
   }
  },
  {
-  "fecha": "2026-10-26T13:54:30Z",
+  "fecha": "2026-10-26T14:16:31Z",
   "hallazgos": [
    {
     "severidad": "alta",
     "area": "liquidacion",
-    "mensaje": "15 picks de Bundesliga sin liquidar tras 66 h (suele ser un nombre de equipo que no coincide)",
+    "mensaje": "15 picks de Bundesliga sin liquidar tras 67 h (suele ser un nombre de equipo que no coincide)",
     "detalle": [
      "Stuttgart v Monchengladbach (2026-10-23T19:30)",
      "Stuttgart v Monchengladbach (2026-10-23T19:30)",
@@ -397,7 +397,7 @@
    {
     "severidad": "alta",
     "area": "liquidacion",
-    "mensaje": "12 picks de Premier League sin liquidar tras 49 h (suele ser un nombre de equipo que no coincide)",
+    "mensaje": "12 picks de Premier League sin liquidar tras 50 h (suele ser un nombre de equipo que no coincide)",
     "detalle": [
      "Aston Villa v Manchester City (2026-10-24T12:30)",
      "Arsenal v Everton (2026-10-24T15:00)",
@@ -421,7 +421,7 @@
     ]
    },
    {
-    "severidad": "media",
+    "severidad": "alta",
     "area": "liquidacion",
     "mensaje": "9 picks de Serie A sin liquidar tras 48 h (suele ser un nombre de equipo que no coincide)",
     "detalle": [
@@ -525,8 +525,8 @@
    }
   },
   "resumen": {
-   "alta": 3,
-   "media": 2,
+   "alta": 4,
+   "media": 1,
    "baja": 1
   }
  }
