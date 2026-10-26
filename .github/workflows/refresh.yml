@@ -76,6 +76,18 @@ jobs:
         continue-on-error: true
         run: python -u scripts/auditoria.py 2>&1 | tee data/_ultima_auditoria.log
 
+      # Humo de la pagina: que cargue y renderice en un navegador de verdad. Los
+      # tests de Python no ven un error de JavaScript, y por uno la app quedo en
+      # "Cargando..." en produccion.
+      - name: Humo de la pagina
+        id: humo
+        if: steps.modo.outputs.args == ''
+        continue-on-error: true
+        run: |
+          pip install playwright >/dev/null
+          playwright install --with-deps chromium >/dev/null 2>&1
+          python -u scripts/test_pagina.py 2>&1 | tee -a data/_ultima_auditoria.log
+
       - name: Commitear si cambio algo
         if: always()
         run: |
@@ -92,6 +104,12 @@ jobs:
 
       # Va en rojo si la auditoria encontro algo de severidad alta, pero recien
       # ahora, con el informe ya commiteado y visible en AUDITORIA.md.
+      - name: Fallar si la pagina no renderiza
+        if: steps.humo.outcome == 'failure'
+        run: |
+          echo "La pagina no carga o tira un error de JavaScript. Ver el log."
+          exit 1
+
       - name: Fallar si la auditoria encontro algo grave
         if: steps.audit.outcome == 'failure'
         run: |
