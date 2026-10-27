@@ -798,5 +798,29 @@
   "ko": "2026-10-26T20:00:00Z",
   "hg": 2,
   "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Sassuolo",
+  "away": "Lazio",
+  "ko": "2026-10-27T17:30:00Z",
+  "hg": 2,
+  "ag": 6
+ },
+ {
+  "lg": "seriea",
+  "home": "Roma",
+  "away": "Cagliari",
+  "ko": "2026-10-27T19:45:00Z",
+  "hg": 4,
+  "ag": 2
+ },
+ {
+  "lg": "seriea",
+  "home": "Torino",
+  "away": "Como",
+  "ko": "2026-10-27T19:45:00Z",
+  "hg": 1,
+  "ag": 3
  }
 ]
