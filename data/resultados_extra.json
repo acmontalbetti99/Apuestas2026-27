@@ -822,5 +822,45 @@
   "ko": "2026-10-27T19:45:00Z",
   "hg": 1,
   "ag": 3
+ },
+ {
+  "lg": "seriea",
+  "home": "Milan",
+  "away": "Bologna",
+  "ko": "2026-10-28T17:30:00Z",
+  "hg": 2,
+  "ag": 4
+ },
+ {
+  "lg": "seriea",
+  "home": "Parma",
+  "away": "Udinese",
+  "ko": "2026-10-28T17:30:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Venezia",
+  "away": "Inter",
+  "ko": "2026-10-28T17:30:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "seriea",
+  "home": "Genoa",
+  "away": "Juventus",
+  "ko": "2026-10-28T19:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Monza",
+  "away": "Napoli",
+  "ko": "2026-10-28T19:45:00Z",
+  "hg": 1,
+  "ag": 4
  }
 ]
