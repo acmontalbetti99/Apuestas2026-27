@@ -1,0 +1,45 @@
+name: Diagnostico stats
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Por que no llegan las estadisticas
+        run: |
+          exec > data/_diagnostico.log 2>&1
+          python -u - <<'PY2'
+          import sys, json; sys.path.insert(0,'scripts')
+          import refresh as R; R.prefer_ipv4()
+          import pandas as pd, numpy as np
+          for div,lg in (("I1","seriea"),("E0","premier"),("SP1","laliga"),("D1","bundesliga")):
+              d=R.fetch_csv(f"https://www.football-data.co.uk/mmz4281/2627/{div}.csv")
+              if d is None: print(f"{div}: no bajo"); continue
+              d["fecha"]=pd.to_datetime(d["Date"],dayfirst=True,errors="coerce")
+              d=d.dropna(subset=["fecha"]).sort_values("fecha")
+              recientes=d[d.fecha>=pd.Timestamp("2026-10-20")]
+              print(f"\n=== {div} ({lg}) · {len(d)} partidos, {len(recientes)} desde el 20/10")
+              cols=["FTHG","HC","AC","HY","AY","HS","AS","HST","AST"]
+              presentes=[c for c in cols if c in d.columns]
+              print(f"   columnas presentes: {presentes}")
+              if len(recientes):
+                  for c in presentes:
+                      v=pd.to_numeric(recientes[c],errors="coerce")
+                      print(f"   {c:5s}: {v.notna().sum():2d}/{len(recientes)} con dato")
+                  print("   ultimos 5 partidos:")
+                  for _,r in recientes.tail(5).iterrows():
+                      vals=" ".join(f"{c}={r.get(c)}" for c in ("FTHG","FTAG","HC","AC","HY","AY"))
+                      print(f"      {r.fecha:%d/%m} {str(r.HomeTeam)[:16]:16s} v {str(r.AwayTeam)[:16]:16s} {vals}")
+          PY2
+      - name: Publicar
+        if: always()
+        run: |
+          git config user.name montoglory-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A data/_diagnostico.log
+          git diff --staged --quiet || { git commit -m "diag stats"; git push; }
