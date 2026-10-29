@@ -59,6 +59,14 @@ LGN = {"premier": "Premier League", "laliga": "La Liga", "seriea": "Serie A",
 # ofrece lo que ES el mercado (1X2 y doble oportunidad), sin pasar por ningun modelo.
 SOLO_MERCADO = {"ucl", "uel", "uecl", "afcon", "unl", "wcq_eu", "wcq_sa", "copa"}
 
+# Mercados de estadisticas suspendidos por liga. Serie A liquido 17 picks de
+# cornners, tarjetas y atajadas con 64,7% real contra 86,5% predicho (z=-2,63),
+# a cuota media 1,16: a ese precio, acertar 64,7% pierde 25% por apuesta. Coincide
+# con la deriva medida aparte en el PR de recalibracion, que encontro justo en
+# Serie A los desvios mas grandes (amarillas -11,1%, atajadas -12,9%).
+# Se levanta cuando la base recalibrada acumule evidencia de que quedo corregido.
+SIN_ESTADISTICAS = {"seriea"}
+
 # Torneos de selecciones: el pick aparece recien cuando faltan pocos dias, porque la
 # cuota se acerca al cierre y es ahi donde mejor predice. Sobre 7.149 partidos medimos
 # que la cuota de cierre le gana a cualquier modelo propio; la de apertura es peor.
@@ -776,6 +784,8 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
                               "p": round(float(p), 4), "cuota": round(1 / float(p), 2),
                               "grupo": "resultado" if fam == "res" else "goles"})
 
+        if lg in SIN_ESTADISTICAS:
+            continue
         rH = ratios.get((lg, f["kH"], "H"), {})
         rA = ratios.get((lg, f["kA"], "A"), {})
         for k, (lab, p, fam, cat) in SE.stat_markets(lg, pH - pA, f["home"], f["away"], rH, rA).items():
