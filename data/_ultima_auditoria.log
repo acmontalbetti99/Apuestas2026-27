@@ -1,10 +1,12 @@
-Auditoria 2026-10-28 16:51 UTC
-  [alta] liquidacion: 6 picks de Premier League sin liquidar tras 100 h (suele ser un nombre de equipo que no coincide)
-  [alta] liquidacion: 8 picks de La Liga sin liquidar tras 100 h (suele ser un nombre de equipo que no coincide)
-  [alta] liquidacion: 12 picks de Serie A sin liquidar tras 99 h (suele ser un nombre de equipo que no coincide)
-  [alta] liquidacion: 6 picks de Bundesliga sin liquidar tras 98 h (suele ser un nombre de equipo que no coincide)
-  [baja] valor: ninguno de los 7 picks con precio supera la cuota justa: valor medio -6.13%. Es lo esperable, pero conviene no apostarlos
-  4 alta · 0 media · 1 baja
+Auditoria 2026-10-29 17:06 UTC
+  [alta] liquidacion: 6 picks de Premier League sin liquidar tras 125 h (suele ser un nombre de equipo que no coincide)
+  [alta] liquidacion: 8 picks de La Liga sin liquidar tras 124 h (suele ser un nombre de equipo que no coincide)
+  [alta] liquidacion: 17 picks de Serie A sin liquidar tras 123 h (suele ser un nombre de equipo que no coincide)
+  [alta] liquidacion: 6 picks de Bundesliga sin liquidar tras 123 h (suele ser un nombre de equipo que no coincide)
+  [media] combinadas: dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen
+  [media] combinadas: dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen
+  [baja] valor: ninguno de los 2 picks con precio supera la cuota justa: valor medio -5.91%. Es lo esperable, pero conviene no apostarlos
+  4 alta · 2 media · 1 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 86, in <module>
     sys.exit(main())

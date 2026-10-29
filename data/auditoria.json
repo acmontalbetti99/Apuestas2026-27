@@ -830,5 +830,168 @@
    "media": 0,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-10-29T17:06:51Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "6 picks de Premier League sin liquidar tras 125 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Aston Villa v Manchester City (2026-10-24T12:30)",
+     "Arsenal v Everton (2026-10-24T15:00)",
+     "Chelsea v Tottenham (2026-10-24T17:30)",
+     "Crystal Palace v Newcastle (2026-10-25T14:00)",
+     "Liverpool v Brighton (2026-10-25T14:00)",
+     "Sunderland v Leeds United (2026-10-25T16:30)"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "8 picks de La Liga sin liquidar tras 124 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Rayo Vallecano v Elche (2026-10-24T13:00)",
+     "Racing Santander v Espanyol (2026-10-24T15:15)",
+     "Valencia v Villarreal (2026-10-24T17:30)",
+     "Athletic Bilbao v Getafe (2026-10-25T13:00)",
+     "Celta de Vigo v Real Betis (2026-10-25T15:15)",
+     "Real Sociedad v Levante (2026-10-25T17:30)"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "17 picks de Serie A sin liquidar tras 123 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Como v Sassuolo (2026-10-24T14:00)",
+     "Cagliari v Bologna (2026-10-24T14:00)",
+     "Napoli v Roma (2026-10-24T17:00)",
+     "Lazio v Parma (2026-10-24T19:45)",
+     "Inter v Fiorentina (2026-10-25T11:30)",
+     "Atalanta v Frosinone (2026-10-25T14:00)"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "6 picks de Bundesliga sin liquidar tras 123 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "RB Leipzig v Elversberg (2026-10-24T14:30)",
+     "Augsburg v Union Berlin (2026-10-24T14:30)",
+     "Paderborn v Hamburgo (2026-10-24T14:30)",
+     "Dortmund v Eintracht Frankfurt (2026-10-24T17:30)",
+     "Hoffenheim v Leverkusen (2026-10-25T14:30)",
+     "Freiburg v Bayern Munich (2026-10-25T16:30)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 2 picks con precio supera la cuota justa: valor medio -5.91%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "premier": 6,
+    "laliga": 8,
+    "seriea": 17,
+    "bundesliga": 6
+   },
+   "calibracion": {
+    "n": 131,
+    "predicho": 0.7928,
+    "real": 0.7481,
+    "z": -1.27
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 75,
+     "predicho": 0.7925,
+     "real": 0.7333,
+     "z": -1.28
+    },
+    "goles": {
+     "n": 48,
+     "predicho": 0.7808,
+     "real": 0.7708,
+     "z": -0.17
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 31,
+     "predicho": 0.7329,
+     "real": 0.6452,
+     "z": -1.1
+    },
+    "0.75-0.80": {
+     "n": 48,
+     "predicho": 0.7712,
+     "real": 0.7292,
+     "z": -0.69
+    },
+    "0.80-0.85": {
+     "n": 21,
+     "predicho": 0.825,
+     "real": 0.7619,
+     "z": -0.76
+    },
+    "0.85-0.90": {
+     "n": 30,
+     "predicho": 0.8702,
+     "real": 0.8667,
+     "z": -0.06
+    }
+   },
+   "valor": {
+    "pendientes": 100,
+    "conPrecioCasa": 2,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0591
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 231,
+    "/data/parlays.json": 46
+   }
+  },
+  "resumen": {
+   "alta": 4,
+   "media": 2,
+   "baja": 1
+  }
  }
 ]
