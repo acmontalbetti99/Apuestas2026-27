@@ -445,3 +445,38 @@ print(f"  {len(liq)} entraron, {len(o)} quedaron: {[(x['grupo'], x['estado']) fo
 assert len(o) == 2, f"el mismo resultado quedo contado {len(o)} veces"
 assert {x["grupo"] for x in o} == {"goles", "resultado"}
 print("  un solo pick por grupo, sin contar dos veces el mismo resultado: ok")
+
+# ===== regresion: la fuente sin estadisticas no debe tapar a la que si las tiene ====
+print("\n" + "=" * 70)
+print("ESCENARIO 8: dos fuentes para el mismo partido")
+import pandas as _pd
+from refresh import settle as _settle
+_ko = "2026-10-25T14:00:00Z"
+# LiveScore: hora exacta, solo goles. football-data: solo fecha, con estadisticas.
+_filas = _pd.DataFrame([
+  {"HomeTeam": "Crystal Palace", "AwayTeam": "Newcastle",
+   "fecha": _pd.Timestamp("2026-10-25 14:00"), "FTHG": 0.0, "FTAG": 2.0,
+   "HC": None, "AC": None, "HY": None, "AY": None, "HS": None, "AS": None,
+   "HST": None, "AST": None, "savH": None, "savA": None,
+   "kH": R.canon("Crystal Palace"), "kA": R.canon("Newcastle")},
+  {"HomeTeam": "Crystal Palace", "AwayTeam": "Newcastle",
+   "fecha": _pd.Timestamp("2026-10-25 00:00"), "FTHG": 0.0, "FTAG": 2.0,
+   "HC": 7.0, "AC": 4.0, "HY": 3.0, "AY": 3.0, "HS": 12.0, "AS": 9.0,
+   "HST": 4.0, "AST": 5.0, "savH": 3.0, "savA": 4.0,
+   "kH": R.canon("Crystal Palace"), "kA": R.canon("Newcastle")},
+])
+def _pick(key, grupo):
+    return {"id": f"cp-{key}", "lg": "premier", "home": "Crystal Palace", "away": "Newcastle",
+            "ko": _ko, "key": key, "label": key, "cat": "c", "grupo": grupo,
+            "p": 0.75, "cuota": 1.33, "estado": "pendiente", "resultado": None}
+_ps = [_pick("X2", "resultado"), _pick("O1.5", "goles"),
+       _pick("cor_m_o8.5", "estadisticas"), _pick("yel_m_o4.5", "estadisticas"),
+       _pick("sav_h_u4.5", "estadisticas")]
+_n = _settle(_ps, _filas, datetime(2026, 10, 26, 12, 0, tzinfo=timezone.utc))
+for q in _ps:
+    print(f"   {q['key']:12s} {q['grupo']:12s} -> {q['estado']}")
+sin = [q for q in _ps if q["estado"] == "pendiente"]
+assert not sin, f"quedaron sin liquidar: {[q['key'] for q in sin]} (la fuente sin stats tapo a la otra)"
+assert _n["sin_datos"] == 0, f"sin_datos={_n['sin_datos']}"
+print("  las cinco liquidaron, incluidas las de estadisticas: ok")
+print("\nESCENARIO 8 OK")

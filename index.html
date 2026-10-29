@@ -87,6 +87,7 @@ main{padding-block:20px 56px}
   color:var(--fg-faint);margin:22px 0 8px;display:flex;align-items:center;gap:10px}
 .day::after{content:"";flex:1;height:1px;background:var(--line)}
 .day:first-child{margin-top:0}
+.day.esperando{color:var(--fg-dim);margin-top:30px}
 
 /* pick row */
 .pick{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;
@@ -414,8 +415,12 @@ function vacioPicks(){
 
 function renderPicks(){
   const el=document.getElementById('p-picks');
-  const open=PICKS.filter(p=>p.estado==='pendiente'&&inView(p))
-                  .sort((a,b)=>new Date(a.ko)-new Date(b.ko)||b.p-a.p);
+  // Los que ya se jugaron y esperan resultado van AL FINAL: encabezaban la lista
+  // y lo primero que se veia al entrar eran partidos de hace cinco dias.
+  const todos=PICKS.filter(p=>p.estado==='pendiente'&&inView(p));
+  const porJugar=todos.filter(p=>!empezado(p)).sort((a,b)=>new Date(a.ko)-new Date(b.ko)||b.p-a.p);
+  const jugados=todos.filter(empezado).sort((a,b)=>new Date(b.ko)-new Date(a.ko));
+  const open=porJugar.concat(jugados);
   if(!ready){el.innerHTML=skeleton('Cargando los picks de la jornada…');return}
   let h=`<p class="lead">Solo se recomienda lo que el modelo da por encima del <b>65%</b>. Hasta tres picks por partido, uno por familia de mercado, para que no se solapen. La <b>cuota justa</b> es el precio a partir del cual la apuesta deja de perder valor. Al lado va el <b>mejor precio</b> que paga alguna casa del mercado, con su valor esperado: en verde cuando supera la cuota justa, que es la \u00fanica situaci\u00f3n en la que la apuesta gana plata. Medido sobre 242 selecciones y 31 casas, apostar al mejor precio deja \u22121,2% de media contra \u22125,1% apostando siempre en la misma, y el 19% queda en positivo.</p>`+filters(true);
   if(!open.length){

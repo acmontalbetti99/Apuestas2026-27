@@ -501,11 +501,9 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
                         cands.append(r)
         # el mismo cruce se repite entre temporadas: el partido mas cercano al kickoff
         gap = lambda x: abs((x["fecha"].tz_localize("UTC") - ko).total_seconds())
-        r = min(cands, key=gap, default=None)
-        if r is not None and gap(r) > 5 * 86400:
-            r = None
+        cands = [c for c in sorted(cands, key=gap) if gap(c) <= 5 * 86400]
 
-        if r is None:
+        if not cands:
             if (today - ko).days > EXPIRA_UCL:
                 n["caducado"] += 1          # se descarta: no contamina el acierto
                 continue
@@ -513,7 +511,17 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
             n["espera"] += 1
             continue
 
-        hit = settle_key(p["key"], r)
+        # Un mismo partido puede estar dos veces: el de LiveScore, que trae solo
+        # goles, y el de football-data, que trae las estadisticas. Quedarse con el
+        # mas cercano al kickoff elegia siempre el de LiveScore (tiene la hora
+        # exacta) y los mercados de cornners y tarjetas no liquidaban NUNCA.
+        # Se prueban todos y se usa el primero que sepa resolver ESTE mercado.
+        hit, r = None, cands[0]
+        for c in cands:
+            v = settle_key(p["key"], c)
+            if v is not None:
+                hit, r = v, c
+                break
         if hit is None:
             n["sin_datos"] += 1
             vivos.append(p)
