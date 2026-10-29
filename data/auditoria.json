@@ -832,7 +832,7 @@
   }
  },
  {
-  "fecha": "2026-10-29T17:06:51Z",
+  "fecha": "2026-10-29T21:12:40Z",
   "hallazgos": [
    {
     "severidad": "media",
@@ -853,125 +853,83 @@
    {
     "severidad": "alta",
     "area": "liquidacion",
-    "mensaje": "6 picks de Premier League sin liquidar tras 125 h (suele ser un nombre de equipo que no coincide)",
+    "mensaje": "1 picks de Premier League sin liquidar tras 101 h (suele ser un nombre de equipo que no coincide)",
     "detalle": [
-     "Aston Villa v Manchester City (2026-10-24T12:30)",
-     "Arsenal v Everton (2026-10-24T15:00)",
-     "Chelsea v Tottenham (2026-10-24T17:30)",
-     "Crystal Palace v Newcastle (2026-10-25T14:00)",
-     "Liverpool v Brighton (2026-10-25T14:00)",
      "Sunderland v Leeds United (2026-10-25T16:30)"
-    ]
-   },
-   {
-    "severidad": "alta",
-    "area": "liquidacion",
-    "mensaje": "8 picks de La Liga sin liquidar tras 124 h (suele ser un nombre de equipo que no coincide)",
-    "detalle": [
-     "Rayo Vallecano v Elche (2026-10-24T13:00)",
-     "Racing Santander v Espanyol (2026-10-24T15:15)",
-     "Valencia v Villarreal (2026-10-24T17:30)",
-     "Athletic Bilbao v Getafe (2026-10-25T13:00)",
-     "Celta de Vigo v Real Betis (2026-10-25T15:15)",
-     "Real Sociedad v Levante (2026-10-25T17:30)"
-    ]
-   },
-   {
-    "severidad": "alta",
-    "area": "liquidacion",
-    "mensaje": "17 picks de Serie A sin liquidar tras 123 h (suele ser un nombre de equipo que no coincide)",
-    "detalle": [
-     "Como v Sassuolo (2026-10-24T14:00)",
-     "Cagliari v Bologna (2026-10-24T14:00)",
-     "Napoli v Roma (2026-10-24T17:00)",
-     "Lazio v Parma (2026-10-24T19:45)",
-     "Inter v Fiorentina (2026-10-25T11:30)",
-     "Atalanta v Frosinone (2026-10-25T14:00)"
-    ]
-   },
-   {
-    "severidad": "alta",
-    "area": "liquidacion",
-    "mensaje": "6 picks de Bundesliga sin liquidar tras 123 h (suele ser un nombre de equipo que no coincide)",
-    "detalle": [
-     "RB Leipzig v Elversberg (2026-10-24T14:30)",
-     "Augsburg v Union Berlin (2026-10-24T14:30)",
-     "Paderborn v Hamburgo (2026-10-24T14:30)",
-     "Dortmund v Eintracht Frankfurt (2026-10-24T17:30)",
-     "Hoffenheim v Leverkusen (2026-10-25T14:30)",
-     "Freiburg v Bayern Munich (2026-10-25T16:30)"
     ]
    },
    {
     "severidad": "baja",
     "area": "valor",
-    "mensaje": "ninguno de los 2 picks con precio supera la cuota justa: valor medio -5.91%. Es lo esperable, pero conviene no apostarlos",
+    "mensaje": "ninguno de los 1 picks con precio supera la cuota justa: valor medio -4.40%. Es lo esperable, pero conviene no apostarlos",
     "detalle": null
    }
   ],
   "metricas": {
    "sinLiquidar": {
-    "premier": 6,
-    "laliga": 8,
-    "seriea": 17,
-    "bundesliga": 6
+    "premier": 1
    },
    "calibracion": {
-    "n": 131,
-    "predicho": 0.7928,
-    "real": 0.7481,
-    "z": -1.27
+    "n": 169,
+    "predicho": 0.8082,
+    "real": 0.7574,
+    "z": -1.7
    },
    "porGrupo": {
     "resultado": {
-     "n": 75,
+     "n": 76,
      "predicho": 0.7925,
-     "real": 0.7333,
-     "z": -1.28
+     "real": 0.7368,
+     "z": -1.21
     },
     "goles": {
-     "n": 48,
-     "predicho": 0.7808,
-     "real": 0.7708,
-     "z": -0.17
+     "n": 49,
+     "predicho": 0.7801,
+     "real": 0.7755,
+     "z": -0.08
+    },
+    "estadisticas": {
+     "n": 44,
+     "predicho": 0.8667,
+     "real": 0.7727,
+     "z": -1.84
     }
    },
    "porBanda": {
     "0.70-0.75": {
-     "n": 31,
-     "predicho": 0.7329,
-     "real": 0.6452,
-     "z": -1.1
+     "n": 32,
+     "predicho": 0.7334,
+     "real": 0.6562,
+     "z": -0.99
     },
     "0.75-0.80": {
-     "n": 48,
-     "predicho": 0.7712,
-     "real": 0.7292,
-     "z": -0.69
+     "n": 49,
+     "predicho": 0.7716,
+     "real": 0.7347,
+     "z": -0.62
     },
     "0.80-0.85": {
-     "n": 21,
-     "predicho": 0.825,
-     "real": 0.7619,
-     "z": -0.76
+     "n": 24,
+     "predicho": 0.827,
+     "real": 0.75,
+     "z": -1.0
     },
     "0.85-0.90": {
-     "n": 30,
-     "predicho": 0.8702,
-     "real": 0.8667,
-     "z": -0.06
+     "n": 63,
+     "predicho": 0.8694,
+     "real": 0.8254,
+     "z": -1.04
     }
    },
    "valor": {
-    "pendientes": 100,
-    "conPrecioCasa": 2,
+    "pendientes": 62,
+    "conPrecioCasa": 1,
     "conValorPositivo": 0,
-    "valorMedio": -0.0591
+    "valorMedio": -0.044
    },
    "cobertura": {
     "ligasConPicks": [
      "bundesliga",
-     "laliga",
      "premier",
      "seriea",
      "ucl",
@@ -985,11 +943,11 @@
    },
    "sitio": {
     "/data/picks.json": 231,
-    "/data/parlays.json": 46
+    "/data/parlays.json": 49
    }
   },
   "resumen": {
-   "alta": 4,
+   "alta": 1,
    "media": 2,
    "baja": 1
   }
