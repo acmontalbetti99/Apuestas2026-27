@@ -1,10 +1,10 @@
-# Auditoria · 2026-10-29 21:12 UTC
+# Auditoria · 2026-10-30 16:50 UTC
 
-**1 de severidad alta · 2 media · 1 baja**
+**1 de severidad alta · 3 media · 1 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 1 picks de Premier League sin liquidar tras 101 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 1 picks de Premier League sin liquidar tras 120 h (suele ser un nombre de equipo que no coincide)
   - `Sunderland v Leeds United (2026-10-25T16:30)`
 
 ## 🟡 Media
@@ -13,28 +13,29 @@
   - `feyenoord__inter__x2`
 - **[combinadas]** dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen
   - `feyenoord__inter__x2`
+- **[sitio]** el sitio publica 231 picks y el repo tiene 343: el despliegue quedo atras
 
 ## ⚪ Baja
 
-- **[valor]** ninguno de los 1 picks con precio supera la cuota justa: valor medio -4.40%. Es lo esperable, pero conviene no apostarlos
+- **[valor]** ninguno de los 37 picks con precio supera la cuota justa: valor medio -5.40%. Es lo esperable, pero conviene no apostarlos
 
 ## Calibracion
 
 | Corte | n | Predicho | Real | z |
 | --- | ---: | ---: | ---: | ---: |
-| Todo | 169 | 80.8% | 75.7% | -1.70 |
-| resultado | 76 | 79.2% | 73.7% | -1.21 |
-| goles | 49 | 78.0% | 77.5% | -0.08 |
-| estadisticas | 44 | 86.7% | 77.3% | -1.84 |
-| banda 0.70-0.75 | 32 | 73.3% | 65.6% | -0.99 |
-| banda 0.75-0.80 | 49 | 77.2% | 73.5% | -0.62 |
+| Todo | 173 | 80.8% | 75.1% | -1.92 |
+| resultado | 77 | 79.2% | 72.7% | -1.41 |
+| goles | 50 | 78.0% | 76.0% | -0.34 |
+| estadisticas | 46 | 86.7% | 78.3% | -1.69 |
+| banda 0.70-0.75 | 33 | 73.4% | 63.6% | -1.26 |
+| banda 0.75-0.80 | 50 | 77.1% | 72.0% | -0.87 |
 | banda 0.80-0.85 | 24 | 82.7% | 75.0% | -1.00 |
-| banda 0.85-0.90 | 63 | 86.9% | 82.5% | -1.04 |
+| banda 0.85-0.90 | 65 | 87.0% | 83.1% | -0.93 |
 
 `z` compara los aciertos contra los que el propio modelo esperaba, con la varianza Poisson-binomial. Entre -2 y +2 es ruido.
 
 ## Valor contra bet365
 
-- 1 de 62 picks pendientes traen precio de la casa
-- 0 superan la cuota justa · valor medio -4.40%
+- 37 de 170 picks pendientes traen precio de la casa
+- 0 superan la cuota justa · valor medio -5.40%
 
