@@ -878,5 +878,21 @@
   "ko": "2026-10-29T19:45:00Z",
   "hg": 2,
   "ag": 2
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Elversberg",
+  "away": "Mainz 05",
+  "ko": "2026-10-30T19:30:00Z",
+  "hg": 4,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Villarreal",
+  "away": "Espanyol",
+  "ko": "2026-10-30T20:00:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]
