@@ -1038,5 +1038,29 @@
   "ko": "2026-10-31T17:30:00Z",
   "hg": 2,
   "ag": 2
+ },
+ {
+  "lg": "seriea",
+  "home": "Milan",
+  "away": "Inter",
+  "ko": "2026-10-31T19:45:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "premier",
+  "home": "Aston Villa",
+  "away": "Fulham",
+  "ko": "2026-10-31T20:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Barcelona",
+  "away": "Deportivo Alaves",
+  "ko": "2026-10-31T20:00:00Z",
+  "hg": 6,
+  "ag": 1
  }
 ]
