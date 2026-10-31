@@ -910,5 +910,101 @@
   "ko": "2026-10-31T13:00:00Z",
   "hg": 0,
   "ag": 2
+ },
+ {
+  "lg": "seriea",
+  "home": "Bologna",
+  "away": "Monza",
+  "ko": "2026-10-31T14:00:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Augsburg",
+  "away": "Freiburg",
+  "ko": "2026-10-31T14:30:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Leverkusen",
+  "away": "VfB Stuttgart",
+  "ko": "2026-10-31T14:30:00Z",
+  "hg": 2,
+  "ag": 4
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Borussia M'gladbach",
+  "away": "Paderborn",
+  "ko": "2026-10-31T14:30:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Schalke 04",
+  "away": "RB Leipzig",
+  "ko": "2026-10-31T14:30:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Werder Bremen",
+  "away": "Hoffenheim",
+  "ko": "2026-10-31T14:30:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "AFC Bournemouth",
+  "away": "Leeds United",
+  "ko": "2026-10-31T15:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Brentford",
+  "away": "Nottingham Forest",
+  "ko": "2026-10-31T15:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Coventry City",
+  "away": "Sunderland",
+  "ko": "2026-10-31T15:00:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "premier",
+  "home": "Hull City",
+  "away": "Ipswich Town",
+  "ko": "2026-10-31T15:00:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Manchester City",
+  "away": "Brighton",
+  "ko": "2026-10-31T15:00:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Rayo Vallecano",
+  "away": "Celta de Vigo",
+  "ko": "2026-10-31T15:15:00Z",
+  "hg": 3,
+  "ag": 0
  }
 ]
