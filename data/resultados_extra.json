@@ -1006,5 +1006,37 @@
   "ko": "2026-10-31T15:15:00Z",
   "hg": 3,
   "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Udinese",
+  "away": "Roma",
+  "ko": "2026-10-31T17:00:00Z",
+  "hg": 2,
+  "ag": 5
+ },
+ {
+  "lg": "premier",
+  "home": "Tottenham",
+  "away": "Crystal Palace",
+  "ko": "2026-10-31T17:30:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Real Betis",
+  "away": "Malaga",
+  "ko": "2026-10-31T17:30:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Bayern Munich",
+  "away": "Dortmund",
+  "ko": "2026-10-31T17:30:00Z",
+  "hg": 2,
+  "ag": 2
  }
 ]
