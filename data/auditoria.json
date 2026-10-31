@@ -1079,5 +1079,137 @@
    "media": 3,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-10-31T15:53:59Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-ff85d4d5 apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__12"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Premier League sin liquidar tras 143 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Sunderland v Leeds United (2026-10-25T16:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Bundesliga sin liquidar tras 20 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Elversberg v Mainz (2026-10-30T19:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de La Liga sin liquidar tras 20 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Villarreal v Espanyol (2026-10-30T20:00)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 33 picks con precio supera la cuota justa: valor medio -5.37%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "premier": 1,
+    "bundesliga": 1,
+    "laliga": 1
+   },
+   "calibracion": {
+    "n": 181,
+    "predicho": 0.8077,
+    "real": 0.7514,
+    "z": -1.94
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 81,
+     "predicho": 0.7922,
+     "real": 0.7284,
+     "z": -1.43
+    },
+    "goles": {
+     "n": 54,
+     "predicho": 0.7802,
+     "real": 0.7593,
+     "z": -0.37
+    },
+    "estadisticas": {
+     "n": 46,
+     "predicho": 0.8671,
+     "real": 0.7826,
+     "z": -1.69
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 33,
+     "predicho": 0.7336,
+     "real": 0.6364,
+     "z": -1.26
+    },
+    "0.75-0.80": {
+     "n": 55,
+     "predicho": 0.7712,
+     "real": 0.7273,
+     "z": -0.78
+    },
+    "0.80-0.85": {
+     "n": 26,
+     "predicho": 0.8263,
+     "real": 0.7692,
+     "z": -0.77
+    },
+    "0.85-0.90": {
+     "n": 66,
+     "predicho": 0.8695,
+     "real": 0.8182,
+     "z": -1.24
+    }
+   },
+   "valor": {
+    "pendientes": 162,
+    "conPrecioCasa": 33,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0537
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 343,
+    "/data/parlays.json": 65
+   }
+  },
+  "resumen": {
+   "alta": 1,
+   "media": 3,
+   "baja": 1
+  }
  }
 ]
