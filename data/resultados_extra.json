@@ -1062,5 +1062,45 @@
   "ko": "2026-10-31T20:00:00Z",
   "hg": 6,
   "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Como",
+  "away": "Venezia",
+  "ko": "2026-11-01T11:30:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Getafe",
+  "away": "Sevilla",
+  "ko": "2026-11-01T13:00:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Frosinone",
+  "away": "Torino",
+  "ko": "2026-11-01T14:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Lazio",
+  "away": "Cagliari",
+  "ko": "2026-11-01T14:00:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Union Berlin",
+  "away": "FC Cologne",
+  "ko": "2026-11-01T14:30:00Z",
+  "hg": 1,
+  "ag": 1
  }
 ]

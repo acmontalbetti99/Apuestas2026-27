@@ -1211,5 +1211,177 @@
    "media": 3,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-11-01T16:56:26Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "11 picks de Premier League sin liquidar tras 168 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Sunderland v Leeds United (2026-10-25T16:30)",
+     "Chelsea v Manchester United (2026-10-31T12:30)",
+     "Bournemouth v Leeds (2026-10-31T15:00)",
+     "Hull v Ipswich (2026-10-31T15:00)",
+     "Brentford v Nottingham Forest (2026-10-31T15:00)",
+     "Manchester City v Brighton (2026-10-31T15:00)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "11 picks de Bundesliga sin liquidar tras 45 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Elversberg v Mainz (2026-10-30T19:30)",
+     "Leverkusen v Stuttgart (2026-10-31T14:30)",
+     "Augsburg v Freiburg (2026-10-31T14:30)",
+     "Monchengladbach v Paderborn (2026-10-31T14:30)",
+     "Schalke 04 v RB Leipzig (2026-10-31T14:30)",
+     "Werder Bremen v Hoffenheim (2026-10-31T14:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "7 picks de La Liga sin liquidar tras 45 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Villarreal v Espanyol (2026-10-30T20:00)",
+     "Levante v Atletico Madrid (2026-10-31T13:00)",
+     "Rayo Vallecano v Celta de Vigo (2026-10-31T15:15)",
+     "Real Betis v Malaga (2026-10-31T17:30)",
+     "Barcelona v Alaves (2026-10-31T20:00)",
+     "Barcelona v Alaves (2026-10-31T20:00)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "3 picks de Serie A sin liquidar tras 27 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Bologna v Monza (2026-10-31T14:00)",
+     "Udinese v Roma (2026-10-31T17:00)",
+     "Milan v Inter (2026-10-31T19:45)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 16 picks con precio supera la cuota justa: valor medio -5.42%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "sitio",
+    "mensaje": "el sitio publica 343 picks y el repo tiene 344: el despliegue quedo atras",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "premier": 11,
+    "bundesliga": 11,
+    "laliga": 7,
+    "seriea": 3
+   },
+   "calibracion": {
+    "n": 218,
+    "predicho": 0.804,
+    "real": 0.7615,
+    "z": -1.6
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 99,
+     "predicho": 0.7914,
+     "real": 0.7475,
+     "z": -1.09
+    },
+    "goles": {
+     "n": 73,
+     "predicho": 0.7814,
+     "real": 0.7671,
+     "z": -0.3
+    },
+    "estadisticas": {
+     "n": 46,
+     "predicho": 0.8671,
+     "real": 0.7826,
+     "z": -1.69
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 41,
+     "predicho": 0.7339,
+     "real": 0.6585,
+     "z": -1.09
+    },
+    "0.75-0.80": {
+     "n": 71,
+     "predicho": 0.7708,
+     "real": 0.7324,
+     "z": -0.77
+    },
+    "0.80-0.85": {
+     "n": 34,
+     "predicho": 0.8236,
+     "real": 0.7941,
+     "z": -0.45
+    },
+    "0.85-0.90": {
+     "n": 71,
+     "predicho": 0.87,
+     "real": 0.831,
+     "z": -0.98
+    }
+   },
+   "valor": {
+    "pendientes": 126,
+    "conPrecioCasa": 16,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0542
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 343,
+    "/data/parlays.json": 73
+   }
+  },
+  "resumen": {
+   "alta": 1,
+   "media": 6,
+   "baja": 1
+  }
  }
 ]
