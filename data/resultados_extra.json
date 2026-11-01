@@ -1110,5 +1110,53 @@
   "ko": "2026-11-01T15:15:00Z",
   "hg": 0,
   "ag": 3
+ },
+ {
+  "lg": "premier",
+  "home": "Liverpool",
+  "away": "Arsenal",
+  "ko": "2026-11-01T16:30:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Eintracht Frankfurt",
+  "away": "Hamburgo",
+  "ko": "2026-11-01T16:30:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Lecce",
+  "away": "Genoa",
+  "ko": "2026-11-01T17:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "laliga",
+  "home": "Elche",
+  "away": "Valencia",
+  "ko": "2026-11-01T17:30:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Juventus",
+  "away": "Napoli",
+  "ko": "2026-11-01T19:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Athletic Bilbao",
+  "away": "Real Sociedad",
+  "ko": "2026-11-01T20:00:00Z",
+  "hg": 2,
+  "ag": 1
  }
 ]
