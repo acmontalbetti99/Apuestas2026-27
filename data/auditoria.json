@@ -1383,5 +1383,170 @@
    "media": 6,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-11-02T20:32:46Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-10-30-a-2026-11-03-3patas-b9007f48 apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-10-30-a-2026-11-03-4patas-81e15e2e apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2",
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2",
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-ff85d4d5 apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-04-4patas-2fa7ecbb apunta a picks que ya no existen",
+    "detalle": [
+     "aek-athens__real-madrid__x2",
+     "slavia-praha__arsenal__x2"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-04-5patas-90986d2c apunta a picks que ya no existen",
+    "detalle": [
+     "aek-athens__real-madrid__x2",
+     "slavia-praha__arsenal__x2"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Premier League sin liquidar tras 196 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Sunderland v Leeds United (2026-10-25T16:30)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 3 picks con precio supera la cuota justa: valor medio -5.53%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "premier": 1
+   },
+   "calibracion": {
+    "n": 279,
+    "predicho": 0.8095,
+    "real": 0.7742,
+    "z": -1.51
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 112,
+     "predicho": 0.7878,
+     "real": 0.7589,
+     "z": -0.75
+    },
+    "goles": {
+     "n": 86,
+     "predicho": 0.7827,
+     "real": 0.7674,
+     "z": -0.34
+    },
+    "estadisticas": {
+     "n": 81,
+     "predicho": 0.8679,
+     "real": 0.8025,
+     "z": -1.74
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 49,
+     "predicho": 0.7325,
+     "real": 0.6939,
+     "z": -0.61
+    },
+    "0.75-0.80": {
+     "n": 82,
+     "predicho": 0.771,
+     "real": 0.7317,
+     "z": -0.85
+    },
+    "0.80-0.85": {
+     "n": 42,
+     "predicho": 0.8247,
+     "real": 0.7857,
+     "z": -0.66
+    },
+    "0.85-0.90": {
+     "n": 105,
+     "predicho": 0.8704,
+     "real": 0.8381,
+     "z": -0.99
+    }
+   },
+   "valor": {
+    "pendientes": 65,
+    "conPrecioCasa": 3,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0553
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 344,
+    "/data/parlays.json": 79
+   }
+  },
+  "resumen": {
+   "alta": 1,
+   "media": 7,
+   "baja": 1
+  }
  }
 ]

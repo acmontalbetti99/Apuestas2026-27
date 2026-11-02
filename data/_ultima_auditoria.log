@@ -1,13 +1,14 @@
-Auditoria 2026-11-01 16:56 UTC
-  [alta] liquidacion: 11 picks de Premier League sin liquidar tras 168 h (suele ser un nombre de equipo que no coincide)
+Auditoria 2026-11-02 20:32 UTC
+  [alta] liquidacion: 1 picks de Premier League sin liquidar tras 196 h (suele ser un nombre de equipo que no coincide)
+  [media] combinadas: fecha-2026-10-30-a-2026-11-03-3patas-b9007f48 apunta a picks que ya no existen
+  [media] combinadas: fecha-2026-10-30-a-2026-11-03-4patas-81e15e2e apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen
-  [media] liquidacion: 11 picks de Bundesliga sin liquidar tras 45 h (suele ser un nombre de equipo que no coincide)
-  [media] liquidacion: 7 picks de La Liga sin liquidar tras 45 h (suele ser un nombre de equipo que no coincide)
-  [media] liquidacion: 3 picks de Serie A sin liquidar tras 27 h (suele ser un nombre de equipo que no coincide)
-  [media] sitio: el sitio publica 343 picks y el repo tiene 344: el despliegue quedo atras
-  [baja] valor: ninguno de los 16 picks con precio supera la cuota justa: valor medio -5.42%. Es lo esperable, pero conviene no apostarlos
-  1 alta · 6 media · 1 baja
+  [media] combinadas: dia-2026-11-03-4patas-ff85d4d5 apunta a picks que ya no existen
+  [media] combinadas: dia-2026-11-04-4patas-2fa7ecbb apunta a picks que ya no existen
+  [media] combinadas: dia-2026-11-04-5patas-90986d2c apunta a picks que ya no existen
+  [baja] valor: ninguno de los 3 picks con precio supera la cuota justa: valor medio -5.53%. Es lo esperable, pero conviene no apostarlos
+  1 alta · 7 media · 1 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 86, in <module>
     sys.exit(main())
