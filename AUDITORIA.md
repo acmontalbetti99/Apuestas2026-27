@@ -1,10 +1,10 @@
-# Auditoria · 2026-11-02 20:32 UTC
+# Auditoria · 2026-11-03 18:05 UTC
 
-**1 de severidad alta · 7 media · 1 baja**
+**1 de severidad alta · 9 media · 1 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 1 picks de Premier League sin liquidar tras 196 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 1 picks de Premier League sin liquidar tras 218 h (suele ser un nombre de equipo que no coincide)
   - `Sunderland v Leeds United (2026-10-25T16:30)`
 
 ## 🟡 Media
@@ -16,6 +16,10 @@
 - **[combinadas]** dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen
   - `feyenoord__inter__x2`
   - `barcelona__aston-villa__12`
+- **[combinadas]** dia-2026-11-03-3patas-295a2865 apunta a picks que ya no existen
+  - `bod-glimt__lille__12`
+- **[combinadas]** dia-2026-11-03-3patas-c960912e apunta a picks que ya no existen
+  - `bod-glimt__lille__12`
 - **[combinadas]** dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen
   - `feyenoord__inter__x2`
   - `barcelona__aston-villa__12`
@@ -30,25 +34,24 @@
 
 ## ⚪ Baja
 
-- **[valor]** ninguno de los 3 picks con precio supera la cuota justa: valor medio -5.53%. Es lo esperable, pero conviene no apostarlos
+- **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
 
 ## Calibracion
 
 | Corte | n | Predicho | Real | z |
 | --- | ---: | ---: | ---: | ---: |
-| Todo | 279 | 81.0% | 77.4% | -1.51 |
-| resultado | 112 | 78.8% | 75.9% | -0.75 |
-| goles | 86 | 78.3% | 76.7% | -0.34 |
-| estadisticas | 81 | 86.8% | 80.2% | -1.74 |
-| banda 0.70-0.75 | 49 | 73.2% | 69.4% | -0.61 |
-| banda 0.75-0.80 | 82 | 77.1% | 73.2% | -0.85 |
-| banda 0.80-0.85 | 42 | 82.5% | 78.6% | -0.66 |
-| banda 0.85-0.90 | 105 | 87.0% | 83.8% | -0.99 |
+| Todo | 289 | 80.9% | 77.5% | -1.50 |
+| resultado | 115 | 78.7% | 75.6% | -0.81 |
+| goles | 89 | 78.2% | 76.4% | -0.41 |
+| estadisticas | 85 | 86.8% | 81.2% | -1.53 |
+| banda 0.70-0.75 | 51 | 73.2% | 70.6% | -0.43 |
+| banda 0.75-0.80 | 85 | 77.1% | 72.9% | -0.91 |
+| banda 0.80-0.85 | 44 | 82.6% | 77.3% | -0.93 |
+| banda 0.85-0.90 | 108 | 87.1% | 84.3% | -0.87 |
 
 `z` compara los aciertos contra los que el propio modelo esperaba, con la varianza Poisson-binomial. Entre -2 y +2 es ruido.
 
 ## Valor contra bet365
 
-- 3 de 65 picks pendientes traen precio de la casa
-- 0 superan la cuota justa · valor medio -5.53%
+- 0 de 55 picks pendientes traen precio de la casa
 
