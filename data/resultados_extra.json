@@ -1190,5 +1190,21 @@
   "ko": "2026-11-02T20:00:00Z",
   "hg": 2,
   "ag": 1
+ },
+ {
+  "lg": "ucl",
+  "home": "Galatasaray",
+  "away": "VfB Stuttgart",
+  "ko": "2026-11-03T17:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "ucl",
+  "home": "Shakhtar Donetsk",
+  "away": "Sporting CP",
+  "ko": "2026-11-03T17:45:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]
