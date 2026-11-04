@@ -320,7 +320,13 @@ function fichas(n){
 /* Un equipo coincide con otro cuando las palabras de uno estan TODAS en el otro.
    Compartir una sola no alcanza: Manchester United y Manchester City comparten
    "manchester", y Real Madrid y Real Sociedad comparten "real". */
-const igualFicha=(x,y)=>x===y||(x.length>=5&&y.length>=5&&(x.startsWith(y)||y.startsWith(x)));
+/* Exonimos: la misma ciudad en dos idiomas (Slavia Praha / Slavia Prague,
+   Bodø/Glimt / Bodoe/Glimt). Misma tabla que refresh.py, por el mismo motivo:
+   no es un error de transliteracion y no lo arregla ninguna regla general. */
+const EXONIMOS=[['praha','prague'],['bodo','bodoe'],['muenchen','munich'],['koeln','colonia']];
+const esExonimo=(x,y)=>EXONIMOS.some(([a,b])=>(x===a&&y===b)||(x===b&&y===a));
+const igualFicha=(x,y)=>x===y||esExonimo(x,y)
+  ||(x.length>=5&&y.length>=5&&(x.startsWith(y)||y.startsWith(x)));
 const subconjunto=(A,B)=>A.every(x=>B.some(y=>igualFicha(x,y)));
 const compartenFicha=(a,b)=>{
   const A=fichas(a), B=fichas(b);

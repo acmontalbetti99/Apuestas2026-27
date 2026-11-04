@@ -238,8 +238,22 @@ def _dist1(x: str, y: str) -> bool:
     return fallos + (len(y) - j) + (len(x) - i) <= 1
 
 
+# Exonimos: la misma ciudad escrita en dos idiomas. No es una transliteracion
+# (praha/prague difieren en tres letras, no en una) ni un alias de club: es como
+# cada fuente nombra el lugar, y por eso no lo arregla ninguna regla general.
+# Solo entran pares vistos de verdad en el log de liquidacion, nunca a priori.
+EXONIMOS = {frozenset(p) for p in (
+    ("praha", "prague"),      # Slavia Praha / Slavia Prague (LiveScore)
+    ("bodo", "bodoe"),         # Bodø/Glimt / Bodoe/Glimt (LiveScore)
+    ("muenchen", "munich"),
+    ("koeln", "colonia"),
+)}
+
+
 def _igual(x: str, y: str) -> bool:
     if x == y:
+        return True
+    if frozenset((x, y)) in EXONIMOS:
         return True
     if len(x) >= 5 and len(y) >= 5 and (x.startswith(y) or y.startswith(x)):
         return True

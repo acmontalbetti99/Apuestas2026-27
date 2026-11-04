@@ -319,6 +319,11 @@ UNO = [("Lillestroem", "Lillestrom", True), ("Olympiacos", "Olympiakos Piraeus",
        ("Be\u015fikta\u015f", "Besiktas JK", True), ("Hoffenheim", "TSG Hoffenheim", True),
        ("Jagiellonia Bialystok", "Jagiellonia Bia\u0142ystok", True),
        ("Inter", "Inter Milano", True), ("Atalanta", "Atalanta BC", True),
+       # Exonimos: la misma ciudad en dos idiomas. No los arregla la distancia de
+       # edicion, y los tres dejaron picks sin liquidar.
+       ("Slavia Praha", "Slavia Prague", True),
+       ("Bodø/Glimt", "Bodoe/Glimt", True),
+       ("Bayern Munich", "Bayern Muenchen", True),
        # distintos: no deben cruzarse nunca
        ("Valencia", "Palencia", False), ("Lorient", "Lorca", False),
        ("Salzburg", "Hamburg", False), ("Manchester United", "Manchester City", False),
@@ -333,7 +338,11 @@ PAR = [(("Bournemouth", "Milan"), ("AFC Bournemouth", "AC Milan"), True),
        (("FC Midtjylland", "Sint Truiden"), ("FC Midtjylland", "St.Truiden"), True),
        (("Inter", "Shakhtar Donetsk"), ("Inter Miami", "Orlando City"), False),
        (("Sporting CP", "LASK Linz"), ("Sporting Gijon", "Albacete"), False),
-       (("Manchester United", "Roma"), ("Manchester City", "Roma"), False)]
+       (("Manchester United", "Roma"), ("Manchester City", "Roma"), False),
+       (("Slavia Praha", "Arsenal"), ("Slavia Prague", "Arsenal"), True),
+       (("Bodø/Glimt", "Lille"), ("Bodoe/Glimt", "Lille OSC"), True),
+       # el exonimo no debe tapar que son dos clubes de la misma ciudad
+       (("Slavia Praha", "Arsenal"), ("Sparta Praha", "Arsenal"), False)]
 mal = []
 for a, b, e in UNO:
     if mismo_equipo(a, b) != e: mal.append(("equipo", a, b, e))
