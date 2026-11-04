@@ -1286,5 +1286,61 @@
   "ko": "2026-11-04T17:45:00Z",
   "hg": 3,
   "ag": 2
+ },
+ {
+  "lg": "ucl",
+  "home": "Dortmund",
+  "away": "Real Betis",
+  "ko": "2026-11-04T20:00:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "ucl",
+  "home": "FC Porto",
+  "away": "Napoli",
+  "ko": "2026-11-04T20:00:00Z",
+  "hg": 4,
+  "ag": 1
+ },
+ {
+  "lg": "ucl",
+  "home": "Lens",
+  "away": "Como",
+  "ko": "2026-11-04T20:00:00Z",
+  "hg": 1,
+  "ag": 9
+ },
+ {
+  "lg": "ucl",
+  "home": "PSV Eindhoven",
+  "away": "Club Brujas",
+  "ko": "2026-11-04T20:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "ucl",
+  "home": "RB Leipzig",
+  "away": "Manchester City",
+  "ko": "2026-11-04T20:00:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "ucl",
+  "home": "Slavia Prague",
+  "away": "Arsenal",
+  "ko": "2026-11-04T20:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "ucl",
+  "home": "Viking",
+  "away": "Sabah FK",
+  "ko": "2026-11-04T20:00:00Z",
+  "hg": 4,
+  "ag": 1
  }
 ]
