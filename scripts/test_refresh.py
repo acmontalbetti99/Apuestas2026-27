@@ -311,38 +311,16 @@ print("\n" + "=" * 70)
 print("ESCENARIO 5: emparejar nombres entre The Odds API y LiveScore")
 from refresh import mismo_equipo, mismo_partido
 
-# Un solo equipo: permisivo a proposito. "Inter" tiene que coincidir con
-# "Inter Milano", y eso arrastra que tambien coincida con "Inter Miami".
-UNO = [("Lillestroem", "Lillestrom", True), ("Olympiacos", "Olympiakos Piraeus", True),
-       ("Omonia Nicosia", "Omonoia FC", True), ("St.Truiden", "Sint Truiden", True),
-       ("AFC Bournemouth", "Bournemouth", True), ("AC Milan", "Milan", True),
-       ("Be\u015fikta\u015f", "Besiktas JK", True), ("Hoffenheim", "TSG Hoffenheim", True),
-       ("Jagiellonia Bialystok", "Jagiellonia Bia\u0142ystok", True),
-       ("Inter", "Inter Milano", True), ("Atalanta", "Atalanta BC", True),
-       # Exonimos: la misma ciudad en dos idiomas. No los arregla la distancia de
-       # edicion, y los tres dejaron picks sin liquidar.
-       ("Slavia Praha", "Slavia Prague", True),
-       ("Bodø/Glimt", "Bodoe/Glimt", True),
-       ("Bayern Munich", "Bayern Muenchen", True),
-       # distintos: no deben cruzarse nunca
-       ("Valencia", "Palencia", False), ("Lorient", "Lorca", False),
-       ("Salzburg", "Hamburg", False), ("Manchester United", "Manchester City", False),
-       ("Real Madrid", "Real Sociedad", False), ("Atletico Madrid", "Real Madrid", False),
-       ("Celtic", "Celta Vigo", False), ("St. Pauli", "St. Gallen", False),
-       ("Borussia Dortmund", "Borussia Monchengladbach", False),
-       ("Union Berlin", "Union St.Gilloise", False)]
-# Partido completo: es lo que se usa de verdad, y lo que cierra los ambiguos.
-PAR = [(("Bournemouth", "Milan"), ("AFC Bournemouth", "AC Milan"), True),
-       (("Omonoia FC", "Benfica"), ("Omonia Nicosia", "Benfica"), True),
-       (("Lillestrom", "Real Sociedad"), ("Lillestroem", "Real Sociedad"), True),
-       (("FC Midtjylland", "Sint Truiden"), ("FC Midtjylland", "St.Truiden"), True),
-       (("Inter", "Shakhtar Donetsk"), ("Inter Miami", "Orlando City"), False),
-       (("Sporting CP", "LASK Linz"), ("Sporting Gijon", "Albacete"), False),
-       (("Manchester United", "Roma"), ("Manchester City", "Roma"), False),
-       (("Slavia Praha", "Arsenal"), ("Slavia Prague", "Arsenal"), True),
-       (("Bodø/Glimt", "Lille"), ("Bodoe/Glimt", "Lille OSC"), True),
-       # el exonimo no debe tapar que son dos clubes de la misma ciudad
-       (("Slavia Praha", "Arsenal"), ("Sparta Praha", "Arsenal"), False)]
+# El corpus vive en casos_nombres.json porque lo comparte test_pagina.py: el
+# matcher de la pagina tiene que dar lo MISMO que este, y cuando no lo daba la
+# pagina mostraba "Esperando resultado" sobre un partido que el pipeline ya tenia
+# liquidado. Un solo equipo es permisivo a proposito: "Inter" tiene que coincidir
+# con "Inter Milano", y eso arrastra que tambien coincida con "Inter Miami". El
+# partido completo es lo que se usa de verdad, y lo que cierra los ambiguos.
+_CASOS = json.loads((Path(__file__).parent / "casos_nombres.json").read_text("utf-8"))
+UNO = [(a, b, e) for a, b, e in _CASOS["equipo"]]
+PAR = [((h1, a1), (h2, a2), e) for (h1, a1), (h2, a2), e in _CASOS["partido"]]
+
 mal = []
 for a, b, e in UNO:
     if mismo_equipo(a, b) != e: mal.append(("equipo", a, b, e))

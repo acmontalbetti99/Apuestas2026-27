@@ -1,0 +1,52 @@
+{
+  "_": [
+    "Corpus de nombres de equipo tal como los escribe cada fuente, compartido por",
+    "test_refresh.py (el matcher de Python, el que liquida) y test_pagina.py (el",
+    "matcher de JavaScript, el que pega el marcador y liquida en vivo).",
+    "Esta en un archivo aparte porque los dos matchers tienen que dar lo MISMO: ya",
+    "paso que la pagina no reconocia Olympiacos/Olympiakos y el pipeline si, y el",
+    "resultado fue que la pagina mostraba 'Esperando resultado' sobre un partido",
+    "que para el pipeline estaba liquidado.",
+    "Cada caso vino de un log de liquidacion real, no de la imaginacion."
+  ],
+  "equipo": [
+    ["Lillestroem", "Lillestrom", true],
+    ["Olympiacos", "Olympiakos Piraeus", true],
+    ["Omonia Nicosia", "Omonoia FC", true],
+    ["St.Truiden", "Sint Truiden", true],
+    ["AFC Bournemouth", "Bournemouth", true],
+    ["AC Milan", "Milan", true],
+    ["Beşiktaş", "Besiktas JK", true],
+    ["Hoffenheim", "TSG Hoffenheim", true],
+    ["Jagiellonia Bialystok", "Jagiellonia Białystok", true],
+    ["Inter", "Inter Milano", true],
+    ["Atalanta", "Atalanta BC", true],
+    ["Slavia Praha", "Slavia Prague", true],
+    ["Bodø/Glimt", "Bodoe/Glimt", true],
+    ["Bayern Munich", "Bayern Muenchen", true],
+
+    ["Valencia", "Palencia", false],
+    ["Lorient", "Lorca", false],
+    ["Salzburg", "Hamburg", false],
+    ["Manchester United", "Manchester City", false],
+    ["Real Madrid", "Real Sociedad", false],
+    ["Atletico Madrid", "Real Madrid", false],
+    ["Celtic", "Celta Vigo", false],
+    ["St. Pauli", "St. Gallen", false],
+    ["Borussia Dortmund", "Borussia Monchengladbach", false],
+    ["Union Berlin", "Union St.Gilloise", false]
+  ],
+  "partido": [
+    [["Bournemouth", "Milan"], ["AFC Bournemouth", "AC Milan"], true],
+    [["Omonoia FC", "Benfica"], ["Omonia Nicosia", "Benfica"], true],
+    [["Lillestrom", "Real Sociedad"], ["Lillestroem", "Real Sociedad"], true],
+    [["FC Midtjylland", "Sint Truiden"], ["FC Midtjylland", "St.Truiden"], true],
+    [["Slavia Praha", "Arsenal"], ["Slavia Prague", "Arsenal"], true],
+    [["Bodø/Glimt", "Lille"], ["Bodoe/Glimt", "Lille OSC"], true],
+
+    [["Inter", "Shakhtar Donetsk"], ["Inter Miami", "Orlando City"], false],
+    [["Sporting CP", "LASK Linz"], ["Sporting Gijon", "Albacete"], false],
+    [["Manchester United", "Roma"], ["Manchester City", "Roma"], false],
+    [["Slavia Praha", "Arsenal"], ["Sparta Praha", "Arsenal"], false]
+  ]
+}

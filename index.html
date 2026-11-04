@@ -223,7 +223,7 @@ const LG={premier:'Premier League',laliga:'La Liga',seriea:'Serie A',bundesliga:
 const GRP={resultado:'Resultado',goles:'Goles',estadisticas:'Córners, tarjetas, remates y atajadas'};
 const DAYS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const MON=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-let PICKS=[],TICKETS=[],ESTADO=null,soloValor=false,VIVO=new Map(),vivoTimer=null,vivoArrancado=false,league='todas',grupo='todos',tab='picks',ready=false;
+let PICKS=[],TICKETS=[],ESTADO=null,soloValor=false,VIVO=new Map(),FIN=new Map(),vivoTimer=null,vivoArrancado=false,league='todas',grupo='todos',tab='picks',ready=false;
 
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pc=p=>(100*p).toFixed(1)+'%';
@@ -311,7 +311,10 @@ const canonJS=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
 const RUIDO=new Set(['fc','afc','ac','sc','cf','sk','bk','jk','ks','ssc','cd','cp',
   'club','de','el','la','los','1','04','05','09','1899','1900','1901','tsg','vfb','vfl',
   'fsv','sv','bsc','rc','rcd','ud','sd','us','nk','hnk','fk','pfc','if','bv','psv','ogc',
-  'calcio','sad','ssd','ac','asd']);
+  'calcio','sad','ssd','ac','asd',
+  // St./Sint/Saint varia entre fuentes (St.Truiden vs Sint Truiden) y lo que
+  // distingue siempre es lo que viene despues: Pauli, Gallen, Etienne, Truiden.
+  'st','sint','saint']);
 
 function fichas(n){
   const t=canonJS(n).split(' ').filter(x=>x&&!RUIDO.has(x));
@@ -325,24 +328,44 @@ function fichas(n){
    no es un error de transliteracion y no lo arregla ninguna regla general. */
 const EXONIMOS=[['praha','prague'],['bodo','bodoe'],['muenchen','munich'],['koeln','colonia']];
 const esExonimo=(x,y)=>EXONIMOS.some(([a,b])=>(x===a&&y===b)||(x===b&&y===a));
+/* Transliteraciones que difieren en una letra entre fuentes: olympiacos vs
+   olympiakos, lillestroem vs lillestrom, omonia vs omonoia. Exigir que las dos
+   primeras letras coincidan es lo que separa una transliteracion de dos clubes
+   distintos: Valencia y Palencia difieren en la primera. Misma regla que _dist1()
+   en refresh.py; cuando las dos no coinciden, la pagina liquida distinto que el
+   pipeline y eso ya paso. */
+function dist1(x,y){
+  if(x.slice(0,2)!==y.slice(0,2))return false;
+  if(Math.abs(x.length-y.length)>1)return false;
+  if(x.length>y.length){const t=x;x=y;y=t}
+  let i=0,j=0,fallos=0;
+  while(i<x.length&&j<y.length){
+    if(x[i]===y[j]){i++;j++;continue}
+    if(++fallos>1)return false;
+    if(x.length===y.length){i++;j++} else {j++}
+  }
+  return fallos+(y.length-j)+(x.length-i)<=1;
+}
 const igualFicha=(x,y)=>x===y||esExonimo(x,y)
-  ||(x.length>=5&&y.length>=5&&(x.startsWith(y)||y.startsWith(x)));
+  ||(x.length>=5&&y.length>=5&&(x.startsWith(y)||y.startsWith(x)))
+  ||(x.length>=6&&y.length>=6&&dist1(x,y));
 const subconjunto=(A,B)=>A.every(x=>B.some(y=>igualFicha(x,y)));
 const compartenFicha=(a,b)=>{
   const A=fichas(a), B=fichas(b);
   return A.length&&B.length&&(subconjunto(A,B)||subconjunto(B,A));
 };
 
-function buscarVivo(p){
+function buscarEn(mapa,p){
   const al=ESTADO?.aliasVivo||{};
   const norm=x=>{const c=canonJS(x).replace(/ /g,'-');return al[c]||c};
   const clave=norm(p.home)+'|'+norm(p.away);
-  if(VIVO.has(clave))return VIVO.get(clave);          // coincidencia exacta primero
-  for(const v of VIVO.values()){                       // si no, por palabra con peso
+  if(mapa.has(clave))return mapa.get(clave);          // coincidencia exacta primero
+  for(const v of mapa.values()){                       // si no, por palabra con peso
     if(compartenFicha(v.hn,p.home)&&compartenFicha(v.an,p.away))return v;
   }
   return null;
 }
+const buscarVivo=p=>buscarEn(VIVO,p);
 
 async function traerVivo(){
   try{
@@ -354,6 +377,72 @@ async function traerVivo(){
     VIVO=m;
   }catch(_){ /* sin marcador en vivo la app sigue igual */ }
 }
+
+/* ---- liquidacion apenas termina el partido -----------------------------------
+   El cron de Actions esta puesto cada 30 minutos, pero GitHub honra 3 a 6 de esos
+   ~23 turnos por dia: el 4 de noviembre los partidos de las 20:00 UTC quedaron
+   hora y media en "Esperando resultado" con el marcador ya definido. Asi que la
+   pagina liquida sola contra /api/final, que trae los partidos terminados.
+
+   Solo los mercados que dependen del marcador: resultado y total de goles. Las
+   estadisticas (cornners, tarjetas, remates, atajadas) necesitan football-data y
+   se siguen liquidando en la corrida diaria.
+
+   Es la misma fuente y la misma cuenta que usa el pipeline, asi que cuando Actions
+   corre el numero ya coincide; esto solo adelanta lo que se ve. */
+const ES_FINAL=/^(FT|AET|AP|FT_PEN)$/i;
+
+function aciertaMarcador(key,hg,ag){
+  const g=hg+ag;
+  if(key==='1')return hg>ag;
+  if(key==='X')return hg===ag;
+  if(key==='2')return ag>hg;
+  if(key==='1X')return hg>=ag;
+  if(key==='12')return hg!==ag;
+  if(key==='X2')return ag>=hg;
+  const m=/^([OU])(\d+(?:\.\d+)?)$/.exec(key);
+  if(m)return m[1]==='O'?g>Number(m[2]):g<Number(m[2]);
+  return null;                       // mercado que no sale del marcador: no se toca
+}
+
+function liquidarConFinales(){
+  let n=0;
+  for(const p of PICKS){
+    if(p.estado!=='pendiente')continue;
+    if(p.grupo!=='resultado'&&p.grupo!=='goles')continue;
+    const v=buscarEn(FIN,p);
+    if(!v||!ES_FINAL.test(v.est))continue;
+    const ok=aciertaMarcador(p.key,v.hg,v.ag);
+    if(ok===null)continue;
+    p.estado=ok?'ganado':'perdido';
+    p.resultado=`${v.hg}-${v.ag}`;
+    p.provisional=true; n++;
+  }
+  // Una combinada se cae con la primera pata perdida y se gana solo con todas.
+  for(const t of TICKETS){
+    if(t.estado==='ganado'||t.estado==='perdido')continue;
+    const es=t.legs.map(l=>(PICKS.find(x=>x.id===l.id)||{}).estado);
+    if(es.some(e=>e==='perdido')){t.estado='perdido';t.provisional=true;continue}
+    if(es.length&&es.every(e=>e==='ganado')){t.estado='ganado';t.provisional=true}
+  }
+  return n;
+}
+
+async function traerFinal(){
+  try{
+    const r=await fetch('/api/final',{cache:'no-store'});
+    if(!r.ok)return 0;
+    const d=await r.json();
+    const m=new Map();
+    for(const q of d.partidos||[]) m.set(q.h+'|'+q.a,q);
+    FIN=m;
+    return liquidarConFinales();
+  }catch(_){ return 0 }
+}
+
+// Hay algo por liquidar mientras quede un pick de marcador cuyo partido ya empezo.
+const faltaLiquidar=()=>PICKS.some(p=>p.estado==='pendiente'&&new Date(p.ko)<=new Date()
+                                      &&(p.grupo==='resultado'||p.grupo==='goles'));
 
 function hayEnJuego(){
   return PICKS.some(p=>p.estado==='pendiente'&&new Date(p.ko)<=new Date()
@@ -369,13 +458,19 @@ function marcador(p){
     <b class="num">${v.hg}<em>-</em>${v.ag}</b><small>${esc(min)}</small></span>`;
 }
 
+/* Un solo ciclo para las dos cosas: el marcador mientras el partido corre y la
+   liquidacion cuando termina. Se corta cuando no queda nada por mirar, para no
+   consultar la fuente de gusto. */
 function cicloVivo(){
   if(vivoTimer)clearInterval(vivoTimer);
-  if(!hayEnJuego())return;
-  traerVivo().then(render);
+  const algo=()=>hayEnJuego()||faltaLiquidar();
+  if(!algo())return;
+  Promise.all([traerVivo(),traerFinal()]).then(render);
   vivoTimer=setInterval(async()=>{
-    if(!hayEnJuego()){clearInterval(vivoTimer);vivoTimer=null;return}
-    await traerVivo(); render();
+    if(!algo()){clearInterval(vivoTimer);vivoTimer=null;return}
+    if(hayEnJuego())await traerVivo();
+    await traerFinal();
+    render();
   },45000);
 }
 
@@ -393,7 +488,7 @@ function pickRow(p,showRes){
       ${marcador(p)}
       <span class="odds num">${p.cuota.toFixed(2)}<small>cuota justa</small></span>
       ${casa(p)}
-      <span class="tag ${st(p)}">${stw(p)}</span>
+      <span class="tag ${st(p)}"${p.provisional?' title="Liquidado con el resultado en vivo; queda confirmado en el refresco."':''}>${stw(p)}</span>
     </div></article>`;
 }
 
