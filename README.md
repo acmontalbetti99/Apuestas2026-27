@@ -50,13 +50,31 @@ Sobre 7.229 partidos reales de 2021-2025:
 | Córners, tarjetas, remates, atajadas | 213.359 | 76,3% | **75,9%** |
 | Combinadas de 40-52% | 2.625 | 47,2% | **48,0%** |
 
-## El refresco diario
+## El refresco, y por qué la página liquida sola
 
-Una tarea programada corre todos los días a las 05:50 (hora de Lima): liquida los partidos
-terminados, mide el acierto acumulado, ajusta el umbral si el desvío lo justifica y genera los picks
-de lo que viene. Hoy escribe en la base del artifact de Claude. Para que además actualice este repo
-— y con eso Vercel redespliegue solo — hace falta darle permiso de escritura a la app de Claude
-sobre este repositorio.
+`.github/workflows/refresh.yml` corre en GitHub Actions y commitea los datos en este repo, con lo
+que Vercel redespliega solo. Tiene dos cadencias: una corrida completa (`50 10 * * *`), que liquida,
+mide el acierto, ajusta el umbral y genera los picks de lo que viene, y una de solo liquidar
+(`*/30 13-23 * * *`), pensada para cerrar los picks apenas termina el partido.
+
+**Esa segunda cadencia no se cumple.** Están programados unos 23 turnos por día y GitHub ejecuta
+entre 3 y 6; los primeros días de noviembre, 3. El 4 de noviembre los partidos de las 20:00 UTC
+terminaron cerca de las 21:50 y la corrida siguiente recién pasó a las 23:20, a mano: hora y media
+con el marcador definido y el pick en «Esperando resultado». Es cómo GitHub trata los cron de
+schedule, y no se arregla subiendo la frecuencia.
+
+Por eso lo que se ve no depende de Actions. `api/final.js` devuelve los partidos ya terminados (hoy
+y ayer, en UTC) y la página liquida contra eso los mercados que dependen solo del marcador
+—resultado y total de goles— y recalcula las combinadas. Es la misma fuente y la misma cuenta que
+usa el pipeline, así que cuando Actions corre el número ya coincide; el sello lleva un `title` que
+aclara que falta confirmarlo. Córners, tarjetas, remates y atajadas sólo los publica
+football-data.co.uk, así que ésos siguen esperando la corrida completa.
+
+Actions sigue siendo quien liquida de verdad y deja el historial. Si hiciera falta que el repo se
+actualice al mismo ritmo que la página, el camino es un cron externo (cron-job.org o similar) que
+dispare el workflow por la API de GitHub; eso pide un token con permiso de Actions guardado como
+variable de entorno en Vercel, nunca en el repo. Vercel Cron no sirve acá: en el plan Hobby corre
+una vez al día.
 
 ## Lo que esto no es
 
