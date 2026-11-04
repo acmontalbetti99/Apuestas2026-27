@@ -1,5 +1,5 @@
-Auditoria 2026-11-03 18:05 UTC
-  [alta] liquidacion: 1 picks de Premier League sin liquidar tras 218 h (suele ser un nombre de equipo que no coincide)
+Auditoria 2026-11-04 18:15 UTC
+  [alta] liquidacion: 1 picks de Premier League sin liquidar tras 242 h (suele ser un nombre de equipo que no coincide)
   [media] combinadas: fecha-2026-10-30-a-2026-11-03-3patas-b9007f48 apunta a picks que ya no existen
   [media] combinadas: fecha-2026-10-30-a-2026-11-03-4patas-81e15e2e apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen
@@ -7,10 +7,14 @@ Auditoria 2026-11-03 18:05 UTC
   [media] combinadas: dia-2026-11-03-3patas-c960912e apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-03-4patas-ff85d4d5 apunta a picks que ya no existen
+  [media] combinadas: fecha-2026-11-03-a-2026-11-05-2patas-ccc082ae apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-04-4patas-2fa7ecbb apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-04-5patas-90986d2c apunta a picks que ya no existen
+  [media] combinadas: dia-2026-11-05-2patas-cea8e1fa apunta a picks que ya no existen
+  [media] combinadas: dia-2026-11-05-3patas-c7c35987 apunta a picks que ya no existen
+  [media] liquidacion: 1 picks de Champions League sin liquidar tras 22 h (suele ser un nombre de equipo que no coincide)
   [baja] valor: ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
-  1 alta · 9 media · 1 baja
+  1 alta · 13 media · 1 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 86, in <module>
     sys.exit(main())
