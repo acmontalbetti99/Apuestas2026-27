@@ -355,12 +355,19 @@ const compartenFicha=(a,b)=>{
   return A.length&&B.length&&(subconjunto(A,B)||subconjunto(B,A));
 };
 
+/* aliasVivo va de como nombra la FUENTE a como nombramos nosotros (club-brugge ->
+   club-brujas), asi que hay que aplicarlo del lado de la fuente. Aplicarlo del
+   lado del pick no servia de nada y por eso Club Brujas no encontraba su partido:
+   ningun alias tiene nuestra forma como clave. */
 function buscarEn(mapa,p){
   const al=ESTADO?.aliasVivo||{};
-  const norm=x=>{const c=canonJS(x).replace(/ /g,'-');return al[c]||c};
-  const clave=norm(p.home)+'|'+norm(p.away);
+  const mio=x=>canonJS(x).replace(/ /g,'-');
+  const clave=mio(p.home)+'|'+mio(p.away);
   if(mapa.has(clave))return mapa.get(clave);          // coincidencia exacta primero
-  for(const v of mapa.values()){                       // si no, por palabra con peso
+  for(const v of mapa.values()){                       // despues, por alias
+    if((al[v.h]||v.h)+'|'+(al[v.a]||v.a)===clave)return v;
+  }
+  for(const v of mapa.values()){                       // y si no, por palabra con peso
     if(compartenFicha(v.hn,p.home)&&compartenFicha(v.an,p.away))return v;
   }
   return null;

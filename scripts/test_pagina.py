@@ -61,6 +61,11 @@ def humo_liquidacion(pw) -> list[str]:
         dict(id="e", lg="laliga", home="Getafe", away="Osasuna", ko=ayer, key="1X",
              label="Local o empate", cat="Doble oportunidad", grupo="resultado",
              p=0.7, cuota=1.3, estado="pendiente", resultado=None),
+        # solo lo resuelve aliasVivo: Brujas y Brugge no se parecen escritos, y no
+        # tienen que parecerse. Estuvo sin liquidar justamente por esto.
+        dict(id="f", lg="ucl", home="PSV Eindhoven", away="Club Brujas", ko=ayer,
+             key="12", label="Local o visitante", cat="Doble oportunidad",
+             grupo="resultado", p=0.7, cuota=1.3, estado="pendiente", resultado=None),
     ]
     legs = [{"id": x["id"], "lg": x["lg"], "liga": x["lg"], "home": x["home"],
              "away": x["away"], "label": x["label"], "p": x["p"], "ko": x["ko"],
@@ -76,6 +81,8 @@ def humo_liquidacion(pw) -> list[str]:
         # en curso: no debe liquidar nada
         {"lg": "premier", "h": "sunderland", "a": "leeds-united", "hn": "Sunderland",
          "an": "Leeds United", "hg": 1, "ag": 0, "est": "63'"},
+        {"lg": "ucl", "h": "psv-eindhoven", "a": "club-brugge", "hn": "PSV Eindhoven",
+         "an": "Club Brugge", "hg": 1, "ag": 2, "est": "FT"},
     ]}
 
     w = Path(tempfile.mkdtemp(prefix="montoglory-liq-"))
@@ -83,12 +90,14 @@ def humo_liquidacion(pw) -> list[str]:
     (w / "data").mkdir()
     (w / "data" / "picks.json").write_text(json.dumps(picks))
     (w / "data" / "parlays.json").write_text(json.dumps(parlays))
-    (w / "data" / "estado.json").write_text(json.dumps({"fecha": ayer, "conCuotas": []}))
+    (w / "data" / "estado.json").write_text(json.dumps(
+        {"fecha": ayer, "conCuotas": [], "aliasVivo": {"club-brugge": "club-brujas"}}))
     (w / "api").mkdir()
     (w / "api" / "vivo").write_text(json.dumps({"ts": 0, "partidos": []}))
     (w / "api" / "final").write_text(json.dumps(final))
 
-    esperado = {"a": ("ganado", "2-1"), "b": ("ganado", "2-1"), "c": ("perdido", "0-0")}
+    esperado = {"a": ("ganado", "2-1"), "b": ("ganado", "2-1"), "c": ("perdido", "0-0"),
+                "f": ("ganado", "1-2")}
     fallas: list[str] = []
     srv = servir(w, 8813)
     try:
