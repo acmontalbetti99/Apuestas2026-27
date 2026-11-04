@@ -1270,5 +1270,21 @@
   "ko": "2026-11-04T15:30:00Z",
   "hg": 0,
   "ag": 0
+ },
+ {
+  "lg": "ucl",
+  "home": "AEK Athens",
+  "away": "Real Madrid",
+  "ko": "2026-11-04T17:45:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "ucl",
+  "home": "Fenerbahçe",
+  "away": "Liverpool",
+  "ko": "2026-11-04T17:45:00Z",
+  "hg": 3,
+  "ag": 2
  }
 ]
