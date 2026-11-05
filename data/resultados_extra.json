@@ -1342,5 +1342,141 @@
   "ko": "2026-11-04T20:00:00Z",
   "hg": 4,
   "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Milan",
+  "away": "Ferencvaros",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Anderlecht",
+  "away": "FC Salzburg",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Crystal Palace",
+  "away": "Hoffenheim",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Levski Sofia",
+  "away": "Jagiellonia Bialystok",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Lillestroem",
+  "away": "Viktoria Plzen",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "NEC Nijmegen",
+  "away": "Omonia Nicosia",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Real Sociedad",
+  "away": "Lyon",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Sparta Prague",
+  "away": "AFC Bournemouth",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 1,
+  "ag": 3
+ },
+ {
+  "lg": "uecl",
+  "home": "AGF",
+  "away": "SC Braga",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Atalanta",
+  "away": "Kairat Almaty",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Midtjylland",
+  "away": "Ajax",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 1,
+  "ag": 6
+ },
+ {
+  "lg": "uecl",
+  "home": "FK Crvena Zvezda",
+  "away": "Inter Club d'Escaldes",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "KuPS",
+  "away": "Gent",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Lincoln Red Imps FC",
+  "away": "Hajduk Split",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Mjaellby",
+  "away": "Borac Banja Luka",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Thun",
+  "away": "Hearts",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "Trabzonspor",
+  "away": "Freiburg",
+  "ko": "2026-11-05T17:45:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]
