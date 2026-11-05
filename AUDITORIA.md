@@ -1,10 +1,10 @@
-# Auditoria · 2026-11-04 18:15 UTC
+# Auditoria · 2026-11-05 18:19 UTC
 
 **1 de severidad alta · 13 media · 1 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 1 picks de Premier League sin liquidar tras 242 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 1 picks de Premier League sin liquidar tras 266 h (suele ser un nombre de equipo que no coincide)
   - `Sunderland v Leeds United (2026-10-25T16:30)`
 
 ## 🟡 Media
@@ -37,8 +37,7 @@
   - `mjallby-aif__fk-borac-banja-luka__1x`
 - **[combinadas]** dia-2026-11-05-3patas-c7c35987 apunta a picks que ya no existen
   - `real-sociedad__lyon__12`
-- **[liquidacion]** 1 picks de Champions League sin liquidar tras 22 h (suele ser un nombre de equipo que no coincide)
-  - `Bodø/Glimt v Lille (2026-11-03T20:00)`
+- **[sitio]** el sitio publica 344 picks y el repo tiene 362: el despliegue quedo atras
 
 ## ⚪ Baja
 
@@ -48,18 +47,18 @@
 
 | Corte | n | Predicho | Real | z |
 | --- | ---: | ---: | ---: | ---: |
-| Todo | 298 | 80.9% | 77.8% | -1.33 |
-| resultado | 124 | 78.7% | 76.6% | -0.58 |
+| Todo | 308 | 80.8% | 78.2% | -1.17 |
+| resultado | 134 | 78.8% | 77.6% | -0.36 |
 | goles | 89 | 78.2% | 76.4% | -0.41 |
 | estadisticas | 85 | 86.8% | 81.2% | -1.53 |
-| banda 0.70-0.75 | 53 | 73.3% | 69.8% | -0.57 |
-| banda 0.75-0.80 | 90 | 77.0% | 74.4% | -0.59 |
-| banda 0.80-0.85 | 44 | 82.6% | 77.3% | -0.93 |
-| banda 0.85-0.90 | 110 | 87.1% | 84.5% | -0.79 |
+| banda 0.70-0.75 | 54 | 73.3% | 70.4% | -0.49 |
+| banda 0.75-0.80 | 93 | 77.0% | 75.3% | -0.41 |
+| banda 0.80-0.85 | 49 | 82.6% | 77.5% | -0.93 |
+| banda 0.85-0.90 | 111 | 87.1% | 84.7% | -0.75 |
 
 `z` compara los aciertos contra los que el propio modelo esperaba, con la varianza Poisson-binomial. Entre -2 y +2 es ruido.
 
 ## Valor contra bet365
 
-- 0 de 46 picks pendientes traen precio de la casa
+- 0 de 54 picks pendientes traen precio de la casa
 
