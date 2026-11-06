@@ -2142,5 +2142,259 @@
    "media": 13,
    "baja": 1
   }
+ },
+ {
+  "fecha": "2026-11-06T17:42:49Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-10-30-a-2026-11-03-3patas-b9007f48 apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-10-30-a-2026-11-03-4patas-81e15e2e apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2",
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-295a2865 apunta a picks que ya no existen",
+    "detalle": [
+     "bod-glimt__lille__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-c960912e apunta a picks que ya no existen",
+    "detalle": [
+     "bod-glimt__lille__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2",
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-ff85d4d5 apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-03-a-2026-11-05-2patas-ccc082ae apunta a picks que ya no existen",
+    "detalle": [
+     "mjallby-aif__fk-borac-banja-luka__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-04-4patas-2fa7ecbb apunta a picks que ya no existen",
+    "detalle": [
+     "aek-athens__real-madrid__x2",
+     "slavia-praha__arsenal__x2"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-04-5patas-90986d2c apunta a picks que ya no existen",
+    "detalle": [
+     "aek-athens__real-madrid__x2",
+     "slavia-praha__arsenal__x2"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-05-2patas-cea8e1fa apunta a picks que ya no existen",
+    "detalle": [
+     "mjallby-aif__fk-borac-banja-luka__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-05-3patas-c7c35987 apunta a picks que ya no existen",
+    "detalle": [
+     "real-sociedad__lyon__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-25-3patas-ac68f6ad apunta a picks que ya no existen",
+    "detalle": [
+     "atletico-madrid__viking-fk__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-25-4patas-33c0023e apunta a picks que ya no existen",
+    "detalle": [
+     "atletico-madrid__viking-fk__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-25-5patas-91315192 apunta a picks que ya no existen",
+    "detalle": [
+     "atletico-madrid__viking-fk__12"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Premier League sin liquidar tras 289 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Sunderland v Leeds United (2026-10-25T16:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Conference League sin liquidar tras 24 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Red Star Belgrade v Inter Club d'Escaldes (2026-11-05T17:45)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Europa League sin liquidar tras 22 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Hapoel Be'er Sheva v OFI Crete (2026-11-05T20:00)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 39 picks con precio supera la cuota justa: valor medio -5.20%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "sitio",
+    "mensaje": "el sitio publica 362 picks y el repo tiene 497: el despliegue quedo atras",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "premier": 1,
+    "uecl": 1,
+    "uel": 1
+   },
+   "calibracion": {
+    "n": 341,
+    "predicho": 0.8084,
+    "real": 0.7801,
+    "z": -1.34
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 167,
+     "predicho": 0.7921,
+     "real": 0.7725,
+     "z": -0.63
+    },
+    "goles": {
+     "n": 89,
+     "predicho": 0.782,
+     "real": 0.764,
+     "z": -0.41
+    },
+    "estadisticas": {
+     "n": 85,
+     "predicho": 0.8679,
+     "real": 0.8118,
+     "z": -1.53
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 63,
+     "predicho": 0.7333,
+     "real": 0.7302,
+     "z": -0.06
+    },
+    "0.75-0.80": {
+     "n": 100,
+     "predicho": 0.7701,
+     "real": 0.76,
+     "z": -0.24
+    },
+    "0.80-0.85": {
+     "n": 56,
+     "predicho": 0.8268,
+     "real": 0.7857,
+     "z": -0.81
+    },
+    "0.85-0.90": {
+     "n": 121,
+     "predicho": 0.8715,
+     "real": 0.8182,
+     "z": -1.75
+    }
+   },
+   "valor": {
+    "pendientes": 156,
+    "conPrecioCasa": 39,
+    "conValorPositivo": 0,
+    "valorMedio": -0.052
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 362,
+    "/data/parlays.json": 115
+   }
+  },
+  "resumen": {
+   "alta": 1,
+   "media": 18,
+   "baja": 1
+  }
  }
 ]

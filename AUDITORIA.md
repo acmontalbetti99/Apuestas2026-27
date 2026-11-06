@@ -1,10 +1,10 @@
-# Auditoria · 2026-11-05 18:19 UTC
+# Auditoria · 2026-11-06 17:42 UTC
 
-**1 de severidad alta · 13 media · 1 baja**
+**1 de severidad alta · 18 media · 1 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 1 picks de Premier League sin liquidar tras 266 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 1 picks de Premier League sin liquidar tras 289 h (suele ser un nombre de equipo que no coincide)
   - `Sunderland v Leeds United (2026-10-25T16:30)`
 
 ## 🟡 Media
@@ -37,28 +37,39 @@
   - `mjallby-aif__fk-borac-banja-luka__1x`
 - **[combinadas]** dia-2026-11-05-3patas-c7c35987 apunta a picks que ya no existen
   - `real-sociedad__lyon__12`
-- **[sitio]** el sitio publica 344 picks y el repo tiene 362: el despliegue quedo atras
+- **[combinadas]** dia-2026-11-25-3patas-ac68f6ad apunta a picks que ya no existen
+  - `atletico-madrid__viking-fk__12`
+- **[combinadas]** dia-2026-11-25-4patas-33c0023e apunta a picks que ya no existen
+  - `atletico-madrid__viking-fk__12`
+- **[combinadas]** dia-2026-11-25-5patas-91315192 apunta a picks que ya no existen
+  - `atletico-madrid__viking-fk__12`
+- **[liquidacion]** 1 picks de Conference League sin liquidar tras 24 h (suele ser un nombre de equipo que no coincide)
+  - `Red Star Belgrade v Inter Club d'Escaldes (2026-11-05T17:45)`
+- **[liquidacion]** 1 picks de Europa League sin liquidar tras 22 h (suele ser un nombre de equipo que no coincide)
+  - `Hapoel Be'er Sheva v OFI Crete (2026-11-05T20:00)`
+- **[sitio]** el sitio publica 362 picks y el repo tiene 497: el despliegue quedo atras
 
 ## ⚪ Baja
 
-- **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
+- **[valor]** ninguno de los 39 picks con precio supera la cuota justa: valor medio -5.20%. Es lo esperable, pero conviene no apostarlos
 
 ## Calibracion
 
 | Corte | n | Predicho | Real | z |
 | --- | ---: | ---: | ---: | ---: |
-| Todo | 308 | 80.8% | 78.2% | -1.17 |
-| resultado | 134 | 78.8% | 77.6% | -0.36 |
+| Todo | 341 | 80.8% | 78.0% | -1.34 |
+| resultado | 167 | 79.2% | 77.2% | -0.63 |
 | goles | 89 | 78.2% | 76.4% | -0.41 |
 | estadisticas | 85 | 86.8% | 81.2% | -1.53 |
-| banda 0.70-0.75 | 54 | 73.3% | 70.4% | -0.49 |
-| banda 0.75-0.80 | 93 | 77.0% | 75.3% | -0.41 |
-| banda 0.80-0.85 | 49 | 82.6% | 77.5% | -0.93 |
-| banda 0.85-0.90 | 111 | 87.1% | 84.7% | -0.75 |
+| banda 0.70-0.75 | 63 | 73.3% | 73.0% | -0.06 |
+| banda 0.75-0.80 | 100 | 77.0% | 76.0% | -0.24 |
+| banda 0.80-0.85 | 56 | 82.7% | 78.6% | -0.81 |
+| banda 0.85-0.90 | 121 | 87.2% | 81.8% | -1.75 |
 
 `z` compara los aciertos contra los que el propio modelo esperaba, con la varianza Poisson-binomial. Entre -2 y +2 es ruido.
 
 ## Valor contra bet365
 
-- 0 de 54 picks pendientes traen precio de la casa
+- 39 de 156 picks pendientes traen precio de la casa
+- 0 superan la cuota justa · valor medio -5.20%
 
