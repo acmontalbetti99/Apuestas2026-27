@@ -1622,5 +1622,37 @@
   "ko": "2026-11-05T20:00:00Z",
   "hg": 1,
   "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Hamburgo",
+  "away": "Borussia M'gladbach",
+  "ko": "2026-11-06T19:30:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Venezia",
+  "away": "Udinese",
+  "ko": "2026-11-06T19:45:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "premier",
+  "home": "Everton",
+  "away": "Coventry City",
+  "ko": "2026-11-06T20:00:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Sevilla",
+  "away": "Deportivo Alaves",
+  "ko": "2026-11-06T20:00:00Z",
+  "hg": 0,
+  "ag": 0
  }
 ]
