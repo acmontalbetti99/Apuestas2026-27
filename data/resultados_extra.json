@@ -1742,5 +1742,37 @@
   "ko": "2026-11-07T15:15:00Z",
   "hg": 0,
   "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Parma",
+  "away": "Bologna",
+  "ko": "2026-11-07T17:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Nottingham Forest",
+  "away": "Manchester City",
+  "ko": "2026-11-07T17:30:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Osasuna",
+  "away": "Athletic Bilbao",
+  "ko": "2026-11-07T17:30:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "VfB Stuttgart",
+  "away": "Werder Bremen",
+  "ko": "2026-11-07T17:30:00Z",
+  "hg": 1,
+  "ag": 0
  }
 ]
