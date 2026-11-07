@@ -1718,5 +1718,29 @@
   "ko": "2026-11-07T14:30:00Z",
   "hg": 5,
   "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Arsenal",
+  "away": "Hull City",
+  "ko": "2026-11-07T15:00:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Fulham",
+  "away": "Newcastle",
+  "ko": "2026-11-07T15:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Espanyol",
+  "away": "Deportivo A Coruna",
+  "ko": "2026-11-07T15:15:00Z",
+  "hg": 0,
+  "ag": 0
  }
 ]
