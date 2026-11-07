@@ -1654,5 +1654,69 @@
   "ko": "2026-11-06T20:00:00Z",
   "hg": 0,
   "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Leeds United",
+  "away": "Tottenham",
+  "ko": "2026-11-07T12:30:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Malaga",
+  "away": "Racing Santander",
+  "ko": "2026-11-07T13:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "seriea",
+  "home": "Cagliari",
+  "away": "Frosinone",
+  "ko": "2026-11-07T14:00:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Torino",
+  "away": "Lecce",
+  "ko": "2026-11-07T14:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Dortmund",
+  "away": "Elversberg",
+  "ko": "2026-11-07T14:30:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Mainz 05",
+  "away": "Bayern Munich",
+  "ko": "2026-11-07T14:30:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Paderborn",
+  "away": "Eintracht Frankfurt",
+  "ko": "2026-11-07T14:30:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "bundesliga",
+  "home": "RB Leipzig",
+  "away": "Augsburg",
+  "ko": "2026-11-07T14:30:00Z",
+  "hg": 5,
+  "ag": 2
  }
 ]
