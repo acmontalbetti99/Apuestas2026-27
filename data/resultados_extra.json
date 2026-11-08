@@ -1790,5 +1790,77 @@
   "ko": "2026-11-07T20:00:00Z",
   "hg": 0,
   "ag": 3
+ },
+ {
+  "lg": "seriea",
+  "home": "Napoli",
+  "away": "Lazio",
+  "ko": "2026-11-08T11:30:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Elche",
+  "away": "Real Betis",
+  "ko": "2026-11-08T13:00:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Brighton",
+  "away": "Brentford",
+  "ko": "2026-11-08T14:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Crystal Palace",
+  "away": "Liverpool",
+  "ko": "2026-11-08T14:00:00Z",
+  "hg": 1,
+  "ag": 3
+ },
+ {
+  "lg": "premier",
+  "home": "Ipswich Town",
+  "away": "AFC Bournemouth",
+  "ko": "2026-11-08T14:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Sunderland",
+  "away": "Chelsea",
+  "ko": "2026-11-08T14:00:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Genoa",
+  "away": "Milan",
+  "ko": "2026-11-08T14:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "seriea",
+  "home": "Monza",
+  "away": "Atalanta",
+  "ko": "2026-11-08T14:00:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "FC Cologne",
+  "away": "Leverkusen",
+  "ko": "2026-11-08T14:30:00Z",
+  "hg": 1,
+  "ag": 2
  }
 ]
