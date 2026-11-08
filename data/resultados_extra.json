@@ -1774,5 +1774,21 @@
   "ko": "2026-11-07T17:30:00Z",
   "hg": 1,
   "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Roma",
+  "away": "Sassuolo",
+  "ko": "2026-11-07T19:45:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Valencia",
+  "away": "Real Madrid",
+  "ko": "2026-11-07T20:00:00Z",
+  "hg": 0,
+  "ag": 3
  }
 ]
