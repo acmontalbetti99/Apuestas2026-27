@@ -1,7 +1,5 @@
-Auditoria 2026-11-08 16:49 UTC
-  [alta] liquidacion: 8 picks de Premier League sin liquidar tras 336 h (suele ser un nombre de equipo que no coincide)
-  [alta] liquidacion: 1 picks de Conference League sin liquidar tras 71 h (suele ser un nombre de equipo que no coincide)
-  [alta] liquidacion: 1 picks de Europa League sin liquidar tras 69 h (suele ser un nombre de equipo que no coincide)
+Auditoria 2026-11-09 21:08 UTC
+  [alta] liquidacion: 1 picks de Premier League sin liquidar tras 365 h (suele ser un nombre de equipo que no coincide)
   [media] combinadas: fecha-2026-10-30-a-2026-11-03-3patas-b9007f48 apunta a picks que ya no existen
   [media] combinadas: fecha-2026-10-30-a-2026-11-03-4patas-81e15e2e apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen
@@ -14,17 +12,20 @@ Auditoria 2026-11-08 16:49 UTC
   [media] combinadas: dia-2026-11-04-5patas-90986d2c apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-05-2patas-cea8e1fa apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-05-3patas-c7c35987 apunta a picks que ya no existen
+  [media] combinadas: dia-2026-11-05-5patas-61b267cd apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-24-3patas-4573b8a5 apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-24-4patas-350eb335 apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-24-5patas-5e777cab apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-25-3patas-ac68f6ad apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-25-4patas-33c0023e apunta a picks que ya no existen
   [media] combinadas: dia-2026-11-25-5patas-91315192 apunta a picks que ya no existen
-  [media] liquidacion: 12 picks de Bundesliga sin liquidar tras 45 h (suele ser un nombre de equipo que no coincide)
-  [media] liquidacion: 5 picks de Serie A sin liquidar tras 45 h (suele ser un nombre de equipo que no coincide)
-  [media] liquidacion: 7 picks de La Liga sin liquidar tras 45 h (suele ser un nombre de equipo que no coincide)
-  [baja] valor: ninguno de los 15 picks con precio supera la cuota justa: valor medio -5.34%. Es lo esperable, pero conviene no apostarlos
-  3 alta · 21 media · 1 baja
+  [media] calibracion: grupo estadisticas: 77.4% real contra 86.8% predicho sobre 124 (z=-3.07)
+  [media] cobertura: sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas
+  [media] sitio: el sitio publica 497 picks y el repo tiene 503: el despliegue quedo atras
+  [baja] calibracion: banda 85%-90%: 80.2% real contra 87.1% predicho sobre 167 (z=-2.65)
+  [baja] valor: ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
+  [baja] cobertura: ningun pick para hoy (2026-11-09)
+  1 alta · 22 media · 3 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 211, in <module>
     sys.exit(main())
