@@ -1,4 +1,4 @@
-Refresco 2026-11-10 14:45 UTC
+Refresco 2026-11-10 17:33 UTC
 Bajando resultados...
   E0 2627: 100 partidos
   SP1 2627: 119 partidos
@@ -8,26 +8,27 @@ Bajando resultados...
   SP1 2526: 380 partidos
   I1 2526: 380 partidos
   D1 2526: 306 partidos
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:356: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:359: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["fecha"] = pd.to_datetime(D["Date"], dayfirst=True, errors="coerce")
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:363: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:366: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["savH"] = (D["AST"] - D["FTAG"]).clip(lower=0)
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:364: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:367: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
-/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:365: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:368: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
   resultados_extra.json: 242 partidos
   2098 partidos en base
 Liquidando...
-  0 acertados · 0 fallados · 44 en espera · 1 sin estadisticas · 0 caducados
-  7 combinadas cerradas · 19 abiertas
+  0 acertados · 0 fallados · 45 en espera · 1 sin estadisticas · 0 caducados
+  0 combinadas cerradas · 25 abiertas
   acierto 0.7773 vs predicho 0.8093 sobre 458 · umbral 0.682
 Bajando proximos partidos...
   cuotas_extra.json: 67 partidos
   67 partidos con cuotas: 0 de ligas domesticas (goles y estadisticas), 67 de torneos (solo resultado)
   ! ninguna liga domestica juega en esta ventana: no habra picks de goles ni de estadisticas hasta que vuelvan
-  22 partidos de torneo todavia lejos (entran a 3 dias del arranque)
-  45 picks sobre el 68%
+  estadisticas: predicho 86.8% contra real 77.4% sobre 124 (z -3.07), se encoge la probabilidad x0.746
+  21 partidos de torneo todavia lejos (entran a 3 dias del arranque)
+  46 picks sobre el 68%
   1 picks pendientes de dias anteriores se mantienen
-  9 combinadas armadas (6 nuevas), 25 abiertas
-Listo: 504 picks (458 liquidados), 152 combinadas
+  9 combinadas armadas (4 nuevas), 29 abiertas
+Listo: 505 picks (458 liquidados), 156 combinadas

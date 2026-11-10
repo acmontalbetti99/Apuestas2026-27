@@ -3315,7 +3315,7 @@
   }
  },
  {
-  "fecha": "2026-11-10T14:46:30Z",
+  "fecha": "2026-11-10T17:34:34Z",
   "hallazgos": [
    {
     "severidad": "media",
@@ -3495,7 +3495,7 @@
    {
     "severidad": "alta",
     "area": "liquidacion",
-    "mensaje": "1 picks de Premier League sin liquidar tras 382 h (suele ser un nombre de equipo que no coincide)",
+    "mensaje": "1 picks de Premier League sin liquidar tras 385 h (suele ser un nombre de equipo que no coincide)",
     "detalle": [
      "Sunderland v Leeds United (2026-10-25T16:30)"
     ]
@@ -3527,7 +3527,7 @@
    {
     "severidad": "media",
     "area": "sitio",
-    "mensaje": "el sitio publica 503 picks y el repo tiene 504: el despliegue quedo atras",
+    "mensaje": "el sitio publica 504 picks y el repo tiene 505: el despliegue quedo atras",
     "detalle": null
    }
   ],
@@ -3588,7 +3588,7 @@
     }
    },
    "valor": {
-    "pendientes": 46,
+    "pendientes": 47,
     "conPrecioCasa": 0
    },
    "cobertura": {
@@ -3605,8 +3605,8 @@
     "_ultimo_livescore.log": 0.0
    },
    "sitio": {
-    "/data/picks.json": 503,
-    "/data/parlays.json": 146
+    "/data/picks.json": 504,
+    "/data/parlays.json": 152
    }
   },
   "resumen": {
