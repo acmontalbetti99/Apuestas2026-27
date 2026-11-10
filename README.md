@@ -76,6 +76,40 @@ dispare el workflow por la API de GitHub; eso pide un token con permiso de Actio
 variable de entorno en Vercel, nunca en el repo. Vercel Cron no sirve acá: en el plan Hobby corre
 una vez al día.
 
+## Qué mercados hay en cada competencia, y por qué
+
+| | Resultado | Goles | Córners, tarjetas, remates |
+|---|---|---|---|
+| Premier, LaLiga, Serie A, Bundesliga | sí | sí | sí |
+| Champions, Europa, Conference, Nations League, AFCON | sí | sí | **no** |
+
+Las cuatro ligas domésticas salen de football-data.co.uk, que publica el marcador y
+también córners, tarjetas, remates y atajadas de cada partido. Es la única fuente
+gratuita que los da, y sólo cubre esas ligas.
+
+Para las demás competencias, el resultado y los goles salen del **mercado**: el 1X2 del
+consenso de casas y las líneas de goles de `alternate_totals` de The Odds API, pedidas
+por partido dentro de la ventana en la que ya puede generar un pick. Eso no necesita
+modelo propio ni historia: la cuota de cierre le gana a cualquier modelo, y la
+liquidación sólo precisa el marcador, que LiveScore ya trae.
+
+**Córners y tarjetas en esas competencias no se ofrecen, y no es por falta de cuotas.**
+The Odds API las vende (`alternate_totals_corners`, `alternate_totals_cards`). Lo que no
+hay es con qué **liquidarlas**: football-data no cubre esas competencias y el feed de
+LiveScore trae sólo el marcador y el entretiempo (`Tr1`, `Tr2`, `Trh1`, `Trh2`), sin una
+sola estadística — comprobado contra seis rutas candidatas de su API, todas 404. Un pick
+que no se puede cerrar es peor que no tenerlo: queda para siempre esperando resultado y
+no cuenta en la precisión. Para habilitarlos hace falta una fuente de estadísticas que
+cubra torneos; la opción realista es API-Football, que publica córners, tarjetas y
+remates por partido y tiene capa gratuita de 100 consultas al día.
+
+**Remates no tienen mercado de equipo en ninguna parte accesible**: The Odds API sólo
+ofrece remates por jugador, y sólo en las cinco grandes ligas con casas de Estados
+Unidos.
+
+Y una semana de fecha FIFA deja el lado domestico en cero: `estado.json` publica
+`sinLigasDomesticas` y la app lo explica en vez de mostrar un filtro vacío.
+
 ## Lo que esto no es
 
 Nada de lo medido produce ganancia esperada positiva apostando a ciegas. El filtro del 65% selecciona
