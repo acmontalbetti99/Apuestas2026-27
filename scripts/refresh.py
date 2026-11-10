@@ -70,7 +70,7 @@ UMBRAL_BASE = 0.65
 UMBRAL_MAX = 0.80
 CEIL_GOAL, CEIL_STAT = 0.90, 0.88
 MIN_LIQ_AJUSTE = 60          # por debajo de esto el error de muestra supera al ajuste
-MIN_LIQ_GRUPO = 40           # minimo para corregir un grupo por separado
+MIN_LIQ_GRUPO = 20           # minimo de picks liquidados para corregir un cubo
 FACTOR_MIN = 0.3             # tope de cuanto se puede encoger: mas que esto es otro problema
 EXPIRA_UCL = 3               # dias despues del kickoff que un pick de UCL sin resultado sobrevive
 PARLAY_LO, PARLAY_HI = 0.40, 0.52
@@ -638,10 +638,8 @@ def calibrate(picks: list[dict]) -> dict:
         # el modelo viene inflado: se le descuenta el desvio al umbral
         out["umbralVigente"] = round(min(UMBRAL_BASE + (pred - real), UMBRAL_MAX), 4)
     por_grupo, factores = {}, {}
-    for g in ("resultado", "goles", "estadisticas"):
-        s = [p for p in done if p.get("grupo") == g]
-        if not s:
-            continue
+    for g in sorted({cubo(p.get("grupo", ""), p.get("key", "")) for p in done}):
+        s = [p for p in done if cubo(p.get("grupo", ""), p.get("key", "")) == g]
         gp = sum(p["p"] for p in s) / len(s)
         gr = sum(p["estado"] == "ganado" for p in s) / len(s)
         c, z = factor_grupo(s)
@@ -652,6 +650,33 @@ def calibrate(picks: list[dict]) -> dict:
     out["porGrupo"] = por_grupo
     out["factores"] = factores
     return out
+
+
+def cubo(grupo: str, key: str) -> str:
+    """El conjunto de picks contra el que se mide y corrige este pick.
+
+    Resultado y goles van enteros: estan bien calibrados y partirlos solo
+    agregaria ruido. Estadisticas va partida en dos, porque medido sobre 124 picks
+    liquidados las dos mitades no se parecen en nada:
+
+      cornners y tarjetas   n=79  predicho 86.8%  real 82.3%  z -1.19
+      remates y atajadas    n=45  predicho 86.7%  real 68.9%  z -3.52
+
+    No es casualidad que caiga justo ahi: los dos mercados de la segunda mitad
+    salen de los remates al arco de football-data -las atajadas se calculan como
+    remates al arco del rival menos sus goles-, el campo mas irregular de ese
+    dataset. Con un factor unico para todo el grupo, las tarjetas se castigaban de
+    gratis y los remates seguian inflados ocho puntos.
+
+    Partirlo asi se valido fuera de muestra en tres cortes: mejora el log loss
+    -1.1%, -2.7% y -3.7% contra -1.3%, -2.3% y -3.1% del factor por grupo. Gana en
+    dos de tres y mejora cuanto mas historia hay, que es lo que se espera cuando la
+    senal es real y lo que falta es muestra.
+    """
+    if grupo != "estadisticas":
+        return grupo
+    return ("estadisticas/tiros" if str(key).split("_")[0] in ("sho", "sav")
+            else "estadisticas/corners-tarjetas")
 
 
 def z_grupo(s: list[dict]) -> float:
@@ -870,14 +895,14 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
     ahora = ahora or datetime.now(timezone.utc)
     fac = factores or {}
 
-    def ajustada(p: float, grupo: str) -> float:
-        """La probabilidad que se publica, corregida por el desvio medido del grupo.
+    def ajustada(p: float, grupo: str, key: str = "") -> float:
+        """La probabilidad que se publica, corregida por el desvio medido de su cubo.
 
         Se corrige ANTES del umbral y de la cuota justa, a proposito: un mercado
         cuya probabilidad honesta no llega al umbral no se ofrece, y la cuota justa
         de una combinada sale de multiplicar estas, no las crudas.
         """
-        c = fac.get(grupo, 1.0)
+        c = fac.get(cubo(grupo, key), 1.0)
         return 0.5 + c * (float(p) - 0.5) if c < 1.0 else float(p)
 
     todas, diferidos = [], 0
@@ -935,7 +960,7 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
         rH = ratios.get((lg, f["kH"], "H"), {})
         rA = ratios.get((lg, f["kA"], "A"), {})
         for k, (lab, p, fam, cat) in SE.stat_markets(lg, pH - pA, f["home"], f["away"], rH, rA).items():
-            pa = ajustada(p, "estadisticas")
+            pa = ajustada(p, "estadisticas", k)
             if umbral < pa <= CEIL_STAT:
                 todas.append({**base, "key": k, "fam": fam, "cat": cat, "label": lab,
                               "p": round(pa, 4), "pModelo": round(float(p), 4),

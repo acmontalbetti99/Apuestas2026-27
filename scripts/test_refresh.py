@@ -536,7 +536,7 @@ print("\nESCENARIO 9 OK")
 print()
 from refresh import calibrate, build_picks, MIN_LIQ_GRUPO  # noqa: E402
 _AHORA_10 = R.datetime(2026, 11, 26, 12, 0, tzinfo=R.timezone.utc)
-print("ESCENARIO 10: corregir la probabilidad por grupo, no con un umbral global")
+print("ESCENARIO 10: corregir la probabilidad por cubo, no con un umbral global")
 # Por que: con 458 picks liquidados, resultado y goles estaban calibrados y
 # estadisticas predecia 86.8% y acertaba 77.4% (z -3.07). Un umbral global reparte
 # ese castigo entre los tres y no corrige a ninguno, y la probabilidad publicada
@@ -544,19 +544,21 @@ print("ESCENARIO 10: corregir la probabilidad por grupo, no con un umbral global
 # contra 17.2% real.
 
 
-def _lote(grupo, n, p, aciertos):
+def _lote(grupo, n, p, aciertos, key="yel_m_u5.5"):
     """n picks de un grupo, todos con probabilidad p, de los que aciertan `aciertos`."""
-    return [{"grupo": grupo, "p": p, "ko": f"2026-10-{1 + i % 28:02d}T20:00:00Z",
+    return [{"grupo": grupo, "key": key, "p": p,
+             "ko": f"2026-10-{1 + i % 28:02d}T20:00:00Z",
              "estado": "ganado" if i < aciertos else "perdido"} for i in range(n)]
 
 
 # estadisticas: dice 88% y acierta 77 de 100. goles: dice 78% y acierta 78 de 100.
 _cal = calibrate(_lote("estadisticas", 100, 0.88, 77) + _lote("goles", 100, 0.78, 78))
-print(f"   estadisticas: {_cal['porGrupo']['estadisticas']}")
+print(f"   corners/tarjetas: {_cal['porGrupo']['estadisticas/corners-tarjetas']}")
 print(f"   goles:        {_cal['porGrupo']['goles']}")
-assert "estadisticas" in _cal["factores"], "el grupo inflado tiene que corregirse"
+_CUBO_CT = "estadisticas/corners-tarjetas"
+assert _CUBO_CT in _cal["factores"], "el cubo inflado tiene que corregirse"
 assert "goles" not in _cal["factores"], "el grupo calibrado no se toca"
-_c = _cal["factores"]["estadisticas"]
+_c = _cal["factores"][_CUBO_CT]
 # 0.5 + c(0.88-0.5) tiene que dar cerca del 77% real
 assert abs((0.5 + _c * 0.38) - 0.77) < 0.01, f"el factor no reproduce el real: {_c}"
 
@@ -566,9 +568,19 @@ assert not _sube["factores"], f"nunca se infla: {_sube['factores']}"
 print("   un grupo que acierta mas de lo que dice se deja como esta: ok")
 
 # muestra chica: no se persigue ruido
-_poco = calibrate(_lote("estadisticas", 20, 0.88, 12))
-assert not _poco["factores"], f"con 20 picks no se corrige: {_poco['factores']}"
-print(f"   con 20 picks no se corrige (minimo {MIN_LIQ_GRUPO}): ok")
+_poco = calibrate(_lote("estadisticas", MIN_LIQ_GRUPO - 5, 0.88, 10))
+assert not _poco["factores"], f"con pocos picks no se corrige: {_poco['factores']}"
+print(f"   con {MIN_LIQ_GRUPO - 5} picks no se corrige (minimo {MIN_LIQ_GRUPO}): ok")
+
+# y las dos mitades de estadisticas se miden por separado: un lote de remates
+# inflado no debe castigar a las tarjetas, que estan bien
+_mix = calibrate(_lote("estadisticas", 40, 0.88, 35, key="yel_m_u5.5")
+                 + _lote("estadisticas", 40, 0.88, 26, key="sho_h_o3.5"))
+print(f"   tarjetas: {_mix['porGrupo']['estadisticas/corners-tarjetas']}")
+print(f"   remates:  {_mix['porGrupo']['estadisticas/tiros']}")
+assert "estadisticas/tiros" in _mix["factores"], "los remates inflados tienen que corregirse"
+assert _CUBO_CT not in _mix["factores"], \
+    f"las tarjetas estaban bien y no debian castigarse: {_mix['factores']}"
 
 # y el factor se aplica ANTES del umbral y de la cuota justa
 _fx10 = [{"lg": "premier", "home": "Arsenal", "away": "Everton", "ko": "2026-11-28T20:00:00Z",
