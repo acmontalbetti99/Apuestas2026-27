@@ -3315,7 +3315,7 @@
   }
  },
  {
-  "fecha": "2026-11-10T17:34:34Z",
+  "fecha": "2026-11-10T17:49:08Z",
   "hallazgos": [
    {
     "severidad": "media",
@@ -3527,7 +3527,7 @@
    {
     "severidad": "media",
     "area": "sitio",
-    "mensaje": "el sitio publica 504 picks y el repo tiene 505: el despliegue quedo atras",
+    "mensaje": "el sitio publica 505 picks y el repo tiene 512: el despliegue quedo atras",
     "detalle": null
    }
   ],
@@ -3588,7 +3588,7 @@
     }
    },
    "valor": {
-    "pendientes": 47,
+    "pendientes": 54,
     "conPrecioCasa": 0
    },
    "cobertura": {
@@ -3605,8 +3605,8 @@
     "_ultimo_livescore.log": 0.0
    },
    "sitio": {
-    "/data/picks.json": 504,
-    "/data/parlays.json": 152
+    "/data/picks.json": 505,
+    "/data/parlays.json": 156
    }
   },
   "resumen": {
