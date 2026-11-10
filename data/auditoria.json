@@ -3313,5 +3313,306 @@
    "media": 22,
    "baja": 3
   }
+ },
+ {
+  "fecha": "2026-11-10T14:46:30Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-10-30-a-2026-11-03-3patas-b9007f48 apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-10-30-a-2026-11-03-4patas-81e15e2e apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-589daef6 apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2",
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-295a2865 apunta a picks que ya no existen",
+    "detalle": [
+     "bod-glimt__lille__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-3patas-c960912e apunta a picks que ya no existen",
+    "detalle": [
+     "bod-glimt__lille__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-80ac0e5b apunta a picks que ya no existen",
+    "detalle": [
+     "feyenoord__inter__x2",
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-03-4patas-ff85d4d5 apunta a picks que ya no existen",
+    "detalle": [
+     "barcelona__aston-villa__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-03-a-2026-11-05-2patas-ccc082ae apunta a picks que ya no existen",
+    "detalle": [
+     "mjallby-aif__fk-borac-banja-luka__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-04-4patas-2fa7ecbb apunta a picks que ya no existen",
+    "detalle": [
+     "aek-athens__real-madrid__x2",
+     "slavia-praha__arsenal__x2"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-04-5patas-90986d2c apunta a picks que ya no existen",
+    "detalle": [
+     "aek-athens__real-madrid__x2",
+     "slavia-praha__arsenal__x2"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-05-2patas-cea8e1fa apunta a picks que ya no existen",
+    "detalle": [
+     "mjallby-aif__fk-borac-banja-luka__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-05-3patas-c7c35987 apunta a picks que ya no existen",
+    "detalle": [
+     "real-sociedad__lyon__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-05-5patas-61b267cd apunta a picks que ya no existen",
+    "detalle": [
+     "red-star-belgrade__inter-club-d-escaldes__1"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-12-4patas-0b0f920d apunta a picks que ya no existen",
+    "detalle": [
+     "montenegro__latvia__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-12-5patas-85ccefa6 apunta a picks que ya no existen",
+    "detalle": [
+     "montenegro__latvia__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-24-3patas-4573b8a5 apunta a picks que ya no existen",
+    "detalle": [
+     "rb-leipzig__lens__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-24-4patas-350eb335 apunta a picks que ya no existen",
+    "detalle": [
+     "manchester-city__napoli__1x",
+     "real-madrid__psv-eindhoven__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-24-5patas-5e777cab apunta a picks que ya no existen",
+    "detalle": [
+     "rb-leipzig__lens__12",
+     "manchester-city__napoli__1x",
+     "real-madrid__psv-eindhoven__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-25-3patas-ac68f6ad apunta a picks que ya no existen",
+    "detalle": [
+     "atletico-madrid__viking-fk__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-25-4patas-33c0023e apunta a picks que ya no existen",
+    "detalle": [
+     "atletico-madrid__viking-fk__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-25-5patas-91315192 apunta a picks que ya no existen",
+    "detalle": [
+     "atletico-madrid__viking-fk__12"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Premier League sin liquidar tras 382 h (suele ser un nombre de equipo que no coincide)",
+    "detalle": [
+     "Sunderland v Leeds United (2026-10-25T16:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "calibracion",
+    "mensaje": "grupo estadisticas: 77.4% real contra 86.8% predicho sobre 124 (z=-3.07)",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "banda 85%-90%: 80.2% real contra 87.1% predicho sobre 167 (z=-2.65)",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "cobertura",
+    "mensaje": "ningun pick para hoy (2026-11-10)",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "sitio",
+    "mensaje": "el sitio publica 503 picks y el repo tiene 504: el despliegue quedo atras",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "premier": 1
+   },
+   "calibracion": {
+    "n": 458,
+    "predicho": 0.8093,
+    "real": 0.7773,
+    "z": -1.76
+   },
+   "porGrupo": {
+    "resultado": {
+     "n": 206,
+     "predicho": 0.7903,
+     "real": 0.7767,
+     "z": -0.49
+    },
+    "goles": {
+     "n": 128,
+     "predicho": 0.7833,
+     "real": 0.7812,
+     "z": -0.06
+    },
+    "estadisticas": {
+     "n": 124,
+     "predicho": 0.8675,
+     "real": 0.7742,
+     "z": -3.07
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 87,
+     "predicho": 0.7347,
+     "real": 0.7011,
+     "z": -0.71
+    },
+    "0.75-0.80": {
+     "n": 130,
+     "predicho": 0.7712,
+     "real": 0.7846,
+     "z": 0.36
+    },
+    "0.80-0.85": {
+     "n": 73,
+     "predicho": 0.826,
+     "real": 0.7945,
+     "z": -0.71
+    },
+    "0.85-0.90": {
+     "n": 167,
+     "predicho": 0.8711,
+     "real": 0.8024,
+     "z": -2.65
+    }
+   },
+   "valor": {
+    "pendientes": 46,
+    "conPrecioCasa": 0
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "premier",
+     "ucl",
+     "uecl",
+     "uel",
+     "unl"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 503,
+    "/data/parlays.json": 146
+   }
+  },
+  "resumen": {
+   "alta": 1,
+   "media": 23,
+   "baja": 3
+  }
  }
 ]

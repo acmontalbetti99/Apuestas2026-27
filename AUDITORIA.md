@@ -1,10 +1,10 @@
-# Auditoria · 2026-11-09 21:08 UTC
+# Auditoria · 2026-11-10 14:46 UTC
 
-**1 de severidad alta · 22 media · 3 baja**
+**1 de severidad alta · 23 media · 3 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 1 picks de Premier League sin liquidar tras 365 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 1 picks de Premier League sin liquidar tras 382 h (suele ser un nombre de equipo que no coincide)
   - `Sunderland v Leeds United (2026-10-25T16:30)`
 
 ## 🟡 Media
@@ -39,6 +39,10 @@
   - `real-sociedad__lyon__12`
 - **[combinadas]** dia-2026-11-05-5patas-61b267cd apunta a picks que ya no existen
   - `red-star-belgrade__inter-club-d-escaldes__1`
+- **[combinadas]** dia-2026-11-12-4patas-0b0f920d apunta a picks que ya no existen
+  - `montenegro__latvia__1x`
+- **[combinadas]** dia-2026-11-12-5patas-85ccefa6 apunta a picks que ya no existen
+  - `montenegro__latvia__1x`
 - **[combinadas]** dia-2026-11-24-3patas-4573b8a5 apunta a picks que ya no existen
   - `rb-leipzig__lens__12`
 - **[combinadas]** dia-2026-11-24-4patas-350eb335 apunta a picks que ya no existen
@@ -55,14 +59,13 @@
 - **[combinadas]** dia-2026-11-25-5patas-91315192 apunta a picks que ya no existen
   - `atletico-madrid__viking-fk__12`
 - **[calibracion]** grupo estadisticas: 77.4% real contra 86.8% predicho sobre 124 (z=-3.07)
-- **[cobertura]** sin ODDS_API_KEY no se generan picks de Conference League: football-data solo publica ligas domesticas
-- **[sitio]** el sitio publica 497 picks y el repo tiene 503: el despliegue quedo atras
+- **[sitio]** el sitio publica 503 picks y el repo tiene 504: el despliegue quedo atras
 
 ## ⚪ Baja
 
 - **[calibracion]** banda 85%-90%: 80.2% real contra 87.1% predicho sobre 167 (z=-2.65)
 - **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
-- **[cobertura]** ningun pick para hoy (2026-11-09)
+- **[cobertura]** ningun pick para hoy (2026-11-10)
 
 ## Calibracion
 
@@ -81,5 +84,5 @@
 
 ## Valor contra bet365
 
-- 0 de 45 picks pendientes traen precio de la casa
+- 0 de 46 picks pendientes traen precio de la casa
 
