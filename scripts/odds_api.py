@@ -21,6 +21,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -82,6 +83,7 @@ MERCADOS_GOLES = "alternate_totals,btts"
 REGION_GOLES = "eu"
 DIAS_VENTANA = 4          # un dia mas que DIAS_ANTES_TORNEO, para llegar antes
 RESERVA = 60              # creditos que no se gastan nunca, para no dejar sin 1X2
+PAUSA = 0.5               # segundos entre consultas por partido, para no comer 429
 
 # Solo estas lineas: son las que el modelo propio ya usaba y las que la
 # liquidacion sabe cerrar con el marcador.
@@ -317,12 +319,24 @@ def pedir_goles(s, key: str, filas: list[dict], restantes) -> object:
         if restantes is not None and int(restantes) <= RESERVA:
             sin_cuota = True
             continue
-        try:
-            q = s.get(f"{BASE}/sports/{r['sport']}/events/{ev}/odds", timeout=30, params={
-                "apiKey": key, "regions": REGION_GOLES, "markets": MERCADOS_GOLES,
-                "oddsFormat": "decimal", "dateFormat": "iso"})
-        except requests.RequestException as e:
-            log(f"  ! goles de {r['home']} v {r['away']}: {e}")
+        # Una consulta por partido y seguidas: la API corta la rafaga con 429 y la
+        # primera version perdio asi las lineas de cinco partidos. Un respiro entre
+        # consultas y un reintento alcanzan; el 429 no gasta cuota.
+        q = None
+        for intento in range(2):
+            if pedidos or intento:
+                time.sleep(PAUSA * (1 + 2 * intento))
+            try:
+                q = s.get(f"{BASE}/sports/{r['sport']}/events/{ev}/odds", timeout=30, params={
+                    "apiKey": key, "regions": REGION_GOLES, "markets": MERCADOS_GOLES,
+                    "oddsFormat": "decimal", "dateFormat": "iso"})
+            except requests.RequestException as e:
+                log(f"  ! goles de {r['home']} v {r['away']}: {e}")
+                q = None
+                break
+            if q.status_code != 429:
+                break
+        if q is None:
             fallados += 1
             continue
         restantes = q.headers.get("x-requests-remaining", restantes)
