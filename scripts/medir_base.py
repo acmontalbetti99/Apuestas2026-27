@@ -28,9 +28,12 @@ sys.path.insert(0, str(Path(__file__).parent))
 from refresh import DIVS, load_results, log, prefer_ipv4  # noqa: E402
 from stats_engine import BASE, CALIB, DISP  # noqa: E402
 
-# Columnas de football-data por estadistica, (local, visitante).
-COLS = {"cor": ("HC", "AC"), "yel": ("HY", "AY"),
-        "sho": ("HST", "AST"), "sav": ("savH", "savA")}
+# Las columnas las define refresh.py y se importan de ahi a proposito. La primera
+# version de este script las repitio a mano y puso HST/AST para los remates, que
+# son los remates AL ARCO; el modelo usa HS/AS, los remates totales. El resultado
+# fue un desvio del -65% parejo en las cuatro ligas, que es justo como se ve un
+# error de columna y no un envejecimiento: lo real nunca se mueve igual en todas.
+from refresh import STAT_COLS as COLS  # noqa: E402
 DESDE = "2023-07-01"           # mismo recorte que uso el PR, para poder comparar
 
 
