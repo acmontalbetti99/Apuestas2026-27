@@ -1,4 +1,4 @@
-Refresco 2026-11-10 17:47 UTC
+Refresco 2026-11-10 17:51 UTC
 Bajando resultados...
   E0 2627: 100 partidos
   SP1 2627: 119 partidos
@@ -19,8 +19,8 @@ Bajando resultados...
   resultados_extra.json: 242 partidos
   2098 partidos en base
 Liquidando...
-  0 acertados · 0 fallados · 46 en espera · 1 sin estadisticas · 0 caducados
-  0 combinadas cerradas · 29 abiertas
+  0 acertados · 0 fallados · 53 en espera · 1 sin estadisticas · 0 caducados
+  0 combinadas cerradas · 33 abiertas
   acierto 0.7773 vs predicho 0.8093 sobre 458 · umbral 0.682
 Bajando proximos partidos...
   cuotas_extra.json: 67 partidos
@@ -30,5 +30,5 @@ Bajando proximos partidos...
   21 partidos de torneo todavia lejos (entran a 3 dias del arranque)
   53 picks sobre el 68%
   1 picks pendientes de dias anteriores se mantienen
-  7 combinadas armadas (4 nuevas), 33 abiertas
+  7 combinadas armadas (0 nuevas), 33 abiertas
 Listo: 512 picks (458 liquidados), 160 combinadas

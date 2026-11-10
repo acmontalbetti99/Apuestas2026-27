@@ -1037,9 +1037,9 @@
   "away": "Finland",
   "ko": "2026-11-12T19:45:00Z",
   "evento": "21f1d732a768ec97ab405050ec9be408",
-  "pH": 0.49,
-  "pD": 0.2837,
-  "pA": 0.2262,
+  "pH": 0.4899,
+  "pD": 0.2838,
+  "pA": 0.2263,
   "b365": {},
   "mejor": {
    "1": 1.99,
@@ -1119,7 +1119,7 @@
   },
   "quien": {
    "1": "onexbet",
-   "X": "betfair_ex_eu",
+   "X": "matchbook",
    "2": "betfair_ex_eu"
   },
   "casas": 31,
@@ -1333,7 +1333,15 @@
    "2": "onexbet"
   },
   "casas": 25,
-  "sport": "soccer_uefa_nations_league"
+  "sport": "soccer_uefa_nations_league",
+  "pGoles": {
+   "O2.5": 0.473,
+   "U2.5": 0.527,
+   "O1.5": 0.7111,
+   "U1.5": 0.2889,
+   "BTTS": 0.3266,
+   "NBTTS": 0.6734
+  }
  },
  {
   "lg": "unl",
@@ -1393,7 +1401,15 @@
    "2": "virginbet"
   },
   "casas": 22,
-  "sport": "soccer_uefa_nations_league"
+  "sport": "soccer_uefa_nations_league",
+  "pGoles": {
+   "O2.5": 0.4026,
+   "U2.5": 0.5974,
+   "O1.5": 0.6345,
+   "U1.5": 0.3655,
+   "BTTS": 0.4633,
+   "NBTTS": 0.5367
+  }
  },
  {
   "lg": "unl",
@@ -1489,7 +1505,17 @@
    "2": "unibet_se"
   },
   "casas": 30,
-  "sport": "soccer_uefa_nations_league"
+  "sport": "soccer_uefa_nations_league",
+  "pGoles": {
+   "O2.5": 0.6013,
+   "U2.5": 0.3987,
+   "O1.5": 0.7958,
+   "U1.5": 0.2042,
+   "O3.5": 0.3802,
+   "U3.5": 0.6198,
+   "BTTS": 0.5475,
+   "NBTTS": 0.4525
+  }
  },
  {
   "lg": "unl",
@@ -1583,7 +1609,15 @@
    "2": "betfair_ex_uk"
   },
   "casas": 25,
-  "sport": "soccer_uefa_nations_league"
+  "sport": "soccer_uefa_nations_league",
+  "pGoles": {
+   "O1.5": 0.7307,
+   "U1.5": 0.2693,
+   "O2.5": 0.5,
+   "U2.5": 0.5,
+   "BTTS": 0.5321,
+   "NBTTS": 0.4679
+  }
  },
  {
   "lg": "unl",
@@ -1609,7 +1643,15 @@
    "2": "betfair_ex_eu"
   },
   "casas": 23,
-  "sport": "soccer_uefa_nations_league"
+  "sport": "soccer_uefa_nations_league",
+  "pGoles": {
+   "O2.5": 0.3893,
+   "U2.5": 0.6107,
+   "O1.5": 0.6453,
+   "U1.5": 0.3547,
+   "BTTS": 0.4704,
+   "NBTTS": 0.5296
+  }
  },
  {
   "lg": "unl",
@@ -1705,17 +1747,17 @@
   "away": "Denmark",
   "ko": "2026-11-14T19:45:00Z",
   "evento": "159554f486f93d1d8d4213c570117a0e",
-  "pH": 0.6283,
-  "pD": 0.2071,
-  "pA": 0.1646,
+  "pH": 0.6284,
+  "pD": 0.2078,
+  "pA": 0.1639,
   "b365": {},
   "mejor": {
    "1": 1.55,
    "X": 4.8,
-   "2": 6.4,
+   "2": 6.5,
    "1X": 1.17,
    "12": 1.25,
-   "X2": 2.74
+   "X2": 2.76
   },
   "quien": {
    "1": "betfair_ex_uk",
@@ -1757,9 +1799,9 @@
   "away": "Poland",
   "ko": "2026-11-14T19:45:00Z",
   "evento": "3ce5eabe80d52d3ed6056b6c141bbea8",
-  "pH": 0.2517,
-  "pD": 0.2554,
-  "pA": 0.493,
+  "pH": 0.2505,
+  "pD": 0.2552,
+  "pA": 0.4943,
   "b365": {},
   "mejor": {
    "1": 4.1,

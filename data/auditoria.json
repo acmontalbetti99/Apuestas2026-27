@@ -3315,7 +3315,7 @@
   }
  },
  {
-  "fecha": "2026-11-10T17:49:08Z",
+  "fecha": "2026-11-10T17:52:03Z",
   "hallazgos": [
    {
     "severidad": "media",
@@ -3523,12 +3523,6 @@
     "area": "cobertura",
     "mensaje": "ningun pick para hoy (2026-11-10)",
     "detalle": null
-   },
-   {
-    "severidad": "media",
-    "area": "sitio",
-    "mensaje": "el sitio publica 505 picks y el repo tiene 512: el despliegue quedo atras",
-    "detalle": null
    }
   ],
   "metricas": {
@@ -3605,13 +3599,13 @@
     "_ultimo_livescore.log": 0.0
    },
    "sitio": {
-    "/data/picks.json": 505,
-    "/data/parlays.json": 156
+    "/data/picks.json": 512,
+    "/data/parlays.json": 160
    }
   },
   "resumen": {
    "alta": 1,
-   "media": 23,
+   "media": 22,
    "baja": 3
   }
  }

@@ -1,6 +1,6 @@
-# Auditoria · 2026-11-10 17:49 UTC
+# Auditoria · 2026-11-10 17:52 UTC
 
-**1 de severidad alta · 23 media · 3 baja**
+**1 de severidad alta · 22 media · 3 baja**
 
 ## 🔴 Alta
 
@@ -59,7 +59,6 @@
 - **[combinadas]** dia-2026-11-25-5patas-91315192 apunta a picks que ya no existen
   - `atletico-madrid__viking-fk__12`
 - **[calibracion]** grupo estadisticas: 77.4% real contra 86.8% predicho sobre 124 (z=-3.07)
-- **[sitio]** el sitio publica 505 picks y el repo tiene 512: el despliegue quedo atras
 
 ## ⚪ Baja
 
