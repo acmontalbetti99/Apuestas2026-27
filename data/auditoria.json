@@ -3315,7 +3315,7 @@
   }
  },
  {
-  "fecha": "2026-11-10T17:52:03Z",
+  "fecha": "2026-11-10T18:19:38Z",
   "hallazgos": [
    {
     "severidad": "media",
@@ -3495,7 +3495,7 @@
    {
     "severidad": "alta",
     "area": "liquidacion",
-    "mensaje": "1 picks de Premier League sin liquidar tras 385 h (suele ser un nombre de equipo que no coincide)",
+    "mensaje": "1 picks de Premier League sin liquidar tras 386 h (suele ser un nombre de equipo que no coincide)",
     "detalle": [
      "Sunderland v Leeds United (2026-10-25T16:30)"
     ]

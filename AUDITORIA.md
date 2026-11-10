@@ -1,10 +1,10 @@
-# Auditoria · 2026-11-10 17:52 UTC
+# Auditoria · 2026-11-10 18:19 UTC
 
 **1 de severidad alta · 22 media · 3 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 1 picks de Premier League sin liquidar tras 385 h (suele ser un nombre de equipo que no coincide)
+- **[liquidacion]** 1 picks de Premier League sin liquidar tras 386 h (suele ser un nombre de equipo que no coincide)
   - `Sunderland v Leeds United (2026-10-25T16:30)`
 
 ## 🟡 Media
