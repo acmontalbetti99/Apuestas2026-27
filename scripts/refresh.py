@@ -72,7 +72,8 @@ CEIL_GOAL, CEIL_STAT = 0.90, 0.88
 MIN_LIQ_AJUSTE = 60          # por debajo de esto el error de muestra supera al ajuste
 MIN_LIQ_GRUPO = 20           # minimo de picks liquidados para corregir un cubo
 FACTOR_MIN = 0.3             # tope de cuanto se puede encoger: mas que esto es otro problema
-EXPIRA_UCL = 3               # dias despues del kickoff que un pick de UCL sin resultado sobrevive
+EXPIRA_UCL = 3               # dias despues del kickoff que un pick sin resultado sobrevive
+EXPIRA_SIN_STATS = 10        # dias que sobrevive un pick con marcador pero sin su estadistica
 PARLAY_LO, PARLAY_HI = 0.40, 0.52
 RATIO_MIN_PARTIDOS = 8
 RATIO_VENTANA = 20
@@ -544,7 +545,8 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
     """Liquida en sitio. Devuelve el conteo de lo que paso."""
     idx, por_dia = indices(D)
 
-    n = {"ganado": 0, "perdido": 0, "sin_datos": 0, "caducado": 0, "espera": 0}
+    n = {"ganado": 0, "perdido": 0, "sin_datos": 0, "caducado": 0,
+         "caducado_sin_stats": 0, "espera": 0}
     vivos = []
     for p in picks:
         if p.get("estado") != "pendiente":
@@ -566,6 +568,15 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
 
         hit, r = resolver(idx, por_dia, p["home"], p["away"], ko, p["key"])
         if hit is None:
+            # El partido aparece, pero su mercado no se puede resolver: football-data
+            # publica el marcador y a veces deja la columna de la estadistica vacia,
+            # y cuando no la rellena en los primeros dias ya no la rellena nunca.
+            # Sunderland v Leeds del 25 de octubre quedo asi 386 horas, en rojo en la
+            # auditoria. Se descarta igual que un partido que no aparece: no se supo
+            # el resultado, asi que contarlo de un lado o del otro seria inventar.
+            if (today - ko).days > EXPIRA_SIN_STATS:
+                n["caducado_sin_stats"] += 1
+                continue
             n["sin_datos"] += 1
             vivos.append(p)
             continue
@@ -1238,7 +1249,9 @@ def main() -> int:
     antes = sum(1 for t in parlays if t.get("estado") == "pendiente")
     settle_parlays(parlays, picks, _idx, _por_dia)
     log(f"  {n['ganado']} acertados · {n['perdido']} fallados · {n['espera']} en espera"
-        f" · {n['sin_datos']} sin estadisticas · {n['caducado']} caducados")
+        f" · {n['sin_datos']} sin estadisticas · {n['caducado']} caducados"
+        + (f" · {n['caducado_sin_stats']} descartados porque la estadistica nunca se publico"
+           if n["caducado_sin_stats"] else ""))
     cerradas = antes - sum(1 for t in parlays if t.get("estado") == "pendiente")
     log(f"  {cerradas} combinadas cerradas · "
         f"{sum(1 for t in parlays if t.get('estado') == 'pendiente')} abiertas")

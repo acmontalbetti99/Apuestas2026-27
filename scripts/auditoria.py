@@ -26,6 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from refresh import (CEIL_GOAL, CEIL_STAT, DATA, LGN, MIN_LIQ_AJUSTE, PARLAY_HI,
+                     cubo,
                      PARLAY_LO, ROOT, SOLO_MERCADO, UMBRAL_BASE, canon, log)
 
 SITIO = "https://montoglory.vercel.app"
@@ -54,7 +55,8 @@ def leer(nombre: str, default):
 
 # --------------------------------------------------------------------- integridad
 
-def integridad(inf: Informe, picks: list[dict], parlays: list[dict]) -> None:
+def integridad(inf: Informe, picks: list[dict], parlays: list[dict],
+               ahora: datetime) -> None:
     ids = [p.get("id") for p in picks]
     dup = {k: v for k, v in Counter(ids).items() if v > 1}
     if dup:
@@ -107,10 +109,21 @@ def integridad(inf: Informe, picks: list[dict], parlays: list[dict]) -> None:
         if t.get("estado") == "pendiente" and not (PARLAY_LO - 0.01 <= prod <= PARLAY_HI + 0.01):
             inf.add("media", "combinadas",
                     f"{t.get('id')} fuera de la banda objetivo: {prod:.3f}")
-        huerf = [l.get("id") for l in legs if l.get("id") and l.get("id") not in por_id]
+        # Una pata puede perder su pick sin que eso rompa nada: cuando se recotiza un
+        # partido, el pick nuevo puede ser de otro mercado y cambiar de id. La pata
+        # igual se liquida, porque lleva encima equipos, mercado y fecha. Asi que esto
+        # solo es un problema si la combinada sigue abierta Y el partido ya se jugo:
+        # ahi si quedo algo que no se va a cerrar nunca. Flaggear las 21 que tenian
+        # alguna pata huerfana, con 13 ya cerradas, era ruido que tapaba lo que importa.
+        if t.get("estado") in ("ganado", "perdido"):
+            continue
+        huerf = [l.get("id") for l in legs
+                 if l.get("id") and l.get("id") not in por_id
+                 and str(l.get("ko") or "") < ahora.strftime("%Y-%m-%dT%H:%M:%SZ")]
         if huerf:
             inf.add("media", "combinadas",
-                    f"{t.get('id')} apunta a picks que ya no existen", huerf[:5])
+                    f"{t.get('id')} sigue abierta y tiene patas sin pick de un partido "
+                    f"ya jugado", huerf[:5])
 
 
 # --------------------------------------------------------------------- liquidacion
@@ -135,7 +148,8 @@ def liquidacion(inf: Informe, picks: list[dict], ahora: datetime) -> None:
         sev = "alta" if horas > 48 else "media"
         inf.add(sev, "liquidacion",
                 f"{len(items)} picks de {LGN.get(lg, lg)} sin liquidar tras {horas:.0f} h "
-                f"(suele ser un nombre de equipo que no coincide)",
+                f"(un nombre de equipo que no coincide, o la estadistica que el "
+                f"mercado necesita que la fuente nunca publico)",
                 [f"{h} v {a} ({ko[:16]})" for h, a, ko in items[:6]])
 
 
@@ -175,17 +189,30 @@ def calibracion(inf: Informe, picks: list[dict], calib: dict) -> None:
         inf.add("media", "calibracion",
                 f"el modelo viene {sentido}: {real:.1%} real contra {pred:.1%} predicho "
                 f"sobre {n} picks (z={z:+.2f}, no es ruido)")
-    for g in ("resultado", "goles", "estadisticas"):
-        sel = [p for p in done if p.get("grupo") == g]
+    # Se mide por los mismos cubos con los que refresh.py corrige, no por grupo:
+    # medir en un nivel y corregir en otro hace que el informe marque en rojo algo
+    # que ya esta corregido, o que esconda una mitad detras del promedio de la otra.
+    factores = (calib or {}).get("factores") or {}
+    for g in sorted({cubo(p.get("grupo", ""), p.get("key", "")) for p in done}):
+        sel = [p for p in done if cubo(p.get("grupo", ""), p.get("key", "")) == g]
         if len(sel) < 25:
             continue
         gp, gr, gz, gn = z_poisson_binomial(sel)
+        c = factores.get(g, 1.0)
         inf.metricas.setdefault("porGrupo", {})[g] = {
-            "n": gn, "predicho": round(gp, 4), "real": round(gr, 4), "z": round(gz, 2)}
-        if abs(gz) > 2:
+            "n": gn, "predicho": round(gp, 4), "real": round(gr, 4), "z": round(gz, 2),
+            "factor": c}
+        if abs(gz) > 2 and c >= 1.0:
             inf.add("media", "calibracion",
-                    f"grupo {g}: {gr:.1%} real contra {gp:.1%} predicho sobre {gn} "
-                    f"(z={gz:+.2f})")
+                    f"{g}: {gr:.1%} real contra {gp:.1%} predicho sobre {gn} "
+                    f"(z={gz:+.2f}) y no se le esta aplicando ninguna correccion")
+        elif abs(gz) > 2:
+            # El desvio se mide sobre los picks ya publicados, que son los de ANTES
+            # de la correccion; que siga ahi es lo esperado. Lo que habria que vigilar
+            # es que no siga creciendo con picks nuevos.
+            inf.add("baja", "calibracion",
+                    f"{g}: {gr:.1%} real contra {gp:.1%} predicho sobre {gn} "
+                    f"(z={gz:+.2f}), ya corregido con factor {c}")
 
     bandas = {}
     for lo in (0.65, 0.70, 0.75, 0.80, 0.85):
@@ -391,7 +418,7 @@ def main() -> int:
     if not isinstance(picks, list) or not picks:
         inf.add("alta", "integridad", "picks.json vacio o ilegible")
     else:
-        integridad(inf, picks, parlays if isinstance(parlays, list) else [])
+        integridad(inf, picks, parlays if isinstance(parlays, list) else [], ahora)
         liquidacion(inf, picks, ahora)
         calibracion(inf, picks, calib if isinstance(calib, dict) else {})
         valor(inf, picks)
