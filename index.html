@@ -527,6 +527,16 @@ function vacioPicks(){
       <p>${esc(ESTADO?.motivo||'Falta configurar la fuente de cuotas de esta competencia.')}
       Hasta entonces no se generan picks acá, por mucho que haya partidos.</p></div>`;
   }
+  // Goles, cornners, tarjetas, remates y atajadas salen SOLO de las ligas
+  // domesticas, porque football-data es el unico que las publica. En una fecha
+  // FIFA esos filtros quedan vacios y antes no decian por que.
+  if(ESTADO?.sinLigasDomesticas && (grupo==='goles'||grupo==='estadisticas')){
+    return `<div class="empty"><h3>Esta semana no juegan las ligas</h3>
+      <p>Los mercados de goles, córners y tarjetas salen de las cuatro ligas domésticas,
+      que son las únicas con estadísticas publicadas. Con la fecha de selecciones ninguna
+      juega, así que lo único abierto son los de resultado de Champions, Europa League,
+      Conference y Nations League. Vuelven solos cuando vuelven las ligas.</p></div>`;
+  }
   const prox = ESTADO?.proximoPorLiga?.[league];
   if(league!=='todas' && prox){
     return `<div class="empty"><h3>Nada abierto en ${esc(LG[league])} con este filtro</h3>

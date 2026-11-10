@@ -24,6 +24,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import math
 import os
 import re
 import socket
@@ -69,6 +70,8 @@ UMBRAL_BASE = 0.65
 UMBRAL_MAX = 0.80
 CEIL_GOAL, CEIL_STAT = 0.90, 0.88
 MIN_LIQ_AJUSTE = 60          # por debajo de esto el error de muestra supera al ajuste
+MIN_LIQ_GRUPO = 40           # minimo para corregir un grupo por separado
+FACTOR_MIN = 0.3             # tope de cuanto se puede encoger: mas que esto es otro problema
 EXPIRA_UCL = 3               # dias despues del kickoff que un pick de UCL sin resultado sobrevive
 PARLAY_LO, PARLAY_HI = 0.40, 0.52
 RATIO_MIN_PARTIDOS = 8
@@ -621,15 +624,66 @@ def calibrate(picks: list[dict]) -> dict:
     if n >= MIN_LIQ_AJUSTE and real < pred:
         # el modelo viene inflado: se le descuenta el desvio al umbral
         out["umbralVigente"] = round(min(UMBRAL_BASE + (pred - real), UMBRAL_MAX), 4)
-    por_grupo = {}
+    por_grupo, factores = {}, {}
     for g in ("resultado", "goles", "estadisticas"):
         s = [p for p in done if p.get("grupo") == g]
-        if s:
-            por_grupo[g] = {"n": len(s),
-                            "predicho": round(sum(p["p"] for p in s) / len(s), 4),
-                            "real": round(sum(p["estado"] == "ganado" for p in s) / len(s), 4)}
+        if not s:
+            continue
+        gp = sum(p["p"] for p in s) / len(s)
+        gr = sum(p["estado"] == "ganado" for p in s) / len(s)
+        c, z = factor_grupo(s)
+        por_grupo[g] = {"n": len(s), "predicho": round(gp, 4), "real": round(gr, 4),
+                        "z": round(z, 2), "factor": round(c, 3)}
+        if c < 1.0:
+            factores[g] = round(c, 3)
     out["porGrupo"] = por_grupo
+    out["factores"] = factores
     return out
+
+
+def z_grupo(s: list[dict]) -> float:
+    """Desvio en sigmas con varianza de Poisson-binomial.
+
+    Cada pick tiene su propia p, asi que la varianza es la suma de p(1-p) y no
+    n*pbarra*(1-pbarra): usar la media infla la varianza y esconde el desvio.
+    """
+    var = sum(p["p"] * (1 - p["p"]) for p in s)
+    if var <= 0:
+        return 0.0
+    aciertos = sum(p["estado"] == "ganado" for p in s)
+    return (aciertos - sum(p["p"] for p in s)) / math.sqrt(var)
+
+
+def factor_grupo(s: list[dict]) -> tuple[float, float]:
+    """Cuanto hay que encoger la probabilidad de un grupo: p' = 0.5 + c(p-0.5).
+
+    Por que por grupo y no un umbral global: medido sobre 458 picks liquidados,
+    resultado y goles estan bien calibrados (z -0.49 y -0.06) y estadisticas no
+    (predicho 86.8%, real 77.4%, z -3.07). Un umbral global reparte ese castigo
+    entre los tres y no corrige a ninguno; peor, la probabilidad publicada sigue
+    inflada, y las combinadas la MULTIPLICAN: a cinco patas eso daba 46.2%
+    predicho contra 17.2% real (z -3.13).
+
+    Encoger la probabilidad en vez de subir el umbral arregla las dos cosas a la
+    vez, porque el umbral y la cuota justa se calculan despues sobre la corregida.
+
+    Dos condiciones antes de tocar nada, para no perseguir ruido:
+      - al menos MIN_LIQ_GRUPO picks liquidados en el grupo,
+      - y desvio de al menos un sigma.
+    Validado fuera de muestra (ajustar en los picks viejos, medir en los nuevos)
+    en tres cortes: mejora el log loss 1.3%, 2.3% y 3.1%. Solo encoge, nunca
+    infla: si un grupo acierta mas de lo que dice, se deja como esta.
+    """
+    if len(s) < MIN_LIQ_GRUPO:
+        return 1.0, z_grupo(s)
+    z = z_grupo(s)
+    if z > -1.0:
+        return 1.0, z
+    pred = sum(p["p"] for p in s) / len(s)
+    real = sum(p["estado"] == "ganado" for p in s) / len(s)
+    if pred <= 0.5:
+        return 1.0, z
+    return max(FACTOR_MIN, min(1.0, (real - 0.5) / (pred - 0.5))), z
 
 
 # --------------------------------------------------------------------------- generacion
@@ -793,8 +847,21 @@ def pick_id(home: str, away: str, key: str) -> str:
 
 
 def build_picks(fx: list[dict], ratios: dict, umbral: float,
-                ahora: datetime | None = None) -> list[dict]:
+                ahora: datetime | None = None,
+                factores: dict | None = None) -> list[dict]:
     ahora = ahora or datetime.now(timezone.utc)
+    fac = factores or {}
+
+    def ajustada(p: float, grupo: str) -> float:
+        """La probabilidad que se publica, corregida por el desvio medido del grupo.
+
+        Se corrige ANTES del umbral y de la cuota justa, a proposito: un mercado
+        cuya probabilidad honesta no llega al umbral no se ofrece, y la cuota justa
+        de una combinada sale de multiplicar estas, no las crudas.
+        """
+        c = fac.get(grupo, 1.0)
+        return 0.5 + c * (float(p) - 0.5) if c < 1.0 else float(p)
+
     todas, diferidos = [], 0
     for f in fx:
         lg, pH, pD, pA = f["lg"], f["pH"], f["pD"], f["pA"]
@@ -815,28 +882,35 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
                               ("1X", "Local o empate", pH + pD),
                               ("12", "Local o visitante (no empate)", pH + pA),
                               ("X2", "Empate o visitante", pD + pA)):
-                if umbral < p <= CEIL_GOAL:
+                pa = ajustada(p, "resultado")
+                if umbral < pa <= CEIL_GOAL:
                     todas.append({**base, "key": k, "fam": "res",
                                   "cat": "1X2" if k in ("1", "2") else "Doble oportunidad",
-                                  "label": lab, "p": round(float(p), 4),
-                                  "cuota": round(1 / float(p), 2), "grupo": "resultado"})
+                                  "label": lab, "p": round(pa, 4),
+                                  "pModelo": round(float(p), 4),
+                                  "cuota": round(1 / pa, 2), "grupo": "resultado"})
             continue
 
         mk, lh, la = markets(lg, pH, pD, pA)
         for k, (lab, p) in mk.items():
-            if k in GOAL_LIQ and umbral < p <= CEIL_GOAL:
-                fam = FAMILY[k]
+            if k not in GOAL_LIQ:
+                continue
+            fam = FAMILY[k]
+            grupo = "resultado" if fam == "res" else "goles"
+            pa = ajustada(p, grupo)
+            if umbral < pa <= CEIL_GOAL:
                 todas.append({**base, "key": k, "fam": fam, "cat": GOAL_LIQ[k], "label": lab,
-                              "p": round(float(p), 4), "cuota": round(1 / float(p), 2),
-                              "grupo": "resultado" if fam == "res" else "goles"})
+                              "p": round(pa, 4), "pModelo": round(float(p), 4),
+                              "cuota": round(1 / pa, 2), "grupo": grupo})
 
         rH = ratios.get((lg, f["kH"], "H"), {})
         rA = ratios.get((lg, f["kA"], "A"), {})
         for k, (lab, p, fam, cat) in SE.stat_markets(lg, pH - pA, f["home"], f["away"], rH, rA).items():
-            if umbral < p <= CEIL_STAT:
+            pa = ajustada(p, "estadisticas")
+            if umbral < pa <= CEIL_STAT:
                 todas.append({**base, "key": k, "fam": fam, "cat": cat, "label": lab,
-                              "p": round(float(p), 4), "cuota": round(1 / float(p), 2),
-                              "grupo": "estadisticas"})
+                              "p": round(pa, 4), "pModelo": round(float(p), 4),
+                              "cuota": round(1 / pa, 2), "grupo": "estadisticas"})
 
     # a lo sumo un pick por partido y por familia de mercado, para que no se solapen
     todas.sort(key=lambda s: -s["p"])
@@ -860,6 +934,10 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
                 "key": s["key"], "label": s["label"], "cat": s["cat"], "grupo": s["grupo"],
                 "p": s["p"], "cuota": s["cuota"],
                 "estado": "pendiente", "resultado": None}
+        # la cruda del modelo queda guardada cuando se corrigio, para que la
+        # auditoria pueda medir si la correccion acerto o se paso
+        if s.get("pModelo") is not None and s["pModelo"] != s["p"]:
+            pick["pModelo"] = s["pModelo"]
         if top:
             pick["mejor"] = top
             pick["ev"] = round(s["p"] * top - 1, 4)
@@ -1124,6 +1202,7 @@ def main() -> int:
         pass
     elif fx is None:
         log("  ! sin fixtures: dejo los picks abiertos como estaban")
+        sin_dom = True
         nuevos = [p for p in picks if p["estado"] == "pendiente"]
     else:
         # De donde viene cada fixture importa: solo las ligas domesticas traen
@@ -1131,12 +1210,18 @@ def main() -> int:
         # publica. Una semana de fecha FIFA deja ese lado en cero y la app sin un
         # solo pick de estadisticas; conviene verlo en el log y no deducirlo.
         dom = sum(1 for f in fx if f.get("lg") in set(DIVS.values()))
+        sin_dom = not dom
         log(f"  {len(fx)} partidos con cuotas: {dom} de ligas domesticas"
             f" (goles y estadisticas), {len(fx) - dom} de torneos (solo resultado)")
         if not dom:
             log("  ! ninguna liga domestica juega en esta ventana: no habra picks"
                 " de goles ni de estadisticas hasta que vuelvan")
-        nuevos = build_picks(fx, team_ratios(D), calib["umbralVigente"])
+        factores = calib.get("factores") or {}
+        for g, c in sorted(factores.items()):
+            d = calib["porGrupo"][g]
+            log(f"  {g}: predicho {d['predicho']:.1%} contra real {d['real']:.1%} "
+                f"sobre {d['n']} (z {d['z']:+.2f}), se encoge la probabilidad x{c}")
+        nuevos = build_picks(fx, team_ratios(D), calib["umbralVigente"], factores=factores)
         log(f"  {len(nuevos)} picks sobre el {100 * calib['umbralVigente']:.0f}%")
 
     # El refresco es aditivo, nunca destructivo. fixtures.csv solo publica una ventana
@@ -1205,16 +1290,28 @@ def main() -> int:
     # Estado por competencia, para que la pagina pueda explicar un vacio en vez de
     # decir "esperá a que carguen", que es mentira cuando no hay fuente de cuotas.
     con_cuotas = sorted({f["lg"] for f in (fx or [])})
-    hay_clave = bool(os.environ.get("ODDS_API_KEY"))
-    sin_fuente = [lg for lg in LGN
-                  if lg in SOLO_MERCADO and lg not in con_cuotas and not hay_clave]
+    # No se puede mirar ODDS_API_KEY desde aca: odds_api.py corre en otro paso del
+    # workflow y es el unico que recibe el secret, asi que aca la variable siempre
+    # viene vacia. Durante semanas eso hizo que la pagina dijera "falta configurar
+    # ODDS_API_KEY" mientras las cuotas UEFA entraban sin problema. Lo que de verdad
+    # dice si la fuente anda es si dejo partidos en cuotas_extra.json.
+    hay_fuente = (DATA / "cuotas_extra.json").exists() and bool(
+        [f for f in (fx or []) if f["lg"] in SOLO_MERCADO])
+    sin_cuotas = [lg for lg in LGN if lg in SOLO_MERCADO and lg not in con_cuotas]
     estado = {
         "fecha": today.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "conCuotas": con_cuotas,
-        "sinFuenteDeCuotas": sin_fuente,
-        "motivo": ("Falta configurar ODDS_API_KEY: football-data solo publica ligas "
-                   "domesticas, y las competencias UEFA y de seleccion dependen de "
-                   "The Odds API.") if sin_fuente else None,
+        "sinFuenteDeCuotas": [] if hay_fuente else sin_cuotas,
+        "sinPartidos": sin_cuotas if hay_fuente else [],
+        "motivo": (("Estas competencias no tienen partidos en la ventana: estan fuera "
+                    "de temporada o su fixture todavia no se publico.") if hay_fuente else
+                   ("Falta configurar ODDS_API_KEY: football-data solo publica ligas "
+                    "domesticas, y las competencias UEFA y de seleccion dependen de "
+                    "The Odds API.")) if sin_cuotas else None,
+        # Sin ligas domesticas en la ventana no hay de donde sacar goles ni
+        # estadisticas, y la pagina tiene que poder decirlo en vez de mostrar un
+        # filtro vacio sin explicacion.
+        "sinLigasDomesticas": bool(sin_dom),
         "proximoPorLiga": {},
         # Para que la pagina pueda emparejar los nombres que llegan del feed en vivo
         # con los de los picks, sin duplicar el diccionario en JavaScript.

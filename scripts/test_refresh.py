@@ -531,3 +531,64 @@ _sp([_t2], _picks9)
 assert _t2["estado"] == "pendiente", "sin indices tiene que quedarse quieta"
 print("  la pata sin pick se liquida contra el resultado, y sin resultado no: ok")
 print("\nESCENARIO 9 OK")
+
+# --------------------------------------------------------------------------- 10
+print()
+from refresh import calibrate, build_picks, MIN_LIQ_GRUPO  # noqa: E402
+_AHORA_10 = R.datetime(2026, 11, 26, 12, 0, tzinfo=R.timezone.utc)
+print("ESCENARIO 10: corregir la probabilidad por grupo, no con un umbral global")
+# Por que: con 458 picks liquidados, resultado y goles estaban calibrados y
+# estadisticas predecia 86.8% y acertaba 77.4% (z -3.07). Un umbral global reparte
+# ese castigo entre los tres y no corrige a ninguno, y la probabilidad publicada
+# sigue inflada; las combinadas la multiplican y a cinco patas daba 46.2% predicho
+# contra 17.2% real.
+
+
+def _lote(grupo, n, p, aciertos):
+    """n picks de un grupo, todos con probabilidad p, de los que aciertan `aciertos`."""
+    return [{"grupo": grupo, "p": p, "ko": f"2026-10-{1 + i % 28:02d}T20:00:00Z",
+             "estado": "ganado" if i < aciertos else "perdido"} for i in range(n)]
+
+
+# estadisticas: dice 88% y acierta 77 de 100. goles: dice 78% y acierta 78 de 100.
+_cal = calibrate(_lote("estadisticas", 100, 0.88, 77) + _lote("goles", 100, 0.78, 78))
+print(f"   estadisticas: {_cal['porGrupo']['estadisticas']}")
+print(f"   goles:        {_cal['porGrupo']['goles']}")
+assert "estadisticas" in _cal["factores"], "el grupo inflado tiene que corregirse"
+assert "goles" not in _cal["factores"], "el grupo calibrado no se toca"
+_c = _cal["factores"]["estadisticas"]
+# 0.5 + c(0.88-0.5) tiene que dar cerca del 77% real
+assert abs((0.5 + _c * 0.38) - 0.77) < 0.01, f"el factor no reproduce el real: {_c}"
+
+# un grupo que acierta MAS de lo que dice no se infla nunca
+_sube = calibrate(_lote("goles", 100, 0.70, 85))
+assert not _sube["factores"], f"nunca se infla: {_sube['factores']}"
+print("   un grupo que acierta mas de lo que dice se deja como esta: ok")
+
+# muestra chica: no se persigue ruido
+_poco = calibrate(_lote("estadisticas", 20, 0.88, 12))
+assert not _poco["factores"], f"con 20 picks no se corrige: {_poco['factores']}"
+print(f"   con 20 picks no se corrige (minimo {MIN_LIQ_GRUPO}): ok")
+
+# y el factor se aplica ANTES del umbral y de la cuota justa
+_fx10 = [{"lg": "premier", "home": "Arsenal", "away": "Everton", "ko": "2026-11-28T20:00:00Z",
+          "pH": 0.72, "pD": 0.18, "pA": 0.10, "kH": "arsenal", "kA": "everton",
+          "b365": {}, "mejor": {}, "quien": {}}]
+_sin = build_picks(_fx10, {}, 0.68, ahora=_AHORA_10)
+_con = build_picks(_fx10, {}, 0.68, ahora=_AHORA_10, factores={"resultado": 0.70})
+_d_sin = {p["key"]: p for p in _sin if p["grupo"] == "resultado"}
+_d_con = {p["key"]: p for p in _con if p["grupo"] == "resultado"}
+print(f"   sin factor: {sorted((k, v['p']) for k, v in _d_sin.items())}")
+print(f"   con factor: {sorted((k, v['p']) for k, v in _d_con.items())}")
+assert _d_con, "con factor tiene que quedar al menos un pick"
+for k, v in _d_con.items():
+    cruda = _d_sin[k]["p"]
+    assert abs(v["p"] - (0.5 + 0.70 * (cruda - 0.5))) < 0.002, f"{k}: no se encogio bien"
+    assert v["pModelo"] == cruda, f"{k}: se perdio la probabilidad cruda del modelo"
+    assert "pModelo" not in _d_sin[k], f"{k}: sin correccion no hace falta guardarla"
+    assert abs(v["cuota"] - round(1 / v["p"], 2)) < 0.011, f"{k}: la cuota justa quedo sobre la cruda"
+    assert v["p"] > 0.68, f"{k}: quedo por debajo del umbral y no debia publicarse"
+# lo que cae por debajo del umbral al corregirse deja de ofrecerse
+assert len(_d_con) <= len(_d_sin), "corregir no puede agregar picks"
+print("   se corrige antes del umbral y la cuota justa sale de la corregida: ok")
+print("\nESCENARIO 10 OK")
