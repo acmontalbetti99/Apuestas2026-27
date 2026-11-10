@@ -60,10 +60,12 @@ def buscar(obj, camino="") -> list[str]:
 
 
 def main() -> int:
-    ayer = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y%m%d")
-    hoy = datetime.now(timezone.utc).strftime("%Y%m%d")
+    # Hasta ocho dias atras: en fecha FIFA no se juega nada de clubes, y la sonda
+    # necesita un partido de torneo YA TERMINADO para ver si trae estadisticas.
+    dias = [(datetime.now(timezone.utc) - timedelta(days=i)).strftime("%Y%m%d")
+            for i in range(0, 9)]
     elegido = None
-    for d in (hoy, ayer):
+    for d in dias:
         st, datos = pedir(f"{BASE}/date/soccer/{d}/0")
         print(f"feed de {d}: HTTP {st}")
         if st != 200 or not isinstance(datos, dict):
