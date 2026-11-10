@@ -1,0 +1,17 @@
+# Manual. Mide contra los datos de hoy las medias por liga que usa el modelo de
+# estadisticas y las compara con las cargadas en stats_engine.py. No escribe nada:
+# imprime en el log y sale. Correrlo al empezar temporada o cuando la auditoria
+# marque sesgo en cornners, tarjetas, remates o atajadas.
+name: Medir las bases del modelo
+on: workflow_dispatch
+jobs:
+  medir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -u scripts/medir_base.py
