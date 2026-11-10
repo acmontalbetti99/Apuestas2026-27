@@ -632,3 +632,54 @@ assert not [q for q in _p11b if q["grupo"] == "goles"], "sin lineas no se invent
 assert [q for q in _p11b if q["grupo"] == "resultado"], "el 1X2 tiene que seguir saliendo"
 print("   sin lineas de mercado no se inventa un pick de goles: ok")
 print("\nESCENARIO 11 OK")
+
+# --------------------------------------------------------------------------- 12
+print()
+print("ESCENARIO 12: reconocer la competencia venga en Cnm o en Snm")
+# En las copas de clubes LiveScore pone la competencia en Cnm, pero no esta
+# garantizado para las de seleccion: la Nations League puede llegar como
+# Cnm="Europe" con Snm="UEFA Nations League". Pidiendo solo Cnm se perderia
+# entera, y con ella la liquidacion de todos sus picks. Comparar el nombre
+# COMPLETO -no por substring- es lo que mantiene afuera a las homonimas de otras
+# confederaciones.
+import livescore as _LSX  # noqa: E402
+
+
+def _competencia(cnm_raw, snm_raw):
+    cnm, snm = str(cnm_raw).lower().strip(), str(snm_raw).lower().strip()
+    if any(w in f"{cnm} {snm}" for w in _LSX.EXCLUIR) or _LSX.es_femenino(cnm, snm):
+        return None
+    lg = (_LSX.UEFA.get(cnm) or _LSX.SELECCIONES.get(cnm)
+          or _LSX.UEFA.get(snm) or _LSX.SELECCIONES.get(snm)
+          or _LSX.DOMESTICAS.get((cnm, snm)))
+    if not lg and cnm in _LSX.CLASIFICATORIAS:
+        for marca, codigo in _LSX.CLASIFICATORIAS[cnm].items():
+            if marca in snm:
+                return codigo
+    return lg
+
+
+_ETAPAS = [
+    ("Nations League", "League A", "unl"),
+    ("Europe", "UEFA Nations League", "unl"),
+    ("Champions League", "League Phase", "ucl"),
+    ("Europe", "UEFA Europa League", "uel"),
+    ("Africa", "Africa Cup of Nations", "afcon"),
+    ("England", "Premier League", "premier"),
+    ("Europe", "World Cup Qualification UEFA", None),
+    # homonimas de otras confederaciones y juveniles: nunca
+    ("Africa", "CAF Champions League", None),
+    ("North & Central America", "CONCACAF Nations League", None),
+    ("UEFA Youth League", "League Phase", None),
+    ("Europe", "UEFA Women's Nations League", None),
+    ("England", "Championship", None),
+]
+_malx = 0
+for _c, _s, _esp in _ETAPAS:
+    _got = _competencia(_c, _s)
+    if _got != _esp:
+        _malx += 1
+        print(f"   MAL Cnm={_c!r} Snm={_s!r} -> {_got}, esperado {_esp}")
+assert not _malx, f"{_malx} etapas mal reconocidas"
+print(f"   {len(_ETAPAS)} etapas reconocidas bien, con las homonimas afuera: ok")
+print("\nESCENARIO 12 OK")

@@ -55,7 +55,13 @@ function extraer(datos, soloFinal = false) {
     const cnm = String(stg.Cnm || "").toLowerCase().trim();
     const snm = String(stg.Snm || "").toLowerCase().trim();
     if (EXCLUIR.some((w) => `${cnm} ${snm}`.includes(w))) continue;
-    const lg = COMPETENCIAS.has(cnm) ? cnm : PAISES.get(`${cnm}|${snm}`);
+    // Cnm o Snm, siempre por nombre completo: en las copas de clubes la competencia
+    // viene en Cnm, pero la Nations League puede llegar como Cnm="Europe" con
+    // Snm="UEFA Nations League". Comparar completo deja afuera a las homonimas de
+    // otras confederaciones, que no estan en el set. Misma regla que livescore.py.
+    const lg = COMPETENCIAS.has(cnm) ? cnm
+             : COMPETENCIAS.has(snm) ? snm
+             : PAISES.get(`${cnm}|${snm}`);
     if (!lg) continue;
 
     for (const e of stg.Events || []) {

@@ -133,7 +133,16 @@ def cosechar(dias: int = 3) -> list[dict]:
             snm = str(stg.get("Snm", "")).lower().strip()
             if any(w in f"{cnm} {snm}" for w in EXCLUIR) or es_femenino(cnm, snm):
                 continue
-            lg = UEFA.get(cnm) or SELECCIONES.get(cnm) or DOMESTICAS.get((cnm, snm))
+            # Se prueba Cnm y tambien Snm, siempre por nombre COMPLETO. En las copas
+            # de clubes la competencia viene en Cnm, pero no esta garantizado para
+            # las de seleccion: la Nations League puede llegar como Cnm="Europe" con
+            # Snm="UEFA Nations League", y pidiendo solo Cnm se perderia entera.
+            # Comparar completo mantiene afuera a las homonimas de otras
+            # confederaciones: "caf champions league" y "concacaf nations league" no
+            # estan en los diccionarios.
+            lg = (UEFA.get(cnm) or SELECCIONES.get(cnm)
+                  or UEFA.get(snm) or SELECCIONES.get(snm)
+                  or DOMESTICAS.get((cnm, snm)))
             if not lg and cnm in CLASIFICATORIAS:
                 for marca, codigo in CLASIFICATORIAS[cnm].items():
                     if marca in snm:
