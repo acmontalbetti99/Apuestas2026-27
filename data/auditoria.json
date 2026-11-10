@@ -3315,16 +3315,8 @@
   }
  },
  {
-  "fecha": "2026-11-10T18:23:27Z",
+  "fecha": "2026-11-10T18:25:59Z",
   "hallazgos": [
-   {
-    "severidad": "alta",
-    "area": "liquidacion",
-    "mensaje": "1 picks de Premier League sin liquidar tras 386 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
-    "detalle": [
-     "Sunderland v Leeds United (2026-10-25T16:30)"
-    ]
-   },
    {
     "severidad": "baja",
     "area": "calibracion",
@@ -3350,16 +3342,14 @@
     "detalle": null
    },
    {
-    "severidad": "baja",
+    "severidad": "media",
     "area": "sitio",
-    "mensaje": "no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))",
+    "mensaje": "el sitio publica 512 picks y el repo tiene 511: el despliegue quedo atras",
     "detalle": null
    }
   ],
   "metricas": {
-   "sinLiquidar": {
-    "premier": 1
-   },
+   "sinLiquidar": {},
    "calibracion": {
     "n": 458,
     "predicho": 0.8093,
@@ -3423,12 +3413,11 @@
     }
    },
    "valor": {
-    "pendientes": 54,
+    "pendientes": 53,
     "conPrecioCasa": 0
    },
    "cobertura": {
     "ligasConPicks": [
-     "premier",
      "ucl",
      "uecl",
      "uel",
@@ -3438,12 +3427,16 @@
    "edadHoras": {
     "_ultimo_refresco.log": 0.0,
     "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 512,
+    "/data/parlays.json": 160
    }
   },
   "resumen": {
-   "alta": 1,
-   "media": 0,
-   "baja": 5
+   "alta": 0,
+   "media": 1,
+   "baja": 4
   }
  }
 ]

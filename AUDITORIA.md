@@ -1,11 +1,10 @@
-# Auditoria · 2026-11-10 18:23 UTC
+# Auditoria · 2026-11-10 18:25 UTC
 
-**1 de severidad alta · 0 media · 5 baja**
+**0 de severidad alta · 1 media · 4 baja**
 
-## 🔴 Alta
+## 🟡 Media
 
-- **[liquidacion]** 1 picks de Premier League sin liquidar tras 386 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  - `Sunderland v Leeds United (2026-10-25T16:30)`
+- **[sitio]** el sitio publica 512 picks y el repo tiene 511: el despliegue quedo atras
 
 ## ⚪ Baja
 
@@ -13,7 +12,6 @@
 - **[calibracion]** banda 85%-90%: 80.2% real contra 87.1% predicho sobre 167 (z=-2.65)
 - **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
 - **[cobertura]** ningun pick para hoy (2026-11-10)
-- **[sitio]** no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden')))
 
 ## Calibracion
 
@@ -33,5 +31,5 @@
 
 ## Valor contra bet365
 
-- 0 de 54 picks pendientes traen precio de la casa
+- 0 de 53 picks pendientes traen precio de la casa
 
