@@ -78,6 +78,19 @@ RATIO_MIN_PARTIDOS = 8
 RATIO_VENTANA = 20
 
 # los mercados liquidos: lo demas se puede calcular pero no se puede apostar a precio decente
+def ETIQUETA_GOLES(k: str) -> str:
+    """El mismo texto que usa engine.py para los picks de las ligas domesticas, para
+    que un pick de goles se lea igual venga del modelo o del mercado."""
+    if k == "BTTS":
+        return "Ambos marcan"
+    if k == "NBTTS":
+        return "Ambos marcan: NO"
+    m = re.fullmatch(r"([OU])(\d+\.\d)", k)
+    if m:
+        return f"{'Mas' if m.group(1) == 'O' else 'Menos'} de {m.group(2)} goles"
+    return k
+
+
 GOAL_LIQ = {"1": "1X2", "2": "1X2",
             "1X": "Doble oportunidad", "12": "Doble oportunidad", "X2": "Doble oportunidad",
             "O1.5": "Goles", "O2.5": "Goles", "U2.5": "Goles", "U3.5": "Goles",
@@ -783,7 +796,12 @@ def load_cuotas_extra(today: datetime) -> list[dict]:
                         "kH": canon(r["home"]), "kA": canon(r["away"]),
                         "pH": float(r["pH"])/s, "pD": float(r["pD"])/s, "pA": float(r["pA"])/s,
                         "b365": r.get("b365") or {}, "mejor": r.get("mejor") or {},
-                        "quien": r.get("quien") or {}})
+                        "quien": r.get("quien") or {},
+                        # Lineas de goles sacadas del mercado, no de un modelo: para
+                        # estas competencias no hay historia de goles con la que
+                        # ajustar nada, y la cuota de cierre le gana a cualquier
+                        # modelo propio igual.
+                        "pGoles": r.get("pGoles") or {}})
         except (KeyError, TypeError, ValueError) as e:
             log(f"  ! cuotas_extra: fila invalida {r!r}: {e}")
     if out:
@@ -876,8 +894,10 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
                 "quien": f.get("quien") or {}}
 
         if lg in SOLO_MERCADO:
-            # Sin base historica para goles ni estadisticas: solo 1X2 y doble oportunidad,
-            # que son el mercado mismo y no pasan por ningun modelo.
+            # Sin base historica propia: todo lo de estas competencias sale del
+            # mercado y no pasa por ningun modelo. 1X2 y doble oportunidad del
+            # consenso de casas; goles y ambos marcan, de las lineas que trae
+            # The Odds API por partido.
             for k, lab, p in (("1", "Gana local", pH), ("2", "Gana visitante", pA),
                               ("1X", "Local o empate", pH + pD),
                               ("12", "Local o visitante (no empate)", pH + pA),
@@ -889,6 +909,15 @@ def build_picks(fx: list[dict], ratios: dict, umbral: float,
                                   "label": lab, "p": round(pa, 4),
                                   "pModelo": round(float(p), 4),
                                   "cuota": round(1 / pa, 2), "grupo": "resultado"})
+            for k, p in (f.get("pGoles") or {}).items():
+                if k not in GOAL_LIQ or k in ("1", "2", "1X", "12", "X2"):
+                    continue
+                pa = ajustada(p, "goles")
+                if umbral < pa <= CEIL_GOAL:
+                    todas.append({**base, "key": k, "fam": FAMILY.get(k, k),
+                                  "cat": GOAL_LIQ[k], "label": ETIQUETA_GOLES(k),
+                                  "p": round(pa, 4), "pModelo": round(float(p), 4),
+                                  "cuota": round(1 / pa, 2), "grupo": "goles"})
             continue
 
         mk, lh, la = markets(lg, pH, pD, pA)

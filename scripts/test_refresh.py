@@ -592,3 +592,43 @@ for k, v in _d_con.items():
 assert len(_d_con) <= len(_d_sin), "corregir no puede agregar picks"
 print("   se corrige antes del umbral y la cuota justa sale de la corregida: ok")
 print("\nESCENARIO 10 OK")
+
+# --------------------------------------------------------------------------- 11
+print()
+print("ESCENARIO 11: goles de mercado en las competencias sin historia propia")
+# Champions, Europa, Conference, Nations League y AFCON no tienen base de goles
+# porque football-data solo publica ligas domesticas. Las lineas se toman del
+# mercado, igual que el 1X2, y se liquidan con el marcador, que es lo que LiveScore
+# ya trae. Cornners y tarjetas no entran aca: no habria con que cerrarlas.
+_AHORA_11 = R.datetime(2026, 11, 22, 12, 0, tzinfo=R.timezone.utc)
+_fx11 = [{"lg": "unl", "home": "Portugal", "away": "Armenia",
+          "ko": "2026-11-24T19:45:00Z", "pH": 0.88, "pD": 0.08, "pA": 0.04,
+          "kH": "portugal", "kA": "armenia", "b365": {}, "mejor": {}, "quien": {},
+          "pGoles": {"O1.5": 0.86, "U1.5": 0.14, "O2.5": 0.70, "U2.5": 0.30,
+                     "O3.5": 0.49, "U3.5": 0.51, "BTTS": 0.38, "NBTTS": 0.62}}]
+_p11 = R.build_picks(_fx11, {}, 0.68, ahora=_AHORA_11)
+for q in _p11:
+    print(f"   {q['grupo']:<11} {q['key']:<6} {q['label']:<22} p={q['p']}  cuota={q['cuota']}")
+_g11 = [q for q in _p11 if q["grupo"] == "goles"]
+assert _g11, "una competencia de seleccion con lineas de mercado tiene que dar picks de goles"
+assert {q["key"] for q in _g11} == {"O1.5"}, \
+    f"solo O1.5 pasa el 68% y la familia no se repite: {[q['key'] for q in _g11]}"
+assert _g11[0]["label"] == "Mas de 1.5 goles", f"etiqueta: {_g11[0]['label']}"
+assert _g11[0]["cat"] == "Goles", f"categoria: {_g11[0]['cat']}"
+# U3.5 al 51% y O3.5 al 49% no llegan al umbral, y O3.5 ni esta en GOAL_LIQ
+assert not [q for q in _g11 if q["key"] in ("O3.5", "U3.5")], "no debia pasar el umbral"
+
+# y se liquida con el marcador, sin estadisticas de ningun tipo
+_r11 = pd.Series({"FTHG": 3, "FTAG": 0})
+assert R.settle_key("O1.5", _r11) is True, "3-0 hace entrar el O1.5"
+assert R.settle_key("U1.5", _r11) is False
+assert R.settle_key("BTTS", _r11) is False, "3-0 no es ambos marcan"
+print("   se liquida con el marcador solo: ok")
+
+# sin lineas de mercado, la competencia sigue dando solo resultado
+_fx11b = [{**_fx11[0], "pGoles": {}}]
+_p11b = R.build_picks(_fx11b, {}, 0.68, ahora=_AHORA_11)
+assert not [q for q in _p11b if q["grupo"] == "goles"], "sin lineas no se inventa nada"
+assert [q for q in _p11b if q["grupo"] == "resultado"], "el 1X2 tiene que seguir saliendo"
+print("   sin lineas de mercado no se inventa un pick de goles: ok")
+print("\nESCENARIO 11 OK")
