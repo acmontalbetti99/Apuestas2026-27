@@ -70,8 +70,22 @@ def humo_liquidacion(pw) -> list[str]:
     legs = [{"id": x["id"], "lg": x["lg"], "liga": x["lg"], "home": x["home"],
              "away": x["away"], "label": x["label"], "p": x["p"], "ko": x["ko"],
              "key": x["key"], "cuota": 1.3} for x in picks[:3]]
+    # t2: las dos patas apuntan a picks que ya no existen (el partido se recotizo y
+    # el pick viejo se reemplazo). Tiene que liquidarse igual: la primera no tiene
+    # ningun pick con ese mercado y sale del resultado, la segunda la resuelve otro
+    # pick del mismo partido. Asi quedaron siete combinadas colgadas en "pendiente",
+    # con las patas ya ganadas y fuera del registro de precision.
+    huerfanas = [{"id": "ya-no-existe-1", "lg": "ucl", "liga": "ucl",
+                  "home": "Slavia Praha", "away": "Arsenal", "label": "Local",
+                  "p": 0.6, "ko": ayer, "key": "1", "cuota": 1.9},
+                 {"id": "ya-no-existe-2", "lg": "ucl", "liga": "ucl",
+                  "home": "PSV Eindhoven", "away": "Club Brujas", "label": "Doble",
+                  "p": 0.7, "ko": ayer, "key": "12", "cuota": 1.3}]
     parlays = [{"id": "t1", "jornada": ayer[:10], "tipo": "dia", "alcance": ayer[:10],
-                "patas": 3, "prob": 0.4, "cuota": 2.2, "legs": legs, "estado": "pendiente"}]
+                "patas": 3, "prob": 0.4, "cuota": 2.2, "legs": legs, "estado": "pendiente"},
+               {"id": "t2", "jornada": ayer[:10], "tipo": "dia", "alcance": ayer[:10],
+                "patas": 2, "prob": 0.4, "cuota": 2.4, "legs": huerfanas,
+                "estado": "pendiente"}]
     # LiveScore nombra la ciudad en ingles: el mismo caso que dejo el pick sin liquidar.
     final = {"ts": 0, "partidos": [
         {"lg": "ucl", "h": "slavia-prague", "a": "arsenal", "hn": "Slavia Prague",
@@ -122,9 +136,10 @@ def humo_liquidacion(pw) -> list[str]:
             if not g or g[0] != "pendiente":
                 fallas.append(f"el pick {pid} no sale del marcador y no debia liquidarse: {g}")
         tk = pg.evaluate("TICKETS.map(t=>t.estado)")
-        print(f"  combinada: {tk}")
-        if tk != ["perdido"]:
-            fallas.append(f"la combinada tenia una pata perdida y debia caerse: {tk}")
+        print(f"  combinadas: {tk}")
+        # t1 tiene una pata perdida; t2 son dos patas huerfanas, las dos ganadas.
+        if tk != ["perdido", "ganado"]:
+            fallas.append(f"combinadas: esperaba ['perdido', 'ganado'], salio {tk}")
 
         # El mismo corpus que usa el matcher de Python. Los dos tienen que dar lo
         # mismo: si la pagina reconoce menos nombres, muestra "Esperando resultado"

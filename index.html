@@ -412,6 +412,24 @@ function aciertaMarcador(key,hg,ag){
   return null;                       // mercado que no sale del marcador: no se toca
 }
 
+/* Como se resuelve una pata de combinada. Por id es lo barato, pero el pick puede
+   no estar: al recotizar un partido se reemplaza entero y el deduplicador deja uno
+   por grupo, asi que ids que la combinada guardo ayer hoy ya no existen. Eso
+   dejaba combinadas en "pendiente" para siempre, con las patas ya ganadas y fuera
+   del registro de precision. La pata trae home, away, key y ko, que alcanza para
+   resolverla sola. Mismo criterio que settle_parlays() en refresh.py. */
+function pataResuelta(l){
+  const pk=PICKS.find(x=>x.id===l.id)
+    || PICKS.find(x=>x.key===l.key&&x.home===l.home&&x.away===l.away);
+  if(pk)return{estado:pk.estado,resultado:pk.resultado};
+  const v=buscarEn(FIN,l);
+  if(v&&ES_FINAL.test(v.est)){
+    const ok=aciertaMarcador(l.key,v.hg,v.ag);
+    if(ok!==null)return{estado:ok?'ganado':'perdido',resultado:`${v.hg}-${v.ag}`};
+  }
+  return{estado:'pendiente',resultado:null};
+}
+
 function liquidarConFinales(){
   let n=0;
   for(const p of PICKS){
@@ -428,7 +446,7 @@ function liquidarConFinales(){
   // Una combinada se cae con la primera pata perdida y se gana solo con todas.
   for(const t of TICKETS){
     if(t.estado==='ganado'||t.estado==='perdido')continue;
-    const es=t.legs.map(l=>(PICKS.find(x=>x.id===l.id)||{}).estado);
+    const es=t.legs.map(l=>pataResuelta(l).estado);
     if(es.some(e=>e==='perdido')){t.estado='perdido';t.provisional=true;continue}
     if(es.length&&es.every(e=>e==='ganado')){t.estado='ganado';t.provisional=true}
   }
@@ -628,8 +646,8 @@ function ticket(t){
       <span class="k"><small>Probabilidad</small>${pc(t.prob)}</span>
       <span class="k"><small>Cuota justa</small>${t.cuota.toFixed(2)}</span></div>`;
   for(const l of t.legs){
-    const pk=PICKS.find(x=>x.id===l.id);
-    const mk=pk&&(pk.estado==='ganado'||pk.estado==='perdido')
+    const pk=pataResuelta(l);
+    const mk=(pk.estado==='ganado'||pk.estado==='perdido')
       ?`<span class="lr ${pk.estado==='ganado'?'won':'lost'}">${esc(pk.resultado||'')}</span>`:'';
     h+=`<div class="leg"><span class="lp">${(100*l.p).toFixed(0)}%</span>
       <div class="lm"><b>${esc(l.home)} v ${esc(l.away)}</b><span>${esc(LG[l.lg]||l.liga||'')} \u00b7 ${esc(dlabel(l.ko))} \u00b7 ${esc(l.label)}</span></div>

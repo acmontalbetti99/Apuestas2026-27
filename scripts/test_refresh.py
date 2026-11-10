@@ -467,3 +467,67 @@ assert not sin, f"quedaron sin liquidar: {[q['key'] for q in sin]} (la fuente si
 assert _n["sin_datos"] == 0, f"sin_datos={_n['sin_datos']}"
 print("  las cinco liquidaron, incluidas las de estadisticas: ok")
 print("\nESCENARIO 8 OK")
+
+
+print("\n" + "=" * 70)
+print("ESCENARIO 9: combinada cuyo pick ya no existe")
+# Siete combinadas del 30/10 al 3/11 quedaron en "pendiente" para siempre con las
+# patas ya ganadas: el pick de una pata habia desaparecido de picks.json, porque al
+# recotizar un partido se reemplaza entero y el deduplicador deja uno por grupo.
+# La combinada tiene que liquidarse contra el resultado, como un pick.
+from refresh import indices as _indices, settle_parlays as _sp
+_ko9 = "2026-11-03T20:00:00Z"
+_D9 = _pd.DataFrame([
+  {"HomeTeam": "Bayern Munich", "AwayTeam": "Arsenal",
+   "fecha": _pd.Timestamp("2026-11-03 20:00"), "FTHG": 3.0, "FTAG": 1.0,
+   "HC": 6.0, "AC": 3.0, "HY": 1.0, "AY": 2.0, "HS": 14.0, "AS": 7.0,
+   "HST": 6.0, "AST": 2.0, "savH": 1.0, "savA": 3.0,
+   "kH": R.canon("Bayern Munich"), "kA": R.canon("Arsenal")},
+  {"HomeTeam": "Inter", "AwayTeam": "Roma",
+   "fecha": _pd.Timestamp("2026-11-03 20:00"), "FTHG": 0.0, "FTAG": 1.0,
+   "HC": 5.0, "AC": 5.0, "HY": 2.0, "AY": 2.0, "HS": 11.0, "AS": 8.0,
+   "HST": 3.0, "AST": 4.0, "savH": 3.0, "savA": 3.0,
+   "kH": R.canon("Inter"), "kA": R.canon("Roma")},
+])
+_idx9, _dia9 = _indices(_D9)
+
+
+def _leg(pid, home, away, key):
+    return {"id": pid, "lg": "ucl", "liga": "ucl", "home": home, "away": away,
+            "label": key, "p": 0.75, "ko": _ko9, "key": key, "cuota": 1.33}
+
+
+# el pick de la primera pata sigue vivo y ganado; el de la segunda ya no existe
+_picks9 = [{"id": "vive", "lg": "ucl", "home": "Bayern Munich", "away": "Arsenal",
+            "ko": _ko9, "key": "1X", "label": "1X", "cat": "c", "grupo": "resultado",
+            "p": 0.75, "cuota": 1.33, "estado": "ganado", "resultado": "3-1"}]
+_t_gana = {"id": "t-gana", "tipo": "dia", "alcance": "2026-11-03", "estado": "pendiente",
+           "patas": 2, "prob": 0.5, "cuota": 1.8,
+           "legs": [_leg("vive", "Bayern Munich", "Arsenal", "1X"),
+                    _leg("borrado", "Inter", "Roma", "X2")]}
+_t_pierde = {"id": "t-pierde", "tipo": "dia", "alcance": "2026-11-03", "estado": "pendiente",
+             "patas": 2, "prob": 0.5, "cuota": 1.8,
+             "legs": [_leg("vive", "Bayern Munich", "Arsenal", "1X"),
+                      _leg("borrado2", "Inter", "Roma", "1")]}
+# partido que todavia no se jugo: tiene que seguir pendiente de verdad
+_t_abre = {"id": "t-abre", "tipo": "dia", "alcance": "2026-11-24", "estado": "pendiente",
+           "patas": 2, "prob": 0.5, "cuota": 1.8,
+           "legs": [_leg("vive", "Bayern Munich", "Arsenal", "1X"),
+                    {"id": "nadie", "lg": "ucl", "liga": "ucl", "home": "Lille",
+                     "away": "Porto", "label": "1X", "p": 0.75,
+                     "ko": "2026-11-24T20:00:00Z", "key": "1X", "cuota": 1.33}]}
+_ts9 = [_t_gana, _t_pierde, _t_abre]
+_sp(_ts9, _picks9, _idx9, _dia9)
+for q in _ts9:
+    print(f"   {q['id']:10s} -> {q['estado']}")
+assert _t_gana["estado"] == "ganado", f"Inter 0-1 Roma hace ganar el X2: {_t_gana['estado']}"
+assert _t_pierde["estado"] == "perdido", f"Inter 0-1 Roma hace perder el 1: {_t_pierde['estado']}"
+assert _t_abre["estado"] == "pendiente", f"sin resultado no se liquida: {_t_abre['estado']}"
+
+# sin indices (compatibilidad) no debe inventar nada
+_t2 = {"id": "t2", "tipo": "dia", "alcance": "2026-11-03", "estado": "pendiente",
+       "patas": 2, "prob": 0.5, "cuota": 1.8, "legs": _t_gana["legs"]}
+_sp([_t2], _picks9)
+assert _t2["estado"] == "pendiente", "sin indices tiene que quedarse quieta"
+print("  la pata sin pick se liquida contra el resultado, y sin resultado no: ok")
+print("\nESCENARIO 9 OK")

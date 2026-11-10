@@ -481,13 +481,52 @@ def settle_label(pick: dict, r: pd.Series) -> str:
     return f"{base} · {v:g} {STAT_WORD[stat]}"
 
 
-def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
-    """Liquida en sitio. Devuelve el conteo de lo que paso."""
+def indices(D: pd.DataFrame) -> tuple[dict, dict]:
+    """Los dos indices de partidos jugados: por cruce y por dia."""
     idx: dict[tuple[str, str], list[pd.Series]] = {}
     por_dia: dict[str, list[pd.Series]] = {}
     for _, r in D.iterrows():
         idx.setdefault((r["kH"], r["kA"]), []).append(r)
         por_dia.setdefault(str(r["fecha"])[:10], []).append(r)
+    return idx, por_dia
+
+
+def candidatos(idx: dict, por_dia: dict, home: str, away: str, ko) -> list[pd.Series]:
+    """Los partidos jugados que podrian ser este, del mas cercano al kickoff."""
+    cands = list(idx.get((canon(home), canon(away)), []))
+    if not cands:
+        # Sin coincidencia literal se busca por palabras, solo entre los partidos
+        # del dia del pick y los vecinos: acotar asi mantiene el costo bajo y
+        # hace casi imposible un falso positivo.
+        for d in (str(ko)[:10], (ko - timedelta(days=1)).strftime("%Y-%m-%d"),
+                  (ko + timedelta(days=1)).strftime("%Y-%m-%d")):
+            for r in por_dia.get(d, []):
+                if mismo_partido(r["HomeTeam"], r["AwayTeam"], home, away):
+                    cands.append(r)
+    # el mismo cruce se repite entre temporadas: el partido mas cercano al kickoff
+    gap = lambda x: abs((x["fecha"].tz_localize("UTC") - ko).total_seconds())  # noqa: E731
+    return [c for c in sorted(cands, key=gap) if gap(c) <= 5 * 86400]
+
+
+def resolver(idx: dict, por_dia: dict, home: str, away: str, ko, key: str):
+    """True/False si se puede liquidar ESTE mercado, None si todavia no.
+
+    Un mismo partido puede estar dos veces: el de LiveScore, que trae solo goles,
+    y el de football-data, que trae las estadisticas. Quedarse con el mas cercano
+    al kickoff elegia siempre el de LiveScore (tiene la hora exacta) y los
+    mercados de cornners y tarjetas no liquidaban NUNCA. Se prueban todos y se usa
+    el primero que sepa resolver este mercado.
+    """
+    for c in candidatos(idx, por_dia, home, away, ko):
+        v = settle_key(key, c)
+        if v is not None:
+            return v, c
+    return None, None
+
+
+def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
+    """Liquida en sitio. Devuelve el conteo de lo que paso."""
+    idx, por_dia = indices(D)
 
     n = {"ganado": 0, "perdido": 0, "sin_datos": 0, "caducado": 0, "espera": 0}
     vivos = []
@@ -501,23 +540,7 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
             n["espera"] += 1
             continue
 
-        cands = idx.get((canon(p["home"]), canon(p["away"])), [])
-        if not cands:
-            # Sin coincidencia literal se busca por palabras, solo entre los partidos
-            # del dia del pick y el anterior: acotar asi mantiene el costo bajo y
-            # hace casi imposible un falso positivo.
-            dia = str(p["ko"])[:10]
-            ayer = (ko - timedelta(days=1)).strftime("%Y-%m-%d")
-            manana = (ko + timedelta(days=1)).strftime("%Y-%m-%d")
-            for d in (dia, ayer, manana):
-                for r in por_dia.get(d, []):
-                    if mismo_partido(r["HomeTeam"], r["AwayTeam"], p["home"], p["away"]):
-                        cands.append(r)
-        # el mismo cruce se repite entre temporadas: el partido mas cercano al kickoff
-        gap = lambda x: abs((x["fecha"].tz_localize("UTC") - ko).total_seconds())
-        cands = [c for c in sorted(cands, key=gap) if gap(c) <= 5 * 86400]
-
-        if not cands:
+        if not candidatos(idx, por_dia, p["home"], p["away"], ko):
             if (today - ko).days > EXPIRA_UCL:
                 n["caducado"] += 1          # se descarta: no contamina el acierto
                 continue
@@ -525,17 +548,7 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
             n["espera"] += 1
             continue
 
-        # Un mismo partido puede estar dos veces: el de LiveScore, que trae solo
-        # goles, y el de football-data, que trae las estadisticas. Quedarse con el
-        # mas cercano al kickoff elegia siempre el de LiveScore (tiene la hora
-        # exacta) y los mercados de cornners y tarjetas no liquidaban NUNCA.
-        # Se prueban todos y se usa el primero que sepa resolver ESTE mercado.
-        hit, r = None, cands[0]
-        for c in cands:
-            v = settle_key(p["key"], c)
-            if v is not None:
-                hit, r = v, c
-                break
+        hit, r = resolver(idx, por_dia, p["home"], p["away"], ko, p["key"])
         if hit is None:
             n["sin_datos"] += 1
             vivos.append(p)
@@ -549,7 +562,21 @@ def settle(picks: list[dict], D: pd.DataFrame, today: datetime) -> dict:
     return n
 
 
-def settle_parlays(parlays: list[dict], picks: list[dict]) -> None:
+def settle_parlays(parlays: list[dict], picks: list[dict],
+                   idx: dict | None = None, por_dia: dict | None = None) -> None:
+    """Liquida las combinadas pendientes.
+
+    La pata se mira primero contra su pick, que es lo barato. Pero el pick puede
+    no estar: cuando un partido se vuelve a cotizar se reemplaza entero, y el
+    deduplicador se queda con uno solo por grupo, asi que ids que una combinada
+    guardo ayer desaparecen hoy. Eso dejaba la combinada en "pendiente" para
+    siempre y fuera del registro de precision: siete combinadas del 30/10 al 3/11
+    estaban asi, con las patas ya ganadas.
+
+    Por eso la pata que perdio su pick se liquida contra el resultado, igual que
+    un pick: trae guardados lg, home, away, key y ko, que es todo lo que hace
+    falta. Si no hay resultado todavia, queda pendiente de verdad.
+    """
     by_id = {p["id"]: p for p in picks}
     for t in parlays:
         if t.get("estado") != "pendiente":
@@ -557,7 +584,20 @@ def settle_parlays(parlays: list[dict], picks: list[dict]) -> None:
         estados = []
         for leg in t.get("legs", []):
             pid = leg.get("id") or pick_id(leg.get("home", ""), leg.get("away", ""), leg.get("key", ""))
-            estados.append(by_id.get(pid, {}).get("estado", "pendiente"))
+            p = by_id.get(pid)
+            if p is not None:
+                estados.append(p.get("estado", "pendiente"))
+                continue
+            if idx is None:
+                estados.append("pendiente")
+                continue
+            ko = pd.to_datetime(leg.get("ko"), utc=True, errors="coerce")
+            if pd.isna(ko):
+                estados.append("pendiente")
+                continue
+            hit, _ = resolver(idx, por_dia or {}, leg.get("home", ""),
+                              leg.get("away", ""), ko, leg.get("key", ""))
+            estados.append("pendiente" if hit is None else ("ganado" if hit else "perdido"))
         if "perdido" in estados:
             t["estado"] = "perdido"
         elif estados and all(e == "ganado" for e in estados):
@@ -1062,9 +1102,14 @@ def main() -> int:
     # cuenta dos veces en el acierto y el umbral se ajusta con numeros inflados.
     picks[:] = _quitar_duplicados(picks)
     n = settle(picks, D, today)
-    settle_parlays(parlays, picks)
+    _idx, _por_dia = indices(D)
+    antes = sum(1 for t in parlays if t.get("estado") == "pendiente")
+    settle_parlays(parlays, picks, _idx, _por_dia)
     log(f"  {n['ganado']} acertados · {n['perdido']} fallados · {n['espera']} en espera"
         f" · {n['sin_datos']} sin estadisticas · {n['caducado']} caducados")
+    cerradas = antes - sum(1 for t in parlays if t.get("estado") == "pendiente")
+    log(f"  {cerradas} combinadas cerradas · "
+        f"{sum(1 for t in parlays if t.get('estado') == 'pendiente')} abiertas")
 
     calib = calibrate(picks)
     log(f"  acierto {calib['real']} vs predicho {calib['predicho']}"
@@ -1081,7 +1126,16 @@ def main() -> int:
         log("  ! sin fixtures: dejo los picks abiertos como estaban")
         nuevos = [p for p in picks if p["estado"] == "pendiente"]
     else:
-        log(f"  {len(fx)} partidos con cuotas")
+        # De donde viene cada fixture importa: solo las ligas domesticas traen
+        # cornners, tarjetas, remates y atajadas, porque solo football-data los
+        # publica. Una semana de fecha FIFA deja ese lado en cero y la app sin un
+        # solo pick de estadisticas; conviene verlo en el log y no deducirlo.
+        dom = sum(1 for f in fx if f.get("lg") in set(DIVS.values()))
+        log(f"  {len(fx)} partidos con cuotas: {dom} de ligas domesticas"
+            f" (goles y estadisticas), {len(fx) - dom} de torneos (solo resultado)")
+        if not dom:
+            log("  ! ninguna liga domestica juega en esta ventana: no habra picks"
+                " de goles ni de estadisticas hasta que vuelvan")
         nuevos = build_picks(fx, team_ratios(D), calib["umbralVigente"])
         log(f"  {len(nuevos)} picks sobre el {100 * calib['umbralVigente']:.0f}%")
 
