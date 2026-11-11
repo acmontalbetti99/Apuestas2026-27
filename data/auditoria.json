@@ -3438,5 +3438,130 @@
    "media": 1,
    "baja": 4
   }
+ },
+ {
+  "fecha": "2026-11-11T18:08:37Z",
+  "hallazgos": [
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "banda 85%-90%: 80.2% real contra 87.1% predicho sobre 167 (z=-2.65)",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "cobertura",
+    "mensaje": "ningun pick para hoy (2026-11-11)",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "sitio",
+    "mensaje": "el sitio publica 511 picks y el repo tiene 533: el despliegue quedo atras",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {},
+   "calibracion": {
+    "n": 458,
+    "predicho": 0.8093,
+    "real": 0.7773,
+    "z": -1.76
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 79,
+     "predicho": 0.8679,
+     "real": 0.8228,
+     "z": -1.19,
+     "factor": 0.877
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 128,
+     "predicho": 0.7833,
+     "real": 0.7812,
+     "z": -0.06,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 206,
+     "predicho": 0.7903,
+     "real": 0.7767,
+     "z": -0.49,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 87,
+     "predicho": 0.7347,
+     "real": 0.7011,
+     "z": -0.71
+    },
+    "0.75-0.80": {
+     "n": 130,
+     "predicho": 0.7712,
+     "real": 0.7846,
+     "z": 0.36
+    },
+    "0.80-0.85": {
+     "n": 73,
+     "predicho": 0.826,
+     "real": 0.7945,
+     "z": -0.71
+    },
+    "0.85-0.90": {
+     "n": 167,
+     "predicho": 0.8711,
+     "real": 0.8024,
+     "z": -2.65
+    }
+   },
+   "valor": {
+    "pendientes": 75,
+    "conPrecioCasa": 0
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "ucl",
+     "uecl",
+     "uel",
+     "unl"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 511,
+    "/data/parlays.json": 160
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 1,
+   "baja": 4
+  }
  }
 ]

@@ -1,17 +1,17 @@
-# Auditoria · 2026-11-10 18:25 UTC
+# Auditoria · 2026-11-11 18:08 UTC
 
 **0 de severidad alta · 1 media · 4 baja**
 
 ## 🟡 Media
 
-- **[sitio]** el sitio publica 512 picks y el repo tiene 511: el despliegue quedo atras
+- **[sitio]** el sitio publica 511 picks y el repo tiene 533: el despliegue quedo atras
 
 ## ⚪ Baja
 
 - **[calibracion]** estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
 - **[calibracion]** banda 85%-90%: 80.2% real contra 87.1% predicho sobre 167 (z=-2.65)
 - **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
-- **[cobertura]** ningun pick para hoy (2026-11-10)
+- **[cobertura]** ningun pick para hoy (2026-11-11)
 
 ## Calibracion
 
@@ -31,5 +31,5 @@
 
 ## Valor contra bet365
 
-- 0 de 53 picks pendientes traen precio de la casa
+- 0 de 75 picks pendientes traen precio de la casa
 

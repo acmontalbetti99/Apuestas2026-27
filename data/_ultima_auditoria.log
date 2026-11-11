@@ -1,9 +1,9 @@
-Auditoria 2026-11-10 18:25 UTC
-  [media] sitio: el sitio publica 512 picks y el repo tiene 511: el despliegue quedo atras
+Auditoria 2026-11-11 18:08 UTC
+  [media] sitio: el sitio publica 511 picks y el repo tiene 533: el despliegue quedo atras
   [baja] calibracion: estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
   [baja] calibracion: banda 85%-90%: 80.2% real contra 87.1% predicho sobre 167 (z=-2.65)
   [baja] valor: ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
-  [baja] cobertura: ningun pick para hoy (2026-11-10)
+  [baja] cobertura: ningun pick para hoy (2026-11-11)
   0 alta · 1 media · 4 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 226, in <module>
