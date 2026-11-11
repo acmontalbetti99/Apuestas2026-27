@@ -1,4 +1,4 @@
-Refresco 2026-11-11 18:06 UTC
+Refresco 2026-11-11 19:55 UTC (solo liquidar)
 Bajando resultados...
   E0 2627: 100 partidos
   SP1 2627: 119 partidos
@@ -19,16 +19,15 @@ Bajando resultados...
   resultados_extra.json: 242 partidos
   2098 partidos en base
 Liquidando...
-  0 acertados · 0 fallados · 53 en espera · 0 sin estadisticas · 0 caducados
-  0 combinadas cerradas · 33 abiertas
+  0 acertados · 0 fallados · 75 en espera · 0 sin estadisticas · 0 caducados
+  0 combinadas cerradas · 44 abiertas
   acierto 0.7773 vs predicho 0.8093 sobre 458 · umbral 0.682
-Bajando proximos partidos...
-  cuotas_extra.json: 71 partidos
-  71 partidos con cuotas: 0 de ligas domesticas (goles y estadisticas), 71 de torneos (solo resultado)
-  ! ninguna liga domestica juega en esta ventana: no habra picks de goles ni de estadisticas hasta que vuelvan
-  estadisticas/corners-tarjetas: predicho 86.8% contra real 82.3% sobre 79 (z -1.19), se encoge la probabilidad x0.877
-  estadisticas/tiros: predicho 86.7% contra real 68.9% sobre 45 (z -3.52), se encoge la probabilidad x0.515
-  13 partidos de torneo todavia lejos (entran a 3 dias del arranque)
-  75 picks sobre el 68%
-  12 combinadas armadas (11 nuevas), 44 abiertas
-Listo: 533 picks (458 liquidados), 171 combinadas
+  75 picks pendientes de dias anteriores se mantienen
+Traceback (most recent call last):
+  File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py", line 1403, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py", line 1381, in main
+    "sinLigasDomesticas": bool(sin_dom),
+                               ^^^^^^^
+UnboundLocalError: cannot access local variable 'sin_dom' where it is not associated with a value
