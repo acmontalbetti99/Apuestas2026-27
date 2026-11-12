@@ -1,4 +1,4 @@
-Refresco 2026-11-11 19:55 UTC (solo liquidar)
+Refresco 2026-11-12 01:11 UTC (solo liquidar)
 Bajando resultados...
   E0 2627: 100 partidos
   SP1 2627: 119 partidos
@@ -23,11 +23,4 @@ Liquidando...
   0 combinadas cerradas · 44 abiertas
   acierto 0.7773 vs predicho 0.8093 sobre 458 · umbral 0.682
   75 picks pendientes de dias anteriores se mantienen
-Traceback (most recent call last):
-  File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py", line 1403, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py", line 1381, in main
-    "sinLigasDomesticas": bool(sin_dom),
-                               ^^^^^^^
-UnboundLocalError: cannot access local variable 'sin_dom' where it is not associated with a value
+Listo: 533 picks (458 liquidados), 171 combinadas
