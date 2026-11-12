@@ -1934,5 +1934,21 @@
   "ko": "2026-11-08T20:00:00Z",
   "hg": 1,
   "ag": 2
+ },
+ {
+  "lg": "unl",
+  "home": "Turkiye",
+  "away": "Belgium",
+  "ko": "2026-11-12T17:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "unl",
+  "home": "Armenia",
+  "away": "Cyprus",
+  "ko": "2026-11-12T17:00:00Z",
+  "hg": 1,
+  "ag": 1
  }
 ]
