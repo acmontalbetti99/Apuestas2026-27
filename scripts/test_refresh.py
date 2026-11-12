@@ -695,3 +695,54 @@ for _c, _s, _esp in _ETAPAS:
 assert not _malx, f"{_malx} etapas mal reconocidas"
 print(f"   {len(_ETAPAS)} etapas reconocidas bien, con las homonimas afuera: ok")
 print("\nESCENARIO 12 OK")
+
+# --------------------------------------------------------------------------- 13
+print()
+print("ESCENARIO 13: la corrida de solo-liquidar tiene que terminar entera")
+# Existe porque fallo de verdad. Los tests ejercitaban las funciones una por una
+# pero nunca main(), y menos en el modo --solo-liquidar, que es el que corre
+# ~20 veces por dia. Una variable que solo se definia en la rama de la corrida
+# completa dejaba reventar el final: liquidaba bien, guardaba los datos y moria
+# antes de escribir estado.json, con el workflow en rojo tres corridas seguidas.
+import shutil as _sh  # noqa: E402
+import tempfile as _tf  # noqa: E402
+
+_tmp13 = R.Path(_tf.mkdtemp(prefix="solo-liq-"))
+for _f in ("picks.json", "parlays.json", "estado.json", "calibracion.json",
+           "resultados_extra.json"):
+    _o = R.DATA / _f
+    if _o.exists():
+        _sh.copy(_o, _tmp13 / _f)
+_prev13 = json.loads((_tmp13 / "estado.json").read_text()) if (_tmp13 / "estado.json").exists() else {}
+
+_DATA_real, _res_real, _fx_real, _argv_real = R.DATA, R.load_results, R.load_fixtures, sys.argv
+try:
+    R.DATA = _tmp13
+    # Sin red. Un partido inventado alcanza: lo que se prueba es que la corrida
+    # llegue entera al final, no que liquide algo en particular.
+    R.load_results = lambda *a, **k: _pd.DataFrame([
+        {"HomeTeam": "Arsenal", "AwayTeam": "Everton",
+         "fecha": _pd.Timestamp("2026-10-20 20:00"), "FTHG": 2.0, "FTAG": 0.0,
+         "HC": 7.0, "AC": 2.0, "HY": 1.0, "AY": 3.0, "HS": 15.0, "AS": 6.0,
+         "HST": 6.0, "AST": 1.0, "savH": 1.0, "savA": 4.0,
+         "kH": R.canon("Arsenal"), "kA": R.canon("Everton")}])
+    R.load_fixtures = lambda *a, **k: (_ for _ in ()).throw(
+        AssertionError("solo-liquidar no debe pedir fixtures"))
+    sys.argv = ["refresh.py", "--solo-liquidar"]
+    _rc13 = R.main()
+finally:
+    R.DATA, R.load_results, R.load_fixtures, sys.argv = \
+        _DATA_real, _res_real, _fx_real, _argv_real
+
+print(f"   main() devolvio {_rc13}")
+assert _rc13 == 0, f"la corrida de solo-liquidar fallo con codigo {_rc13}"
+_est13 = json.loads((_tmp13 / "estado.json").read_text())
+for _k in ("fecha", "sinLigasDomesticas", "aliasVivo"):
+    assert _k in _est13, f"estado.json quedo sin {_k}: la corrida no llego al final"
+# lo que solo-liquidar no puede recalcular se arrastra, no se inventa
+assert _est13["sinLigasDomesticas"] == _prev13.get("sinLigasDomesticas", False), \
+    "solo-liquidar no mira fixtures: tiene que conservar lo que dejo la completa"
+assert (_tmp13 / "picks.json").exists()
+print("   estado.json completo y sinLigasDomesticas arrastrado de la corrida previa: ok")
+_sh.rmtree(_tmp13, ignore_errors=True)
+print("\nESCENARIO 13 OK")

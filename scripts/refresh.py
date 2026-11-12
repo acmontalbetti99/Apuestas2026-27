@@ -663,6 +663,21 @@ def calibrate(picks: list[dict]) -> dict:
     return out
 
 
+def estado_previo() -> dict | None:
+    """Lo que dejo escrito la corrida anterior en data/estado.json.
+
+    Sirve para arrastrar lo que una corrida de solo-liquidar no puede recalcular
+    porque no mira los fixtures.
+    """
+    path = DATA / "estado.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
 def cubo(grupo: str, key: str) -> str:
     """El conjunto de picks contra el que se mide y corrige este pick.
 
@@ -1259,6 +1274,13 @@ def main() -> int:
     calib = calibrate(picks)
     log(f"  acierto {calib['real']} vs predicho {calib['predicho']}"
         f" sobre {calib['nLiquidados']} · umbral {calib['umbralVigente']}")
+
+    # Liquidar no mira los fixtures, asi que no sabe si juegan las ligas
+    # domesticas: se conserva lo que dejo escrito la ultima corrida completa. Sin
+    # este arrastre la variable quedaba sin definir y la corrida de solo liquidar
+    # reventaba al final, DESPUES de haber liquidado: los datos se guardaban igual
+    # y el workflow quedaba en rojo sin que se notara que faltaba estado.json.
+    sin_dom = bool((estado_previo() or {}).get("sinLigasDomesticas", False))
 
     if solo_liquidar:
         fx, nuevos = None, []
