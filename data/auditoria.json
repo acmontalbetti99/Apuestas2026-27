@@ -3682,5 +3682,135 @@
    "media": 1,
    "baja": 3
   }
+ },
+ {
+  "fecha": "2026-11-13T18:09:12Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "2 picks de Nations League sin liquidar tras 25 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Turkey v Belgium (2026-11-12T17:00)",
+     "Turkey v Belgium (2026-11-12T17:00)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "banda 85%-90%: 80.5% real contra 87.1% predicho sobre 169 (z=-2.58)",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "sitio",
+    "mensaje": "el sitio publica 551 picks y el repo tiene 560: el despliegue quedo atras",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "unl": 2
+   },
+   "calibracion": {
+    "n": 471,
+    "predicho": 0.8089,
+    "real": 0.7792,
+    "z": -1.66
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 79,
+     "predicho": 0.8679,
+     "real": 0.8228,
+     "z": -1.19,
+     "factor": 0.877
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 134,
+     "predicho": 0.7833,
+     "real": 0.791,
+     "z": 0.22,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 213,
+     "predicho": 0.7909,
+     "real": 0.7746,
+     "z": -0.59,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 89,
+     "predicho": 0.7346,
+     "real": 0.6854,
+     "z": -1.05
+    },
+    "0.75-0.80": {
+     "n": 134,
+     "predicho": 0.7714,
+     "real": 0.791,
+     "z": 0.54
+    },
+    "0.80-0.85": {
+     "n": 77,
+     "predicho": 0.8267,
+     "real": 0.8052,
+     "z": -0.5
+    },
+    "0.85-0.90": {
+     "n": 169,
+     "predicho": 0.8711,
+     "real": 0.8047,
+     "z": -2.58
+    }
+   },
+   "valor": {
+    "pendientes": 89,
+    "conPrecioCasa": 0
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "ucl",
+     "uecl",
+     "uel",
+     "unl"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 551,
+    "/data/parlays.json": 180
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 2,
+   "baja": 3
+  }
  }
 ]
