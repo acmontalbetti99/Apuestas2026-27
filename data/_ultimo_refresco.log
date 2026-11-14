@@ -1,4 +1,4 @@
-Refresco 2026-11-13 20:09 UTC (solo liquidar)
+Refresco 2026-11-14 00:56 UTC (solo liquidar)
 Bajando resultados...
   E0 2627: 100 partidos
   SP1 2627: 119 partidos
@@ -16,11 +16,11 @@ Bajando resultados...
   D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
 /home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:382: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
-  resultados_extra.json: 251 partidos
-  2107 partidos en base
+  resultados_extra.json: 260 partidos
+  2116 partidos en base
 Liquidando...
-  1 acertados · 0 fallados · 88 en espera · 0 sin estadisticas · 0 caducados
-  4 combinadas cerradas · 51 abiertas
-  acierto 0.7797 vs predicho 0.8087 sobre 472 · umbral 0.679
-  88 picks pendientes de dias anteriores se mantienen
-Listo: 560 picks (472 liquidados), 191 combinadas
+  14 acertados · 3 fallados · 71 en espera · 0 sin estadisticas · 0 caducados
+  12 combinadas cerradas · 39 abiertas
+  acierto 0.7812 vs predicho 0.808 sobre 489 · umbral 0.6768
+  71 picks pendientes de dias anteriores se mantienen
+Listo: 560 picks (489 liquidados), 191 combinadas
