@@ -1,9 +1,9 @@
-Auditoria 2026-11-14 16:46 UTC
-  [media] liquidacion: 2 picks de Nations League sin liquidar tras 48 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  [media] sitio: el sitio publica 560 picks y el repo tiene 591: el despliegue quedo atras
+Auditoria 2026-11-15 17:27 UTC
+  [alta] liquidacion: 4 picks de Nations League sin liquidar tras 72 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+  [media] sitio: el sitio publica 591 picks y el repo tiene 607: el despliegue quedo atras
   [baja] calibracion: estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
   [baja] valor: ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
-  0 alta · 2 media · 2 baja
+  1 alta · 1 media · 2 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 226, in <module>
     sys.exit(main())
