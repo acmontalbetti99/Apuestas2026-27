@@ -4062,5 +4062,154 @@
    "media": 1,
    "baja": 2
   }
+ },
+ {
+  "fecha": "2026-11-16T20:44:19Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-12-3patas-84d8900a sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "turkey__belgium__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-12-4patas-199dbc8f sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "turkey__belgium__o1-5"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-12-a-2026-11-14-3patas-d4344dd9 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "turkey__belgium__12"
+    ]
+   },
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "3 picks de Nations League sin liquidar tras 49 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Austria v Iceland (2026-11-14T19:45)",
+     "Austria v Iceland (2026-11-14T19:45)",
+     "France v Turkey (2026-11-15T19:45)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   },
+   {
+    "severidad": "media",
+    "area": "sitio",
+    "mensaje": "el sitio publica 607 picks y el repo tiene 605: el despliegue quedo atras",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "unl": 3
+   },
+   "calibracion": {
+    "n": 522,
+    "predicho": 0.8066,
+    "real": 0.7835,
+    "z": -1.35
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 79,
+     "predicho": 0.8679,
+     "real": 0.8228,
+     "z": -1.19,
+     "factor": 0.877
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 156,
+     "predicho": 0.7813,
+     "real": 0.7885,
+     "z": 0.22,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 242,
+     "predicho": 0.7918,
+     "real": 0.7851,
+     "z": -0.26,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 98,
+     "predicho": 0.7341,
+     "real": 0.6735,
+     "z": -1.36
+    },
+    "0.75-0.80": {
+     "n": 148,
+     "predicho": 0.7713,
+     "real": 0.8041,
+     "z": 0.95
+    },
+    "0.80-0.85": {
+     "n": 90,
+     "predicho": 0.8258,
+     "real": 0.8111,
+     "z": -0.37
+    },
+    "0.85-0.90": {
+     "n": 178,
+     "predicho": 0.8713,
+     "real": 0.8146,
+     "z": -2.26
+    }
+   },
+   "valor": {
+    "pendientes": 83,
+    "conPrecioCasa": 0
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "ucl",
+     "uecl",
+     "uel",
+     "unl"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 607,
+    "/data/parlays.json": 212
+   }
+  },
+  "resumen": {
+   "alta": 1,
+   "media": 4,
+   "baja": 2
+  }
  }
 ]
