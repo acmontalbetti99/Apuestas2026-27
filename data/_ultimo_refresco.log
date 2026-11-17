@@ -1,4 +1,4 @@
-Refresco 2026-11-17 19:26 UTC
+Refresco 2026-11-17 21:26 UTC (solo liquidar)
 Bajando resultados...
   E0 2627: 100 partidos
   SP1 2627: 119 partidos
@@ -20,15 +20,7 @@ Bajando resultados...
   2142 partidos en base
 Liquidando...
   0 acertados · 0 fallados · 73 en espera · 0 sin estadisticas · 0 caducados
-  0 combinadas cerradas · 37 abiertas
+  0 combinadas cerradas · 39 abiertas
   acierto 0.7857 vs predicho 0.8066 sobre 532 · umbral 0.6709
-Bajando proximos partidos...
-  cuotas_extra.json: 62 partidos
-  62 partidos con cuotas: 0 de ligas domesticas (goles y estadisticas), 62 de torneos (solo resultado)
-  ! ninguna liga domestica juega en esta ventana: no habra picks de goles ni de estadisticas hasta que vuelvan
-  estadisticas/corners-tarjetas: predicho 86.8% contra real 82.3% sobre 79 (z -1.19), se encoge la probabilidad x0.877
-  estadisticas/tiros: predicho 86.7% contra real 68.9% sobre 45 (z -3.52), se encoge la probabilidad x0.515
-  70 picks sobre el 67%
-  3 picks pendientes de dias anteriores se mantienen
-  9 combinadas armadas (2 nuevas), 39 abiertas
+  73 picks pendientes de dias anteriores se mantienen
 Listo: 605 picks (532 liquidados), 216 combinadas
