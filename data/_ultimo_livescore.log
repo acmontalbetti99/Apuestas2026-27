@@ -1,8 +1,9 @@
-LiveScore 2026-11-16 22:38 UTC
+LiveScore 2026-11-17 04:52 UTC
+  2026-11-17: 0 partidos terminados de nuestras ligas
   2026-11-16: 10 partidos terminados de nuestras ligas
   2026-11-15: 8 partidos terminados de nuestras ligas
-  2026-11-14: 8 partidos terminados de nuestras ligas
-  15 competencias internacionales sin mapear (agregarlas a SELECCIONES/CLASIFICATORIAS si interesan):
+  18 competencias internacionales sin mapear (agregarlas a SELECCIONES/CLASIFICATORIAS si interesan):
+     Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group A'
      Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group B'
      Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group C'
      Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group D'
@@ -10,8 +11,7 @@ LiveScore 2026-11-16 22:38 UTC
      Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group F'
      Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group G'
      Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group H'
-     Cnm='Africa Cup of Nations Qualification' Snm='Qualification: Group I'
-  26 resultados leidos, 5 nuevos en resultados_extra.json
+  18 resultados leidos, 0 nuevos en resultados_extra.json
   2 partidos ya jugados sin resultado (nombre que no coincide, o fuera de la ventana de dias):
      [unl] Austria v Iceland  2026-11-14T19:45:00Z
      [unl] France v Turkey  2026-11-15T19:45:00Z
