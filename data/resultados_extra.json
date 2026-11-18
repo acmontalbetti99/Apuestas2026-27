@@ -2286,5 +2286,69 @@
   "ko": "2026-11-16T19:45:00Z",
   "hg": 1,
   "ag": 1
+ },
+ {
+  "lg": "unl",
+  "home": "Denmark",
+  "away": "Norway",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "unl",
+  "home": "Wales",
+  "away": "Portugal",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "unl",
+  "home": "Hungary",
+  "away": "Northern Ireland",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "unl",
+  "home": "Ukraine",
+  "away": "Georgia",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "unl",
+  "home": "Ireland",
+  "away": "Kosovo",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "unl",
+  "home": "Israel",
+  "away": "Austria",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "unl",
+  "home": "Bosnia and Herzegovina",
+  "away": "Romania",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "unl",
+  "home": "Poland",
+  "away": "Sweden",
+  "ko": "2026-11-17T19:45:00Z",
+  "hg": 1,
+  "ag": 1
  }
 ]
