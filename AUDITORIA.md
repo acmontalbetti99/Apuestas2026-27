@@ -1,10 +1,10 @@
-# Auditoria · 2026-11-17 19:27 UTC
+# Auditoria · 2026-11-18 19:08 UTC
 
-**1 de severidad alta · 3 media · 2 baja**
+**1 de severidad alta · 3 media · 3 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 3 picks de Nations League sin liquidar tras 72 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+- **[liquidacion]** 3 picks de Nations League sin liquidar tras 95 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
   - `Austria v Iceland (2026-11-14T19:45)`
   - `Austria v Iceland (2026-11-14T19:45)`
   - `France v Turkey (2026-11-15T19:45)`
@@ -22,24 +22,25 @@
 
 - **[calibracion]** estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
 - **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
+- **[cobertura]** ningun pick para hoy (2026-11-18)
 
 ## Calibracion
 
 | Corte | n | Predicho | Real | z |
 | --- | ---: | ---: | ---: | ---: |
-| Todo | 532 | 80.7% | 78.6% | -1.23 |
+| Todo | 548 | 80.6% | 79.0% | -0.92 |
 | estadisticas/corners-tarjetas | 79 | 86.8% | 82.3% | -1.19 |
 | estadisticas/tiros | 45 | 86.7% | 68.9% | -3.52 |
-| goles | 161 | 78.1% | 78.9% | +0.24 |
-| resultado | 247 | 79.3% | 79.0% | -0.12 |
-| banda 0.70-0.75 | 99 | 73.4% | 67.7% | -1.29 |
-| banda 0.75-0.80 | 152 | 77.1% | 80.3% | +0.92 |
-| banda 0.80-0.85 | 92 | 82.6% | 81.5% | -0.26 |
-| banda 0.85-0.90 | 181 | 87.1% | 81.8% | -2.15 |
+| goles | 169 | 78.1% | 79.9% | +0.57 |
+| resultado | 255 | 79.2% | 79.2% | +0.01 |
+| banda 0.70-0.75 | 104 | 73.4% | 68.3% | -1.18 |
+| banda 0.75-0.80 | 160 | 77.2% | 81.2% | +1.23 |
+| banda 0.80-0.85 | 94 | 82.5% | 81.9% | -0.15 |
+| banda 0.85-0.90 | 182 | 87.1% | 81.9% | -2.11 |
 
 `z` compara los aciertos contra los que el propio modelo esperaba, con la varianza Poisson-binomial. Entre -2 y +2 es ruido.
 
 ## Valor contra bet365
 
-- 0 de 73 picks pendientes traen precio de la casa
+- 0 de 57 picks pendientes traen precio de la casa
 
