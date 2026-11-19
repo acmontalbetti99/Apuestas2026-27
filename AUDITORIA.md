@@ -1,12 +1,10 @@
-# Auditoria · 2026-11-18 19:08 UTC
+# Auditoria · 2026-11-19 19:11 UTC
 
-**1 de severidad alta · 3 media · 3 baja**
+**1 de severidad alta · 6 media · 3 baja**
 
 ## 🔴 Alta
 
-- **[liquidacion]** 3 picks de Nations League sin liquidar tras 95 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  - `Austria v Iceland (2026-11-14T19:45)`
-  - `Austria v Iceland (2026-11-14T19:45)`
+- **[liquidacion]** 1 picks de Nations League sin liquidar tras 95 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
   - `France v Turkey (2026-11-15T19:45)`
 
 ## 🟡 Media
@@ -17,12 +15,18 @@
   - `turkey__belgium__o1-5`
 - **[combinadas]** fecha-2026-11-12-a-2026-11-14-3patas-d4344dd9 sigue abierta y tiene patas sin pick de un partido ya jugado
   - `turkey__belgium__12`
+- **[combinadas]** fecha-2026-11-12-a-2026-11-14-4patas-ad0b7154 sigue abierta y tiene patas sin pick de un partido ya jugado
+  - `austria__iceland__1x`
+- **[combinadas]** dia-2026-11-14-2patas-232d7552 sigue abierta y tiene patas sin pick de un partido ya jugado
+  - `austria__iceland__o1-5`
+- **[combinadas]** fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado
+  - `austria__iceland__1x`
 
 ## ⚪ Baja
 
 - **[calibracion]** estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
 - **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
-- **[cobertura]** ningun pick para hoy (2026-11-18)
+- **[cobertura]** ningun pick para hoy (2026-11-19)
 
 ## Calibracion
 
@@ -42,5 +46,5 @@
 
 ## Valor contra bet365
 
-- 0 de 57 picks pendientes traen precio de la casa
+- 0 de 55 picks pendientes traen precio de la casa
 
