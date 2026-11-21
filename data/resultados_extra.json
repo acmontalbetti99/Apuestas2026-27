@@ -2486,5 +2486,37 @@
   "ko": "2026-11-21T15:15:00Z",
   "hg": 0,
   "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Parma",
+  "away": "Roma",
+  "ko": "2026-11-21T17:00:00Z",
+  "hg": 1,
+  "ag": 5
+ },
+ {
+  "lg": "premier",
+  "home": "Newcastle",
+  "away": "Arsenal",
+  "ko": "2026-11-21T17:30:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "laliga",
+  "home": "Sevilla",
+  "away": "Real Betis",
+  "ko": "2026-11-21T17:30:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Schalke 04",
+  "away": "VfB Stuttgart",
+  "ko": "2026-11-21T17:30:00Z",
+  "hg": 0,
+  "ag": 0
  }
 ]
