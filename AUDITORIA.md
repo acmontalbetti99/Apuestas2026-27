@@ -1,29 +1,15 @@
-# Auditoria · 2026-11-21 14:16 UTC
+# Auditoria · 2026-11-21 14:19 UTC
 
-**0 de severidad alta · 12 media · 3 baja**
+**0 de severidad alta · 5 media · 2 baja**
 
 ## 🟡 Media
 
-- **[combinadas]** dia-2026-11-12-3patas-84d8900a sigue abierta y tiene patas sin pick de un partido ya jugado
-  - `turkey__belgium__12`
-- **[combinadas]** dia-2026-11-12-4patas-199dbc8f sigue abierta y tiene patas sin pick de un partido ya jugado
-  - `turkey__belgium__o1-5`
-- **[combinadas]** fecha-2026-11-12-a-2026-11-14-3patas-d4344dd9 sigue abierta y tiene patas sin pick de un partido ya jugado
-  - `turkey__belgium__12`
 - **[combinadas]** fecha-2026-11-12-a-2026-11-14-4patas-ad0b7154 sigue abierta y tiene patas sin pick de un partido ya jugado
   - `austria__iceland__1x`
-- **[combinadas]** fecha-2026-11-13-a-2026-11-15-5patas-8e1e20e2 sigue abierta y tiene patas sin pick de un partido ya jugado
-  - `france__turkey__12`
 - **[combinadas]** dia-2026-11-14-2patas-232d7552 sigue abierta y tiene patas sin pick de un partido ya jugado
   - `austria__iceland__o1-5`
 - **[combinadas]** fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado
   - `austria__iceland__1x`
-  - `france__turkey__12`
-- **[combinadas]** dia-2026-11-15-3patas-3a477d58 sigue abierta y tiene patas sin pick de un partido ya jugado
-  - `france__turkey__12`
-- **[combinadas]** dia-2026-11-15-4patas-a650a93a sigue abierta y tiene patas sin pick de un partido ya jugado
-  - `france__turkey__12`
-- **[combinadas]** dia-2026-11-15-4patas-870a4b5f sigue abierta y tiene patas sin pick de un partido ya jugado
   - `france__turkey__12`
 - **[liquidacion]** 3 picks de Bundesliga sin liquidar tras 19 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
   - `Bayern Munich v Colonia (2026-11-20T19:30)`
@@ -36,7 +22,6 @@
 
 - **[calibracion]** estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
 - **[valor]** ninguno de los 38 picks con precio supera la cuota justa: valor medio -5.67%. Es lo esperable, pero conviene no apostarlos
-- **[sitio]** no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden (agent proxy: no rule or network setting allows this host)')))
 
 ## Calibracion
 
@@ -56,6 +41,6 @@
 
 ## Valor contra bet365
 
-- 38 de 171 picks pendientes traen precio de la casa
+- 38 de 178 picks pendientes traen precio de la casa
 - 0 superan la cuota justa · valor medio -5.67%
 

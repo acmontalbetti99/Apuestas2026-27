@@ -4875,46 +4875,14 @@
   }
  },
  {
-  "fecha": "2026-11-21T14:16:34Z",
+  "fecha": "2026-11-21T14:19:19Z",
   "hallazgos": [
-   {
-    "severidad": "media",
-    "area": "combinadas",
-    "mensaje": "dia-2026-11-12-3patas-84d8900a sigue abierta y tiene patas sin pick de un partido ya jugado",
-    "detalle": [
-     "turkey__belgium__12"
-    ]
-   },
-   {
-    "severidad": "media",
-    "area": "combinadas",
-    "mensaje": "dia-2026-11-12-4patas-199dbc8f sigue abierta y tiene patas sin pick de un partido ya jugado",
-    "detalle": [
-     "turkey__belgium__o1-5"
-    ]
-   },
-   {
-    "severidad": "media",
-    "area": "combinadas",
-    "mensaje": "fecha-2026-11-12-a-2026-11-14-3patas-d4344dd9 sigue abierta y tiene patas sin pick de un partido ya jugado",
-    "detalle": [
-     "turkey__belgium__12"
-    ]
-   },
    {
     "severidad": "media",
     "area": "combinadas",
     "mensaje": "fecha-2026-11-12-a-2026-11-14-4patas-ad0b7154 sigue abierta y tiene patas sin pick de un partido ya jugado",
     "detalle": [
      "austria__iceland__1x"
-    ]
-   },
-   {
-    "severidad": "media",
-    "area": "combinadas",
-    "mensaje": "fecha-2026-11-13-a-2026-11-15-5patas-8e1e20e2 sigue abierta y tiene patas sin pick de un partido ya jugado",
-    "detalle": [
-     "france__turkey__12"
     ]
    },
    {
@@ -4931,30 +4899,6 @@
     "mensaje": "fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado",
     "detalle": [
      "austria__iceland__1x",
-     "france__turkey__12"
-    ]
-   },
-   {
-    "severidad": "media",
-    "area": "combinadas",
-    "mensaje": "dia-2026-11-15-3patas-3a477d58 sigue abierta y tiene patas sin pick de un partido ya jugado",
-    "detalle": [
-     "france__turkey__12"
-    ]
-   },
-   {
-    "severidad": "media",
-    "area": "combinadas",
-    "mensaje": "dia-2026-11-15-4patas-a650a93a sigue abierta y tiene patas sin pick de un partido ya jugado",
-    "detalle": [
-     "france__turkey__12"
-    ]
-   },
-   {
-    "severidad": "media",
-    "area": "combinadas",
-    "mensaje": "dia-2026-11-15-4patas-870a4b5f sigue abierta y tiene patas sin pick de un partido ya jugado",
-    "detalle": [
      "france__turkey__12"
     ]
    },
@@ -4986,12 +4930,6 @@
     "severidad": "baja",
     "area": "valor",
     "mensaje": "ninguno de los 38 picks con precio supera la cuota justa: valor medio -5.67%. Es lo esperable, pero conviene no apostarlos",
-    "detalle": null
-   },
-   {
-    "severidad": "baja",
-    "area": "sitio",
-    "mensaje": "no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden (agent proxy: no rule or network setting allows this host)')))",
     "detalle": null
    }
   ],
@@ -5063,7 +5001,7 @@
     }
    },
    "valor": {
-    "pendientes": 171,
+    "pendientes": 178,
     "conPrecioCasa": 38,
     "conValorPositivo": 0,
     "valorMedio": -0.0567
@@ -5080,14 +5018,19 @@
     ]
    },
    "edadHoras": {
-    "_ultimo_refresco.log": 0.1,
-    "_ultimo_livescore.log": 0.1
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 721,
+    "/data/parlays.json": 240,
+    "horasDesdeElDespliegue": 12.4
    }
   },
   "resumen": {
    "alta": 0,
-   "media": 12,
-   "baja": 3
+   "media": 5,
+   "baja": 2
   }
  }
 ]
