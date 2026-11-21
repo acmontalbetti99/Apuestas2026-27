@@ -746,3 +746,41 @@ assert (_tmp13 / "picks.json").exists()
 print("   estado.json completo y sinLigasDomesticas arrastrado de la corrida previa: ok")
 _sh.rmtree(_tmp13, ignore_errors=True)
 print("\nESCENARIO 13 OK")
+
+# --------------------------------------------------------------------------- 14
+print()
+print("ESCENARIO 14: una combinada que no se puede liquidar se anula, no cuelga")
+# El 14/11 habia picks de "Austria v Iceland", un partido que no se jugo: ese dia
+# Austria jugo con Irlanda e Islandia jugo con Bulgaria y Luxemburgo. La fuente de
+# cuotas lo nombro mal. Las combinadas con esa pata se quedaban pendientes para
+# siempre, fuera del registro de precision y ensuciando el informe, que es donde se
+# ven las que de VERDAD estan esperando.
+_vieja = (R.datetime.now(R.timezone.utc) - R.timedelta(days=R.EXPIRA_SIN_STATS + 2))
+_reciente = (R.datetime.now(R.timezone.utc) - R.timedelta(days=1))
+
+
+def _combi(ko, pid="austria__iceland__1x"):
+    k = ko.strftime("%Y-%m-%dT%H:%M:%SZ")
+    return {"id": f"t-{k[:10]}", "estado": "pendiente", "patas": 1, "prob": 0.8,
+            "cuota": 1.25, "tipo": "dia", "alcance": k[:10],
+            "legs": [{"id": pid, "lg": "unl", "home": "Austria", "away": "Iceland",
+                      "key": "1X", "label": "Local o empate", "p": 0.8, "ko": k}]}
+
+
+_t_vieja, _t_nueva = _combi(_vieja), _combi(_reciente)
+_idx14, _dia14 = R.indices(_pd.DataFrame([
+    {"HomeTeam": "Austria", "AwayTeam": "Ireland", "fecha": _pd.Timestamp(_vieja.replace(tzinfo=None)),
+     "FTHG": 1.0, "FTAG": 0.0, "kH": R.canon("Austria"), "kA": R.canon("Ireland")}]))
+R.settle_parlays([_t_vieja, _t_nueva], [], _idx14, _dia14)
+print(f"   partido de hace {R.EXPIRA_SIN_STATS + 2} dias -> {_t_vieja['estado']}")
+print(f"   partido de hace 1 dia          -> {_t_nueva['estado']}")
+assert _t_vieja["estado"] == "anulado", "la vencida tenia que anularse"
+assert _t_nueva["estado"] == "pendiente", "la reciente todavia puede liquidarse"
+# y el resultado de Austria v Ireland NO debe cerrar un pick de Austria v Iceland
+assert not R.mismo_equipo("Iceland", "Ireland"), "Islandia e Irlanda no son la misma"
+print("   Austria v Ireland no liquida un pick de Austria v Iceland: ok")
+
+# Turquia si es un exonimo de verdad, y tenia tres picks colgados
+assert R.mismo_partido("Turkey", "Belgium", "Turkiye", "Belgium"), "Turkey/Turkiye"
+print("   Turkey / Turkiye reconocidos como el mismo pais: ok")
+print("\nESCENARIO 14 OK")

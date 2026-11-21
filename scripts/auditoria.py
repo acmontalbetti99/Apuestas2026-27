@@ -63,7 +63,8 @@ def integridad(inf: Informe, picks: list[dict], parlays: list[dict],
         inf.add("alta", "integridad", f"{len(dup)} ids de pick duplicados", list(dup)[:10])
 
     estados = Counter(p.get("estado") for p in picks)
-    raros = {k: v for k, v in estados.items() if k not in ("pendiente", "ganado", "perdido")}
+    raros = {k: v for k, v in estados.items()
+             if k not in ("pendiente", "ganado", "perdido", "anulado")}
     if raros:
         inf.add("alta", "integridad", "estados desconocidos", raros)
 
@@ -115,7 +116,7 @@ def integridad(inf: Informe, picks: list[dict], parlays: list[dict],
         # solo es un problema si la combinada sigue abierta Y el partido ya se jugo:
         # ahi si quedo algo que no se va a cerrar nunca. Flaggear las 21 que tenian
         # alguna pata huerfana, con 13 ya cerradas, era ruido que tapaba lo que importa.
-        if t.get("estado") in ("ganado", "perdido"):
+        if t.get("estado") in ("ganado", "perdido", "anulado"):
             continue
         huerf = [l.get("id") for l in legs
                  if l.get("id") and l.get("id") not in por_id
@@ -311,7 +312,10 @@ def frescura(inf: Informe, ahora: datetime) -> None:
 
 # -------------------------------------------------------------------------- sitio
 
-def sitio(inf: Informe) -> None:
+HORAS_SITIO_VIEJO = 26   # mas de un dia entero sin desplegar ya es un corte
+
+
+def sitio(inf: Informe, ahora: datetime) -> None:
     try:
         import requests
         from refresh import prefer_ipv4
@@ -334,13 +338,29 @@ def sitio(inf: Informe) -> None:
                     inf.metricas.setdefault("sitio", {})[ruta] = len(d)
             elif "<!doctype html>" not in r.text[:200].lower():
                 inf.add("media", "sitio", "la pagina no arranca con doctype")
-        # lo publicado deberia coincidir con lo que hay en el repo
-        local = len(leer("picks.json", []))
+        # Comparar el conteo del sitio contra el del repo no sirve: esta auditoria
+        # corre DENTRO de la misma corrida que acaba de generar los picks y antes de
+        # que se commiteen, asi que el sitio todavia sirve el despliegue anterior y
+        # la diferencia es siempre la del propio turno. Marcaba "el despliegue quedo
+        # atras" cada vez que se agregaban picks, con el sitio perfectamente al dia.
+        #
+        # Lo que sí dice algo es cuanto hace que el sitio no se actualiza: si lo
+        # publicado es mas viejo que varias corridas, el despliegue se corto de
+        # verdad.
         remoto = inf.metricas.get("sitio", {}).get("/data/picks.json")
-        if remoto is not None and local and remoto != local:
-            inf.add("media", "sitio",
-                    f"el sitio publica {remoto} picks y el repo tiene {local}: "
-                    f"el despliegue quedo atras")
+        if remoto is not None:
+            try:
+                r = s.get(SITIO + "/data/estado.json", timeout=25)
+                fecha = r.json().get("fecha") if r.status_code == 200 else None
+            except (ValueError, requests.RequestException):
+                fecha = None
+            if fecha:
+                pub = datetime.fromisoformat(str(fecha).replace("Z", "+00:00"))
+                horas = (ahora - pub).total_seconds() / 3600
+                inf.metricas.setdefault("sitio", {})["horasDesdeElDespliegue"] = round(horas, 1)
+                if horas > HORAS_SITIO_VIEJO:
+                    inf.add("media", "sitio",
+                            f"lo publicado tiene {horas:.0f} h: el despliegue se corto")
     except Exception as e:  # noqa: BLE001 - la auditoria no debe caerse por el chequeo web
         inf.add("baja", "sitio", f"no se pudo chequear el sitio: {type(e).__name__}: {e}")
 
@@ -424,7 +444,7 @@ def main() -> int:
         valor(inf, picks)
         cobertura(inf, picks, ahora)
     frescura(inf, ahora)
-    sitio(inf)
+    sitio(inf, ahora)
     escribir(inf, ahora)
 
     for sev in ("alta", "media", "baja"):

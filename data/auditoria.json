@@ -4873,5 +4873,221 @@
    "media": 11,
    "baja": 2
   }
+ },
+ {
+  "fecha": "2026-11-21T14:16:34Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-12-3patas-84d8900a sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "turkey__belgium__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-12-4patas-199dbc8f sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "turkey__belgium__o1-5"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-12-a-2026-11-14-3patas-d4344dd9 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "turkey__belgium__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-12-a-2026-11-14-4patas-ad0b7154 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-13-a-2026-11-15-5patas-8e1e20e2 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "france__turkey__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-14-2patas-232d7552 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__o1-5"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__1x",
+     "france__turkey__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-15-3patas-3a477d58 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "france__turkey__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-15-4patas-a650a93a sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "france__turkey__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-15-4patas-870a4b5f sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "france__turkey__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "3 picks de Bundesliga sin liquidar tras 19 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Bayern Munich v Colonia (2026-11-20T19:30)",
+     "Bayern Munich v Colonia (2026-11-20T19:30)",
+     "Bayern Munich v Colonia (2026-11-20T19:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de La Liga sin liquidar tras 18 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Athletic Bilbao v Espanyol (2026-11-20T20:00)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 38 picks con precio supera la cuota justa: valor medio -5.67%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "sitio",
+    "mensaje": "no se pudo chequear el sitio: ProxyError: HTTPSConnectionPool(host='montoglory.vercel.app', port=443): Max retries exceeded with url: / (Caused by ProxyError('Unable to connect to proxy', OSError('Tunnel connection failed: 403 Forbidden (agent proxy: no rule or network setting allows this host)')))",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "bundesliga": 3,
+    "laliga": 1
+   },
+   "calibracion": {
+    "n": 550,
+    "predicho": 0.8056,
+    "real": 0.7873,
+    "z": -1.1
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 79,
+     "predicho": 0.8679,
+     "real": 0.8228,
+     "z": -1.19,
+     "factor": 0.877
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 170,
+     "predicho": 0.7808,
+     "real": 0.7941,
+     "z": 0.42,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 256,
+     "predicho": 0.7921,
+     "real": 0.7891,
+     "z": -0.12,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 104,
+     "predicho": 0.734,
+     "real": 0.6827,
+     "z": -1.18
+    },
+    "0.75-0.80": {
+     "n": 161,
+     "predicho": 0.7717,
+     "real": 0.8075,
+     "z": 1.08
+    },
+    "0.80-0.85": {
+     "n": 95,
+     "predicho": 0.8254,
+     "real": 0.8105,
+     "z": -0.38
+    },
+    "0.85-0.90": {
+     "n": 182,
+     "predicho": 0.8711,
+     "real": 0.8187,
+     "z": -2.11
+    }
+   },
+   "valor": {
+    "pendientes": 171,
+    "conPrecioCasa": 38,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0567
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.1,
+    "_ultimo_livescore.log": 0.1
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 12,
+   "baja": 3
+  }
  }
 ]

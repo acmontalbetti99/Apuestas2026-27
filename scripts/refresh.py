@@ -259,11 +259,19 @@ def _dist1(x: str, y: str) -> bool:
 # (praha/prague difieren en tres letras, no en una) ni un alias de club: es como
 # cada fuente nombra el lugar, y por eso no lo arregla ninguna regla general.
 # Solo entran pares vistos de verdad en el log de liquidacion, nunca a priori.
+# Palabras que, si una la tiene y la otra no, bastan para decir que son equipos
+# distintos aunque una sea subconjunto de la otra.
+DISTINTIVOS = {"northern", "republic", "women", "femenino", "sub"}
+
 EXONIMOS = {frozenset(p) for p in (
     ("praha", "prague"),      # Slavia Praha / Slavia Prague (LiveScore)
     ("bodo", "bodoe"),         # Bodø/Glimt / Bodoe/Glimt (LiveScore)
     ("muenchen", "munich"),
     ("koeln", "colonia"),
+    # Turkiye es el nombre oficial y Turkey el ingles; The Odds API usa uno y
+    # LiveScore el otro. Dejo tres picks del 12 y el 15 de noviembre sin liquidar
+    # y colgadas cuatro combinadas que ya estaban ganadas.
+    ("turkey", "turkiye"),
 )}
 
 
@@ -289,6 +297,13 @@ def mismo_equipo(a: str, b: str) -> bool:
     """
     A, B = fichas(a), fichas(b)
     if not A or not B:
+        return False
+    # Hay palabras que no son relleno: son lo unico que distingue a dos selecciones
+    # distintas. "Ireland" entraba como subconjunto de "Northern Ireland" y las dos
+    # juegan la misma competencia los mismos dias, asi que un dia que compartan rival
+    # entre jornadas la liquidacion cierra el pick contra el partido equivocado.
+    # Con "Inter" e "Inter Milano" la permisividad es deseable; aca no.
+    if (set(A) ^ set(B)) & DISTINTIVOS:
         return False
     sub = lambda P, Q: all(any(_igual(x, y) for y in Q) for x in P)  # noqa: E731
     return sub(A, B) or sub(B, A)
@@ -629,6 +644,29 @@ def settle_parlays(parlays: list[dict], picks: list[dict],
             t["estado"] = "perdido"
         elif estados and all(e == "ganado" for e in estados):
             t["estado"] = "ganado"
+        elif _vencida(t):
+            # Una pata que no se puede resolver despues de EXPIRA_SIN_STATS dias no
+            # se va a resolver nunca: o el partido no existio como lo nombraba la
+            # fuente de cuotas, o cambio. Paso con "Austria v Iceland" del 14/11,
+            # que no se jugo: ese dia Austria jugo con Irlanda e Islandia jugo con
+            # Bulgaria y Luxemburgo. No es un alias que falte; es un partido que no
+            # existio.
+            #
+            # Se anula, no se cuenta. Igual que un pick caducado: no se supo el
+            # resultado, asi que contarla de un lado o del otro seria inventar. Y
+            # dejarla "pendiente" para siempre ensucia el informe y esconde las
+            # combinadas que de verdad estan esperando.
+            t["estado"] = "anulado"
+
+
+def _vencida(t: dict, ahora: datetime | None = None) -> bool:
+    """La combinada ya paso de largo: su ultimo partido se jugo hace rato."""
+    ahora = ahora or datetime.now(timezone.utc)
+    kos = [pd.to_datetime(l.get("ko"), utc=True, errors="coerce") for l in t.get("legs", [])]
+    kos = [k for k in kos if not pd.isna(k)]
+    if not kos:
+        return False
+    return (ahora - max(kos).to_pydatetime()).days > EXPIRA_SIN_STATS
 
 
 # --------------------------------------------------------------------------- calibracion

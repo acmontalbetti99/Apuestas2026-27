@@ -326,7 +326,8 @@ function fichas(n){
 /* Exonimos: la misma ciudad en dos idiomas (Slavia Praha / Slavia Prague,
    Bodø/Glimt / Bodoe/Glimt). Misma tabla que refresh.py, por el mismo motivo:
    no es un error de transliteracion y no lo arregla ninguna regla general. */
-const EXONIMOS=[['praha','prague'],['bodo','bodoe'],['muenchen','munich'],['koeln','colonia']];
+const EXONIMOS=[['praha','prague'],['bodo','bodoe'],['muenchen','munich'],['koeln','colonia'],
+                ['turkey','turkiye']];
 const esExonimo=(x,y)=>EXONIMOS.some(([a,b])=>(x===a&&y===b)||(x===b&&y===a));
 /* Transliteraciones que difieren en una letra entre fuentes: olympiacos vs
    olympiakos, lillestroem vs lillestrom, omonia vs omonoia. Exigir que las dos
@@ -346,13 +347,21 @@ function dist1(x,y){
   }
   return fallos+(y.length-j)+(x.length-i)<=1;
 }
+/* Misma regla que DISTINTIVOS en refresh.py: Ireland entraba como subconjunto de
+   Northern Ireland, y las dos juegan la misma competencia los mismos dias. */
+const DISTINTIVOS=['northern','republic','women','femenino','sub'];
 const igualFicha=(x,y)=>x===y||esExonimo(x,y)
   ||(x.length>=5&&y.length>=5&&(x.startsWith(y)||y.startsWith(x)))
   ||(x.length>=6&&y.length>=6&&dist1(x,y));
 const subconjunto=(A,B)=>A.every(x=>B.some(y=>igualFicha(x,y)));
 const compartenFicha=(a,b)=>{
   const A=fichas(a), B=fichas(b);
-  return A.length&&B.length&&(subconjunto(A,B)||subconjunto(B,A));
+  if(!A.length||!B.length)return false;
+  // Ireland entraba como subconjunto de Northern Ireland. Con Inter / Inter Milano
+  // la permisividad sirve; con dos selecciones de la misma competencia, no.
+  const soloEnUna=A.filter(x=>!B.includes(x)).concat(B.filter(x=>!A.includes(x)));
+  if(soloEnUna.some(x=>DISTINTIVOS.includes(x)))return false;
+  return subconjunto(A,B)||subconjunto(B,A);
 };
 
 /* aliasVivo va de como nombra la FUENTE a como nombramos nosotros (club-brugge ->
@@ -445,7 +454,7 @@ function liquidarConFinales(){
   }
   // Una combinada se cae con la primera pata perdida y se gana solo con todas.
   for(const t of TICKETS){
-    if(t.estado==='ganado'||t.estado==='perdido')continue;
+    if(t.estado==='ganado'||t.estado==='perdido'||t.estado==='anulado')continue;
     const es=t.legs.map(l=>pataResuelta(l).estado);
     if(es.some(e=>e==='perdido')){t.estado='perdido';t.provisional=true;continue}
     if(es.length&&es.every(e=>e==='ganado')){t.estado='ganado';t.provisional=true}
@@ -651,7 +660,10 @@ function precisionCombis(){
 function ticket(t){
   const rango=t.tipo==='fecha'&&t.alcance?`<span class="alc">${esc(t.alcance)}</span>`:'';
   const cerr=t.estado==='ganado'||t.estado==='perdido';
-  const sello=cerr?`<span class="tag ${t.estado==='ganado'?'won':'lost'}">${t.estado==='ganado'?'Entr\u00f3':'No entr\u00f3'}</span>`:'';
+  // Anulada: una pata quedo sin resultado posible (el partido no existio como lo
+  // nombraba la fuente, o cambio). No cuenta ni a favor ni en contra.
+  const sello=cerr?`<span class="tag ${t.estado==='ganado'?'won':'lost'}">${t.estado==='ganado'?'Entr\u00f3':'No entr\u00f3'}</span>`
+    :t.estado==='anulado'?`<span class="tag" title="Una pata se quedo sin resultado: no cuenta en la precision.">Anulada</span>`:'';
   let h=`<div class="ticket${cerr?' '+(t.estado==='ganado'?'won':'lost'):''}"><div class="thead"><h3>${t.patas} patas</h3>${rango}${sello}
       <span class="k"><small>Probabilidad</small>${pc(t.prob)}</span>
       <span class="k"><small>Cuota justa</small>${t.cuota.toFixed(2)}</span></div>`;
