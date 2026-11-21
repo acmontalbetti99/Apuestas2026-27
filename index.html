@@ -326,9 +326,9 @@ function fichas(n){
 /* Exonimos: la misma ciudad en dos idiomas (Slavia Praha / Slavia Prague,
    Bodø/Glimt / Bodoe/Glimt). Misma tabla que refresh.py, por el mismo motivo:
    no es un error de transliteracion y no lo arregla ninguna regla general. */
-const EXONIMOS=[['praha','prague'],['bodo','bodoe'],['muenchen','munich'],['koeln','colonia'],
-                ['turkey','turkiye']];
-const esExonimo=(x,y)=>EXONIMOS.some(([a,b])=>(x===a&&y===b)||(x===b&&y===a));
+const EXONIMOS=[['praha','prague'],['bodo','bodoe'],['muenchen','munich'],
+                ['koeln','koln','colonia','cologne'],['turkey','turkiye']];
+const esExonimo=(x,y)=>EXONIMOS.some(g=>g.includes(x)&&g.includes(y));
 /* Transliteraciones que difieren en una letra entre fuentes: olympiacos vs
    olympiakos, lillestroem vs lillestrom, omonia vs omonoia. Exigir que las dos
    primeras letras coincidan es lo que separa una transliteracion de dos clubes

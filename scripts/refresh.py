@@ -263,22 +263,26 @@ def _dist1(x: str, y: str) -> bool:
 # distintos aunque una sea subconjunto de la otra.
 DISTINTIVOS = {"northern", "republic", "women", "femenino", "sub"}
 
-EXONIMOS = {frozenset(p) for p in (
-    ("praha", "prague"),      # Slavia Praha / Slavia Prague (LiveScore)
-    ("bodo", "bodoe"),         # Bodø/Glimt / Bodoe/Glimt (LiveScore)
+# GRUPOS, no pares: una ciudad puede tener tres formas y con pares habria que
+# declarar las tres combinaciones. Colonia/Koeln estaba declarado y Colonia/Cologne
+# no, asi que los picks de Bayern v Colonia del 20/11 quedaron sin liquidar con el
+# 1-1 ya en la base.
+EXONIMOS = tuple(frozenset(g) for g in (
+    ("praha", "prague"),                  # Slavia Praha / Slavia Prague (LiveScore)
+    ("bodo", "bodoe"),                    # Bodø/Glimt / Bodoe/Glimt (LiveScore)
     ("muenchen", "munich"),
-    ("koeln", "colonia"),
+    ("koeln", "koln", "colonia", "cologne"),   # Köln pierde la dieresis al canonizar
     # Turkiye es el nombre oficial y Turkey el ingles; The Odds API usa uno y
     # LiveScore el otro. Dejo tres picks del 12 y el 15 de noviembre sin liquidar
     # y colgadas cuatro combinadas que ya estaban ganadas.
     ("turkey", "turkiye"),
-)}
+))
 
 
 def _igual(x: str, y: str) -> bool:
     if x == y:
         return True
-    if frozenset((x, y)) in EXONIMOS:
+    if any({x, y} <= g for g in EXONIMOS):
         return True
     if len(x) >= 5 and len(y) >= 5 and (x.startswith(y) or y.startswith(x)):
         return True

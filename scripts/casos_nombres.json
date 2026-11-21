@@ -145,6 +145,26 @@
       "Ireland",
       "Northern Ireland",
       false
+    ],
+    [
+      "Colonia",
+      "FC Cologne",
+      true
+    ],
+    [
+      "Colonia",
+      "1. FC Köln",
+      true
+    ],
+    [
+      "FC Koln",
+      "FC Cologne",
+      true
+    ],
+    [
+      "Colonia",
+      "Bolonia",
+      false
     ]
   ],
   "partido": [
@@ -290,6 +310,17 @@
         "Ireland"
       ],
       false
+    ],
+    [
+      [
+        "Bayern Munich",
+        "Colonia"
+      ],
+      [
+        "Bayern Munich",
+        "FC Cologne"
+      ],
+      true
     ]
   ]
 }
