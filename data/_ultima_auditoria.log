@@ -1,11 +1,11 @@
-Auditoria 2026-11-21 14:19 UTC
+Auditoria 2026-11-21 14:33 UTC
   [media] combinadas: fecha-2026-11-12-a-2026-11-14-4patas-ad0b7154 sigue abierta y tiene patas sin pick de un partido ya jugado
   [media] combinadas: dia-2026-11-14-2patas-232d7552 sigue abierta y tiene patas sin pick de un partido ya jugado
   [media] combinadas: fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado
   [media] liquidacion: 3 picks de Bundesliga sin liquidar tras 19 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  [media] liquidacion: 1 picks de La Liga sin liquidar tras 18 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+  [media] liquidacion: 1 picks de La Liga sin liquidar tras 19 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
   [baja] calibracion: estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
-  [baja] valor: ninguno de los 38 picks con precio supera la cuota justa: valor medio -5.67%. Es lo esperable, pero conviene no apostarlos
+  [baja] valor: ninguno de los 37 picks con precio supera la cuota justa: valor medio -5.66%. Es lo esperable, pero conviene no apostarlos
   0 alta · 5 media · 2 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 226, in <module>

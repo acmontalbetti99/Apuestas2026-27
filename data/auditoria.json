@@ -4875,7 +4875,7 @@
   }
  },
  {
-  "fecha": "2026-11-21T14:19:19Z",
+  "fecha": "2026-11-21T14:33:43Z",
   "hallazgos": [
    {
     "severidad": "media",
@@ -4915,7 +4915,7 @@
    {
     "severidad": "media",
     "area": "liquidacion",
-    "mensaje": "1 picks de La Liga sin liquidar tras 18 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "mensaje": "1 picks de La Liga sin liquidar tras 19 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
     "detalle": [
      "Athletic Bilbao v Espanyol (2026-11-20T20:00)"
     ]
@@ -4929,7 +4929,7 @@
    {
     "severidad": "baja",
     "area": "valor",
-    "mensaje": "ninguno de los 38 picks con precio supera la cuota justa: valor medio -5.67%. Es lo esperable, pero conviene no apostarlos",
+    "mensaje": "ninguno de los 37 picks con precio supera la cuota justa: valor medio -5.66%. Es lo esperable, pero conviene no apostarlos",
     "detalle": null
    }
   ],
@@ -4939,10 +4939,10 @@
     "laliga": 1
    },
    "calibracion": {
-    "n": 550,
-    "predicho": 0.8056,
-    "real": 0.7873,
-    "z": -1.1
+    "n": 552,
+    "predicho": 0.8058,
+    "real": 0.788,
+    "z": -1.06
    },
    "porGrupo": {
     "estadisticas/corners-tarjetas": {
@@ -4960,17 +4960,17 @@
      "factor": 0.515
     },
     "goles": {
-     "n": 170,
-     "predicho": 0.7808,
-     "real": 0.7941,
-     "z": 0.42,
+     "n": 171,
+     "predicho": 0.7811,
+     "real": 0.7953,
+     "z": 0.45,
      "factor": 1.0
     },
     "resultado": {
-     "n": 256,
-     "predicho": 0.7921,
-     "real": 0.7891,
-     "z": -0.12,
+     "n": 257,
+     "predicho": 0.7924,
+     "real": 0.7899,
+     "z": -0.1,
      "factor": 1.0
     }
    },
@@ -4988,23 +4988,23 @@
      "z": 1.08
     },
     "0.80-0.85": {
-     "n": 95,
+     "n": 96,
      "predicho": 0.8254,
-     "real": 0.8105,
-     "z": -0.38
+     "real": 0.8125,
+     "z": -0.33
     },
     "0.85-0.90": {
-     "n": 182,
+     "n": 183,
      "predicho": 0.8711,
-     "real": 0.8187,
-     "z": -2.11
+     "real": 0.8197,
+     "z": -2.08
     }
    },
    "valor": {
-    "pendientes": 178,
-    "conPrecioCasa": 38,
+    "pendientes": 176,
+    "conPrecioCasa": 37,
     "conValorPositivo": 0,
-    "valorMedio": -0.0567
+    "valorMedio": -0.0566
    },
    "cobertura": {
     "ligasConPicks": [
@@ -5022,9 +5022,9 @@
     "_ultimo_livescore.log": 0.0
    },
    "sitio": {
-    "/data/picks.json": 721,
-    "/data/parlays.json": 240,
-    "horasDesdeElDespliegue": 12.4
+    "/data/picks.json": 728,
+    "/data/parlays.json": 245,
+    "horasDesdeElDespliegue": 0.1
    }
   },
   "resumen": {
