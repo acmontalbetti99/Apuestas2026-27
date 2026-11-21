@@ -2350,5 +2350,21 @@
   "ko": "2026-11-17T19:45:00Z",
   "hg": 1,
   "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Bayern Munich",
+  "away": "FC Cologne",
+  "ko": "2026-11-20T19:30:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Athletic Bilbao",
+  "away": "Espanyol",
+  "ko": "2026-11-20T20:00:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]
