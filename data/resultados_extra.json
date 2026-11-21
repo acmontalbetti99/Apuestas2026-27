@@ -2366,5 +2366,13 @@
   "ko": "2026-11-20T20:00:00Z",
   "hg": 0,
   "ag": 1
+ },
+ {
+  "lg": "premier",
+  "home": "Manchester City",
+  "away": "Fulham",
+  "ko": "2026-11-21T12:30:00Z",
+  "hg": 1,
+  "ag": 1
  }
 ]
