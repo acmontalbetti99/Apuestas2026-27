@@ -2374,5 +2374,117 @@
   "ko": "2026-11-21T12:30:00Z",
   "hg": 1,
   "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Deportivo Alaves",
+  "away": "Deportivo A Coruna",
+  "ko": "2026-11-21T13:00:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Como",
+  "away": "Cagliari",
+  "ko": "2026-11-21T14:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Lazio",
+  "away": "Lecce",
+  "ko": "2026-11-21T14:00:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Leverkusen",
+  "away": "Paderborn",
+  "ko": "2026-11-21T14:30:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Borussia M'gladbach",
+  "away": "Dortmund",
+  "ko": "2026-11-21T14:30:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Eintracht Frankfurt",
+  "away": "Hoffenheim",
+  "ko": "2026-11-21T14:30:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Elversberg",
+  "away": "Freiburg",
+  "ko": "2026-11-21T14:30:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Union Berlin",
+  "away": "RB Leipzig",
+  "ko": "2026-11-21T14:30:00Z",
+  "hg": 1,
+  "ag": 5
+ },
+ {
+  "lg": "premier",
+  "home": "AFC Bournemouth",
+  "away": "Nottingham Forest",
+  "ko": "2026-11-21T15:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Aston Villa",
+  "away": "Sunderland",
+  "ko": "2026-11-21T15:00:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Chelsea",
+  "away": "Leeds United",
+  "ko": "2026-11-21T15:00:00Z",
+  "hg": 1,
+  "ag": 4
+ },
+ {
+  "lg": "premier",
+  "home": "Coventry City",
+  "away": "Crystal Palace",
+  "ko": "2026-11-21T15:00:00Z",
+  "hg": 3,
+  "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Tottenham",
+  "away": "Ipswich Town",
+  "ko": "2026-11-21T15:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Rayo Vallecano",
+  "away": "Valencia",
+  "ko": "2026-11-21T15:15:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]

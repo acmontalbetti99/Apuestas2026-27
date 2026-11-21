@@ -4875,7 +4875,7 @@
   }
  },
  {
-  "fecha": "2026-11-21T14:33:43Z",
+  "fecha": "2026-11-21T17:50:29Z",
   "hallazgos": [
    {
     "severidad": "media",
@@ -4905,7 +4905,7 @@
    {
     "severidad": "media",
     "area": "liquidacion",
-    "mensaje": "3 picks de Bundesliga sin liquidar tras 19 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "mensaje": "3 picks de Bundesliga sin liquidar tras 22 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
     "detalle": [
      "Bayern Munich v Colonia (2026-11-20T19:30)",
      "Bayern Munich v Colonia (2026-11-20T19:30)",
@@ -4915,7 +4915,7 @@
    {
     "severidad": "media",
     "area": "liquidacion",
-    "mensaje": "1 picks de La Liga sin liquidar tras 19 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "mensaje": "1 picks de La Liga sin liquidar tras 22 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
     "detalle": [
      "Athletic Bilbao v Espanyol (2026-11-20T20:00)"
     ]
@@ -4929,7 +4929,7 @@
    {
     "severidad": "baja",
     "area": "valor",
-    "mensaje": "ninguno de los 37 picks con precio supera la cuota justa: valor medio -5.66%. Es lo esperable, pero conviene no apostarlos",
+    "mensaje": "ninguno de los 26 picks con precio supera la cuota justa: valor medio -5.81%. Es lo esperable, pero conviene no apostarlos",
     "detalle": null
    }
   ],
@@ -4939,10 +4939,10 @@
     "laliga": 1
    },
    "calibracion": {
-    "n": 552,
-    "predicho": 0.8058,
-    "real": 0.788,
-    "z": -1.06
+    "n": 574,
+    "predicho": 0.8056,
+    "real": 0.7875,
+    "z": -1.11
    },
    "porGrupo": {
     "estadisticas/corners-tarjetas": {
@@ -4960,51 +4960,51 @@
      "factor": 0.515
     },
     "goles": {
-     "n": 171,
-     "predicho": 0.7811,
-     "real": 0.7953,
-     "z": 0.45,
+     "n": 182,
+     "predicho": 0.7821,
+     "real": 0.7857,
+     "z": 0.12,
      "factor": 1.0
     },
     "resultado": {
-     "n": 257,
-     "predicho": 0.7924,
-     "real": 0.7899,
-     "z": -0.1,
+     "n": 268,
+     "predicho": 0.7928,
+     "real": 0.7948,
+     "z": 0.08,
      "factor": 1.0
     }
    },
    "porBanda": {
     "0.70-0.75": {
-     "n": 104,
+     "n": 108,
      "predicho": 0.734,
-     "real": 0.6827,
-     "z": -1.18
+     "real": 0.6944,
+     "z": -0.93
     },
     "0.75-0.80": {
-     "n": 161,
-     "predicho": 0.7717,
-     "real": 0.8075,
-     "z": 1.08
+     "n": 170,
+     "predicho": 0.7719,
+     "real": 0.7941,
+     "z": 0.69
     },
     "0.80-0.85": {
-     "n": 96,
+     "n": 100,
      "predicho": 0.8254,
-     "real": 0.8125,
-     "z": -0.33
+     "real": 0.81,
+     "z": -0.41
     },
     "0.85-0.90": {
-     "n": 183,
-     "predicho": 0.8711,
-     "real": 0.8197,
-     "z": -2.08
+     "n": 188,
+     "predicho": 0.8713,
+     "real": 0.8245,
+     "z": -1.92
     }
    },
    "valor": {
-    "pendientes": 176,
-    "conPrecioCasa": 37,
+    "pendientes": 156,
+    "conPrecioCasa": 26,
     "conValorPositivo": 0,
-    "valorMedio": -0.0566
+    "valorMedio": -0.0581
    },
    "cobertura": {
     "ligasConPicks": [
@@ -5019,12 +5019,12 @@
    },
    "edadHoras": {
     "_ultimo_refresco.log": 0.0,
-    "_ultimo_livescore.log": 0.0
+    "_ultimo_livescore.log": 0.1
    },
    "sitio": {
     "/data/picks.json": 728,
-    "/data/parlays.json": 245,
-    "horasDesdeElDespliegue": 0.1
+    "/data/parlays.json": 251,
+    "horasDesdeElDespliegue": 3.3
    }
   },
   "resumen": {

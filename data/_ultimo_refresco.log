@@ -1,4 +1,4 @@
-Refresco 2026-11-21 14:31 UTC
+Refresco 2026-11-21 17:46 UTC
 Bajando resultados...
   E0 2627: 100 partidos
   SP1 2627: 119 partidos
@@ -16,19 +16,19 @@ Bajando resultados...
   D["savA"] = (D["HST"] - D["FTHG"]).clip(lower=0)
 /home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:401: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
-  resultados_extra.json: 297 partidos
-  2153 partidos en base
+  resultados_extra.json: 311 partidos
+  2167 partidos en base
 Liquidando...
-  0 acertados · 0 fallados · 174 en espera · 2 sin estadisticas · 0 caducados
-  0 combinadas cerradas · 56 abiertas
-  acierto 0.788 vs predicho 0.8058 sobre 552 · umbral 0.6677
+  17 acertados · 5 fallados · 141 en espera · 13 sin estadisticas · 0 caducados
+  4 combinadas cerradas · 58 abiertas
+  acierto 0.7875 vs predicho 0.8056 sobre 574 · umbral 0.6681
 Bajando proximos partidos...
   cuotas_extra.json: 58 partidos
-  94 partidos con cuotas: 36 de ligas domesticas (goles y estadisticas), 58 de torneos (solo resultado)
+  80 partidos con cuotas: 22 de ligas domesticas (goles y estadisticas), 58 de torneos (solo resultado)
   estadisticas/corners-tarjetas: predicho 86.8% contra real 82.3% sobre 79 (z -1.19), se encoge la probabilidad x0.877
   estadisticas/tiros: predicho 86.7% contra real 68.9% sobre 45 (z -3.52), se encoge la probabilidad x0.515
   4 partidos de torneo todavia lejos (entran a 3 dias del arranque)
-  171 picks sobre el 67%
-  5 picks pendientes de dias anteriores se mantienen
-  10 combinadas armadas (6 nuevas), 62 abiertas
-Listo: 728 picks (552 liquidados), 251 combinadas
+  131 picks sobre el 67%
+  25 picks pendientes de dias anteriores se mantienen
+  7 combinadas armadas (3 nuevas), 61 abiertas
+Listo: 730 picks (574 liquidados), 254 combinadas
