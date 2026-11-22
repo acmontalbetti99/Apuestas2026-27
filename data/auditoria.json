@@ -5032,5 +5032,197 @@
    "media": 5,
    "baja": 2
   }
+ },
+ {
+  "fecha": "2026-11-22T18:08:10Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-12-a-2026-11-14-4patas-ad0b7154 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-14-2patas-232d7552 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__o1-5"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__1x",
+     "france__turkey__12"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "11 picks de Bundesliga sin liquidar tras 47 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Bayern Munich v Colonia (2026-11-20T19:30)",
+     "Bayern Munich v Colonia (2026-11-20T19:30)",
+     "Bayern Munich v Colonia (2026-11-20T19:30)",
+     "Leverkusen v Paderborn (2026-11-21T14:30)",
+     "Union Berlin v RB Leipzig (2026-11-21T14:30)",
+     "Monchengladbach v Dortmund (2026-11-21T14:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "5 picks de La Liga sin liquidar tras 46 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Athletic Bilbao v Espanyol (2026-11-20T20:00)",
+     "Alaves v Deportivo (2026-11-21T13:00)",
+     "Rayo Vallecano v Valencia (2026-11-21T15:15)",
+     "Sevilla v Real Betis (2026-11-21T17:30)",
+     "Real Madrid v Celta de Vigo (2026-11-21T20:00)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "11 picks de Premier League sin liquidar tras 30 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Manchester City v Fulham (2026-11-21T12:30)",
+     "Aston Villa v Sunderland (2026-11-21T15:00)",
+     "Chelsea v Leeds (2026-11-21T15:00)",
+     "Tottenham v Ipswich (2026-11-21T15:00)",
+     "Bournemouth v Nottingham Forest (2026-11-21T15:00)",
+     "Coventry v Crystal Palace (2026-11-21T15:00)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "4 picks de Serie A sin liquidar tras 28 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Lazio v Lecce (2026-11-21T14:00)",
+     "Como v Cagliari (2026-11-21T14:00)",
+     "Parma v Roma (2026-11-21T17:00)",
+     "Napoli v Torino (2026-11-21T19:45)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 14 picks con precio supera la cuota justa: valor medio -5.85%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "bundesliga": 11,
+    "laliga": 5,
+    "premier": 11,
+    "seriea": 4
+   },
+   "calibracion": {
+    "n": 598,
+    "predicho": 0.8055,
+    "real": 0.786,
+    "z": -1.22
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 79,
+     "predicho": 0.8679,
+     "real": 0.8228,
+     "z": -1.19,
+     "factor": 0.877
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 194,
+     "predicho": 0.7825,
+     "real": 0.7835,
+     "z": 0.03,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 280,
+     "predicho": 0.794,
+     "real": 0.7929,
+     "z": -0.05,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 111,
+     "predicho": 0.7339,
+     "real": 0.6937,
+     "z": -0.96
+    },
+    "0.75-0.80": {
+     "n": 179,
+     "predicho": 0.7721,
+     "real": 0.7877,
+     "z": 0.5
+    },
+    "0.80-0.85": {
+     "n": 108,
+     "predicho": 0.8253,
+     "real": 0.8056,
+     "z": -0.54
+    },
+    "0.85-0.90": {
+     "n": 192,
+     "predicho": 0.8716,
+     "real": 0.8281,
+     "z": -1.8
+    }
+   },
+   "valor": {
+    "pendientes": 157,
+    "conPrecioCasa": 14,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0585
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.1
+   },
+   "sitio": {
+    "/data/picks.json": 730,
+    "/data/parlays.json": 254,
+    "horasDesdeElDespliegue": 18.1
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 7,
+   "baja": 2
+  }
  }
 ]

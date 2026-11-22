@@ -2534,5 +2534,61 @@
   "ko": "2026-11-21T20:00:00Z",
   "hg": 2,
   "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Juventus",
+  "away": "Venezia",
+  "ko": "2026-11-22T11:30:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Barcelona",
+  "away": "Villarreal",
+  "ko": "2026-11-22T13:00:00Z",
+  "hg": 3,
+  "ag": 2
+ },
+ {
+  "lg": "premier",
+  "home": "Hull City",
+  "away": "Brighton",
+  "ko": "2026-11-22T14:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Bologna",
+  "away": "Udinese",
+  "ko": "2026-11-22T14:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Sassuolo",
+  "away": "Genoa",
+  "ko": "2026-11-22T14:00:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Augsburg",
+  "away": "Mainz 05",
+  "ko": "2026-11-22T14:30:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "laliga",
+  "home": "Racing Santander",
+  "away": "Real Sociedad",
+  "ko": "2026-11-22T15:15:00Z",
+  "hg": 3,
+  "ag": 2
  }
 ]
