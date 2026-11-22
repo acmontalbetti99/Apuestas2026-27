@@ -2518,5 +2518,21 @@
   "ko": "2026-11-21T17:30:00Z",
   "hg": 0,
   "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Napoli",
+  "away": "Torino",
+  "ko": "2026-11-21T19:45:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "laliga",
+  "home": "Real Madrid",
+  "away": "Celta de Vigo",
+  "ko": "2026-11-21T20:00:00Z",
+  "hg": 2,
+  "ag": 1
  }
 ]
