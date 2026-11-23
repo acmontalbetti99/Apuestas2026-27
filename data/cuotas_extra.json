@@ -5,24 +5,24 @@
   "away": "Aston Villa",
   "ko": "2026-11-24T17:45:00Z",
   "evento": "e422af92d1fc06c0a330838c1c2f2e08",
-  "pH": 0.3563,
-  "pD": 0.2436,
-  "pA": 0.4001,
+  "pH": 0.3287,
+  "pD": 0.2418,
+  "pA": 0.4294,
   "b365": {},
   "mejor": {
-   "1": 2.88,
-   "X": 4.1,
-   "2": 2.49,
-   "1X": 1.69,
-   "12": 1.34,
-   "X2": 1.55
+   "1": 3.1,
+   "X": 4.2,
+   "2": 2.32,
+   "1X": 1.78,
+   "12": 1.33,
+   "X2": 1.49
   },
   "quien": {
    "1": "smarkets",
-   "X": "pinnacle",
+   "X": "boylesports",
    "2": "onexbet"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O2.5": 0.652,
@@ -41,24 +41,24 @@
   "away": "LASK Linz",
   "ko": "2026-11-24T17:45:00Z",
   "evento": "50b80f3ebd38bf63663b11ae0afc575b",
-  "pH": 0.6202,
-  "pD": 0.1926,
-  "pA": 0.1873,
+  "pH": 0.6358,
+  "pD": 0.188,
+  "pA": 0.1762,
   "b365": {},
   "mejor": {
-   "1": 1.61,
+   "1": 1.53,
    "X": 5.5,
-   "2": 5.8,
-   "1X": 1.25,
-   "12": 1.26,
-   "X2": 2.82
+   "2": 6.0,
+   "1X": 1.2,
+   "12": 1.22,
+   "X2": 2.87
   },
   "quien": {
-   "1": "onexbet",
+   "1": "smarkets",
    "X": "smarkets",
-   "2": "unibet_se"
+   "2": "betfair_ex_eu"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.5444,
@@ -77,24 +77,24 @@
   "away": "AEK Athens",
   "ko": "2026-11-24T20:00:00Z",
   "evento": "ba719e378ac366262013bdb51a06aa6f",
-  "pH": 0.7301,
-  "pD": 0.1614,
-  "pA": 0.1085,
+  "pH": 0.7563,
+  "pD": 0.1477,
+  "pA": 0.0959,
   "b365": {},
   "mejor": {
-   "1": 1.36,
-   "X": 6.4,
-   "2": 10.4,
-   "1X": 1.12,
-   "12": 1.2,
-   "X2": 3.96
+   "1": 1.3,
+   "X": 7.0,
+   "2": 12.0,
+   "1X": 1.1,
+   "12": 1.17,
+   "X2": 4.42
   },
   "quien": {
-   "1": "gtbets",
-   "X": "nordicbet",
-   "2": "onexbet"
+   "1": "onexbet",
+   "X": "unibet_se",
+   "2": "smarkets"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.4958,
@@ -113,24 +113,24 @@
   "away": "Dortmund",
   "ko": "2026-11-24T20:00:00Z",
   "evento": "aee4e3c225603397ab52de3d066b566b",
-  "pH": 0.6827,
-  "pD": 0.1925,
-  "pA": 0.1248,
+  "pH": 0.6768,
+  "pD": 0.1941,
+  "pA": 0.1291,
   "b365": {},
   "mejor": {
-   "1": 1.46,
-   "X": 5.3,
+   "1": 1.45,
+   "X": 5.2,
    "2": 8.5,
-   "1X": 1.14,
-   "12": 1.25,
-   "X2": 3.26
+   "1X": 1.13,
+   "12": 1.24,
+   "X2": 3.23
   },
   "quien": {
    "1": "onexbet",
    "X": "smarkets",
    "2": "unibet_se"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O2.5": 0.5767,
@@ -149,24 +149,24 @@
   "away": "Porto",
   "ko": "2026-11-24T20:00:00Z",
   "evento": "9a2ebad454db4ab3d53b89e96c79847a",
-  "pH": 0.3456,
-  "pD": 0.2609,
-  "pA": 0.3935,
+  "pH": 0.3284,
+  "pD": 0.2588,
+  "pA": 0.4128,
   "b365": {},
   "mejor": {
-   "1": 2.95,
-   "X": 3.8,
-   "2": 2.54,
-   "1X": 1.66,
-   "12": 1.36,
-   "X2": 1.52
+   "1": 3.1,
+   "X": 3.85,
+   "2": 2.44,
+   "1X": 1.72,
+   "12": 1.37,
+   "X2": 1.49
   },
   "quien": {
-   "1": "unibet_se",
+   "1": "smarkets",
    "X": "smarkets",
    "2": "onexbet"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O2.5": 0.5905,
@@ -185,24 +185,24 @@
   "away": "Napoli",
   "ko": "2026-11-24T20:00:00Z",
   "evento": "b9f00a4d399ec661e733857c9d5fb2dc",
-  "pH": 0.7565,
-  "pD": 0.1478,
-  "pA": 0.0957,
+  "pH": 0.7439,
+  "pD": 0.1513,
+  "pA": 0.1048,
   "b365": {},
   "mejor": {
-   "1": 1.3,
-   "X": 6.9,
-   "2": 11.6,
-   "1X": 1.09,
+   "1": 1.32,
+   "X": 6.8,
+   "2": 10.5,
+   "1X": 1.11,
    "12": 1.17,
-   "X2": 4.33
+   "X2": 4.13
   },
   "quien": {
    "1": "smarkets",
-   "X": "onexbet",
-   "2": "onexbet"
+   "X": "smarkets",
+   "2": "unibet_nl"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.5048,
@@ -221,24 +221,24 @@
   "away": "PSV Eindhoven",
   "ko": "2026-11-24T20:00:00Z",
   "evento": "3fb5e4a792cf34a0459efcb79a11a785",
-  "pH": 0.8055,
-  "pD": 0.1137,
-  "pA": 0.0807,
+  "pH": 0.8145,
+  "pD": 0.1088,
+  "pA": 0.0767,
   "b365": {},
   "mejor": {
-   "1": 1.2,
-   "X": 9.8,
-   "2": 14.99,
-   "1X": 1.07,
-   "12": 1.11,
-   "X2": 5.93
+   "1": 1.21,
+   "X": 10.0,
+   "2": 16.5,
+   "1X": 1.08,
+   "12": 1.13,
+   "X2": 6.23
   },
   "quien": {
-   "1": "unibet_nl",
+   "1": "onexbet",
    "X": "matchbook",
-   "2": "smarkets"
+   "2": "betfair_ex_eu"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.6465,
@@ -257,24 +257,24 @@
   "away": "Lens",
   "ko": "2026-11-24T20:00:00Z",
   "evento": "aea973c122c91837c15e066c757c747f",
-  "pH": 0.6808,
-  "pD": 0.1726,
-  "pA": 0.1466,
+  "pH": 0.685,
+  "pD": 0.1706,
+  "pA": 0.1444,
   "b365": {},
   "mejor": {
    "1": 1.46,
-   "X": 6.2,
+   "X": 6.06,
    "2": 7.6,
    "1X": 1.18,
    "12": 1.22,
-   "X2": 3.41
+   "X2": 3.37
   },
   "quien": {
    "1": "gtbets",
-   "X": "smarkets",
+   "X": "betonlineag",
    "2": "smarkets"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.5309,
@@ -293,24 +293,24 @@
   "away": "Real Betis",
   "ko": "2026-11-24T20:00:00Z",
   "evento": "8e93849b4c1ccbf1c207836d5c470150",
-  "pH": 0.0909,
-  "pD": 0.1448,
-  "pA": 0.7643,
+  "pH": 0.0941,
+  "pD": 0.147,
+  "pA": 0.7589,
   "b365": {},
   "mejor": {
-   "1": 12.5,
-   "X": 7.12,
-   "2": 1.3,
-   "1X": 4.54,
+   "1": 12.0,
+   "X": 6.95,
+   "2": 1.31,
+   "1X": 4.4,
    "12": 1.18,
    "X2": 1.1
   },
   "quien": {
-   "1": "smarkets",
-   "X": "betonlineag",
-   "2": "gtbets"
+   "1": "unibet_nl",
+   "X": "coolbet",
+   "2": "smarkets"
   },
-  "casas": 39,
+  "casas": 40,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.5016,
@@ -329,24 +329,24 @@
   "away": "Barcelona",
   "ko": "2026-11-25T17:45:00Z",
   "evento": "e6fa007f93e0cef004be920f96ee95ba",
-  "pH": 0.0452,
-  "pD": 0.0717,
-  "pA": 0.8831,
+  "pH": 0.0483,
+  "pD": 0.0763,
+  "pA": 0.8754,
   "b365": {},
   "mejor": {
-   "1": 32.0,
-   "X": 19.0,
+   "1": 29.0,
+   "X": 16.5,
    "2": 1.11,
-   "1X": 11.92,
+   "1X": 10.52,
    "12": 1.07,
-   "X2": 1.05
+   "X2": 1.04
   },
   "quien": {
-   "1": "nordicbet",
-   "X": "betfair_ex_eu",
-   "2": "casumo"
+   "1": "onexbet",
+   "X": "onexbet",
+   "2": "smarkets"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O1.5": 0.9248,
@@ -365,24 +365,24 @@
   "away": "Villarreal",
   "ko": "2026-11-25T17:45:00Z",
   "evento": "a7c87fac9e9cbcfc02ad0e0b29ca89e2",
-  "pH": 0.312,
-  "pD": 0.2504,
-  "pA": 0.4376,
+  "pH": 0.307,
+  "pD": 0.2487,
+  "pA": 0.4443,
   "b365": {},
   "mejor": {
    "1": 3.25,
    "X": 4.1,
-   "2": 2.28,
+   "2": 2.22,
    "1X": 1.81,
-   "12": 1.34,
-   "X2": 1.47
+   "12": 1.32,
+   "X2": 1.44
   },
   "quien": {
-   "1": "betfair_ex_uk",
-   "X": "matchbook",
-   "2": "onexbet"
+   "1": "unibet_nl",
+   "X": "betfair_ex_uk",
+   "2": "matchbook"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O2.5": 0.6158,
@@ -401,24 +401,24 @@
   "away": "AS Roma",
   "ko": "2026-11-25T20:00:00Z",
   "evento": "14007bc0605bce3bd164b132254ba24c",
-  "pH": 0.6912,
-  "pD": 0.1743,
-  "pA": 0.1345,
+  "pH": 0.6713,
+  "pD": 0.1843,
+  "pA": 0.1444,
   "b365": {},
   "mejor": {
-   "1": 1.42,
-   "X": 5.8,
-   "2": 8.0,
-   "1X": 1.14,
-   "12": 1.21,
-   "X2": 3.36
+   "1": 1.47,
+   "X": 5.55,
+   "2": 7.6,
+   "1X": 1.16,
+   "12": 1.23,
+   "X2": 3.21
   },
   "quien": {
    "1": "smarkets",
-   "X": "unibet_se",
-   "2": "unibet_se"
+   "X": "onexbet",
+   "2": "smarkets"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.5167,
@@ -437,24 +437,24 @@
   "away": "Viking FK",
   "ko": "2026-11-25T20:00:00Z",
   "evento": "b1af6789fe6db7aab18a2945ce56f035",
-  "pH": 0.8589,
-  "pD": 0.0951,
-  "pA": 0.0461,
+  "pH": 0.8633,
+  "pD": 0.0916,
+  "pA": 0.0452,
   "b365": {},
   "mejor": {
-   "1": 1.14,
-   "X": 12.4,
-   "2": 30.0,
+   "1": 1.13,
+   "X": 12.9,
+   "2": 28.0,
    "1X": 1.04,
-   "12": 1.1,
-   "X2": 8.77
+   "12": 1.09,
+   "X2": 8.83
   },
   "quien": {
-   "1": "betfair_ex_eu",
+   "1": "smarkets",
    "X": "onexbet",
    "2": "nordicbet"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O1.5": 0.8802,
@@ -473,24 +473,24 @@
   "away": "Bayern Munich",
   "ko": "2026-11-25T20:00:00Z",
   "evento": "0ee2cfddf20153779cd2cc3e1f1f879f",
-  "pH": 0.1886,
-  "pD": 0.2191,
-  "pA": 0.5923,
+  "pH": 0.1884,
+  "pD": 0.222,
+  "pA": 0.5896,
   "b365": {},
   "mejor": {
-   "1": 5.7,
+   "1": 5.6,
    "X": 4.5,
-   "2": 1.65,
-   "1X": 2.51,
-   "12": 1.28,
-   "X2": 1.21
+   "2": 1.68,
+   "1X": 2.5,
+   "12": 1.29,
+   "X2": 1.22
   },
   "quien": {
    "1": "smarkets",
-   "X": "smarkets",
-   "2": "onexbet"
+   "X": "unibet_se",
+   "2": "betfair_ex_eu"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O2.5": 0.6089,
@@ -509,24 +509,24 @@
   "away": "Liverpool",
   "ko": "2026-11-25T20:00:00Z",
   "evento": "99459b90f3e732106e09585bf94b36b4",
-  "pH": 0.2233,
-  "pD": 0.2103,
-  "pA": 0.5664,
+  "pH": 0.2159,
+  "pD": 0.2071,
+  "pA": 0.577,
   "b365": {},
   "mejor": {
-   "1": 4.6,
-   "X": 4.9,
-   "2": 1.75,
-   "1X": 2.37,
+   "1": 4.8,
+   "X": 5.0,
+   "2": 1.73,
+   "1X": 2.45,
    "12": 1.27,
    "X2": 1.29
   },
   "quien": {
-   "1": "smarkets",
+   "1": "unibet_se",
    "X": "smarkets",
-   "2": "onexbet"
+   "2": "gtbets"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.5287,
@@ -545,24 +545,24 @@
   "away": "Fenerbahce",
   "ko": "2026-11-25T20:00:00Z",
   "evento": "49c66d76bc4085e63a181179cc47ef4d",
-  "pH": 0.3616,
-  "pD": 0.2715,
-  "pA": 0.3669,
+  "pH": 0.3623,
+  "pD": 0.2706,
+  "pA": 0.3672,
   "b365": {},
   "mejor": {
-   "1": 2.75,
-   "X": 3.65,
-   "2": 2.7,
-   "1X": 1.57,
-   "12": 1.36,
-   "X2": 1.55
+   "1": 2.76,
+   "X": 3.7,
+   "2": 2.72,
+   "1X": 1.58,
+   "12": 1.37,
+   "X2": 1.57
   },
   "quien": {
-   "1": "onexbet",
+   "1": "smarkets",
    "X": "betfair_ex_eu",
-   "2": "onexbet"
+   "2": "smarkets"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O1.5": 0.7693,
@@ -581,24 +581,24 @@
   "away": "VfB Stuttgart",
   "ko": "2026-11-25T20:00:00Z",
   "evento": "e7e64568f6af00d395a3fdfc27de8ae3",
-  "pH": 0.667,
-  "pD": 0.1742,
-  "pA": 0.1588,
+  "pH": 0.6704,
+  "pD": 0.1738,
+  "pA": 0.1558,
   "b365": {},
   "mejor": {
-   "1": 1.48,
-   "X": 6.0,
-   "2": 7.0,
-   "1X": 1.19,
-   "12": 1.22,
-   "X2": 3.23
+   "1": 1.47,
+   "X": 5.9,
+   "2": 6.8,
+   "1X": 1.18,
+   "12": 1.21,
+   "X2": 3.16
   },
   "quien": {
-   "1": "onexbet",
+   "1": "gtbets",
    "X": "smarkets",
    "2": "smarkets"
   },
-  "casas": 37,
+  "casas": 38,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O3.5": 0.583,
@@ -617,24 +617,24 @@
   "away": "Manchester United",
   "ko": "2026-11-25T20:00:00Z",
   "evento": "01a61442fe04f8751b62eb251f234079",
-  "pH": 0.3766,
-  "pD": 0.2599,
-  "pA": 0.3635,
+  "pH": 0.3891,
+  "pD": 0.256,
+  "pA": 0.3549,
   "b365": {},
   "mejor": {
-   "1": 2.65,
-   "X": 3.9,
-   "2": 2.76,
-   "1X": 1.58,
+   "1": 2.56,
+   "X": 4.0,
+   "2": 2.84,
+   "1X": 1.56,
    "12": 1.35,
-   "X2": 1.62
+   "X2": 1.66
   },
   "quien": {
    "1": "onexbet",
    "X": "smarkets",
    "2": "smarkets"
   },
-  "casas": 38,
+  "casas": 39,
   "sport": "soccer_uefa_champs_league",
   "pGoles": {
    "O1.5": 0.8023,
@@ -653,20 +653,20 @@
   "away": "Milan",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "31ebd41354699af625fa3372932206f0",
-  "pH": 0.3821,
-  "pD": 0.2764,
-  "pA": 0.3416,
+  "pH": 0.3518,
+  "pD": 0.2762,
+  "pA": 0.372,
   "b365": {},
   "mejor": {
-   "1": 2.65,
-   "X": 3.55,
-   "2": 3.0,
-   "1X": 1.52,
-   "12": 1.41,
-   "X2": 1.63
+   "1": 2.79,
+   "X": 3.6,
+   "2": 2.7,
+   "1X": 1.57,
+   "12": 1.37,
+   "X2": 1.54
   },
   "quien": {
-   "1": "onexbet",
+   "1": "pinnacle",
    "X": "smarkets",
    "2": "unibet_se"
   },
@@ -689,22 +689,22 @@
   "away": "Leverkusen",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "cdf4b848361b0374c2027326bd54d8eb",
-  "pH": 0.2231,
-  "pD": 0.2264,
-  "pA": 0.5505,
+  "pH": 0.2221,
+  "pD": 0.2242,
+  "pA": 0.5538,
   "b365": {},
   "mejor": {
-   "1": 4.6,
-   "X": 4.4,
-   "2": 1.75,
-   "1X": 2.25,
+   "1": 4.55,
+   "X": 4.6,
+   "2": 1.76,
+   "1X": 2.29,
    "12": 1.27,
-   "X2": 1.25
+   "X2": 1.27
   },
   "quien": {
-   "1": "smarkets",
+   "1": "nordicbet",
    "X": "smarkets",
-   "2": "smarkets"
+   "2": "betfair_ex_eu"
   },
   "casas": 36,
   "sport": "soccer_uefa_europa_league",
@@ -725,22 +725,22 @@
   "away": "Benfica",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "38332e4cbb2b3991904b00a75dc3769d",
-  "pH": 0.1692,
-  "pD": 0.2007,
-  "pA": 0.63,
+  "pH": 0.1665,
+  "pD": 0.1968,
+  "pA": 0.6367,
   "b365": {},
   "mejor": {
-   "1": 6.25,
-   "X": 4.98,
-   "2": 1.53,
-   "1X": 2.77,
-   "12": 1.23,
+   "1": 6.4,
+   "X": 5.1,
+   "2": 1.51,
+   "1X": 2.84,
+   "12": 1.22,
    "X2": 1.17
   },
   "quien": {
    "1": "unibet_se",
-   "X": "pinnacle",
-   "2": "onexbet"
+   "X": "smarkets",
+   "2": "smarkets"
   },
   "casas": 36,
   "sport": "soccer_uefa_europa_league",
@@ -761,22 +761,22 @@
   "away": "Hapoel Be'er Sheva",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "a18687d4f17a96a7732fb0c8673ea037",
-  "pH": 0.7748,
-  "pD": 0.1386,
-  "pA": 0.0867,
+  "pH": 0.7765,
+  "pD": 0.1376,
+  "pA": 0.0859,
   "b365": {},
   "mejor": {
-   "1": 1.24,
+   "1": 1.25,
    "X": 7.7,
-   "2": 13.0,
-   "1X": 1.07,
-   "12": 1.13,
-   "X2": 4.84
+   "2": 13.5,
+   "1X": 1.08,
+   "12": 1.14,
+   "X2": 4.9
   },
   "quien": {
-   "1": "onexbet",
+   "1": "unibet_se",
    "X": "nordicbet",
-   "2": "nordicbet"
+   "2": "betfair_ex_eu"
   },
   "casas": 36,
   "sport": "soccer_uefa_europa_league",
@@ -797,21 +797,21 @@
   "away": "Bournemouth",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "7da3be4f6fe50a39ecdf3a8dc12966c8",
-  "pH": 0.2475,
-  "pD": 0.266,
-  "pA": 0.4865,
+  "pH": 0.2518,
+  "pD": 0.2654,
+  "pA": 0.4828,
   "b365": {},
   "mejor": {
-   "1": 4.1,
-   "X": 3.7,
-   "2": 2.0,
+   "1": 4.0,
+   "X": 3.75,
+   "2": 2.08,
    "1X": 1.94,
-   "12": 1.34,
-   "X2": 1.3
+   "12": 1.37,
+   "X2": 1.34
   },
   "quien": {
-   "1": "smarkets",
-   "X": "smarkets",
+   "1": "unibet_se",
+   "X": "unibet_se",
    "2": "smarkets"
   },
   "casas": 36,
@@ -833,21 +833,21 @@
   "away": "FC Ararat-Armenia",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "5902b4703e9ddc1f573091e14107834c",
-  "pH": 0.7859,
-  "pD": 0.1203,
-  "pA": 0.0938,
+  "pH": 0.8073,
+  "pD": 0.1216,
+  "pA": 0.0712,
   "b365": {},
   "mejor": {
    "1": 1.2,
-   "X": 8.4,
+   "X": 8.7,
    "2": 17.0,
    "1X": 1.05,
    "12": 1.12,
-   "X2": 5.62
+   "X2": 5.75
   },
   "quien": {
    "1": "unibet_se",
-   "X": "smarkets",
+   "X": "nordicbet",
    "2": "nordicbet"
   },
   "casas": 36,
@@ -869,22 +869,22 @@
   "away": "Lech Poznań",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "3ee2bf8a6fa6add543f64ac3e9813976",
-  "pH": 0.6872,
-  "pD": 0.1812,
-  "pA": 0.1315,
+  "pH": 0.6884,
+  "pD": 0.1806,
+  "pA": 0.1311,
   "b365": {},
   "mejor": {
    "1": 1.41,
-   "X": 5.6,
-   "2": 8.2,
+   "X": 5.7,
+   "2": 8.1,
    "1X": 1.13,
    "12": 1.2,
-   "X2": 3.33
+   "X2": 3.35
   },
   "quien": {
    "1": "unibet_se",
-   "X": "matchbook",
-   "2": "betfair_ex_eu"
+   "X": "smarkets",
+   "2": "nordicbet"
   },
   "casas": 36,
   "sport": "soccer_uefa_europa_league",
@@ -905,21 +905,21 @@
   "away": "PFC Levski Sofia",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "707c513bfa43b45b7813126e09ad08d8",
-  "pH": 0.6599,
-  "pD": 0.2015,
-  "pA": 0.1386,
+  "pH": 0.6637,
+  "pD": 0.2009,
+  "pA": 0.1354,
   "b365": {},
   "mejor": {
-   "1": 1.47,
-   "X": 5.1,
+   "1": 1.46,
+   "X": 5.0,
    "2": 7.8,
-   "1X": 1.14,
-   "12": 1.24,
-   "X2": 3.08
+   "1X": 1.13,
+   "12": 1.23,
+   "X2": 3.05
   },
   "quien": {
-   "1": "unibet_se",
-   "X": "betfair_ex_eu",
+   "1": "onexbet",
+   "X": "unibet_se",
    "2": "smarkets"
   },
   "casas": 36,
@@ -941,25 +941,35 @@
   "away": "AZ Alkmaar",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "189401357a4b5e5920ca9ec1207a6566",
-  "pH": 0.3542,
-  "pD": 0.2632,
-  "pA": 0.3826,
+  "pH": 0.3437,
+  "pD": 0.262,
+  "pA": 0.3943,
   "b365": {},
   "mejor": {
-   "1": 2.75,
+   "1": 2.92,
    "X": 3.75,
-   "2": 2.61,
-   "1X": 1.59,
-   "12": 1.34,
-   "X2": 1.54
+   "2": 2.55,
+   "1X": 1.64,
+   "12": 1.36,
+   "X2": 1.52
   },
   "quien": {
-   "1": "betsson",
+   "1": "betfair_ex_eu",
    "X": "smarkets",
-   "2": "onexbet"
+   "2": "unibet_se"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.364,
+   "U3.5": 0.636,
+   "O2.5": 0.5728,
+   "U2.5": 0.4272,
+   "O1.5": 0.7824,
+   "U1.5": 0.2176,
+   "BTTS": 0.607,
+   "NBTTS": 0.393
+  }
  },
  {
   "lg": "uel",
@@ -967,25 +977,35 @@
   "away": "Anderlecht",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "de10dd2e5917108a9478c07275ba8cdb",
-  "pH": 0.2271,
-  "pD": 0.2517,
-  "pA": 0.5212,
+  "pH": 0.2243,
+  "pD": 0.2503,
+  "pA": 0.5254,
   "b365": {},
   "mejor": {
-   "1": 4.5,
+   "1": 4.55,
    "X": 3.95,
-   "2": 1.86,
-   "1X": 2.1,
-   "12": 1.32,
-   "X2": 1.26
+   "2": 1.87,
+   "1X": 2.11,
+   "12": 1.33,
+   "X2": 1.27
   },
   "quien": {
-   "1": "smarkets",
+   "1": "nordicbet",
    "X": "smarkets",
-   "2": "onexbet"
+   "2": "unibet_se"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.3582,
+   "U3.5": 0.6418,
+   "O2.5": 0.5624,
+   "U2.5": 0.4376,
+   "O1.5": 0.7779,
+   "U1.5": 0.2221,
+   "BTTS": 0.5746,
+   "NBTTS": 0.4254
+  }
  },
  {
   "lg": "uel",
@@ -993,25 +1013,35 @@
   "away": "Celtic",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "e2036567ee9394a55f022358781dce15",
-  "pH": 0.2158,
-  "pD": 0.2306,
-  "pA": 0.5536,
+  "pH": 0.2103,
+  "pD": 0.2289,
+  "pA": 0.5607,
   "b365": {},
   "mejor": {
-   "1": 4.74,
-   "X": 4.25,
-   "2": 1.76,
-   "1X": 2.24,
-   "12": 1.28,
-   "X2": 1.24
+   "1": 4.9,
+   "X": 4.4,
+   "2": 1.75,
+   "1X": 2.32,
+   "12": 1.29,
+   "X2": 1.25
   },
   "quien": {
-   "1": "betonlineag",
-   "X": "onexbet",
+   "1": "betfair_ex_eu",
+   "X": "smarkets",
    "2": "unibet_se"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.4012,
+   "U3.5": 0.5988,
+   "O2.5": 0.6135,
+   "U2.5": 0.3865,
+   "O1.5": 0.8063,
+   "U1.5": 0.1937,
+   "BTTS": 0.6,
+   "NBTTS": 0.4
+  }
  },
  {
   "lg": "uel",
@@ -1019,25 +1049,35 @@
   "away": "Real Sociedad",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "3fe17778f32b5fd0f218f9be6b0681cc",
-  "pH": 0.4591,
-  "pD": 0.2482,
-  "pA": 0.2927,
+  "pH": 0.4628,
+  "pD": 0.2455,
+  "pA": 0.2917,
   "b365": {},
   "mejor": {
-   "1": 2.13,
-   "X": 4.09,
-   "2": 3.4,
+   "1": 2.12,
+   "X": 4.1,
+   "2": 3.5,
    "1X": 1.4,
-   "12": 1.31,
-   "X2": 1.86
+   "12": 1.32,
+   "X2": 1.89
   },
   "quien": {
-   "1": "onexbet",
-   "X": "pinnacle",
-   "2": "coolbet"
+   "1": "smarkets",
+   "X": "matchbook",
+   "2": "smarkets"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.3916,
+   "U3.5": 0.6084,
+   "O2.5": 0.6029,
+   "U2.5": 0.3971,
+   "O1.5": 0.8029,
+   "U1.5": 0.1971,
+   "BTTS": 0.621,
+   "NBTTS": 0.379
+  }
  },
  {
   "lg": "uel",
@@ -1045,25 +1085,35 @@
   "away": "NK Celje",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "0e5553b52ece07115fbdf8145df0c377",
-  "pH": 0.6917,
-  "pD": 0.1817,
-  "pA": 0.1265,
+  "pH": 0.6931,
+  "pD": 0.1826,
+  "pA": 0.1244,
   "b365": {},
   "mejor": {
-   "1": 1.39,
-   "X": 5.5,
-   "2": 8.5,
-   "1X": 1.11,
-   "12": 1.19,
-   "X2": 3.34
+   "1": 1.4,
+   "X": 5.6,
+   "2": 9.0,
+   "1X": 1.12,
+   "12": 1.21,
+   "X2": 3.45
   },
   "quien": {
    "1": "smarkets",
-   "X": "betfred_uk",
+   "X": "unibet_se",
    "2": "unibet_se"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.4054,
+   "U3.5": 0.5946,
+   "O2.5": 0.617,
+   "U2.5": 0.383,
+   "O1.5": 0.8069,
+   "U1.5": 0.1931,
+   "BTTS": 0.5251,
+   "NBTTS": 0.4749
+  }
  },
  {
   "lg": "uel",
@@ -1071,25 +1121,35 @@
   "away": "Jagiellonia Białystok",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "413409b43875d1bdb627a9e7fb6bc3fd",
-  "pH": 0.7457,
-  "pD": 0.1642,
-  "pA": 0.0901,
+  "pH": 0.7531,
+  "pD": 0.1598,
+  "pA": 0.087,
   "b365": {},
   "mejor": {
-   "1": 1.29,
-   "X": 6.25,
-   "2": 12.5,
+   "1": 1.28,
+   "X": 6.4,
+   "2": 13.5,
    "1X": 1.07,
    "12": 1.17,
-   "X2": 4.17
+   "X2": 4.34
   },
   "quien": {
-   "1": "onexbet",
-   "X": "unibet_se",
+   "1": "unibet_se",
+   "X": "betfair_ex_eu",
    "2": "smarkets"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.3922,
+   "U3.5": 0.6078,
+   "O2.5": 0.6013,
+   "U2.5": 0.3987,
+   "O1.5": 0.7999,
+   "U1.5": 0.2001,
+   "BTTS": 0.4548,
+   "NBTTS": 0.5452
+  }
  },
  {
   "lg": "uel",
@@ -1097,25 +1157,35 @@
   "away": "Omonoia FC",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "d6377d30379e5d3053c1076646d83f78",
-  "pH": 0.7871,
-  "pD": 0.1372,
-  "pA": 0.0757,
+  "pH": 0.7938,
+  "pD": 0.1325,
+  "pA": 0.0737,
   "b365": {},
   "mejor": {
    "1": 1.23,
-   "X": 7.8,
-   "2": 16.0,
-   "1X": 1.06,
+   "X": 8.0,
+   "2": 16.5,
+   "1X": 1.07,
    "12": 1.14,
-   "X2": 5.24
+   "X2": 5.39
   },
   "quien": {
-   "1": "onexbet",
-   "X": "smarkets",
-   "2": "betfair_ex_eu"
+   "1": "unibet_se",
+   "X": "winamax_de",
+   "2": "matchbook"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.4717,
+   "U3.5": 0.5283,
+   "O2.5": 0.6779,
+   "U2.5": 0.3221,
+   "O1.5": 0.842,
+   "U1.5": 0.158,
+   "BTTS": 0.4765,
+   "NBTTS": 0.5235
+  }
  },
  {
   "lg": "uel",
@@ -1123,25 +1193,35 @@
   "away": "Lillestrom",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "a24c89b65c5a30fb9473735049589e64",
-  "pH": 0.7895,
-  "pD": 0.1326,
-  "pA": 0.078,
+  "pH": 0.7965,
+  "pD": 0.1281,
+  "pA": 0.0754,
   "b365": {},
   "mejor": {
-   "1": 1.22,
-   "X": 8.2,
-   "2": 15.5,
-   "1X": 1.06,
-   "12": 1.13,
-   "X2": 5.36
+   "1": 1.23,
+   "X": 8.5,
+   "2": 16.0,
+   "1X": 1.07,
+   "12": 1.14,
+   "X2": 5.55
   },
   "quien": {
    "1": "unibet_se",
-   "X": "betfair_ex_eu",
+   "X": "winamax_de",
    "2": "betfair_ex_eu"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.4978,
+   "U3.5": 0.5022,
+   "O2.5": 0.697,
+   "U2.5": 0.303,
+   "O1.5": 0.8548,
+   "U1.5": 0.1452,
+   "BTTS": 0.4826,
+   "NBTTS": 0.5174
+  }
  },
  {
   "lg": "uel",
@@ -1149,25 +1229,35 @@
   "away": "Rennes",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "e836bc70afa19b0db28fb320a97662e4",
-  "pH": 0.3188,
-  "pD": 0.2485,
-  "pA": 0.4327,
+  "pH": 0.3153,
+  "pD": 0.2475,
+  "pA": 0.4373,
   "b365": {},
   "mejor": {
-   "1": 3.1,
+   "1": 3.12,
    "X": 4.0,
-   "2": 2.26,
+   "2": 2.25,
    "1X": 1.75,
    "12": 1.31,
    "X2": 1.44
   },
   "quien": {
-   "1": "betsson",
-   "X": "unibet_se",
-   "2": "onexbet"
+   "1": "onexbet",
+   "X": "smarkets",
+   "2": "unibet_se"
   },
-  "casas": 35,
-  "sport": "soccer_uefa_europa_league"
+  "casas": 36,
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.4112,
+   "U3.5": 0.5888,
+   "O2.5": 0.6164,
+   "U2.5": 0.3836,
+   "O1.5": 0.8108,
+   "U1.5": 0.1892,
+   "BTTS": 0.6369,
+   "NBTTS": 0.3631
+  }
  },
  {
   "lg": "uel",
@@ -1175,25 +1265,35 @@
   "away": "SK Sturm Graz",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "df4947bbe49057782feacca38c03e790",
-  "pH": 0.7049,
-  "pD": 0.1708,
-  "pA": 0.1243,
+  "pH": 0.7053,
+  "pD": 0.1702,
+  "pA": 0.1245,
   "b365": {},
   "mejor": {
    "1": 1.37,
    "X": 6.0,
-   "2": 8.6,
+   "2": 9.0,
    "1X": 1.12,
-   "12": 1.18,
-   "X2": 3.53
+   "12": 1.19,
+   "X2": 3.6
   },
   "quien": {
    "1": "onexbet",
    "X": "betfair_ex_eu",
-   "2": "betfair_ex_eu"
+   "2": "unibet_se"
   },
   "casas": 36,
-  "sport": "soccer_uefa_europa_league"
+  "sport": "soccer_uefa_europa_league",
+  "pGoles": {
+   "O3.5": 0.4787,
+   "U3.5": 0.5213,
+   "O2.5": 0.6801,
+   "U2.5": 0.3199,
+   "O1.5": 0.8449,
+   "U1.5": 0.1551,
+   "BTTS": 0.5737,
+   "NBTTS": 0.4263
+  }
  },
  {
   "lg": "uecl",
@@ -1201,24 +1301,24 @@
   "away": "Mjällby AIF",
   "ko": "2026-11-26T15:30:00Z",
   "evento": "b11e430b1d8052d0c718bcee69145f7a",
-  "pH": 0.4253,
-  "pD": 0.2768,
-  "pA": 0.298,
+  "pH": 0.4115,
+  "pD": 0.2747,
+  "pA": 0.3138,
   "b365": {},
   "mejor": {
-   "1": 2.27,
-   "X": 3.5,
-   "2": 3.3,
-   "1X": 1.38,
-   "12": 1.34,
-   "X2": 1.7
+   "1": 2.4,
+   "X": 3.7,
+   "2": 3.2,
+   "1X": 1.46,
+   "12": 1.37,
+   "X2": 1.72
   },
   "quien": {
-   "1": "onexbet",
-   "X": "coral",
-   "2": "nordicbet"
+   "1": "betonlineag",
+   "X": "unibet_nl",
+   "2": "unibet_nl"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O1.5": 0.7323,
@@ -1237,24 +1337,24 @@
   "away": "AGF Aarhus",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "e1bfce2837ee873eec90dbefe31844ac",
-  "pH": 0.4441,
-  "pD": 0.2532,
-  "pA": 0.3026,
+  "pH": 0.4437,
+  "pD": 0.2494,
+  "pA": 0.3068,
   "b365": {},
   "mejor": {
-   "1": 2.2,
-   "X": 3.88,
-   "2": 3.4,
-   "1X": 1.4,
-   "12": 1.34,
-   "X2": 1.81
+   "1": 2.19,
+   "X": 4.1,
+   "2": 3.35,
+   "1X": 1.43,
+   "12": 1.32,
+   "X2": 1.84
   },
   "quien": {
    "1": "onexbet",
-   "X": "betonlineag",
+   "X": "matchbook",
    "2": "unibet_nl"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O2.5": 0.6097,
@@ -1273,24 +1373,24 @@
   "away": "AS Monaco",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "c587e5656d1f38f068cba1b168462ba4",
-  "pH": 0.206,
-  "pD": 0.2286,
-  "pA": 0.5654,
+  "pH": 0.2022,
+  "pD": 0.2252,
+  "pA": 0.5726,
   "b365": {},
   "mejor": {
-   "1": 5.0,
-   "X": 4.31,
-   "2": 1.69,
-   "1X": 2.31,
+   "1": 5.1,
+   "X": 4.4,
+   "2": 1.68,
+   "1X": 2.36,
    "12": 1.26,
-   "X2": 1.21
+   "X2": 1.22
   },
   "quien": {
    "1": "betfair_ex_uk",
-   "X": "betonlineag",
-   "2": "pinnacle"
+   "X": "betfair_ex_uk",
+   "2": "matchbook"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O3.5": 0.395,
@@ -1309,24 +1409,24 @@
   "away": "FC Thun",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "8a0dc963ce319d55751d4d07c5152600",
-  "pH": 0.7936,
-  "pD": 0.1276,
-  "pA": 0.0787,
+  "pH": 0.8037,
+  "pD": 0.1202,
+  "pA": 0.076,
   "b365": {},
   "mejor": {
    "1": 1.2,
-   "X": 8.2,
-   "2": 15.0,
-   "1X": 1.05,
-   "12": 1.11,
-   "X2": 5.3
+   "X": 8.8,
+   "2": 17.0,
+   "1X": 1.06,
+   "12": 1.12,
+   "X2": 5.8
   },
   "quien": {
    "1": "coral",
-   "X": "betfair_ex_eu",
-   "2": "onexbet"
+   "X": "onexbet",
+   "2": "unibet_nl"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O1.5": 0.8825,
@@ -1345,24 +1445,24 @@
   "away": "Universitatea Craiova",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "bbab118a8c6ca33b6b0e7b5ed36fecd8",
-  "pH": 0.8188,
-  "pD": 0.1185,
-  "pA": 0.0626,
+  "pH": 0.8196,
+  "pD": 0.1176,
+  "pA": 0.0628,
   "b365": {},
   "mejor": {
-   "1": 1.17,
+   "1": 1.18,
    "X": 9.15,
    "2": 21.0,
-   "1X": 1.04,
-   "12": 1.11,
+   "1X": 1.05,
+   "12": 1.12,
    "X2": 6.37
   },
   "quien": {
-   "1": "coral",
+   "1": "betfair_ex_eu",
    "X": "onexbet",
    "2": "betfair_ex_eu"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O2.5": 0.6974,
@@ -1381,24 +1481,24 @@
   "away": "Getafe",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "cbe7d454dbea3c32de84901cced19bd4",
-  "pH": 0.1489,
-  "pD": 0.2346,
-  "pA": 0.6165,
+  "pH": 0.1507,
+  "pD": 0.2345,
+  "pA": 0.6148,
   "b365": {},
   "mejor": {
-   "1": 7.0,
-   "X": 4.2,
+   "1": 7.5,
+   "X": 4.3,
    "2": 1.56,
-   "1X": 2.62,
-   "12": 1.28,
+   "1X": 2.73,
+   "12": 1.29,
    "X2": 1.14
   },
   "quien": {
    "1": "unibet_nl",
-   "X": "coral",
+   "X": "matchbook",
    "2": "onexbet"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O1.5": 0.7071,
@@ -1417,24 +1517,24 @@
   "away": "FC Lugano",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "4f5b1a808bafc37b7c0041e947c2e536",
-  "pH": 0.2937,
-  "pD": 0.2599,
-  "pA": 0.4464,
+  "pH": 0.2803,
+  "pD": 0.2581,
+  "pA": 0.4616,
   "b365": {},
   "mejor": {
-   "1": 3.45,
-   "X": 3.86,
-   "2": 2.2,
-   "1X": 1.82,
-   "12": 1.34,
-   "X2": 1.4
+   "1": 3.55,
+   "X": 3.85,
+   "2": 2.11,
+   "1X": 1.85,
+   "12": 1.32,
+   "X2": 1.36
   },
   "quien": {
    "1": "betfair_ex_uk",
-   "X": "betonlineag",
-   "2": "unibet_nl"
+   "X": "matchbook",
+   "2": "onexbet"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O2.5": 0.5436,
@@ -1453,24 +1553,24 @@
   "away": "FC Midtjylland",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "48a49061ae356d2a8b3b3976ec21508d",
-  "pH": 0.2992,
-  "pD": 0.2552,
-  "pA": 0.4455,
+  "pH": 0.3202,
+  "pD": 0.2598,
+  "pA": 0.4201,
   "b365": {},
   "mejor": {
-   "1": 3.26,
-   "X": 3.8,
-   "2": 2.2,
-   "1X": 1.75,
-   "12": 1.31,
-   "X2": 1.39
+   "1": 3.1,
+   "X": 3.9,
+   "2": 2.36,
+   "1X": 1.73,
+   "12": 1.34,
+   "X2": 1.47
   },
   "quien": {
-   "1": "betonlineag",
-   "X": "betfair_ex_uk",
-   "2": "onexbet"
+   "1": "unibet_nl",
+   "X": "unibet_nl",
+   "2": "betfair_ex_uk"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O2.5": 0.6078,
@@ -1489,9 +1589,9 @@
   "away": "Riga FC",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "679c499344805de09a59a2a2535cd0c8",
-  "pH": 0.2803,
-  "pD": 0.2799,
-  "pA": 0.4398,
+  "pH": 0.2794,
+  "pD": 0.2792,
+  "pA": 0.4414,
   "b365": {},
   "mejor": {
    "1": 3.55,
@@ -1506,7 +1606,7 @@
    "X": "coral",
    "2": "onexbet"
   },
-  "casas": 25,
+  "casas": 27,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O2.5": 0.4961,
@@ -1525,24 +1625,24 @@
   "away": "Lincoln Red Imps FC",
   "ko": "2026-11-26T17:45:00Z",
   "evento": "cb6689f811b7ce08379eef028e2254a4",
-  "pH": 0.5895,
-  "pD": 0.2262,
-  "pA": 0.1843,
+  "pH": 0.5972,
+  "pD": 0.2236,
+  "pA": 0.1792,
   "b365": {},
   "mejor": {
-   "1": 1.64,
-   "X": 4.35,
-   "2": 5.6,
-   "1X": 1.19,
-   "12": 1.27,
-   "X2": 2.45
+   "1": 1.62,
+   "X": 4.4,
+   "2": 6.0,
+   "1X": 1.18,
+   "12": 1.28,
+   "X2": 2.54
   },
   "quien": {
-   "1": "onexbet",
-   "X": "nordicbet",
-   "2": "unibet_nl"
+   "1": "betonlineag",
+   "X": "betfair_ex_uk",
+   "2": "betfair_ex_uk"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league",
   "pGoles": {
    "O1.5": 0.7952,
@@ -1561,25 +1661,35 @@
   "away": "Atalanta BC",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "1f0d932ff8b08ed2c3b775e60d92bb4e",
-  "pH": 0.1956,
-  "pD": 0.2222,
-  "pA": 0.5821,
+  "pH": 0.1879,
+  "pD": 0.2191,
+  "pA": 0.593,
   "b365": {},
   "mejor": {
-   "1": 5.3,
-   "X": 4.44,
-   "2": 1.65,
-   "1X": 2.42,
-   "12": 1.26,
-   "X2": 1.2
+   "1": 5.5,
+   "X": 4.5,
+   "2": 1.62,
+   "1X": 2.48,
+   "12": 1.25,
+   "X2": 1.19
   },
   "quien": {
    "1": "betfair_ex_uk",
-   "X": "betonlineag",
-   "2": "onexbet"
+   "X": "betway",
+   "2": "unibet_nl"
   },
-  "casas": 27,
-  "sport": "soccer_uefa_europa_conference_league"
+  "casas": 29,
+  "sport": "soccer_uefa_europa_conference_league",
+  "pGoles": {
+   "O2.5": 0.6124,
+   "U2.5": 0.3876,
+   "O1.5": 0.8051,
+   "U1.5": 0.1949,
+   "O3.5": 0.3939,
+   "U3.5": 0.6061,
+   "BTTS": 0.5769,
+   "NBTTS": 0.4231
+  }
  },
  {
   "lg": "uecl",
@@ -1587,25 +1697,35 @@
   "away": "FC Copenhagen",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "4f10f55b47b83f7f4f2a8cd745a9e67f",
-  "pH": 0.0923,
-  "pD": 0.1589,
-  "pA": 0.7488,
+  "pH": 0.0961,
+  "pD": 0.1661,
+  "pA": 0.7379,
   "b365": {},
   "mejor": {
    "1": 12.5,
-   "X": 6.5,
-   "2": 1.3,
-   "1X": 4.28,
-   "12": 1.18,
-   "X2": 1.08
+   "X": 6.25,
+   "2": 1.32,
+   "1X": 4.17,
+   "12": 1.19,
+   "X2": 1.09
   },
   "quien": {
    "1": "unibet_nl",
-   "X": "coral",
+   "X": "unibet_nl",
    "2": "pinnacle"
   },
-  "casas": 27,
-  "sport": "soccer_uefa_europa_conference_league"
+  "casas": 29,
+  "sport": "soccer_uefa_europa_conference_league",
+  "pGoles": {
+   "O1.5": 0.8076,
+   "U1.5": 0.1924,
+   "O2.5": 0.617,
+   "U2.5": 0.383,
+   "O3.5": 0.4013,
+   "U3.5": 0.5987,
+   "BTTS": 0.4789,
+   "NBTTS": 0.5211
+  }
  },
  {
   "lg": "uecl",
@@ -1613,25 +1733,35 @@
   "away": "Panathinaikos FC",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "92db66d09fdcf10ff8561cb7ec09732e",
-  "pH": 0.342,
-  "pD": 0.2685,
-  "pA": 0.3895,
+  "pH": 0.3485,
+  "pD": 0.2681,
+  "pA": 0.3834,
   "b365": {},
   "mejor": {
-   "1": 2.83,
-   "X": 3.65,
-   "2": 2.48,
-   "1X": 1.59,
-   "12": 1.32,
-   "X2": 1.48
+   "1": 2.9,
+   "X": 3.7,
+   "2": 2.56,
+   "1X": 1.63,
+   "12": 1.36,
+   "X2": 1.51
   },
   "quien": {
-   "1": "onexbet",
-   "X": "betfair_ex_uk",
-   "2": "onexbet"
+   "1": "unibet_nl",
+   "X": "matchbook",
+   "2": "betfair_ex_uk"
   },
-  "casas": 27,
-  "sport": "soccer_uefa_europa_conference_league"
+  "casas": 29,
+  "sport": "soccer_uefa_europa_conference_league",
+  "pGoles": {
+   "O2.5": 0.5535,
+   "U2.5": 0.4465,
+   "O1.5": 0.7802,
+   "U1.5": 0.2198,
+   "O3.5": 0.3449,
+   "U3.5": 0.6551,
+   "BTTS": 0.6012,
+   "NBTTS": 0.3988
+  }
  },
  {
   "lg": "uecl",
@@ -1639,25 +1769,35 @@
   "away": "FC Twente Enschede",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "dd5f6def5ea1aa9e0a0f45e3605ac64e",
-  "pH": 0.4602,
-  "pD": 0.2402,
-  "pA": 0.2997,
+  "pH": 0.4567,
+  "pD": 0.2425,
+  "pA": 0.3008,
   "b365": {},
   "mejor": {
-   "1": 2.11,
-   "X": 4.3,
-   "2": 3.3,
-   "1X": 1.42,
-   "12": 1.29,
-   "X2": 1.87
+   "1": 2.13,
+   "X": 4.2,
+   "2": 3.35,
+   "1X": 1.41,
+   "12": 1.3,
+   "X2": 1.86
   },
   "quien": {
    "1": "onexbet",
    "X": "betfair_ex_uk",
-   "2": "betfair_ex_uk"
+   "2": "unibet_nl"
   },
-  "casas": 27,
-  "sport": "soccer_uefa_europa_conference_league"
+  "casas": 29,
+  "sport": "soccer_uefa_europa_conference_league",
+  "pGoles": {
+   "O1.5": 0.8172,
+   "U1.5": 0.1828,
+   "O2.5": 0.6311,
+   "U2.5": 0.3689,
+   "O3.5": 0.4074,
+   "U3.5": 0.5926,
+   "BTTS": 0.6364,
+   "NBTTS": 0.3636
+  }
  },
  {
   "lg": "uecl",
@@ -1665,25 +1805,35 @@
   "away": "Red Star Belgrade",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "3c6175802b9110c0abdb30f491965093",
-  "pH": 0.4423,
-  "pD": 0.271,
-  "pA": 0.2867,
+  "pH": 0.4371,
+  "pD": 0.2713,
+  "pA": 0.2916,
   "b365": {},
   "mejor": {
-   "1": 2.18,
-   "X": 3.6,
+   "1": 2.22,
+   "X": 3.65,
    "2": 3.42,
-   "1X": 1.36,
-   "12": 1.33,
-   "X2": 1.75
+   "1X": 1.38,
+   "12": 1.35,
+   "X2": 1.77
   },
   "quien": {
-   "1": "nordicbet",
-   "X": "coral",
+   "1": "betfair_ex_uk",
+   "X": "unibet_nl",
    "2": "onexbet"
   },
-  "casas": 27,
-  "sport": "soccer_uefa_europa_conference_league"
+  "casas": 29,
+  "sport": "soccer_uefa_europa_conference_league",
+  "pGoles": {
+   "O1.5": 0.7577,
+   "U1.5": 0.2423,
+   "O2.5": 0.5296,
+   "U2.5": 0.4704,
+   "O3.5": 0.3143,
+   "U3.5": 0.6857,
+   "BTTS": 0.5718,
+   "NBTTS": 0.4282
+  }
  },
  {
   "lg": "uecl",
@@ -1691,24 +1841,24 @@
   "away": "Sint Truiden",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "9f2cd85ad777bea9550b987dc409b280",
-  "pH": 0.4475,
-  "pD": 0.2675,
-  "pA": 0.285,
+  "pH": 0.4435,
+  "pD": 0.2683,
+  "pA": 0.2882,
   "b365": {},
   "mejor": {
-   "1": 2.18,
+   "1": 2.23,
    "X": 3.6,
    "2": 3.42,
-   "1X": 1.36,
-   "12": 1.33,
+   "1X": 1.38,
+   "12": 1.35,
    "X2": 1.75
   },
   "quien": {
    "1": "unibet_nl",
-   "X": "casumo",
+   "X": "coral",
    "2": "onexbet"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league"
  },
  {
@@ -1717,24 +1867,24 @@
   "away": "KuPS Kuopio",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "1abbe02767589722b5de92e94e96429d",
-  "pH": 0.8241,
-  "pD": 0.1172,
-  "pA": 0.0587,
+  "pH": 0.833,
+  "pD": 0.1117,
+  "pA": 0.0553,
   "b365": {},
   "mejor": {
-   "1": 1.17,
-   "X": 9.75,
-   "2": 24.0,
+   "1": 1.16,
+   "X": 10.5,
+   "2": 26.0,
    "1X": 1.04,
-   "12": 1.12,
-   "X2": 6.93
+   "12": 1.11,
+   "X2": 7.48
   },
   "quien": {
-   "1": "casumo",
-   "X": "onexbet",
-   "2": "onexbet"
+   "1": "unibet_nl",
+   "X": "betfair_ex_eu",
+   "2": "matchbook"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league"
  },
  {
@@ -1743,24 +1893,24 @@
   "away": "Trabzonspor",
   "ko": "2026-11-26T20:00:00Z",
   "evento": "491426b0dae5aecf2b92525815131cb2",
-  "pH": 0.2622,
-  "pD": 0.2465,
-  "pA": 0.4913,
+  "pH": 0.2606,
+  "pD": 0.2479,
+  "pA": 0.4915,
   "b365": {},
   "mejor": {
-   "1": 3.9,
-   "X": 3.96,
-   "2": 1.95,
-   "1X": 1.96,
-   "12": 1.3,
-   "X2": 1.31
+   "1": 4.1,
+   "X": 4.0,
+   "2": 2.0,
+   "1X": 2.02,
+   "12": 1.34,
+   "X2": 1.33
   },
   "quien": {
    "1": "unibet_nl",
-   "X": "onexbet",
-   "2": "casumo"
+   "X": "unibet_fr",
+   "2": "betfair_ex_uk"
   },
-  "casas": 27,
+  "casas": 29,
   "sport": "soccer_uefa_europa_conference_league"
  },
  {
@@ -1769,20 +1919,20 @@
   "away": "Germany",
   "ko": "2027-03-25T19:45:00Z",
   "evento": "f7282ea5932abd0a1c41a5e3bc3d5072",
-  "pH": 0.3498,
-  "pD": 0.2713,
-  "pA": 0.379,
+  "pH": 0.3492,
+  "pD": 0.2723,
+  "pA": 0.3785,
   "b365": {},
   "mejor": {
-   "1": 2.75,
-   "X": 3.69,
-   "2": 2.53,
-   "1X": 1.58,
-   "12": 1.32,
-   "X2": 1.5
+   "1": 2.77,
+   "X": 3.59,
+   "2": 2.55,
+   "1X": 1.56,
+   "12": 1.33,
+   "X2": 1.49
   },
   "quien": {
-   "1": "betsson",
+   "1": "onexbet",
    "X": "onexbet",
    "2": "onexbet"
   },
@@ -1795,17 +1945,17 @@
   "away": "France",
   "ko": "2027-03-25T19:45:00Z",
   "evento": "728a661f4b458bc738d816438d564525",
-  "pH": 0.416,
-  "pD": 0.2811,
-  "pA": 0.3029,
+  "pH": 0.4165,
+  "pD": 0.2807,
+  "pA": 0.3028,
   "b365": {},
   "mejor": {
-   "1": 2.31,
-   "X": 3.56,
+   "1": 2.34,
+   "X": 3.52,
    "2": 3.4,
-   "1X": 1.4,
-   "12": 1.38,
-   "X2": 1.74
+   "1X": 1.41,
+   "12": 1.39,
+   "X2": 1.73
   },
   "quien": {
    "1": "onexbet",
@@ -1821,24 +1971,24 @@
   "away": "England",
   "ko": "2027-03-27T17:00:00Z",
   "evento": "a9d059deec41f2362872f49049287aea",
-  "pH": 0.3124,
-  "pD": 0.2711,
-  "pA": 0.4165,
+  "pH": 0.315,
+  "pD": 0.2714,
+  "pA": 0.4136,
   "b365": {},
   "mejor": {
-   "1": 3.13,
+   "1": 3.1,
    "X": 3.54,
-   "2": 2.33,
-   "1X": 1.66,
+   "2": 2.36,
+   "1X": 1.65,
    "12": 1.34,
-   "X2": 1.41
+   "X2": 1.42
   },
   "quien": {
-   "1": "onexbet",
+   "1": "sport888",
    "X": "onexbet",
    "2": "onexbet"
   },
-  "casas": 20,
+  "casas": 21,
   "sport": "soccer_uefa_nations_league"
  },
  {
@@ -1847,24 +1997,24 @@
   "away": "Portugal",
   "ko": "2027-03-27T19:45:00Z",
   "evento": "12edfcb24921dde76db7adc9d66f5c1e",
-  "pH": 0.3888,
-  "pD": 0.2706,
-  "pA": 0.3406,
+  "pH": 0.3948,
+  "pD": 0.2642,
+  "pA": 0.3411,
   "b365": {},
   "mejor": {
-   "1": 2.5,
+   "1": 2.46,
    "X": 3.66,
-   "2": 2.91,
-   "1X": 1.49,
-   "12": 1.34,
-   "X2": 1.62
+   "2": 2.85,
+   "1X": 1.47,
+   "12": 1.32,
+   "X2": 1.6
   },
   "quien": {
-   "1": "betfred_uk",
+   "1": "onexbet",
    "X": "onexbet",
-   "2": "onexbet"
+   "2": "betsson"
   },
-  "casas": 20,
+  "casas": 21,
   "sport": "soccer_uefa_nations_league"
  }
 ]

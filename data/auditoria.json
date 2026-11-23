@@ -5224,5 +5224,140 @@
    "media": 7,
    "baja": 2
   }
+ },
+ {
+  "fecha": "2026-11-23T22:19:01Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-12-a-2026-11-14-4patas-ad0b7154 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__1x"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "dia-2026-11-14-2patas-232d7552 sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__o1-5"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "combinadas",
+    "mensaje": "fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado",
+    "detalle": [
+     "austria__iceland__1x",
+     "france__turkey__12"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {},
+   "calibracion": {
+    "n": 662,
+    "predicho": 0.8076,
+    "real": 0.7976,
+    "z": -0.66
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 115,
+     "predicho": 0.8649,
+     "real": 0.8696,
+     "z": 0.15,
+     "factor": 1.0
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 208,
+     "predicho": 0.7829,
+     "real": 0.7885,
+     "z": 0.19,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 294,
+     "predicho": 0.7935,
+     "real": 0.7925,
+     "z": -0.04,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 115,
+     "predicho": 0.7341,
+     "real": 0.687,
+     "z": -1.14
+    },
+    "0.75-0.80": {
+     "n": 195,
+     "predicho": 0.772,
+     "real": 0.8,
+     "z": 0.93
+    },
+    "0.80-0.85": {
+     "n": 124,
+     "predicho": 0.8266,
+     "real": 0.8145,
+     "z": -0.35
+    },
+    "0.85-0.90": {
+     "n": 220,
+     "predicho": 0.871,
+     "real": 0.8455,
+     "z": -1.13
+    }
+   },
+   "valor": {
+    "pendientes": 108,
+    "conPrecioCasa": 0
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.0
+   },
+   "sitio": {
+    "/data/picks.json": 755,
+    "/data/parlays.json": 260,
+    "horasDesdeElDespliegue": 21.3
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 3,
+   "baja": 2
+  }
  }
 ]

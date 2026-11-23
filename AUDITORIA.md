@@ -1,6 +1,6 @@
-# Auditoria · 2026-11-22 18:08 UTC
+# Auditoria · 2026-11-23 22:19 UTC
 
-**0 de severidad alta · 7 media · 2 baja**
+**0 de severidad alta · 3 media · 2 baja**
 
 ## 🟡 Media
 
@@ -11,55 +11,29 @@
 - **[combinadas]** fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado
   - `austria__iceland__1x`
   - `france__turkey__12`
-- **[liquidacion]** 11 picks de Bundesliga sin liquidar tras 47 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  - `Bayern Munich v Colonia (2026-11-20T19:30)`
-  - `Bayern Munich v Colonia (2026-11-20T19:30)`
-  - `Bayern Munich v Colonia (2026-11-20T19:30)`
-  - `Leverkusen v Paderborn (2026-11-21T14:30)`
-  - `Union Berlin v RB Leipzig (2026-11-21T14:30)`
-  - `Monchengladbach v Dortmund (2026-11-21T14:30)`
-- **[liquidacion]** 5 picks de La Liga sin liquidar tras 46 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  - `Athletic Bilbao v Espanyol (2026-11-20T20:00)`
-  - `Alaves v Deportivo (2026-11-21T13:00)`
-  - `Rayo Vallecano v Valencia (2026-11-21T15:15)`
-  - `Sevilla v Real Betis (2026-11-21T17:30)`
-  - `Real Madrid v Celta de Vigo (2026-11-21T20:00)`
-- **[liquidacion]** 11 picks de Premier League sin liquidar tras 30 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  - `Manchester City v Fulham (2026-11-21T12:30)`
-  - `Aston Villa v Sunderland (2026-11-21T15:00)`
-  - `Chelsea v Leeds (2026-11-21T15:00)`
-  - `Tottenham v Ipswich (2026-11-21T15:00)`
-  - `Bournemouth v Nottingham Forest (2026-11-21T15:00)`
-  - `Coventry v Crystal Palace (2026-11-21T15:00)`
-- **[liquidacion]** 4 picks de Serie A sin liquidar tras 28 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  - `Lazio v Lecce (2026-11-21T14:00)`
-  - `Como v Cagliari (2026-11-21T14:00)`
-  - `Parma v Roma (2026-11-21T17:00)`
-  - `Napoli v Torino (2026-11-21T19:45)`
 
 ## ⚪ Baja
 
 - **[calibracion]** estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
-- **[valor]** ninguno de los 14 picks con precio supera la cuota justa: valor medio -5.85%. Es lo esperable, pero conviene no apostarlos
+- **[valor]** ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
 
 ## Calibracion
 
 | Corte | n | Predicho | Real | z |
 | --- | ---: | ---: | ---: | ---: |
-| Todo | 598 | 80.5% | 78.6% | -1.22 |
-| estadisticas/corners-tarjetas | 79 | 86.8% | 82.3% | -1.19 |
+| Todo | 662 | 80.8% | 79.8% | -0.66 |
+| estadisticas/corners-tarjetas | 115 | 86.5% | 87.0% | +0.15 |
 | estadisticas/tiros | 45 | 86.7% | 68.9% | -3.52 |
-| goles | 194 | 78.2% | 78.3% | +0.03 |
-| resultado | 280 | 79.4% | 79.3% | -0.05 |
-| banda 0.70-0.75 | 111 | 73.4% | 69.4% | -0.96 |
-| banda 0.75-0.80 | 179 | 77.2% | 78.8% | +0.50 |
-| banda 0.80-0.85 | 108 | 82.5% | 80.6% | -0.54 |
-| banda 0.85-0.90 | 192 | 87.2% | 82.8% | -1.80 |
+| goles | 208 | 78.3% | 78.8% | +0.19 |
+| resultado | 294 | 79.3% | 79.2% | -0.04 |
+| banda 0.70-0.75 | 115 | 73.4% | 68.7% | -1.14 |
+| banda 0.75-0.80 | 195 | 77.2% | 80.0% | +0.93 |
+| banda 0.80-0.85 | 124 | 82.7% | 81.5% | -0.35 |
+| banda 0.85-0.90 | 220 | 87.1% | 84.5% | -1.13 |
 
 `z` compara los aciertos contra los que el propio modelo esperaba, con la varianza Poisson-binomial. Entre -2 y +2 es ruido.
 
 ## Valor contra bet365
 
-- 14 de 157 picks pendientes traen precio de la casa
-- 0 superan la cuota justa · valor medio -5.85%
+- 0 de 108 picks pendientes traen precio de la casa
 
