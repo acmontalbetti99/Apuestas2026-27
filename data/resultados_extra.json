@@ -2622,5 +2622,21 @@
   "ko": "2026-11-22T17:30:00Z",
   "hg": 1,
   "ag": 0
+ },
+ {
+  "lg": "seriea",
+  "home": "Atalanta",
+  "away": "Inter",
+  "ko": "2026-11-22T19:45:00Z",
+  "hg": 4,
+  "ag": 4
+ },
+ {
+  "lg": "laliga",
+  "home": "Getafe",
+  "away": "Atletico Madrid",
+  "ko": "2026-11-22T20:00:00Z",
+  "hg": 0,
+  "ag": 3
  }
 ]
