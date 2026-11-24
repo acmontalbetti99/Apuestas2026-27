@@ -1,8 +1,8 @@
-Refresco 2026-11-23 22:16 UTC
+Refresco 2026-11-24 00:28 UTC (solo liquidar)
 Bajando resultados...
-  E0 2627: 109 partidos
-  SP1 2627: 128 partidos
-  I1 2627: 119 partidos
+  E0 2627: 110 partidos
+  SP1 2627: 129 partidos
+  I1 2627: 120 partidos
   D1 2627: 90 partidos
   E0 2526: 380 partidos
   SP1 2526: 380 partidos
@@ -17,18 +17,10 @@ Bajando resultados...
 /home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/refresh.py:401: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
   D["kH"], D["kA"] = D["HomeTeam"].map(canon), D["AwayTeam"].map(canon)
   resultados_extra.json: 333 partidos
-  2225 partidos en base
+  2228 partidos en base
 Liquidando...
-  47 acertados · 5 fallados · 90 en espera · 3 sin estadisticas · 0 caducados
-  9 combinadas cerradas · 50 abiertas
-  acierto 0.7976 vs predicho 0.8076 sobre 662 · umbral 0.66
-Bajando proximos partidos...
-  cuotas_extra.json: 58 partidos
-  58 partidos con cuotas: 0 de ligas domesticas (goles y estadisticas), 58 de torneos (solo resultado)
-  ! ninguna liga domestica juega en esta ventana: no habra picks de goles ni de estadisticas hasta que vuelvan
-  estadisticas/tiros: predicho 86.7% contra real 68.9% sobre 45 (z -3.52), se encoge la probabilidad x0.515
-  4 partidos de torneo todavia lejos (entran a 3 dias del arranque)
-  105 picks sobre el 66%
-  3 picks pendientes de dias anteriores se mantienen
-  12 combinadas armadas (12 nuevas), 62 abiertas
-Listo: 770 picks (662 liquidados), 272 combinadas
+  2 acertados · 1 fallados · 105 en espera · 0 sin estadisticas · 0 caducados
+  0 combinadas cerradas · 62 abiertas
+  acierto 0.797 vs predicho 0.8078 sobre 665 · umbral 0.6609
+  105 picks pendientes de dias anteriores se mantienen
+Listo: 770 picks (665 liquidados), 272 combinadas
