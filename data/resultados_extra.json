@@ -2734,5 +2734,21 @@
   "ko": "2026-11-24T20:00:00Z",
   "hg": 0,
   "ag": 2
+ },
+ {
+  "lg": "ucl",
+  "home": "Sabah FK",
+  "away": "Barcelona",
+  "ko": "2026-11-25T17:45:00Z",
+  "hg": 1,
+  "ag": 4
+ },
+ {
+  "lg": "ucl",
+  "home": "Slavia Prague",
+  "away": "Villarreal",
+  "ko": "2026-11-25T17:45:00Z",
+  "hg": 0,
+  "ag": 1
  }
 ]

@@ -1,26 +1,11 @@
-Auditoria 2026-11-24 20:56 UTC
+Auditoria 2026-11-25 20:17 UTC
   [media] combinadas: fecha-2026-11-14-a-2026-11-16-5patas-0461106e sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: fecha-2026-11-22-a-2026-11-26-5patas-b7880d85 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-3patas-4573b8a5 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-3patas-d0a48215 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-2585f5ec sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-350eb335 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-4752c66c sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-b4505ecb sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-759f61ac sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-68e326f5 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-2cfa2366 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-c86b19cf sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-4patas-7b26483f sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-5patas-eb7a5e97 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-5patas-5e777cab sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-5patas-cc9cd8cd sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: dia-2026-11-24-5patas-d1435148 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: fecha-2026-11-24-a-2026-11-26-5patas-7a6146f9 sigue abierta y tiene patas sin pick de un partido ya jugado
-  [media] combinadas: fecha-2026-11-24-a-2026-11-26-5patas-ad1a497f sigue abierta y tiene patas sin pick de un partido ya jugado
+  [media] combinadas: dia-2026-11-25-3patas-ac68f6ad sigue abierta y tiene patas sin pick de un partido ya jugado
+  [media] combinadas: dia-2026-11-25-4patas-33c0023e sigue abierta y tiene patas sin pick de un partido ya jugado
+  [media] combinadas: dia-2026-11-25-5patas-91315192 sigue abierta y tiene patas sin pick de un partido ya jugado
   [baja] calibracion: estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
   [baja] valor: ningun pick pendiente trae precio de bet365: sin eso no se puede saber cual tiene valor de verdad
-  0 alta · 19 media · 2 baja
+  0 alta · 4 media · 2 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 226, in <module>
     sys.exit(main())
