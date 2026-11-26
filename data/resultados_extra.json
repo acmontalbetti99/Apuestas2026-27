@@ -2942,5 +2942,157 @@
   "ko": "2026-11-26T17:45:00Z",
   "hg": 0,
   "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Beşiktaş",
+  "away": "Hapoel Beer Sheva",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Crystal Palace",
+  "away": "Real Sociedad",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Ferencvaros",
+  "away": "NK Celje",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Hoffenheim",
+  "away": "Sturm Graz",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Juventus",
+  "away": "Omonia Nicosia",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 4,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Lyon",
+  "away": "Lillestroem",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "NEC Nijmegen",
+  "away": "Rennes",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 3,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "OFI Crete",
+  "away": "Anderlecht",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 1,
+  "ag": 3
+ },
+ {
+  "lg": "uel",
+  "home": "Sparta Prague",
+  "away": "AZ Alkmaar",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 2,
+  "ag": 4
+ },
+ {
+  "lg": "uel",
+  "home": "Sunderland",
+  "away": "Jagiellonia Bialystok",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uel",
+  "home": "Torreense",
+  "away": "Celtic",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "Borac Banja Luka",
+  "away": "Atalanta",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Nordsjaelland",
+  "away": "Panathinaikos",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 3,
+  "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "Freiburg",
+  "away": "FC Twente",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "Gent",
+  "away": "FK Crvena Zvezda",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 1,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "Hajduk Split",
+  "away": "St.Truiden",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "Inter Club d'Escaldes",
+  "away": "FC Copenhagen",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "PFC CSKA Sofia",
+  "away": "Trabzonspor",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "SC Braga",
+  "away": "KuPS",
+  "ko": "2026-11-26T20:00:00Z",
+  "hg": 4,
+  "ag": 0
  }
 ]
