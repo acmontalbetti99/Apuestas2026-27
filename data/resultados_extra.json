@@ -2806,5 +2806,141 @@
   "ko": "2026-11-25T20:00:00Z",
   "hg": 2,
   "ag": 2
+ },
+ {
+  "lg": "uecl",
+  "home": "Kairat Almaty",
+  "away": "Mjaellby",
+  "ko": "2026-11-26T15:30:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Celta de Vigo",
+  "away": "AFC Bournemouth",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 1,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Dinamo Zagreb",
+  "away": "Leverkusen",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 0,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "FC Salzburg",
+  "away": "Ararat Armenia",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Marseille",
+  "away": "Levski Sofia",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "uel",
+  "home": "Olympiacos",
+  "away": "Milan",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 4
+ },
+ {
+  "lg": "uel",
+  "home": "Union St.Gilloise",
+  "away": "Lech Poznan",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 2
+ },
+ {
+  "lg": "uel",
+  "home": "Viktoria Plzen",
+  "away": "Benfica",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Ajax",
+  "away": "Thun",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Brann",
+  "away": "AGF",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 1,
+  "ag": 4
+ },
+ {
+  "lg": "uecl",
+  "home": "Brighton",
+  "away": "CS Universitatea Craiova",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 4,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "FC Iberia 1999",
+  "away": "Getafe",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 1,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "FK Kauno Zalgiris",
+  "away": "Riga FC",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "Hearts",
+  "away": "AS Monaco",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 3
+ },
+ {
+  "lg": "uecl",
+  "home": "Jablonec",
+  "away": "Lugano",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 0
+ },
+ {
+  "lg": "uecl",
+  "home": "KF Egnatia",
+  "away": "Lincoln Red Imps FC",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "uecl",
+  "home": "Pafos FC",
+  "away": "FC Midtjylland",
+  "ko": "2026-11-26T17:45:00Z",
+  "hg": 0,
+  "ag": 2
  }
 ]
