@@ -3094,5 +3094,21 @@
   "ko": "2026-11-26T20:00:00Z",
   "hg": 4,
   "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Werder Bremen",
+  "away": "Borussia M'gladbach",
+  "ko": "2026-11-27T19:30:00Z",
+  "hg": 3,
+  "ag": 3
+ },
+ {
+  "lg": "seriea",
+  "home": "Venezia",
+  "away": "Bologna",
+  "ko": "2026-11-27T19:45:00Z",
+  "hg": 0,
+  "ag": 0
  }
 ]
