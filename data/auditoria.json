@@ -5876,5 +5876,139 @@
    "media": 0,
    "baja": 2
   }
+ },
+ {
+  "fecha": "2026-11-27T19:45:23Z",
+  "hallazgos": [
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "2 picks de Europa League sin liquidar tras 26 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Besiktas JK v Hapoel Be'er Sheva (2026-11-26T17:45)",
+     "Besiktas JK v Hapoel Be'er Sheva (2026-11-26T17:45)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "2 picks de Conference League sin liquidar tras 24 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Gent v Red Star Belgrade (2026-11-26T20:00)",
+     "Gent v Red Star Belgrade (2026-11-26T20:00)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 39 picks con precio supera la cuota justa: valor medio -5.55%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "uel": 2,
+    "uecl": 2
+   },
+   "calibracion": {
+    "n": 766,
+    "predicho": 0.8086,
+    "real": 0.8016,
+    "z": -0.5
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 118,
+     "predicho": 0.8649,
+     "real": 0.8644,
+     "z": -0.01,
+     "factor": 1.0
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 257,
+     "predicho": 0.7892,
+     "real": 0.7899,
+     "z": 0.03,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 346,
+     "predicho": 0.7964,
+     "real": 0.8035,
+     "z": 0.33,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 134,
+     "predicho": 0.7345,
+     "real": 0.7164,
+     "z": -0.47
+    },
+    "0.75-0.80": {
+     "n": 215,
+     "predicho": 0.7727,
+     "real": 0.8047,
+     "z": 1.12
+    },
+    "0.80-0.85": {
+     "n": 152,
+     "predicho": 0.8255,
+     "real": 0.8092,
+     "z": -0.53
+    },
+    "0.85-0.90": {
+     "n": 257,
+     "predicho": 0.871,
+     "real": 0.8405,
+     "z": -1.46
+    }
+   },
+   "valor": {
+    "pendientes": 157,
+    "conPrecioCasa": 39,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0555
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.1
+   },
+   "sitio": {
+    "/data/picks.json": 788,
+    "/data/parlays.json": 283,
+    "horasDesdeElDespliegue": 15.4
+   }
+  },
+  "resumen": {
+   "alta": 0,
+   "media": 2,
+   "baja": 2
+  }
  }
 ]
