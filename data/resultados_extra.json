@@ -3110,5 +3110,21 @@
   "ko": "2026-11-27T19:45:00Z",
   "hg": 0,
   "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Nottingham Forest",
+  "away": "Chelsea",
+  "ko": "2026-11-27T20:00:00Z",
+  "hg": 3,
+  "ag": 2
+ },
+ {
+  "lg": "laliga",
+  "home": "Levante",
+  "away": "Racing Santander",
+  "ko": "2026-11-27T20:00:00Z",
+  "hg": 1,
+  "ag": 3
  }
 ]
