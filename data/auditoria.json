@@ -6010,5 +6010,177 @@
    "media": 2,
    "baja": 2
   }
+ },
+ {
+  "fecha": "2026-11-28T18:34:03Z",
+  "hallazgos": [
+   {
+    "severidad": "alta",
+    "area": "liquidacion",
+    "mensaje": "2 picks de Europa League sin liquidar tras 49 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Besiktas JK v Hapoel Be'er Sheva (2026-11-26T17:45)",
+     "Besiktas JK v Hapoel Be'er Sheva (2026-11-26T17:45)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "2 picks de Conference League sin liquidar tras 47 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Gent v Red Star Belgrade (2026-11-26T20:00)",
+     "Gent v Red Star Belgrade (2026-11-26T20:00)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "3 picks de Bundesliga sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Werder Bremen v Monchengladbach (2026-11-27T19:30)",
+     "Werder Bremen v Monchengladbach (2026-11-27T19:30)",
+     "Werder Bremen v Monchengladbach (2026-11-27T19:30)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Serie A sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Venezia v Bologna (2026-11-27T19:45)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de La Liga sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Levante v Racing Santander (2026-11-27T20:00)"
+    ]
+   },
+   {
+    "severidad": "media",
+    "area": "liquidacion",
+    "mensaje": "1 picks de Premier League sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)",
+    "detalle": [
+     "Nottingham Forest v Chelsea (2026-11-27T20:00)"
+    ]
+   },
+   {
+    "severidad": "baja",
+    "area": "calibracion",
+    "mensaje": "estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515",
+    "detalle": null
+   },
+   {
+    "severidad": "baja",
+    "area": "valor",
+    "mensaje": "ninguno de los 28 picks con precio supera la cuota justa: valor medio -5.61%. Es lo esperable, pero conviene no apostarlos",
+    "detalle": null
+   }
+  ],
+  "metricas": {
+   "sinLiquidar": {
+    "uel": 2,
+    "uecl": 2,
+    "bundesliga": 3,
+    "seriea": 1,
+    "laliga": 1,
+    "premier": 1
+   },
+   "calibracion": {
+    "n": 788,
+    "predicho": 0.8079,
+    "real": 0.8008,
+    "z": -0.52
+   },
+   "porGrupo": {
+    "estadisticas/corners-tarjetas": {
+     "n": 118,
+     "predicho": 0.8649,
+     "real": 0.8644,
+     "z": -0.01,
+     "factor": 1.0
+    },
+    "estadisticas/tiros": {
+     "n": 45,
+     "predicho": 0.8668,
+     "real": 0.6889,
+     "z": -3.52,
+     "factor": 0.515
+    },
+    "goles": {
+     "n": 268,
+     "predicho": 0.789,
+     "real": 0.7873,
+     "z": -0.07,
+     "factor": 1.0
+    },
+    "resultado": {
+     "n": 357,
+     "predicho": 0.7959,
+     "real": 0.8039,
+     "z": 0.38,
+     "factor": 1.0
+    }
+   },
+   "porBanda": {
+    "0.70-0.75": {
+     "n": 140,
+     "predicho": 0.7343,
+     "real": 0.7214,
+     "z": -0.35
+    },
+    "0.75-0.80": {
+     "n": 224,
+     "predicho": 0.7725,
+     "real": 0.8036,
+     "z": 1.11
+    },
+    "0.80-0.85": {
+     "n": 156,
+     "predicho": 0.8254,
+     "real": 0.8077,
+     "z": -0.58
+    },
+    "0.85-0.90": {
+     "n": 260,
+     "predicho": 0.871,
+     "real": 0.8385,
+     "z": -1.57
+    }
+   },
+   "valor": {
+    "pendientes": 152,
+    "conPrecioCasa": 28,
+    "conValorPositivo": 0,
+    "valorMedio": -0.0561
+   },
+   "cobertura": {
+    "ligasConPicks": [
+     "bundesliga",
+     "laliga",
+     "premier",
+     "seriea",
+     "ucl",
+     "uecl",
+     "uel"
+    ]
+   },
+   "edadHoras": {
+    "_ultimo_refresco.log": 0.0,
+    "_ultimo_livescore.log": 0.1
+   },
+   "sitio": {
+    "/data/picks.json": 923,
+    "/data/parlays.json": 295,
+    "horasDesdeElDespliegue": 14.9
+   }
+  },
+  "resumen": {
+   "alta": 1,
+   "media": 5,
+   "baja": 2
+  }
  }
 ]

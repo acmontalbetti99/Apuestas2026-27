@@ -3126,5 +3126,77 @@
   "ko": "2026-11-27T20:00:00Z",
   "hg": 1,
   "ag": 3
+ },
+ {
+  "lg": "laliga",
+  "home": "Real Betis",
+  "away": "Rayo Vallecano",
+  "ko": "2026-11-28T13:00:00Z",
+  "hg": 0,
+  "ag": 1
+ },
+ {
+  "lg": "seriea",
+  "home": "Frosinone",
+  "away": "Parma",
+  "ko": "2026-11-28T14:00:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "FC Cologne",
+  "away": "Elversberg",
+  "ko": "2026-11-28T14:30:00Z",
+  "hg": 5,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Hamburgo",
+  "away": "Bayern Munich",
+  "ko": "2026-11-28T14:30:00Z",
+  "hg": 0,
+  "ag": 0
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Mainz 05",
+  "away": "Union Berlin",
+  "ko": "2026-11-28T14:30:00Z",
+  "hg": 2,
+  "ag": 1
+ },
+ {
+  "lg": "bundesliga",
+  "home": "Paderborn",
+  "away": "Schalke 04",
+  "ko": "2026-11-28T14:30:00Z",
+  "hg": 8,
+  "ag": 1
+ },
+ {
+  "lg": "premier",
+  "home": "Leeds United",
+  "away": "Coventry City",
+  "ko": "2026-11-28T15:00:00Z",
+  "hg": 3,
+  "ag": 0
+ },
+ {
+  "lg": "premier",
+  "home": "Manchester United",
+  "away": "Brentford",
+  "ko": "2026-11-28T15:00:00Z",
+  "hg": 0,
+  "ag": 4
+ },
+ {
+  "lg": "laliga",
+  "home": "Malaga",
+  "away": "Athletic Bilbao",
+  "ko": "2026-11-28T15:15:00Z",
+  "hg": 3,
+  "ag": 4
  }
 ]

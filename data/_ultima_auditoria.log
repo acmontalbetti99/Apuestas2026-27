@@ -1,9 +1,13 @@
-Auditoria 2026-11-27 19:45 UTC
-  [media] liquidacion: 2 picks de Europa League sin liquidar tras 26 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
-  [media] liquidacion: 2 picks de Conference League sin liquidar tras 24 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+Auditoria 2026-11-28 18:34 UTC
+  [alta] liquidacion: 2 picks de Europa League sin liquidar tras 49 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+  [media] liquidacion: 2 picks de Conference League sin liquidar tras 47 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+  [media] liquidacion: 3 picks de Bundesliga sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+  [media] liquidacion: 1 picks de Serie A sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+  [media] liquidacion: 1 picks de La Liga sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
+  [media] liquidacion: 1 picks de Premier League sin liquidar tras 23 h (un nombre de equipo que no coincide, o la estadistica que el mercado necesita que la fuente nunca publico)
   [baja] calibracion: estadisticas/tiros: 68.9% real contra 86.7% predicho sobre 45 (z=-3.52), ya corregido con factor 0.515
-  [baja] valor: ninguno de los 39 picks con precio supera la cuota justa: valor medio -5.55%. Es lo esperable, pero conviene no apostarlos
-  0 alta · 2 media · 2 baja
+  [baja] valor: ninguno de los 28 picks con precio supera la cuota justa: valor medio -5.61%. Es lo esperable, pero conviene no apostarlos
+  1 alta · 5 media · 2 baja
 Traceback (most recent call last):
   File "/home/runner/work/Apuestas2026-27/Apuestas2026-27/scripts/test_pagina.py", line 226, in <module>
     sys.exit(main())
